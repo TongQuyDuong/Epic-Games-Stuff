@@ -1,0 +1,138 @@
+[gd_scene load_steps=14 format=3 uid="uid://4kaxxey6eusy"]
+
+[ext_resource type="Script" path="res://Scripts/ProjectileBehaviour.cs" id="1_xlxy3"]
+[ext_resource type="Texture2D" uid="uid://i0gqoyoyncq8" path="res://Sprites/fire_proj.png" id="2_re0v1"]
+[ext_resource type="Script" path="res://Scripts/ProjectileImpact.cs" id="3_bdvcb"]
+
+[sub_resource type="Animation" id="Animation_n0sv6"]
+resource_name = "Explode"
+length = 0.2
+step = 0.04
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.04, 0.08, 0.12, 0.16),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [4, 5, 6, 7, 8]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.2),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_loaam"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_l64i1"]
+resource_name = "fireball"
+length = 0.4
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_be1kr"]
+_data = {
+"Explode": SubResource("Animation_n0sv6"),
+"RESET": SubResource("Animation_loaam"),
+"fireball": SubResource("Animation_l64i1")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_er43u"]
+animation = &"Explode"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_5m7t0"]
+animation = &"fireball"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_k62v2"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_cmpof"]
+advance_mode = 2
+advance_condition = &"explode"
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_iok3y"]
+states/Explode/node = SubResource("AnimationNodeAnimation_er43u")
+states/Explode/position = Vector2(673, 147)
+states/fireball/node = SubResource("AnimationNodeAnimation_5m7t0")
+states/fireball/position = Vector2(481, 101)
+transitions = ["Start", "fireball", SubResource("AnimationNodeStateMachineTransition_k62v2"), "fireball", "Explode", SubResource("AnimationNodeStateMachineTransition_cmpof")]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1qs5a"]
+radius = 16.0
+
+[node name="FireballProjectile" type="RigidBody2D" node_paths=PackedStringArray("impactPoint", "tree")]
+script = ExtResource("1_xlxy3")
+projectileDuration = 5.0
+projectileSpeed = 1000.0
+impactPoint = NodePath("ImpactPoint")
+tree = NodePath("AnimationTree")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-3, 0)
+scale = Vector2(2, 2)
+texture = ExtResource("2_re0v1")
+hframes = 9
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_be1kr")
+}
+
+[node name="ImpactPoint" type="Node2D" parent="."]
+position = Vector2(17, 0)
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeStateMachine_iok3y")
+anim_player = NodePath("../AnimationPlayer")
+active = true
+parameters/conditions/explode = false
+
+[node name="Area2D" type="Area2D" parent="."]
+script = ExtResource("3_bdvcb")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(2, 0)
+shape = SubResource("CircleShape2D_1qs5a")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="ScreenExited"]

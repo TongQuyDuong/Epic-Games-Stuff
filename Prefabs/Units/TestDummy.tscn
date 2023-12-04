@@ -1,0 +1,92 @@
+[gd_scene load_steps=15 format=3 uid="uid://2wh87d6rrgjd"]
+
+[ext_resource type="Script" path="res://Scripts/BaseUnit.cs" id="1_1r2kk"]
+[ext_resource type="Script" path="res://Scripts/Resources/UnitStat.cs" id="2_8jjst"]
+[ext_resource type="Script" path="res://Scripts/Resources/UnitStatList.cs" id="3_r1173"]
+[ext_resource type="Shader" path="res://Resources/Shaders/FlashSprite.gdshader" id="4_86eem"]
+[ext_resource type="Texture2D" uid="uid://dximn6h8xrrf1" path="res://Sprites/dummy.png" id="4_x5y8s"]
+[ext_resource type="PackedScene" uid="uid://e5ccxwf8ehw1" path="res://Components/unit_health.tscn" id="5_cc7gc"]
+
+[sub_resource type="Resource" id="Resource_j8ygn"]
+script = ExtResource("2_8jjst")
+statType = 1
+BaseValue = 1.0
+
+[sub_resource type="Resource" id="Resource_rmdcx"]
+script = ExtResource("2_8jjst")
+statType = 3
+BaseValue = 1.0
+
+[sub_resource type="Resource" id="Resource_x0d02"]
+script = ExtResource("3_r1173")
+StatList = [SubResource("Resource_j8ygn"), SubResource("Resource_rmdcx")]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_h271s"]
+resource_local_to_scene = true
+shader = ExtResource("4_86eem")
+shader_parameter/quantity = 0.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_naai2"]
+size = Vector2(68, 215)
+
+[sub_resource type="Animation" id="Animation_c1uj6"]
+resource_name = "Damage"
+length = 0.1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:material:shader_parameter/quantity")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05),
+"transitions": PackedFloat32Array(0.993335, 1.3752e-05),
+"update": 0,
+"values": [1.0, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_22ted"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:material:shader_parameter/quantity")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_le6d1"]
+_data = {
+"Damage": SubResource("Animation_c1uj6"),
+"RESET": SubResource("Animation_22ted")
+}
+
+[node name="TestDummy" type="CharacterBody2D"]
+script = ExtResource("1_1r2kk")
+stats = SubResource("Resource_x0d02")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_h271s")
+position = Vector2(6, -107)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("4_x5y8s")
+
+[node name="UnitHealth" parent="." node_paths=PackedStringArray("spriteAnim") instance=ExtResource("5_cc7gc")]
+currentHP = 5
+maxHP = 5
+spriteAnim = NodePath("../AnimationPlayer")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(9, -107.5)
+shape = SubResource("RectangleShape2D_naai2")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_le6d1")
+}

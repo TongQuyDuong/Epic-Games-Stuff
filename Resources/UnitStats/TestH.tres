@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="UnitStatList" load_steps=7 format=3 uid="uid://cole6tiatpmnm"]
+
+[ext_resource type="Script" path="res://Scripts/Resources/UnitStat.cs" id="1_kpeox"]
+[ext_resource type="Script" path="res://Scripts/Resources/UnitStatList.cs" id="1_liwn7"]
+
+[sub_resource type="Resource" id="Resource_3q0h6"]
+script = ExtResource("1_kpeox")
+statType = 0
+BaseValue = 1.0
+
+[sub_resource type="Resource" id="Resource_3k6l5"]
+script = ExtResource("1_kpeox")
+statType = 1
+BaseValue = 1.0
+
+[sub_resource type="Resource" id="Resource_wstnj"]
+script = ExtResource("1_kpeox")
+statType = 2
+BaseValue = 1.0
+
+[sub_resource type="Resource" id="Resource_fk4od"]
+script = ExtResource("1_kpeox")
+statType = 3
+BaseValue = 1.0
+
+[resource]
+script = ExtResource("1_liwn7")
+StatList = [SubResource("Resource_3q0h6"), SubResource("Resource_3k6l5"), SubResource("Resource_wstnj"), SubResource("Resource_fk4od")]
