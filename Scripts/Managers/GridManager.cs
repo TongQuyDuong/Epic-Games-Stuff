@@ -18,7 +18,7 @@ public partial class GridManager : Node
 	public void GenerateGrid(){
 		_panels = new Dictionary<Vector2, Panel>();
 		var _panelPrefab = GD.Load<PackedScene>("res://Prefabs/Panels/panel.tscn");
-		for (float x = 185, i = 0; i < _width; i++)
+		for (float x = 230, i = 0; i < _width; i++)
 		{
 			for (float y = 450, j = 0; j < _height; j++)
 			{

@@ -11,7 +11,8 @@ public partial class Ability : Resource
     [Export] public float cooldown;
     [Export] public float activeTime;
     public Action OnCast;
-    [Export] protected BaseUnit caster;
+    protected BaseUnit caster;
+    [Export] public CompressedTexture2D Icon; 
 
     public virtual void Initialize(BaseUnit owner)
     {

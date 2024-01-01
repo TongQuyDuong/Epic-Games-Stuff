@@ -1,0 +1,75 @@
+[gd_scene load_steps=5 format=3 uid="uid://dci2tvkgw7a7t"]
+
+[ext_resource type="Texture2D" uid="uid://b17g1x747duc" path="res://Sprites/UI/HpbarBorder.png" id="1_adb1g"]
+[ext_resource type="Texture2D" uid="uid://dwh34t8mj55rn" path="res://Sprites/UI/HpbarPortrait.png" id="2_tk6e2"]
+[ext_resource type="Texture2D" uid="uid://ova4grfinsue" path="res://Sprites/TestH/TestPortrait.png" id="3_2xcgq"]
+[ext_resource type="Texture2D" uid="uid://dkht6a2t36lkv" path="res://Sprites/UI/HpbarProgress.png" id="4_ihwei"]
+
+[node name="TopLeftUI" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1000.0
+offset_bottom = 300.0
+
+[node name="Border" type="TextureRect" parent="."]
+z_index = 1
+layout_mode = 0
+offset_top = -38.0
+offset_right = 256.0
+offset_bottom = 67.0
+scale = Vector2(2.5, 2.5)
+texture = ExtResource("1_adb1g")
+expand_mode = 1
+stretch_mode = 2
+
+[node name="PortraitBack" type="TextureRect" parent="."]
+clip_children = 2
+layout_mode = 0
+offset_top = -38.0
+offset_right = 256.0
+offset_bottom = 98.0
+scale = Vector2(2.5, 2.5)
+texture = ExtResource("2_tk6e2")
+expand_mode = 2
+stretch_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="PortraitBack"]
+layout_mode = 0
+offset_left = 16.4
+offset_top = 32.8
+offset_right = 80.4
+offset_bottom = 96.8
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("3_2xcgq")
+
+[node name="Control" type="Control" parent="."]
+anchors_preset = 0
+offset_left = 164.0
+offset_top = 44.0
+offset_right = 204.0
+offset_bottom = 84.0
+
+[node name="HpBarMain" type="TextureProgressBar" parent="Control"]
+z_index = 1
+layout_mode = 0
+offset_left = -164.0
+offset_top = -82.0
+offset_right = 92.0
+offset_bottom = 174.0
+scale = Vector2(2.5, 2.5)
+value = 75.0
+texture_progress = ExtResource("4_ihwei")
+tint_progress = Color(0.0862745, 1, 0.0705882, 1)
+
+[node name="HpBarUnder" type="TextureProgressBar" parent="Control"]
+layout_mode = 0
+offset_left = -164.0
+offset_top = -82.0
+offset_right = 92.0
+offset_bottom = 174.0
+scale = Vector2(2.5, 2.5)
+value = 100.0
+texture_under = ExtResource("4_ihwei")
+texture_progress = ExtResource("4_ihwei")
+tint_under = Color(0.294118, 0.294118, 0.294118, 1)
+tint_progress = Color(1, 0.258824, 0.258824, 1)

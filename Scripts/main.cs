@@ -3,9 +3,11 @@ using System;
 
 public partial class main : Node2D
 {
+	[Export] PackedScene battleScene;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -17,7 +19,7 @@ public partial class main : Node2D
 		GetTree().Quit();
 	}
 	private void _on_play_pressed(){
-		GetNode("Control").QueueFree();
+		GetTree().ChangeSceneToPacked(battleScene);
 	}
 }
 

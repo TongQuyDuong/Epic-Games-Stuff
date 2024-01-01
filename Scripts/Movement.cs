@@ -20,6 +20,27 @@ public partial class Movement : Node2D
 		anim = currentUnit.GetNode("AnimationPlayer") as AnimationPlayer;
 	}
 
+    public override void _Ready()
+    {
+        base._Ready();
+		Events.OnBattleActive += EnableMovement;
+		Events.OnBattleEnd += DisableMovement;
+    }
+
+    public override void _ExitTree()
+    {
+        base._ExitTree();
+		Events.OnBattleActive -= EnableMovement;
+		Events.OnBattleEnd -= DisableMovement;
+	}
+    private void EnableMovement() {
+		this.ProcessMode = ProcessModeEnum.Inherit;
+	}
+	private void DisableMovement()
+	{
+		this.ProcessMode = ProcessModeEnum.Disabled;
+	}
+
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{

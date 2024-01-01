@@ -10,7 +10,7 @@ public partial class UnitStatList : Resource
 {
     [Export] public Godot.Collections.Array<UnitStat> StatList = new Godot.Collections.Array<UnitStat>();
 
-    public bool TryGetStatValue(StatType statType, out float value)
+    public bool TryGetStatValue(StatType statType, out int value)
     {
         for (int i = 0; i < StatList.Count; i++)
         {

@@ -14,24 +14,18 @@ public partial class PlayerStateController : Node2D
 	public override void _EnterTree()
 	{
 		Events.OnMove += ToMove;
-		Events.OnIdle += ToIdle;
 		Events.OnAttackRanged += ToAttack;
 	}
 
 	public override void _ExitTree()
 	{
 		Events.OnMove -= ToMove;
-		Events.OnIdle -= ToIdle;
 		Events.OnAttackRanged -= ToAttack;
 	}
 
 	private void ToAttack()
 	{
 		ChangePlayerState(PlayerState.Attacking);
-	}
-	private void ToIdle()
-	{
-		ChangePlayerState(PlayerState.Idling);
 	}
 	private void ToMove()
 	{
@@ -40,6 +34,7 @@ public partial class PlayerStateController : Node2D
 
 	public void ReturnToIdle(){
 		Events.OnIdle?.Invoke();
+		ChangePlayerState(PlayerState.Idling);
 	}
 	private void ChangePlayerState(PlayerState newState)
 	{

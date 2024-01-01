@@ -20,7 +20,7 @@ public partial class ProjectileAbility : RangedAbility
 	{
 		var proj = (ProjectileBehaviour)projectile.Instantiate();
 		proj.rowNumber = (int)caster.currentPos.Y;
-		caster.stats.TryGetStatValue(StatType.Magic, out float power);
+		caster.stats.TryGetStatValue(StatType.Magic, out int power);
 		proj.Damage = power;
 		proj.Position = caster.GetNode<Node2D>("FiringPoint").GlobalPosition;
 		caster.GetParent().AddChild(proj);

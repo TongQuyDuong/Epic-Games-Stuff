@@ -1,0 +1,45 @@
+[gd_scene load_steps=5 format=3 uid="uid://d0ckwq8cucbrt"]
+
+[ext_resource type="Script" path="res://Scripts/UI/BattleAnnouncement.cs" id="1_mle27"]
+[ext_resource type="Texture2D" uid="uid://cq5thmkino5hy" path="res://Sprites/UI/BattleAnnounce.png" id="1_uyu16"]
+[ext_resource type="FontFile" uid="uid://bch6ug3gayri3" path="res://Resources/Karma Suture.otf" id="2_4gkqr"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ni64f"]
+line_spacing = 0.0
+font = ExtResource("2_4gkqr")
+font_size = 100
+outline_size = 15
+outline_color = Color(0, 0, 0, 1)
+
+[node name="BattleAnnouncement" type="Control" node_paths=PackedStringArray("board", "content")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_mle27")
+board = NodePath("Board")
+content = NodePath("Board/AnnounceContent")
+
+[node name="Board" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 450.0
+offset_top = 200.0
+offset_right = 532.0
+offset_bottom = 250.0
+scale = Vector2(4, 4)
+texture = ExtResource("1_uyu16")
+
+[node name="AnnounceContent" type="Label" parent="Board"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 13.0
+offset_right = 426.0
+offset_bottom = 255.0
+scale = Vector2(0.14, 0.112)
+text = "Battle
+Start !"
+label_settings = SubResource("LabelSettings_ni64f")
+horizontal_alignment = 1
+vertical_alignment = 1

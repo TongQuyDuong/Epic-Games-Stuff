@@ -31,5 +31,6 @@ public partial class UnitManager : Node
 		{
 			SpawnUnit(info);
 		}
+		GameManager.Instance.UpdateGameState(GameState.BattleStart);
 	}
 }

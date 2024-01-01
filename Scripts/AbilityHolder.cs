@@ -4,32 +4,43 @@ using System.Diagnostics;
 
 public partial class AbilityHolder : Node
 {
-	[Export] private Ability ability;
+	[Export] public Ability ability;
 	private float cooldownTime;
 	private float activeTime;
 	private float castTime;
 	[Export] private BaseUnit user;
 	private AbilityState state = AbilityState.ready;
-	public AbilitySlot slot = AbilitySlot.first;
+	[Export] public AbilitySlot slotNumber;
 	[Export] private PlayerStateController stateCon;
+	[Export] public int numberOfCharges;
 
 	public override void _Ready()
 	{
-		
 		ability.Initialize(user);
-		
+		BattleUI.Instance.DisplayAbility((int)slotNumber,ability.Icon,numberOfCharges);
 	}
 	public override void _PhysicsProcess(double delta)
 	{
+		if(ability != null) {
 		switch (state)
 		{
 			case AbilityState.ready:
-				if (Input.IsActionJustPressed("Skill1") && stateCon.CurrentPlayerState == PlayerState.Idling)
+				if (Input.IsActionJustPressed("Skill" + ((int)slotNumber+1)) && stateCon.CurrentPlayerState == PlayerState.Idling)
 				{
 					
 					ability.OnCast?.Invoke();
+					numberOfCharges -= 1;
+					if (numberOfCharges <= 0) {
+						
+						BattleUI.Instance.DisplayAbility((int)slotNumber, null, 0);
+						state = AbilityState.casting;
+						castTime = ability.castTime;
+						break; 
+					}
+					BattleUI.Instance.BeginCooldown((int)slotNumber, ability.cooldown + ability.castTime);
 					state = AbilityState.casting;
 					castTime = ability.castTime;
+					
 				}
 				break;
 			case AbilityState.casting:
@@ -39,7 +50,6 @@ public partial class AbilityHolder : Node
 				}
 				else
 				{
-					
 					ability.TriggerAbility();
 					state = AbilityState.active;
 					activeTime = ability.activeTime;
@@ -53,8 +63,14 @@ public partial class AbilityHolder : Node
 				}
 				else
 				{
+					if(numberOfCharges <= 0) {
+						ability = null;
+						state = AbilityState.empty;
+						break;
+					}
 					state = AbilityState.cooldown;
 					cooldownTime = ability.cooldown;
+					
 				}
 				break;
 
@@ -72,6 +88,7 @@ public partial class AbilityHolder : Node
 			default:
 				break;
 		}
+		}
 	}
 }
 
@@ -80,14 +97,15 @@ public enum AbilityState
 	ready,
 	casting,
 	active,
-	cooldown
+	cooldown,
+	empty
 
 }
 
 public enum AbilitySlot
 {
-	first,
-	second,
-	third,
-	fourth
+	First = 0,
+	Second = 1,
+	Third = 2,
+	Fourth
 }

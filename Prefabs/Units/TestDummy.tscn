@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://2wh87d6rrgjd"]
+[gd_scene load_steps=16 format=3 uid="uid://2wh87d6rrgjd"]
 
 [ext_resource type="Script" path="res://Scripts/BaseUnit.cs" id="1_1r2kk"]
 [ext_resource type="Script" path="res://Scripts/Resources/UnitStat.cs" id="2_8jjst"]
@@ -17,9 +17,14 @@ script = ExtResource("2_8jjst")
 statType = 3
 BaseValue = 1.0
 
+[sub_resource type="Resource" id="Resource_xftxo"]
+script = ExtResource("2_8jjst")
+statType = 4
+BaseValue = 5.0
+
 [sub_resource type="Resource" id="Resource_x0d02"]
 script = ExtResource("3_r1173")
-StatList = [SubResource("Resource_j8ygn"), SubResource("Resource_rmdcx")]
+StatList = [SubResource("Resource_j8ygn"), SubResource("Resource_rmdcx"), SubResource("Resource_xftxo")]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_h271s"]
 resource_local_to_scene = true
@@ -27,7 +32,7 @@ shader = ExtResource("4_86eem")
 shader_parameter/quantity = 0.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_naai2"]
-size = Vector2(68, 215)
+size = Vector2(52, 173.5)
 
 [sub_resource type="Animation" id="Animation_c1uj6"]
 resource_name = "Damage"
@@ -67,14 +72,15 @@ _data = {
 "RESET": SubResource("Animation_22ted")
 }
 
-[node name="TestDummy" type="CharacterBody2D"]
+[node name="TestDummy" type="CharacterBody2D" node_paths=PackedStringArray("PopupPoint")]
 script = ExtResource("1_1r2kk")
 stats = SubResource("Resource_x0d02")
+PopupPoint = NodePath("PopupPoint")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_h271s")
-position = Vector2(6, -107)
-scale = Vector2(0.25, 0.25)
+position = Vector2(8, -85)
+scale = Vector2(0.2, 0.2)
 texture = ExtResource("4_x5y8s")
 
 [node name="UnitHealth" parent="." node_paths=PackedStringArray("spriteAnim") instance=ExtResource("5_cc7gc")]
@@ -83,10 +89,13 @@ maxHP = 5
 spriteAnim = NodePath("../AnimationPlayer")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(9, -107.5)
+position = Vector2(12, -86.25)
 shape = SubResource("RectangleShape2D_naai2")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_le6d1")
 }
+
+[node name="PopupPoint" type="Marker2D" parent="."]
+position = Vector2(26, -193)

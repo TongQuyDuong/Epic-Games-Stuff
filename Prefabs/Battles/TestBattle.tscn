@@ -1,0 +1,88 @@
+[gd_scene load_steps=15 format=3 uid="uid://ib51qwl44qfd"]
+
+[ext_resource type="Script" path="res://Scripts/Managers/GameManager.cs" id="1_wgu4n"]
+[ext_resource type="PackedScene" uid="uid://84w4aiqpct83" path="res://main.tscn" id="2_p0ber"]
+[ext_resource type="Script" path="res://Scripts/Managers/GridManager.cs" id="2_ylql0"]
+[ext_resource type="Script" path="res://Scripts/Managers/UnitManager.cs" id="3_xm58r"]
+[ext_resource type="PackedScene" uid="uid://dj3s5sndljpr1" path="res://Prefabs/Units/TestH.tscn" id="4_h2i1f"]
+[ext_resource type="Resource" uid="uid://duw1rvkqxa0hh" path="res://Resources/SpawnFormations/DummyForma.tres" id="5_iqshw"]
+[ext_resource type="Script" path="res://Scripts/Managers/SpriteLayerManager.cs" id="6_8aygl"]
+[ext_resource type="Script" path="res://Scripts/Managers/SpriteManager.cs" id="7_rp32s"]
+[ext_resource type="Script" path="res://Scripts/BattleUI.cs" id="8_2cvlb"]
+[ext_resource type="PackedScene" uid="uid://o145r5colibr" path="res://Prefabs/UI/AbilityIcon.tscn" id="9_5rs6t"]
+[ext_resource type="PackedScene" uid="uid://d0ckwq8cucbrt" path="res://Prefabs/UI/battle_announcement.tscn" id="9_fywl8"]
+[ext_resource type="Texture2D" uid="uid://b0fgwlwi7527l" path="res://Sprites/Backgrounds/ForestBackground.png" id="10_ax1fd"]
+[ext_resource type="PackedScene" uid="uid://bjwsaflrdm5j1" path="res://Prefabs/UI/TopLeftUI.tscn" id="10_knel8"]
+[ext_resource type="PackedScene" uid="uid://fj2dqfgyyqme" path="res://Prefabs/Panels/panel.tscn" id="11_b6ayx"]
+
+[node name="TestBattle" type="Node2D"]
+
+[node name="Managers" type="Node2D" parent="."]
+
+[node name="GameManager" type="Node" parent="Managers"]
+script = ExtResource("1_wgu4n")
+menuScene = ExtResource("2_p0ber")
+
+[node name="GridManager" type="Node" parent="Managers"]
+script = ExtResource("2_ylql0")
+offsetX = 110.0
+offsetY = 60.0
+
+[node name="UnitManager" type="Node" parent="Managers"]
+script = ExtResource("3_xm58r")
+hero = ExtResource("4_h2i1f")
+formation = ExtResource("5_iqshw")
+
+[node name="SpriteLayerManager" type="Node" parent="Managers"]
+script = ExtResource("6_8aygl")
+
+[node name="SpriteManager" type="Node" parent="Managers"]
+script = ExtResource("7_rp32s")
+
+[node name="BattleUI" type="Control" parent="." node_paths=PackedStringArray("Slot1", "Slot2", "Slot3", "topLeftUI")]
+z_index = 10
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1273.0
+offset_bottom = 654.0
+scale = Vector2(0.976097, 0.980784)
+script = ExtResource("8_2cvlb")
+Slot1 = NodePath("AbilityIcon")
+Slot2 = NodePath("AbilityIcon2")
+Slot3 = NodePath("AbilityIcon3")
+topLeftUI = NodePath("TopLeftUI")
+announcement = ExtResource("9_fywl8")
+
+[node name="AbilityIcon" parent="BattleUI" instance=ExtResource("9_5rs6t")]
+layout_mode = 1
+offset_left = -601.667
+offset_top = -149.591
+offset_right = 748.333
+offset_bottom = 1200.41
+
+[node name="AbilityIcon2" parent="BattleUI" instance=ExtResource("9_5rs6t")]
+layout_mode = 1
+offset_left = -601.667
+offset_top = -71.0823
+offset_right = 748.333
+offset_bottom = 1278.92
+
+[node name="AbilityIcon3" parent="BattleUI" instance=ExtResource("9_5rs6t")]
+layout_mode = 1
+offset_left = -601.667
+offset_top = 8.44595
+offset_right = 748.333
+offset_bottom = 1358.45
+
+[node name="TopLeftUI" parent="BattleUI" instance=ExtResource("10_knel8")]
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_right = 672.0
+offset_bottom = 444.0
+scale = Vector2(1.9, 1.65)
+texture = ExtResource("10_ax1fd")
+
+[node name="BattleGrid" type="Node2D" parent="."]
+
+[node name="Panel" parent="BattleGrid" instance=ExtResource("11_b6ayx")]
+position = Vector2(230, 450)

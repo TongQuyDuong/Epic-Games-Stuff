@@ -11,7 +11,7 @@ public partial class UnitStat : Resource
     [Export] public StatType statType { get; set; }
     [Export] public float BaseValue { get; set; }
     protected float lastBaseValue = float.MinValue;
-    public float CurrentValue
+    public int CurrentValue
     {
         get
         {
@@ -27,7 +27,7 @@ public partial class UnitStat : Resource
     protected readonly List<StatModifier> statModifiers;
     public readonly ReadOnlyCollection<StatModifier> StatModifiers;
     protected bool isDirty = true;
-    protected float _value;
+    protected int _value;
     public UnitStat()
     {
         statModifiers = new List<StatModifier>();
@@ -60,7 +60,7 @@ public partial class UnitStat : Resource
 
     }
 
-    protected float CalculateFinalValue()
+    protected int CalculateFinalValue()
     {
         float finalValue = BaseValue;
         float sumPercentAdd = 0;
@@ -84,7 +84,7 @@ public partial class UnitStat : Resource
             }
         }
 
-        return (float)Math.Round(finalValue, 4);
+        return (int)Math.Round(finalValue, 4);
     }
 
     public int CompareModOrder(StatModifier a, StatModifier b)
@@ -115,5 +115,6 @@ public enum StatType
     Attack,
     Defence,
     Magic,
-    Resistance
+    Resistance,
+    HP
 }

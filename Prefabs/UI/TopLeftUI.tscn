@@ -1,0 +1,80 @@
+[gd_scene load_steps=7 format=3 uid="uid://bjwsaflrdm5j1"]
+
+[ext_resource type="Script" path="res://Scripts/UI/TopLeftUI.cs" id="1_kuspj"]
+[ext_resource type="Texture2D" uid="uid://b17g1x747duc" path="res://Sprites/UI/HpbarBorder.png" id="1_yn17c"]
+[ext_resource type="Texture2D" uid="uid://dwh34t8mj55rn" path="res://Sprites/UI/HpbarPortrait.png" id="2_qkj4u"]
+[ext_resource type="Texture2D" uid="uid://ova4grfinsue" path="res://Sprites/TestH/TestPortrait.png" id="3_1jq3u"]
+[ext_resource type="Texture2D" uid="uid://dkht6a2t36lkv" path="res://Sprites/UI/HpbarProgress.png" id="4_iuk8l"]
+[ext_resource type="Script" path="res://Scripts/UI/HpBar.cs" id="5_a1rj0"]
+
+[node name="TopLeftUI" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1000.0
+offset_bottom = 180.0
+script = ExtResource("1_kuspj")
+maxHP = 100
+
+[node name="Border" type="TextureRect" parent="."]
+z_index = 2
+layout_mode = 0
+offset_top = -38.0
+offset_right = 256.0
+offset_bottom = 44.0
+scale = Vector2(2.5, 2.5)
+texture = ExtResource("1_yn17c")
+expand_mode = 1
+stretch_mode = 2
+
+[node name="PortraitBack" type="TextureRect" parent="."]
+clip_children = 2
+layout_mode = 0
+offset_top = -38.0
+offset_right = 256.0
+offset_bottom = 98.0
+scale = Vector2(2.5, 2.5)
+texture = ExtResource("2_qkj4u")
+expand_mode = 2
+stretch_mode = 2
+
+[node name="CharaPortrait" type="TextureRect" parent="PortraitBack"]
+layout_mode = 0
+offset_left = 16.4
+offset_top = 32.8
+offset_right = 80.4
+offset_bottom = 96.8
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("3_1jq3u")
+
+[node name="HpBar" type="Control" parent="."]
+anchors_preset = 0
+offset_left = 164.0
+offset_top = 44.0
+offset_right = 571.0
+offset_bottom = 70.0
+script = ExtResource("5_a1rj0")
+
+[node name="HpBarMain" type="TextureProgressBar" parent="HpBar"]
+z_index = 1
+layout_mode = 0
+offset_left = 1.0
+offset_top = -2.0
+offset_right = 257.0
+offset_bottom = 254.0
+scale = Vector2(2.5, 2.5)
+value = 100.0
+texture_progress = ExtResource("4_iuk8l")
+tint_progress = Color(0.0862745, 1, 0.0705882, 1)
+
+[node name="HpBarUnder" type="TextureProgressBar" parent="HpBar"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = -2.0
+offset_right = 161.0
+offset_bottom = 8.0
+scale = Vector2(2.5, 2.5)
+value = 100.0
+texture_under = ExtResource("4_iuk8l")
+texture_progress = ExtResource("4_iuk8l")
+tint_under = Color(0.294118, 0.294118, 0.294118, 1)
+tint_progress = Color(1, 0.74902, 0, 1)
