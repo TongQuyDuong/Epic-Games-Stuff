@@ -7,9 +7,15 @@ public partial class UnitManager : Node
 	public static UnitManager Instance;
 	[Export] private SpawnFormation formation;
 	[Export] public bool heroIsFacingRight = true;
+	
 	public override void _EnterTree()
 	{
 		if (Instance == null) { Instance = this; }
+	}
+	public override void _ExitTree()
+	{
+		base._ExitTree();
+		Instance = null;
 	}
 	public void SpawnHero(){
 		SpawnUnit(new SpawnInfo(hero,GridManager.Instance.GetHeroSpawnPanel().Pos));

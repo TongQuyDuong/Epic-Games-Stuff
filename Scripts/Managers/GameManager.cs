@@ -25,6 +25,7 @@ public partial class GameManager : Node
         base._ExitTree();
 		Events.OnBattleActive -= BeginBattle;
 		Events.OnBattleEnd -= EndBattle;
+		Instance = null;
 	}
 
     public override void _Process(double delta)
@@ -68,7 +69,7 @@ public partial class GameManager : Node
 	}
 
 	public void ExitBattle() {
-		// this.GetTree().ChangeSceneToPacked(menuScene);
+		this.GetTree().ChangeSceneToFile("res://main.tscn");
 	}
 }
 public enum GameState

@@ -1,7 +1,6 @@
-[gd_scene load_steps=15 format=3 uid="uid://ib51qwl44qfd"]
+[gd_scene load_steps=14 format=3 uid="uid://ib51qwl44qfd"]
 
 [ext_resource type="Script" path="res://Scripts/Managers/GameManager.cs" id="1_wgu4n"]
-[ext_resource type="PackedScene" uid="uid://84w4aiqpct83" path="res://main.tscn" id="2_p0ber"]
 [ext_resource type="Script" path="res://Scripts/Managers/GridManager.cs" id="2_ylql0"]
 [ext_resource type="Script" path="res://Scripts/Managers/UnitManager.cs" id="3_xm58r"]
 [ext_resource type="PackedScene" uid="uid://dj3s5sndljpr1" path="res://Prefabs/Units/TestH.tscn" id="4_h2i1f"]
@@ -19,10 +18,6 @@
 
 [node name="Managers" type="Node2D" parent="."]
 
-[node name="GameManager" type="Node" parent="Managers"]
-script = ExtResource("1_wgu4n")
-menuScene = ExtResource("2_p0ber")
-
 [node name="GridManager" type="Node" parent="Managers"]
 script = ExtResource("2_ylql0")
 offsetX = 110.0
@@ -38,6 +33,9 @@ script = ExtResource("6_8aygl")
 
 [node name="SpriteManager" type="Node" parent="Managers"]
 script = ExtResource("7_rp32s")
+
+[node name="GameManager" type="Node" parent="Managers"]
+script = ExtResource("1_wgu4n")
 
 [node name="BattleUI" type="Control" parent="." node_paths=PackedStringArray("Slot1", "Slot2", "Slot3", "topLeftUI")]
 z_index = 10

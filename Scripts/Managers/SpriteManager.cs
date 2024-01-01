@@ -10,6 +10,11 @@ public partial class SpriteManager : Node
 	{
 		if (Instance == null) { Instance = this; }
 	}
+	public override void _ExitTree()
+	{
+		base._ExitTree();
+		Instance = null;
+	}
 
 	public void FlashDamage(Sprite2D sprite) 
 	{

@@ -15,7 +15,13 @@ public partial class GridManager : Node
 		if(Instance == null) Instance = this;
 	}
 
-	public void GenerateGrid(){
+    public override void _ExitTree()
+    {
+        base._ExitTree();
+		Instance = null;
+    }
+
+    public void GenerateGrid(){
 		_panels = new Dictionary<Vector2, Panel>();
 		var _panelPrefab = GD.Load<PackedScene>("res://Prefabs/Panels/panel.tscn");
 		for (float x = 230, i = 0; i < _width; i++)

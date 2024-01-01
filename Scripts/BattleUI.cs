@@ -15,8 +15,12 @@ public partial class BattleUI : Control
 		if (Instance == null) { Instance = this; }
 		
 	}
+	public override void _ExitTree()
+	{
+		base._ExitTree();
+		Instance = null;
+	}
 
-	
 	public void SetMaxHP(int maxHP) {
 		topLeftUI.maxHP = maxHP;
 	}
@@ -60,6 +64,6 @@ public partial class BattleUI : Control
 		BattleAnnouncement announce = announcement.Instantiate<BattleAnnouncement>();
 		announce.isBattleStart = isBattleStart;
 		AddChild(announce);
-		
+
 	}
 }

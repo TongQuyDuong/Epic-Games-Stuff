@@ -18,6 +18,7 @@ public partial class SpriteLayerManager : Node
     public override void _ExitTree()
     {
         Events.OnRowChange -= AdjustLayerOnMovement;
+        Instance = null;
     }
     private void AdjustLayerOnMovement(BaseUnit unit)
     {
