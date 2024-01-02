@@ -19,10 +19,12 @@ public partial class AbilityIcon : Control
 		progBar.TextureUnder = image;
 		progBar.TextureProgress = image;
 	}
+	
     public void UpdateLabel() {
 		label.Visible = numberOfCharges <= 0 ? false : true;
 		label.Text = "x " + numberOfCharges;
 	}
+
 	public void BeginCooldown(float cooldown){
 		numberOfCharges -= 1;
 		UpdateLabel();

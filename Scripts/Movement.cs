@@ -6,18 +6,15 @@ using System.Collections.Generic;
 
 public partial class Movement : Node2D
 {
-	[Export] private BaseUnit currentUnit;
+	[Export] private BaseHero currentUnit;
 	[Export] private float cooldown;
 	protected float countdown;
 	[Export] private Vector2 axis;
-	[Export] private PlayerStateController stateCon;
-	private AnimationPlayer anim;
+	
 	// Called when the node enters the scene tree for the first time.
 	public override void _EnterTree()
 	{
 		countdown = cooldown;
-		stateCon = currentUnit.GetNode("PlayerStateController") as PlayerStateController;
-		anim = currentUnit.GetNode("AnimationPlayer") as AnimationPlayer;
 	}
 
     public override void _Ready()
@@ -44,7 +41,7 @@ public partial class Movement : Node2D
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
-		if (stateCon.CurrentPlayerState != PlayerState.Attacking) ProcessInput();
+		if (currentUnit.stateController.CurrentPlayerState != PlayerState.Attacking) ProcessInput();
 
 	}
 	protected void Flip()

@@ -1,30 +1,31 @@
-[gd_scene load_steps=16 format=3 uid="uid://2wh87d6rrgjd"]
+[gd_scene load_steps=17 format=3 uid="uid://2wh87d6rrgjd"]
 
-[ext_resource type="Script" path="res://Scripts/BaseUnit.cs" id="1_1r2kk"]
+[ext_resource type="Script" path="res://Scripts/BaseEnemy.cs" id="1_b65pt"]
 [ext_resource type="Script" path="res://Scripts/Resources/UnitStat.cs" id="2_8jjst"]
 [ext_resource type="Script" path="res://Scripts/Resources/UnitStatList.cs" id="3_r1173"]
+[ext_resource type="PackedScene" uid="uid://crbruay2rfa3p" path="res://Prefabs/Effects/PopupEffect.tscn" id="4_0hvu2"]
 [ext_resource type="Shader" path="res://Resources/Shaders/FlashSprite.gdshader" id="4_86eem"]
 [ext_resource type="Texture2D" uid="uid://dximn6h8xrrf1" path="res://Sprites/dummy.png" id="4_x5y8s"]
 [ext_resource type="PackedScene" uid="uid://e5ccxwf8ehw1" path="res://Components/unit_health.tscn" id="5_cc7gc"]
 
-[sub_resource type="Resource" id="Resource_j8ygn"]
+[sub_resource type="Resource" id="Resource_vxwf6"]
 script = ExtResource("2_8jjst")
 statType = 1
-BaseValue = 1.0
+BaseValue = 0.0
 
-[sub_resource type="Resource" id="Resource_rmdcx"]
+[sub_resource type="Resource" id="Resource_ge0c8"]
 script = ExtResource("2_8jjst")
 statType = 3
-BaseValue = 1.0
+BaseValue = 0.0
 
-[sub_resource type="Resource" id="Resource_xftxo"]
+[sub_resource type="Resource" id="Resource_7hmd1"]
 script = ExtResource("2_8jjst")
 statType = 4
 BaseValue = 5.0
 
-[sub_resource type="Resource" id="Resource_x0d02"]
+[sub_resource type="Resource" id="Resource_ndm0n"]
 script = ExtResource("3_r1173")
-StatList = [SubResource("Resource_j8ygn"), SubResource("Resource_rmdcx"), SubResource("Resource_xftxo")]
+StatList = [SubResource("Resource_vxwf6"), SubResource("Resource_ge0c8"), SubResource("Resource_7hmd1")]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_h271s"]
 resource_local_to_scene = true
@@ -73,8 +74,9 @@ _data = {
 }
 
 [node name="TestDummy" type="CharacterBody2D" node_paths=PackedStringArray("PopupPoint")]
-script = ExtResource("1_1r2kk")
-stats = SubResource("Resource_x0d02")
+script = ExtResource("1_b65pt")
+stats = SubResource("Resource_ndm0n")
+PopupPrefab = ExtResource("4_0hvu2")
 PopupPoint = NodePath("PopupPoint")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

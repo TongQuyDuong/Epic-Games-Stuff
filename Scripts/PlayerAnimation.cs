@@ -36,4 +36,9 @@ public partial class PlayerAnimation : Node
 	public void AnimateIdle() {
 		animPlayer.Play("Idle");
 	}
+
+	public void AnimateEntrance() {
+		animPlayer.Play("Appear");
+		
+	}
 }

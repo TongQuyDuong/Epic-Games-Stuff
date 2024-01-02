@@ -21,7 +21,17 @@ public partial class BattleUI : Control
 		Instance = null;
 	}
 
-	public void SetMaxHP(int maxHP) {
+//MoveUI elements out of the screen
+    public override void _Ready()
+    {
+        base._Ready();
+		topLeftUI.Position += new Vector2(0,-180);
+		Slot1.Position += new Vector2(-150,0);
+		Slot2.Position += new Vector2(-150, 0);
+		Slot3.Position += new Vector2(-150, 0);
+	}
+
+    public void SetMaxHP(int maxHP) {
 		topLeftUI.maxHP = maxHP;
 	}
 	public void DisplayAbility(int abilityIndex, CompressedTexture2D image, int numberOfCharges) {
@@ -44,6 +54,19 @@ public partial class BattleUI : Control
 		}
 		
 	}
+
+//MoveUI elements back in with animation
+	public void GenerateUI() {
+		Tween tweenUI = GetTree().CreateTween();
+		tweenUI.SetEase(Tween.EaseType.Out);
+		tweenUI.SetParallel();
+		tweenUI.TweenProperty(topLeftUI,"position",new Vector2(0,0),0.5);
+		tweenUI.TweenProperty(Slot1, "position",Slot1.Position + new Vector2(150, 0), 0.5);
+		tweenUI.TweenProperty(Slot2, "position",Slot2.Position + new Vector2(150, 0), 0.5).SetDelay(0.1);
+		tweenUI.TweenProperty(Slot3, "position",Slot3.Position + new Vector2(150, 0), 0.5).SetDelay(0.2);
+		tweenUI.Finished += delegate {GameManager.Instance.UpdateGameState(GameState.SpawnHero);};
+	}
+
 	public void BeginCooldown(int abilityIndex,float cooldown) {
 		switch (abilityIndex)
 		{

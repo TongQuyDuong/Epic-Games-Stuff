@@ -20,7 +20,7 @@ anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -656.0
 offset_top = -356.5
-offset_right = 694.0
+offset_right = 1377.0
 offset_bottom = 993.5
 grow_horizontal = 2
 grow_vertical = 2
@@ -55,6 +55,7 @@ offset_bottom = 1180.0
 texture = ExtResource("4_wpjtq")
 
 [node name="NumberOfCharges" type="Label" parent="."]
+visible = false
 layout_mode = 0
 offset_left = 1316.67
 offset_top = 250.0

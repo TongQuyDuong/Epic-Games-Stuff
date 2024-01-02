@@ -1,8 +1,9 @@
-[gd_scene load_steps=18 format=3 uid="uid://dj3s5sndljpr1"]
+[gd_scene load_steps=19 format=3 uid="uid://dj3s5sndljpr1"]
 
 [ext_resource type="Script" path="res://Scripts/TestH.cs" id="1_ulebq"]
 [ext_resource type="Texture2D" uid="uid://cr2lb354w36mv" path="res://Sprites/TestH/chara.png" id="2_me2tq"]
 [ext_resource type="Resource" uid="uid://cole6tiatpmnm" path="res://Resources/UnitStats/TestH.tres" id="2_o08ap"]
+[ext_resource type="PackedScene" uid="uid://crbruay2rfa3p" path="res://Prefabs/Effects/PopupEffect.tscn" id="3_nihf5"]
 [ext_resource type="Script" path="res://Scripts/Movement.cs" id="3_or2d2"]
 [ext_resource type="Material" uid="uid://dcqwr42e1ky5v" path="res://Resources/Material/FlashMat.tres" id="3_wwgct"]
 [ext_resource type="Script" path="res://Scripts/PlayerStateController.cs" id="4_d4ftl"]
@@ -134,9 +135,12 @@ _data = {
 "Vanish": SubResource("Animation_h1245")
 }
 
-[node name="TestH" type="CharacterBody2D" node_paths=PackedStringArray("PopupPoint")]
+[node name="TestH" type="CharacterBody2D" node_paths=PackedStringArray("playerAnim", "stateController", "PopupPoint")]
 script = ExtResource("1_ulebq")
+playerAnim = NodePath("PlayerAnimation")
+stateController = NodePath("PlayerStateController")
 stats = ExtResource("2_o08ap")
+PopupPrefab = ExtResource("3_nihf5")
 PopupPoint = NodePath("PopupPoint")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

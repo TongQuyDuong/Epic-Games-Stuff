@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 
 public partial class UnitManager : Node
 {
@@ -7,36 +8,53 @@ public partial class UnitManager : Node
 	public static UnitManager Instance;
 	[Export] private SpawnFormation formation;
 	[Export] public bool heroIsFacingRight = true;
+	[Export] private int EnemiesAlive = 0;
 	
 	public override void _EnterTree()
 	{
 		if (Instance == null) { Instance = this; }
+		Events.OnEnemyDeath += RemoveEnemiesAlive;
 	}
 	public override void _ExitTree()
 	{
 		base._ExitTree();
 		Instance = null;
+		Events.OnEnemyDeath -= RemoveEnemiesAlive;
 	}
 	public void SpawnHero(){
-		SpawnUnit(new SpawnInfo(hero,GridManager.Instance.GetHeroSpawnPanel().Pos));
+		BaseHero chara = SpawnUnit(new SpawnInfo(hero,GridManager.Instance.GetHeroSpawnPanel().Pos)) as BaseHero;
+		chara.playerAnim.AnimateEntrance();
 		GameManager.Instance.UpdateGameState(GameState.SpawnEnemies);
 	}
 
-	public void SpawnUnit(SpawnInfo info)
+	public BaseUnit SpawnUnit(SpawnInfo info)
 	{
 		var spawnedUnit = info.unitToSpawn.Instantiate<Node2D>() as BaseUnit;
 		Panel spawnPanel = GridManager.Instance.GetPanelAtPosition(info.spawnLocation);
 		spawnPanel.SetUnit(spawnedUnit);
 		AddChild(spawnedUnit);
 		SpriteLayerManager.Instance.AdjustLayerOnInstantiation(spawnedUnit, (int)spawnedUnit.currentPos.Y);
+		return spawnedUnit;
 	}
 
 	public void SpawnEnemies()
 	{
-		foreach (SpawnInfo info in formation.spawns)
-		{
-			SpawnUnit(info);
+		for(int i = 0; i < formation.spawns.Count; i++) {
+			BaseEnemy unit = SpawnUnit(formation.spawns[i]) as BaseEnemy;
+			EnemiesAlive += 1;
+			unit.Position += new Vector2(0,-600);
+			Tween tweenUnit = GetTree().CreateTween();
+			tweenUnit.SetEase(Tween.EaseType.In);
+			tweenUnit.TweenProperty(unit,"position",unit.Position + new Vector2(0,600),0.6).SetDelay(i*0.3);
+			if(i == (formation.spawns.Count-1)) tweenUnit.Finished += delegate {GameManager.Instance.UpdateGameState(GameState.BattleStart);};
 		}
-		GameManager.Instance.UpdateGameState(GameState.BattleStart);
+		
+	}
+
+	private void RemoveEnemiesAlive() {
+		EnemiesAlive -= 1;
+		if(EnemiesAlive == 0) {
+			Events.OnBattleEnd?.Invoke();
+		}
 	}
 }

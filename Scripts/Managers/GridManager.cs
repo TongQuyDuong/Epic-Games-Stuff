@@ -30,15 +30,19 @@ public partial class GridManager : Node
 			{
 				Panel spawnedPanel = _panelPrefab.Instantiate<Node2D>() as Panel;
 				spawnedPanel.Position = new Vector2(x, y);
-				AddChild(spawnedPanel);
 				y += offsetY;
 				_panels[new Vector2(i, j)] = spawnedPanel;
 				spawnedPanel.Pos = new Vector2(i, j);
+				spawnedPanel.Scale = new Vector2(1,1);
+				AddChild(spawnedPanel);
+				Tween tweenPanel = GetTree().CreateTween();
+				tweenPanel.TweenProperty(spawnedPanel,"scale",new Vector2(30,30),0.5).SetDelay(i*0.1);
+				if(i == (_width-1) && j == (_height-1)) tweenPanel.Finished += delegate {GameManager.Instance.UpdateGameState(GameState.GenerateUI);};
 			}
 			x += offsetX;
 		}
 		 
-		GameManager.Instance.UpdateGameState(GameState.SpawnHero);
+		
 		
 
 	}

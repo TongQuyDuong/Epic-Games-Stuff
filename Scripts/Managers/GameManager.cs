@@ -31,8 +31,8 @@ public partial class GameManager : Node
     public override void _Process(double delta)
     {
         base._Process(delta);
-		if(Input.IsActionJustPressed("EndBattle")) BattleUI.Instance.AnnounceBattle(false);
-    }
+		if(Input.IsActionJustPressed("EndBattle")) Events.OnBattleEnd?.Invoke();
+	}
 
     public void UpdateGameState(GameState newState)
 	{
@@ -41,6 +41,9 @@ public partial class GameManager : Node
 		{
 			case GameState.GenerateGrid:
 				GridManager.Instance.GenerateGrid();
+				break;
+			case GameState.GenerateUI:
+				BattleUI.Instance.GenerateUI();
 				break;
 			case GameState.SpawnHero:
 				UnitManager.Instance.SpawnHero();
@@ -54,6 +57,7 @@ public partial class GameManager : Node
 			case GameState.BattleActive:
 				break;
 			case GameState.BattleEnd:
+				BattleUI.Instance.AnnounceBattle(false);
 				break;
 			default:
 				throw new ArgumentOutOfRangeException(nameof(newState), newState, null);
@@ -75,6 +79,7 @@ public partial class GameManager : Node
 public enum GameState
 {
 	GenerateGrid,
+	GenerateUI,
 	SpawnHero,
 	SpawnEnemies,
 	BattleStart,

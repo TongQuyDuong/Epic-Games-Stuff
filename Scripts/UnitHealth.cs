@@ -28,7 +28,7 @@ public partial class UnitHealth : Node, IDamageable
 		unit.ShowPopup(Damage.ToString());
 		currentHP -= Damage;
 		spriteAnim.Play("Damage");
-		if (currentHP < 0) { Die(); }
+		if (currentHP <= 0) { Die(); }
 		
 	}
 
@@ -47,6 +47,9 @@ public partial class UnitHealth : Node, IDamageable
 	private void Die()
 	{
 		GridManager.Instance.GetPanelAtPosition(unit.currentPos).ResetPanel();
+		if(unit is BaseEnemy) {
+			Events.OnEnemyDeath?.Invoke();
+		}
 		unit.QueueFree();
 	}
 }
