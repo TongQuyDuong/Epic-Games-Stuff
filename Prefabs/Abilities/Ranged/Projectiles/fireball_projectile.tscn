@@ -1,7 +1,7 @@
-[gd_scene load_steps=14 format=3 uid="uid://4kaxxey6eusy"]
+[gd_scene load_steps=9 format=3 uid="uid://4kaxxey6eusy"]
 
-[ext_resource type="Script" path="res://Scripts/ProjectileBehaviour.cs" id="1_xlxy3"]
-[ext_resource type="Texture2D" uid="uid://i0gqoyoyncq8" path="res://Sprites/fire_proj.png" id="2_re0v1"]
+[ext_resource type="Script" path="res://Scripts/AbilityBehaviours/ProjectileBehaviour.cs" id="1_xlxy3"]
+[ext_resource type="Texture2D" uid="uid://i0gqoyoyncq8" path="res://Sprites/Abilities/Ranged/Projectiles/Fireball/fire_proj.png" id="2_re0v1"]
 [ext_resource type="Script" path="res://Scripts/ProjectileImpact.cs" id="3_bdvcb"]
 
 [sub_resource type="Animation" id="Animation_n0sv6"]
@@ -75,35 +75,15 @@ _data = {
 "fireball": SubResource("Animation_l64i1")
 }
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_er43u"]
-animation = &"Explode"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_5m7t0"]
-animation = &"fireball"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_k62v2"]
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_cmpof"]
-advance_mode = 2
-advance_condition = &"explode"
-
-[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_iok3y"]
-states/Explode/node = SubResource("AnimationNodeAnimation_er43u")
-states/Explode/position = Vector2(673, 147)
-states/fireball/node = SubResource("AnimationNodeAnimation_5m7t0")
-states/fireball/position = Vector2(481, 101)
-transitions = ["Start", "fireball", SubResource("AnimationNodeStateMachineTransition_k62v2"), "fireball", "Explode", SubResource("AnimationNodeStateMachineTransition_cmpof")]
-
 [sub_resource type="CircleShape2D" id="CircleShape2D_1qs5a"]
 radius = 16.0
 
-[node name="FireballProjectile" type="RigidBody2D" node_paths=PackedStringArray("impactPoint", "tree")]
+[node name="FireballProjectile" type="RigidBody2D" node_paths=PackedStringArray("impactPoint", "animationPlayer")]
 script = ExtResource("1_xlxy3")
 projectileDuration = 5.0
 projectileSpeed = 1000.0
 impactPoint = NodePath("ImpactPoint")
-tree = NodePath("AnimationTree")
+animationPlayer = NodePath("AnimationPlayer")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(-3, 0)
@@ -112,18 +92,13 @@ texture = ExtResource("2_re0v1")
 hframes = 9
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "fireball"
 libraries = {
 "": SubResource("AnimationLibrary_be1kr")
 }
 
 [node name="ImpactPoint" type="Node2D" parent="."]
 position = Vector2(17, 0)
-
-[node name="AnimationTree" type="AnimationTree" parent="."]
-tree_root = SubResource("AnimationNodeStateMachine_iok3y")
-anim_player = NodePath("../AnimationPlayer")
-active = true
-parameters/conditions/explode = false
 
 [node name="Area2D" type="Area2D" parent="."]
 script = ExtResource("3_bdvcb")

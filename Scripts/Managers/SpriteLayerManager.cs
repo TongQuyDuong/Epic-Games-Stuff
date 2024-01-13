@@ -20,12 +20,12 @@ public partial class SpriteLayerManager : Node
         Events.OnRowChange -= AdjustLayerOnMovement;
         Instance = null;
     }
-    private void AdjustLayerOnMovement(BaseUnit unit)
+    private void AdjustLayerOnMovement(BaseUnit unit,int yDifference)
     {
-        unit.ZIndex = (int)unit.currentPos.Y;
+        unit.ZIndex += yDifference;
     }
     public void AdjustLayerOnInstantiation(Node2D unit, int rowNumber)
     {
-        unit.ZIndex = rowNumber;
+        unit.ZIndex += rowNumber;
     }
 }

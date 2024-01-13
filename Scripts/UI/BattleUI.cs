@@ -22,17 +22,17 @@ public partial class BattleUI : Control
 	}
 
 //MoveUI elements out of the screen
-    public override void _Ready()
-    {
-        base._Ready();
+	public override void _Ready()
+	{
+		base._Ready();
 		topLeftUI.Position += new Vector2(0,-180);
 		Slot1.Position += new Vector2(-150,0);
 		Slot2.Position += new Vector2(-150, 0);
 		Slot3.Position += new Vector2(-150, 0);
 	}
 
-    public void SetMaxHP(int maxHP) {
-		topLeftUI.maxHP = maxHP;
+	public void SetMaxHP(int maxHP) {
+		topLeftUI.hpBar.SetMaxHP(maxHP);
 	}
 	public void DisplayAbility(int abilityIndex, CompressedTexture2D image, int numberOfCharges) {
 		switch(abilityIndex) {

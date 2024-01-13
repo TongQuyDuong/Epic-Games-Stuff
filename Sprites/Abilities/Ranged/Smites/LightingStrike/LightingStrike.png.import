@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://i0gqoyoyncq8"
-path="res://.godot/imported/fire_proj.png-ffa505d5878e641e8c6dd58409a64fc4.ctex"
+uid="uid://c2f1qdauvrav3"
+path="res://.godot/imported/LightingStrike.png-b8fc368083ba04450a638bb2cfdba392.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/fire_proj.png"
-dest_files=["res://.godot/imported/fire_proj.png-ffa505d5878e641e8c6dd58409a64fc4.ctex"]
+source_file="res://Sprites/Abilities/Ranged/Smites/LightingStrike/LightingStrike.png"
+dest_files=["res://.godot/imported/LightingStrike.png-b8fc368083ba04450a638bb2cfdba392.ctex"]
 
 [params]
 

@@ -1,0 +1,15 @@
+[gd_resource type="Resource" load_steps=4 format=3 uid="uid://dm1f0j6b5csfi"]
+
+[ext_resource type="Texture2D" uid="uid://dov6fl4c26pov" path="res://Sprites/Abilities/Ranged/Smites/LightingStrike/LightningStrikeIcon.png" id="1_e74uv"]
+[ext_resource type="Script" path="res://Scripts/Resources/Abilities/Ranged/HitscanAbilities/SmiteAbility.cs" id="1_sfj0v"]
+[ext_resource type="PackedScene" uid="uid://cr411vkbfr5r5" path="res://Prefabs/Abilities/Ranged/Smite/lightning_strike.tscn" id="3_h4fcy"]
+
+[resource]
+script = ExtResource("1_sfj0v")
+smiteEffect = ExtResource("3_h4fcy")
+aName = "LightingStrike"
+aDescription = "lighitng"
+castTime = 0.2
+cooldown = 1.0
+activeTime = 0.0
+Icon = ExtResource("1_e74uv")

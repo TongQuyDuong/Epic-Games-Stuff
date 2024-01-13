@@ -3,18 +3,20 @@ using System;
 
 public partial class HpBar : Control
 {
-	private TextureProgressBar hpBarMain;
-	private TextureProgressBar hpBarUnder;
+	[Export] private TextureProgressBar hpBarMain;
+	[Export] private TextureProgressBar hpBarUnder;
 	Tween tweenMain;
 	Tween tweenUnder;
 	public override void _EnterTree()
 	{
 		hpBarMain = GetNode<TextureProgressBar>("HpBarMain");
 		hpBarUnder = GetNode<TextureProgressBar>("HpBarUnder");
-		
 	}
-    public void UpdateHealth(int damage) {
-		if(GetTree().GetProcessedTweens().Count > 0) {
+	public void UpdateHealth(int damage) {
+		//Inflate the value so the tween looks smoother
+		int trueDamage = damage*10;
+		
+		if(tweenMain != null || tweenUnder != null) {
 			tweenMain.Kill();
 			tweenUnder.Kill();
 		}
@@ -23,15 +25,15 @@ public partial class HpBar : Control
 
 		if (damage > 0){
 			
-			tweenMain.TweenProperty(hpBarMain, "value", (double)(hpBarMain.Value - damage), 0.1);
+			tweenMain.TweenProperty(hpBarMain, "value", (double)(hpBarMain.Value - trueDamage), 0.1);
 			tweenMain.Finished += delegate { UpdateColor(); };
 			tweenUnder = GetTree().CreateTween();
 			tweenUnder.TweenInterval(0.5);
-			tweenUnder.TweenProperty(hpBarUnder, "value", (double)(hpBarMain.Value - damage), 0.2);
+			tweenUnder.TweenProperty(hpBarUnder, "value", (double)(hpBarMain.Value - trueDamage), 0.3);
 			
 		} else if(damage < 0) {
 			
-			tweenMain.TweenProperty(hpBarMain, "value", (double)(hpBarMain.Value - damage), 0.1);
+			tweenMain.TweenProperty(hpBarMain, "value", (double)(hpBarMain.Value - trueDamage), 0.1);
 			tweenMain.Finished += delegate { 
 				UpdateColor();
 				hpBarUnder.Value = hpBarMain.Value;
@@ -52,11 +54,15 @@ public partial class HpBar : Control
 		}
 	}
 	public void SetMaxHP(int maxHP) {
-		hpBarMain.MaxValue = maxHP;
-		hpBarUnder.MaxValue = maxHP;
-		hpBarMain.Value = maxHP;
-		hpBarUnder.Value = maxHP;
+		//Inflate the value so the tween looks smoother
+		int trueValue = maxHP*10;
+		hpBarMain.MaxValue = trueValue;
+		hpBarUnder.MaxValue = trueValue;
+		hpBarMain.Value = trueValue;
+		hpBarUnder.Value = trueValue;
 	}
+
+
 
 
 }

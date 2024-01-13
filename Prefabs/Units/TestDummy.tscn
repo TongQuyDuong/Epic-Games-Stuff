@@ -1,6 +1,6 @@
 [gd_scene load_steps=17 format=3 uid="uid://2wh87d6rrgjd"]
 
-[ext_resource type="Script" path="res://Scripts/BaseEnemy.cs" id="1_b65pt"]
+[ext_resource type="Script" path="res://Scripts/Units/Enemies/BaseEnemy.cs" id="1_u3x8x"]
 [ext_resource type="Script" path="res://Scripts/Resources/UnitStat.cs" id="2_8jjst"]
 [ext_resource type="Script" path="res://Scripts/Resources/UnitStatList.cs" id="3_r1173"]
 [ext_resource type="PackedScene" uid="uid://crbruay2rfa3p" path="res://Prefabs/Effects/PopupEffect.tscn" id="4_0hvu2"]
@@ -46,10 +46,10 @@ tracks/0/path = NodePath("Sprite2D:material:shader_parameter/quantity")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.05),
-"transitions": PackedFloat32Array(0.993335, 1.3752e-05),
+"times": PackedFloat32Array(0, 0.05, 0.1),
+"transitions": PackedFloat32Array(0.993335, 0.993335, 1.3752e-05),
 "update": 0,
-"values": [1.0, 0.0]
+"values": [1.0, 1.0, 0.0]
 }
 
 [sub_resource type="Animation" id="Animation_22ted"]
@@ -74,7 +74,7 @@ _data = {
 }
 
 [node name="TestDummy" type="CharacterBody2D" node_paths=PackedStringArray("PopupPoint")]
-script = ExtResource("1_b65pt")
+script = ExtResource("1_u3x8x")
 stats = SubResource("Resource_ndm0n")
 PopupPrefab = ExtResource("4_0hvu2")
 PopupPoint = NodePath("PopupPoint")
@@ -90,7 +90,7 @@ currentHP = 5
 maxHP = 5
 spriteAnim = NodePath("../AnimationPlayer")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="Hitbox" type="CollisionShape2D" parent="."]
 position = Vector2(12, -86.25)
 shape = SubResource("RectangleShape2D_naai2")
 

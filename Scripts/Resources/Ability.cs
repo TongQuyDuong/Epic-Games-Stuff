@@ -11,14 +11,12 @@ public partial class Ability : Resource
     [Export] public float cooldown;
     [Export] public float activeTime;
     public Action OnCast;
-    protected BaseUnit caster;
     [Export] public CompressedTexture2D Icon; 
-
-    public virtual void Initialize(BaseUnit owner)
-    {
+    public virtual void Initialize() {
 
     }
-    public virtual void TriggerAbility()
+
+    public virtual void TriggerAbility(BaseUnit caster)
     {
 
     }

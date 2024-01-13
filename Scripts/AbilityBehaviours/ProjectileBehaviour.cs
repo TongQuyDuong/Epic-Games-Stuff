@@ -3,20 +3,23 @@ using System;
 
 public partial class ProjectileBehaviour : RigidBody2D
 {
+	[Export] public BaseUnit caster;
 	[Export] private float projectileDuration;
 	[Export] private float projectileSpeed;
 	[Export] private Node2D impactPoint;
 	[Export] public int rowNumber;
+	[Export] private AnimationPlayer animationPlayer;
 	public float Damage;
-	[Export] private AnimationTree tree;
 	Vector2 velo = new Vector2();
 
 
 	public override void _Ready()
 	{
+		rowNumber = (int)caster.currentPos.Y;
 		SpriteLayerManager.Instance.AdjustLayerOnInstantiation(this, rowNumber);
-		if(!UnitManager.Instance.heroIsFacingRight) this.Scale = new Vector2(this.Scale.X*-1,this.Scale.Y);
-		projectileSpeed *= UnitManager.Instance.heroIsFacingRight? 1 : -1;
+		caster.stats.TryGetStatValue(StatType.Magic, out Damage);
+		if (!caster.isFacingRight) this.Scale = new Vector2(this.Scale.X*-1,this.Scale.Y);
+		projectileSpeed *= caster.isFacingRight ? 1 : -1;
 	}
 
 	public override void _PhysicsProcess(double delta)
@@ -35,7 +38,7 @@ public partial class ProjectileBehaviour : RigidBody2D
 			this.Sleeping = true;
 			this.SetPhysicsProcess(false);
 			this.GlobalPosition = impactPoint.GlobalPosition;
-			tree.Set("parameters/conditions/explode", true);
+			animationPlayer.Play("Explode");
 			IDamageable targetHealth = target.GetNode<IDamageable>("UnitHealth");
 			targetHealth.TakeDamage(Damage);
 		}

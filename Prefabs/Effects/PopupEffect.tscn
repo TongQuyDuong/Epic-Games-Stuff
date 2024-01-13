@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://crbruay2rfa3p"]
 
 [ext_resource type="Script" path="res://Prefabs/Effects/PopupEffect.cs" id="1_y38ga"]
-[ext_resource type="FontFile" uid="uid://bch6ug3gayri3" path="res://Resources/Karma Suture.otf" id="2_g57ct"]
+[ext_resource type="FontFile" uid="uid://bch6ug3gayri3" path="res://Resources/Fonts/Karma Suture.otf" id="2_g57ct"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_jxgw6"]
 font = ExtResource("2_g57ct")

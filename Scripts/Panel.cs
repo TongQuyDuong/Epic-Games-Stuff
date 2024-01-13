@@ -7,6 +7,7 @@ public partial class Panel : Node2D
 	[Export] public Vector2 Pos;
 	[Export] public BaseUnit occupiedUnit = null;
 	[Export] public bool Walkable;
+	[Export] public AnimationPlayer animationPlayer;
 
 	public override void _Ready()
 	{

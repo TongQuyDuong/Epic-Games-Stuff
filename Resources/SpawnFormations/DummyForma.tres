@@ -1,13 +1,8 @@
-[gd_resource type="Resource" load_steps=7 format=3 uid="uid://duw1rvkqxa0hh"]
+[gd_resource type="Resource" load_steps=6 format=3 uid="uid://duw1rvkqxa0hh"]
 
 [ext_resource type="Script" path="res://Scripts/Resources/SpawnFormation.cs" id="1_npk1i"]
 [ext_resource type="Script" path="res://Scripts/Resources/SpawnInfo.cs" id="2_dxjax"]
 [ext_resource type="PackedScene" uid="uid://2wh87d6rrgjd" path="res://Prefabs/Units/TestDummy.tscn" id="3_pfr6n"]
-
-[sub_resource type="Resource" id="Resource_k2jvn"]
-script = ExtResource("2_dxjax")
-unitToSpawn = ExtResource("3_pfr6n")
-spawnLocation = Vector2(6, 1)
 
 [sub_resource type="Resource" id="Resource_wfcw2"]
 script = ExtResource("2_dxjax")
@@ -21,4 +16,4 @@ spawnLocation = Vector2(6, 2)
 
 [resource]
 script = ExtResource("1_npk1i")
-spawns = [SubResource("Resource_k2jvn"), SubResource("Resource_wfcw2"), SubResource("Resource_wojsa")]
+spawns = [SubResource("Resource_wfcw2"), SubResource("Resource_wojsa")]

@@ -16,7 +16,7 @@ public partial class AbilityHolder : Node
 
 	public override void _Ready()
 	{
-		ability.Initialize(user);
+		ability.Initialize();
 		BattleUI.Instance.DisplayAbility((int)slotNumber,ability.Icon,numberOfCharges);
 	}
 	public override void _PhysicsProcess(double delta)
@@ -50,7 +50,7 @@ public partial class AbilityHolder : Node
 				}
 				else
 				{
-					ability.TriggerAbility();
+					ability.TriggerAbility(user);
 					state = AbilityState.active;
 					activeTime = ability.activeTime;
 				}

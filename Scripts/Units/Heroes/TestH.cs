@@ -7,4 +7,8 @@ public partial class TestH : BaseHero
     {
         base._EnterTree();
     }
+    public override void _ExitTree()
+    {
+        base._ExitTree();
+    }
 }

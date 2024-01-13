@@ -18,11 +18,11 @@ public partial class UnitHealth : Node, IDamageable
 	public override void _Ready()
 	{
 		unit = this.GetParent() as BaseUnit;
-		unit.stats.TryGetStatValue(StatType.HP,out maxHP);
-		currentHP = maxHP;
+		unit.stats.TryGetStatValue(StatType.HP,out float maxHP);
+		currentHP = (int)maxHP;
 
 	}
-	public void TakeDamage(float amount)
+	public virtual void TakeDamage(float amount)
 	{
 		int Damage = (int)Mathf.Round(amount);
 		unit.ShowPopup(Damage.ToString());
@@ -44,7 +44,7 @@ public partial class UnitHealth : Node, IDamageable
 			currentHP = maxHP;
 		}
 	}
-	private void Die()
+	protected void Die()
 	{
 		GridManager.Instance.GetPanelAtPosition(unit.currentPos).ResetPanel();
 		if(unit is BaseEnemy) {

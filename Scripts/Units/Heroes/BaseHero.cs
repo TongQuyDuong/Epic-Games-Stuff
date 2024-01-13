@@ -8,7 +8,12 @@ public partial class BaseHero : BaseUnit
     public override void _EnterTree()
     {
         base._EnterTree();
-        stats.TryGetStatValue(StatType.HP,out int maxHP);
-        BattleUI.Instance.SetMaxHP(maxHP);
+        stats.TryGetStatValue(StatType.HP,out float maxHP);
+        BattleUI.Instance.SetMaxHP((int)maxHP);
+    }
+
+    public override void _ExitTree()
+    {
+        base._ExitTree();
     }
 }

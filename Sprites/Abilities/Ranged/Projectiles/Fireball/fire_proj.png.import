@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://s1sdbns2aekl"
-path="res://.godot/imported/fireball.png-5b97b465adba87b37a7ee71e6eb24e65.ctex"
+uid="uid://i0gqoyoyncq8"
+path="res://.godot/imported/fire_proj.png-e8c354d7299d480ed7123e76987bc870.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/fireball.png"
-dest_files=["res://.godot/imported/fireball.png-5b97b465adba87b37a7ee71e6eb24e65.ctex"]
+source_file="res://Sprites/Abilities/Ranged/Projectiles/Fireball/fire_proj.png"
+dest_files=["res://.godot/imported/fire_proj.png-e8c354d7299d480ed7123e76987bc870.ctex"]
 
 [params]
 

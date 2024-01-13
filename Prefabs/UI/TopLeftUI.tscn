@@ -13,7 +13,7 @@ anchors_preset = 0
 offset_right = 583.0
 offset_bottom = 180.0
 script = ExtResource("1_kuspj")
-maxHP = 100
+maxHP = 20
 
 [node name="Border" type="TextureRect" parent="."]
 z_index = 2
@@ -62,7 +62,8 @@ offset_top = -2.0
 offset_right = 257.0
 offset_bottom = 254.0
 scale = Vector2(2.5, 2.5)
-value = 100.0
+max_value = 20.0
+value = 20.0
 texture_progress = ExtResource("4_iuk8l")
 tint_progress = Color(0.0862745, 1, 0.0705882, 1)
 
@@ -73,7 +74,8 @@ offset_top = -2.0
 offset_right = 161.0
 offset_bottom = 8.0
 scale = Vector2(2.5, 2.5)
-value = 100.0
+max_value = 20.0
+value = 20.0
 texture_under = ExtResource("4_iuk8l")
 texture_progress = ExtResource("4_iuk8l")
 tint_under = Color(0.294118, 0.294118, 0.294118, 1)

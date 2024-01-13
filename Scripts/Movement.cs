@@ -20,23 +20,11 @@ public partial class Movement : Node2D
     public override void _Ready()
     {
         base._Ready();
-		Events.OnBattleActive += EnableMovement;
-		Events.OnBattleEnd += DisableMovement;
+
     }
 
-    public override void _ExitTree()
-    {
-        base._ExitTree();
-		Events.OnBattleActive -= EnableMovement;
-		Events.OnBattleEnd -= DisableMovement;
-	}
-    private void EnableMovement() {
-		this.ProcessMode = ProcessModeEnum.Inherit;
-	}
-	private void DisableMovement()
-	{
-		this.ProcessMode = ProcessModeEnum.Disabled;
-	}
+
+
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
@@ -46,7 +34,7 @@ public partial class Movement : Node2D
 	}
 	protected void Flip()
 	{
-		UnitManager.Instance.heroIsFacingRight = !UnitManager.Instance.heroIsFacingRight;
+		currentUnit.isFacingRight = !currentUnit.isFacingRight;
 
 		currentUnit.Scale = new Vector2(currentUnit.Scale.X * -1, 1);
 	}
@@ -114,7 +102,8 @@ public partial class Movement : Node2D
 	{
 		Events.OnMove?.Invoke();
 		yield return Timing.WaitForSeconds(delay);
+		int yDifference = (int)(nextPanel.Pos.Y - currentUnit.currentPos.Y);
 		nextPanel.SetUnit(currentUnit);
-		Events.OnRowChange?.Invoke(currentUnit);
+		if(yDifference != 0) Events.OnRowChange?.Invoke(currentUnit,yDifference);
 	}
 }

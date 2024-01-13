@@ -22,14 +22,15 @@ public partial class UnitManager : Node
 		Events.OnEnemyDeath -= RemoveEnemiesAlive;
 	}
 	public void SpawnHero(){
-		BaseHero chara = SpawnUnit(new SpawnInfo(hero,GridManager.Instance.GetHeroSpawnPanel().Pos)) as BaseHero;
+		BaseHero chara = SpawnUnit(new SpawnInfo(hero,GridManager.Instance.GetHeroSpawnPanel().Pos),true) as BaseHero;
 		chara.playerAnim.AnimateEntrance();
 		GameManager.Instance.UpdateGameState(GameState.SpawnEnemies);
 	}
 
-	public BaseUnit SpawnUnit(SpawnInfo info)
+	public BaseUnit SpawnUnit(SpawnInfo info,bool isFacingRight)
 	{
 		var spawnedUnit = info.unitToSpawn.Instantiate<Node2D>() as BaseUnit;
+		spawnedUnit.isFacingRight = isFacingRight;
 		Panel spawnPanel = GridManager.Instance.GetPanelAtPosition(info.spawnLocation);
 		spawnPanel.SetUnit(spawnedUnit);
 		AddChild(spawnedUnit);
@@ -40,7 +41,7 @@ public partial class UnitManager : Node
 	public void SpawnEnemies()
 	{
 		for(int i = 0; i < formation.spawns.Count; i++) {
-			BaseEnemy unit = SpawnUnit(formation.spawns[i]) as BaseEnemy;
+			BaseEnemy unit = SpawnUnit(formation.spawns[i],false) as BaseEnemy;
 			EnemiesAlive += 1;
 			unit.Position += new Vector2(0,-600);
 			Tween tweenUnit = GetTree().CreateTween();

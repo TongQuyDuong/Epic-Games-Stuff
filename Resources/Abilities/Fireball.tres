@@ -1,10 +1,11 @@
 [gd_resource type="Resource" load_steps=4 format=3 uid="uid://mntob2ltyay2"]
 
-[ext_resource type="Texture2D" uid="uid://s1sdbns2aekl" path="res://Sprites/fireball.png" id="1_6wkdg"]
+[ext_resource type="Texture2D" uid="uid://s1sdbns2aekl" path="res://Sprites/Abilities/Ranged/Projectiles/Fireball/fireball.png" id="1_6wkdg"]
 [ext_resource type="Script" path="res://Scripts/Resources/Abilities/Ranged/ProjectileAbilities/ProjectileAbility.cs" id="1_afdio"]
-[ext_resource type="PackedScene" uid="uid://4kaxxey6eusy" path="res://Prefabs/fireball_projectile.tscn" id="1_gu2j1"]
+[ext_resource type="PackedScene" uid="uid://4kaxxey6eusy" path="res://Prefabs/Abilities/Ranged/Projectiles/fireball_projectile.tscn" id="1_gu2j1"]
 
 [resource]
+resource_local_to_scene = true
 script = ExtResource("1_afdio")
 projectile = ExtResource("1_gu2j1")
 aName = "Fireball"

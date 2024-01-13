@@ -2,11 +2,11 @@
 
 [ext_resource type="Script" path="res://Scripts/UI/AbilityIcon.cs" id="1_w63t5"]
 [ext_resource type="Texture2D" uid="uid://mpnq6k2myn6r" path="res://Sprites/UI/AbilityMask.png" id="2_qj24g"]
-[ext_resource type="FontFile" uid="uid://bch6ug3gayri3" path="res://Resources/Karma Suture.otf" id="4_h6hkv"]
+[ext_resource type="FontFile" uid="uid://bch6ug3gayri3" path="res://Resources/Fonts/Karma Suture.otf" id="4_4pro1"]
 [ext_resource type="Texture2D" uid="uid://b24328mhw0rfc" path="res://Sprites/UI/AbilityBorder.png" id="4_wpjtq"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_4ahts"]
-font = ExtResource("4_h6hkv")
+font = ExtResource("4_4pro1")
 font_size = 80
 outline_size = 20
 outline_color = Color(0, 0, 0, 1)
@@ -39,11 +39,11 @@ texture = ExtResource("2_qj24g")
 
 [node name="TextureProgressBar" type="TextureProgressBar" parent="TextureRect"]
 layout_mode = 1
-offset_left = 77.8818
-offset_top = 62.3054
-offset_right = 1677.88
-offset_bottom = 1662.31
-scale = Vector2(0.65, 0.65)
+offset_left = 77.8817
+offset_top = 77.8817
+offset_right = 141.882
+offset_bottom = 141.882
+scale = Vector2(16, 16)
 fill_mode = 5
 tint_progress = Color(0.27451, 0.27451, 0.27451, 1)
 
