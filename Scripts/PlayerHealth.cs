@@ -22,4 +22,10 @@ public partial class PlayerHealth : UnitHealth
 			}
 
 	}
+	
+	protected override void Die() {
+		GridManager.Instance.GetPanelAtPosition(unit.currentPos).ResetPanel();
+		spriteAnim.Play("Vanish");
+		this.GetParent().QueueFree();
+	}
 }

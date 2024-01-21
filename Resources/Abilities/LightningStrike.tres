@@ -10,6 +10,6 @@ smiteEffect = ExtResource("3_h4fcy")
 aName = "LightingStrike"
 aDescription = "lighitng"
 castTime = 0.2
-cooldown = 1.0
+cooldown = 0.5
 activeTime = 0.0
 Icon = ExtResource("1_e74uv")

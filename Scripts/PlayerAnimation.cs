@@ -23,10 +23,12 @@ public partial class PlayerAnimation : Node
 	public void AnimateMovement() {
 		animPlayer.Play("Vanish");
 		animPlayer.Queue("Appear");
+		animPlayer.Queue("RESET");
 	}
 
 	public void AnimateAttackRanged(){
 		animPlayer.Play("Attack");
+		animPlayer.Queue("RESET");
 	}
 
 	public void AnimateIdle() {
@@ -35,5 +37,6 @@ public partial class PlayerAnimation : Node
 
 	public void AnimateEntrance() {
 		animPlayer.Play("Appear");
+		animPlayer.Queue("RESET");
 	}
 }

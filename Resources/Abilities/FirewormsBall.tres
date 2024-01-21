@@ -1,0 +1,13 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://cybtmgs6be4wf"]
+
+[ext_resource type="PackedScene" uid="uid://dxatt187mlk6s" path="res://Prefabs/Units/Enemies/fireworm_ball.tscn" id="1_d83xi"]
+[ext_resource type="Script" path="res://Scripts/Resources/Abilities/Ranged/ProjectileAbilities/ProjectileAbility.cs" id="1_ojh7j"]
+
+[resource]
+script = ExtResource("1_ojh7j")
+projectile = ExtResource("1_d83xi")
+aName = "FirewormsBall"
+aDescription = "ball"
+castTime = 0.0
+cooldown = 0.0
+activeTime = 0.0

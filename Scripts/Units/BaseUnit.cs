@@ -16,6 +16,7 @@ public partial class BaseUnit : CharacterBody2D
 		this.ProcessMode = ProcessModeEnum.Disabled;
 		Events.OnBattleActive += Enable;
 		Events.OnBattleEnd += Disable;
+		if(isFacingRight == false) this.Scale = new Vector2(this.Scale.X * -1,this.Scale.Y);
 	}
 	public override void _ExitTree()
 	{

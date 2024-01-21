@@ -36,7 +36,7 @@ public partial class Movement : Node2D
 	{
 		currentUnit.isFacingRight = !currentUnit.isFacingRight;
 
-		currentUnit.Scale = new Vector2(currentUnit.Scale.X * -1, 1);
+		currentUnit.Scale = new Vector2(currentUnit.Scale.X * -1, currentUnit.Scale.Y);
 	}
 
 	void ProcessInput()
@@ -104,6 +104,7 @@ public partial class Movement : Node2D
 		yield return Timing.WaitForSeconds(delay);
 		int yDifference = (int)(nextPanel.Pos.Y - currentUnit.currentPos.Y);
 		nextPanel.SetUnit(currentUnit);
+		UnitManager.Instance.playerPos = currentUnit.currentPos;
 		if(yDifference != 0) Events.OnRowChange?.Invoke(currentUnit,yDifference);
 	}
 }

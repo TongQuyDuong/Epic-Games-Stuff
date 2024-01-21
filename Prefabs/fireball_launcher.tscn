@@ -1,0 +1,28 @@
+[gd_scene load_steps=8 format=3 uid="uid://biob266ihpwos"]
+
+[ext_resource type="Script" path="res://Scripts/Units/BaseUnit.cs" id="1_kfjwf"]
+[ext_resource type="Script" path="res://Scripts/Resources/UnitStat.cs" id="2_dku6i"]
+[ext_resource type="Script" path="res://Scripts/Resources/UnitStatList.cs" id="3_m0v0r"]
+[ext_resource type="Script" path="res://Scripts/ProjectileLauncher.cs" id="4_wt7i5"]
+[ext_resource type="Resource" uid="uid://mntob2ltyay2" path="res://Resources/Abilities/Fireball.tres" id="5_08r3b"]
+
+[sub_resource type="Resource" id="Resource_hxbyl"]
+script = ExtResource("2_dku6i")
+statType = 2
+BaseValue = 1.0
+
+[sub_resource type="Resource" id="Resource_nxp53"]
+script = ExtResource("3_m0v0r")
+StatList = [SubResource("Resource_hxbyl")]
+
+[node name="FireballLauncher" type="CharacterBody2D"]
+position = Vector2(1478, 400)
+script = ExtResource("1_kfjwf")
+stats = SubResource("Resource_nxp53")
+
+[node name="ProjectileLauncher" type="Node2D" parent="." node_paths=PackedStringArray("caster")]
+script = ExtResource("4_wt7i5")
+ability = ExtResource("5_08r3b")
+caster = NodePath("")
+
+[node name="FiringPoint" type="Marker2D" parent="."]

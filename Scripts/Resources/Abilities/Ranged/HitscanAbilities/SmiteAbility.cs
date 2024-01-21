@@ -15,7 +15,6 @@ public partial class SmiteAbility : RangedAbility
 	}
 	public override void TriggerAbility(BaseUnit caster)
 	{
-		firingPoint = caster.GetNode<Marker2D>("FiringPoint");
 		int direction = caster.isFacingRight? 1 : -1;
 		Panel panel;
 		for (int i = (int)caster.currentPos.X + direction; i >= 0 && i < 8; i += direction ) {
@@ -24,7 +23,7 @@ public partial class SmiteAbility : RangedAbility
 				panel.animationPlayer.Play("Warning");
 
 				caster.stats.TryGetStatValue(StatType.Magic, out float Damage);
-				Timing.RunCoroutine(waitForSecondsAndStrike(1,panel,Damage));
+				Timing.RunCoroutine(waitForSecondsAndStrike(0.5f,panel,Damage));
 				break;
 			}
 		}
@@ -37,7 +36,7 @@ public partial class SmiteAbility : RangedAbility
 		panel.animationPlayer.Queue("Flash");
 
 		var smite = (SmiteBehaviour)smiteEffect.Instantiate();
-		smite.currentPos = panel.Pos;
+		SpriteLayerManager.Instance.AdjustLayerOnInstantiation(smite, (int)panel.Pos.Y);
 		smite.GlobalPosition = panel.GlobalPosition;
 		UnitManager.Instance.AddChild(smite);
 

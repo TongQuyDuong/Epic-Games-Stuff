@@ -1,0 +1,113 @@
+[gd_scene load_steps=8 format=3 uid="uid://dxatt187mlk6s"]
+
+[ext_resource type="Script" path="res://Scripts/AbilityBehaviours/ProjectileBehaviour.cs" id="1_xxnhs"]
+[ext_resource type="Texture2D" uid="uid://c2pdup7pgf5pd" path="res://Sprites/Units/Enemies/Fireworm/FirewormBalls.png" id="2_y8aii"]
+
+[sub_resource type="Animation" id="Animation_y26a0"]
+resource_name = "Explode"
+length = 0.7
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [7, 8, 9, 10, 11, 12, 13]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.65),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_0wak7"]
+resource_name = "Idle"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+
+[sub_resource type="Animation" id="Animation_w8at2"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_j4dlk"]
+_data = {
+"Explode": SubResource("Animation_y26a0"),
+"Idle": SubResource("Animation_0wak7"),
+"RESET": SubResource("Animation_w8at2")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_bl4dc"]
+radius = 4.0
+
+[node name="FirewormBall" type="RigidBody2D" node_paths=PackedStringArray("impactPoint", "animationPlayer")]
+script = ExtResource("1_xxnhs")
+projectileDuration = 5.0
+projectileSpeed = 1000.0
+impactPoint = NodePath("ImpactPoint")
+animationPlayer = NodePath("AnimationPlayer")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(3, 3)
+texture = ExtResource("2_y8aii")
+offset = Vector2(-2.66667, -0.555556)
+hframes = 7
+vframes = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_j4dlk")
+}
+
+[node name="ImpactPoint" type="Marker2D" parent="."]
+position = Vector2(10, 0)
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(-1.5, -0.5)
+scale = Vector2(0.35, 0.35)
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(1, 0)
+scale = Vector2(2.35316, 2.49646)
+shape = SubResource("CircleShape2D_bl4dc")
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="ScreenExited"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

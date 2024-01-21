@@ -8,11 +8,13 @@
 script = ExtResource("2_dxjax")
 unitToSpawn = ExtResource("3_pfr6n")
 spawnLocation = Vector2(6, 0)
+isFacingRight = false
 
 [sub_resource type="Resource" id="Resource_wojsa"]
 script = ExtResource("2_dxjax")
 unitToSpawn = ExtResource("3_pfr6n")
 spawnLocation = Vector2(6, 2)
+isFacingRight = false
 
 [resource]
 script = ExtResource("1_npk1i")

@@ -1,11 +1,10 @@
-[gd_scene load_steps=20 format=3 uid="uid://ib51qwl44qfd"]
+[gd_scene load_steps=13 format=3 uid="uid://ib51qwl44qfd"]
 
 [ext_resource type="Script" path="res://Scripts/Managers/GameManager.cs" id="1_wgu4n"]
 [ext_resource type="Script" path="res://Scripts/Managers/GridManager.cs" id="2_ylql0"]
 [ext_resource type="Script" path="res://Scripts/Managers/UnitManager.cs" id="3_xm58r"]
 [ext_resource type="PackedScene" uid="uid://dj3s5sndljpr1" path="res://Prefabs/Units/TestH.tscn" id="4_h2i1f"]
-[ext_resource type="Script" path="res://Scripts/Units/BaseUnit.cs" id="5_0oa1t"]
-[ext_resource type="Resource" uid="uid://duw1rvkqxa0hh" path="res://Resources/SpawnFormations/DummyForma.tres" id="5_iqshw"]
+[ext_resource type="Resource" uid="uid://cx4aoi357yfc7" path="res://Resources/SpawnFormations/FireWormForma.tres" id="4_s7a6n"]
 [ext_resource type="Script" path="res://Scripts/Managers/SpriteLayerManager.cs" id="6_8aygl"]
 [ext_resource type="Script" path="res://Scripts/Managers/SpriteManager.cs" id="7_rp32s"]
 [ext_resource type="PackedScene" uid="uid://o145r5colibr" path="res://Prefabs/UI/AbilityIcon.tscn" id="9_5rs6t"]
@@ -13,19 +12,6 @@
 [ext_resource type="Texture2D" uid="uid://b0fgwlwi7527l" path="res://Sprites/Backgrounds/ForestBackground.png" id="10_ax1fd"]
 [ext_resource type="PackedScene" uid="uid://bjwsaflrdm5j1" path="res://Prefabs/UI/TopLeftUI.tscn" id="10_knel8"]
 [ext_resource type="Script" path="res://Scripts/UI/BattleUI.cs" id="13_1dkkn"]
-[ext_resource type="Script" path="res://Scripts/Resources/UnitStat.cs" id="14_7h130"]
-[ext_resource type="Script" path="res://Scripts/Resources/UnitStatList.cs" id="15_1rbt3"]
-[ext_resource type="Script" path="res://Scripts/ProjectileLauncher.cs" id="16_da2xi"]
-[ext_resource type="Resource" uid="uid://mntob2ltyay2" path="res://Resources/Abilities/Fireball.tres" id="17_yd0ad"]
-
-[sub_resource type="Resource" id="Resource_hxbyl"]
-script = ExtResource("14_7h130")
-statType = 2
-BaseValue = 1.0
-
-[sub_resource type="Resource" id="Resource_nxp53"]
-script = ExtResource("15_1rbt3")
-StatList = [SubResource("Resource_hxbyl")]
 
 [node name="TestBattle" type="Node2D"]
 
@@ -39,19 +25,7 @@ offsetY = 60.0
 [node name="UnitManager" type="Node" parent="Managers"]
 script = ExtResource("3_xm58r")
 hero = ExtResource("4_h2i1f")
-formation = ExtResource("5_iqshw")
-
-[node name="FireballLauncher" type="CharacterBody2D" parent="Managers/UnitManager"]
-position = Vector2(1478, 400)
-script = ExtResource("5_0oa1t")
-stats = SubResource("Resource_nxp53")
-
-[node name="ProjectileLauncher" type="Node2D" parent="Managers/UnitManager/FireballLauncher" node_paths=PackedStringArray("caster")]
-script = ExtResource("16_da2xi")
-ability = ExtResource("17_yd0ad")
-caster = NodePath("..")
-
-[node name="FiringPoint" type="Marker2D" parent="Managers/UnitManager/FireballLauncher"]
+formation = ExtResource("4_s7a6n")
 
 [node name="SpriteLayerManager" type="Node" parent="Managers"]
 script = ExtResource("6_8aygl")
