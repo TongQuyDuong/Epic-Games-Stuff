@@ -9,9 +9,11 @@ public partial class BattleUI : Control
 	[Export] public AbilityIcon Slot3;
 	[Export] public TopLeftUI topLeftUI;
 	[Export] public PackedScene announcement;
+	[Export] public PackedScene PopupPrefab;
 
 	public override void _EnterTree()
 	{
+		PopupPrefab = GD.Load<PackedScene>("res://Prefabs/Effects/PopupEffect.tscn");
 		if (Instance == null) { Instance = this; }
 		
 	}
@@ -64,6 +66,7 @@ public partial class BattleUI : Control
 		tweenUI.TweenProperty(Slot1, "position",Slot1.Position + new Vector2(150, 0), 0.5);
 		tweenUI.TweenProperty(Slot2, "position",Slot2.Position + new Vector2(150, 0), 0.5).SetDelay(0.1);
 		tweenUI.TweenProperty(Slot3, "position",Slot3.Position + new Vector2(150, 0), 0.5).SetDelay(0.2);
+		tweenUI.TweenInterval(0.2);
 		tweenUI.Finished += delegate {GameManager.Instance.UpdateGameState(GameState.SpawnHero);};
 	}
 

@@ -17,6 +17,7 @@ public partial class ProjectileAbility : RangedAbility
 
 		var proj = (ProjectileBehaviour)projectile.Instantiate();
 		proj.caster = caster;
+		proj.effectsToApply = effectsToApply;
 		proj.GlobalPosition = firingPoint.GlobalPosition;
 		caster.GetParent().AddChild(proj);
 		

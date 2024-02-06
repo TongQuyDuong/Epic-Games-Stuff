@@ -5,12 +5,14 @@
 [ext_resource type="PackedScene" uid="uid://2wh87d6rrgjd" path="res://Prefabs/Units/TestDummy.tscn" id="3_pfr6n"]
 
 [sub_resource type="Resource" id="Resource_wfcw2"]
+resource_local_to_scene = true
 script = ExtResource("2_dxjax")
 unitToSpawn = ExtResource("3_pfr6n")
 spawnLocation = Vector2(6, 0)
 isFacingRight = false
 
 [sub_resource type="Resource" id="Resource_wojsa"]
+resource_local_to_scene = true
 script = ExtResource("2_dxjax")
 unitToSpawn = ExtResource("3_pfr6n")
 spawnLocation = Vector2(6, 2)

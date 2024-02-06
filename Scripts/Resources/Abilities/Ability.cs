@@ -10,8 +10,10 @@ public partial class Ability : Resource
     [Export] public float castTime;
     [Export] public float cooldown;
     [Export] public float activeTime;
+    [Export] public Godot.Collections.Array<StatusEffectData> effectsToApply;
     public Action OnCast;
     [Export] public CompressedTexture2D Icon; 
+    
     public virtual void Initialize() {
 
     }

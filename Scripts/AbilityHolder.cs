@@ -25,6 +25,7 @@ public partial class AbilityHolder : Node
 		switch (state)
 		{
 			case AbilityState.ready:
+				if (user.isControlled == true) break;
 				if (Input.IsActionJustPressed("Skill" + ((int)slotNumber+1)) && stateCon.CurrentPlayerState == PlayerState.Idling)
 				{
 					

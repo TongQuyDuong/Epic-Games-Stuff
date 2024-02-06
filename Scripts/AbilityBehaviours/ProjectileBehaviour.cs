@@ -9,6 +9,7 @@ public partial class ProjectileBehaviour : RigidBody2D
 	[Export] private Node2D impactPoint;
 	[Export] public int rowNumber;
 	[Export] private AnimationPlayer animationPlayer;
+	[Export] public Godot.Collections.Array<StatusEffectData> effectsToApply;
 	public float Damage;
 	Vector2 velo = new Vector2();
 
@@ -39,8 +40,18 @@ public partial class ProjectileBehaviour : RigidBody2D
 			this.SetPhysicsProcess(false);
 			this.GlobalPosition = impactPoint.GlobalPosition;
 			animationPlayer.Play("Explode");
+
 			IDamageable targetHealth = target.GetNode<IDamageable>("UnitHealth");
 			targetHealth.TakeDamage(Damage);
+			
+			for(int i = 0; i < effectsToApply.Count; i++) {
+				if (effectsToApply[i].type == StatusEffectType.DamageOverTime) {
+					target.STeffectCon.AddDamageOverTime((DamageOverTime)effectsToApply[i],caster);
+				} else {
+					target.STeffectCon.AddStatusEffect(effectsToApply[i]);
+				}
+				
+			}
 		}
 	}
 

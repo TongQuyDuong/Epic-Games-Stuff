@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Diagnostics;
 
 public partial class main : Node2D
 {
@@ -19,6 +20,7 @@ public partial class main : Node2D
 		GetTree().Quit();
 	}
 	private void _on_play_pressed(){
+		Debug.Print("Play");
 		GetTree().ChangeSceneToPacked(battleScene);
 	}
 }

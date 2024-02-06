@@ -29,8 +29,7 @@ public partial class Movement : Node2D
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
-		if (currentUnit.stateController.CurrentPlayerState != PlayerState.Attacking) ProcessInput();
-
+		if (currentUnit.stateController.CurrentPlayerState != PlayerState.Attacking && currentUnit.isControlled == false) ProcessInput();
 	}
 	protected void Flip()
 	{

@@ -1,0 +1,15 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://dkq1m5ocbldml"]
+
+[ext_resource type="Script" path="res://Scripts/Resources/StatusEffects/StatChangeEffect.cs" id="1_2auvj"]
+
+[resource]
+script = ExtResource("1_2auvj")
+modValue = -1.0
+modType = 100
+statType = 2
+Name = ""
+Description = ""
+isNegativeEffect = true
+isPermanentEffect = false
+duration = 5.0
+type = 2

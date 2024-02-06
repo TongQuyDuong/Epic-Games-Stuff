@@ -16,4 +16,9 @@ public partial class BaseHero : BaseUnit
     {
         base._ExitTree();
     }
+
+    public override void _PhysicsProcess(double delta)
+    {
+        base._PhysicsProcess(delta);
+    }
 }

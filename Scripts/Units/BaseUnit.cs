@@ -1,18 +1,23 @@
 using Godot;
 using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 
 public partial class BaseUnit : CharacterBody2D
 {
 	public Panel occupiedPanel;
 	[Export] public Vector2 currentPos;
 	[Export] public UnitStatList stats;
-	[Export] public PackedScene PopupPrefab;
+	[Export] public StatusEffectsController STeffectCon;
+	[Export] public AnimationPlayer animPlayer;
 	[Export] public Marker2D PopupPoint;
 	[Export] public bool isFacingRight;
+	[Export] public bool isStatusImmune;
+	public bool isControlled = false;
 
 	public override void _EnterTree()
 	{
-		PopupPrefab = GD.Load<PackedScene>("res://Prefabs/Effects/PopupEffect.tscn");
 		this.ProcessMode = ProcessModeEnum.Disabled;
 		Events.OnBattleActive += Enable;
 		Events.OnBattleEnd += Disable;
@@ -23,21 +28,23 @@ public partial class BaseUnit : CharacterBody2D
 		Events.OnBattleActive -= Enable;
 		Events.OnBattleEnd -= Disable;
 	}
-	private void Enable()
+	public void Enable()
 	{
 		this.ProcessMode = ProcessModeEnum.Inherit;
 	}
-	private void Disable()
+	public void Disable()
 	{
 		this.ProcessMode = ProcessModeEnum.Disabled;
 	}
 	public void ShowPopup(string content) 
 	{
-		var popup = PopupPrefab.Instantiate<Marker2D>() as PopupEffect;
+		var popup = BattleUI.Instance.PopupPrefab.Instantiate<Marker2D>() as PopupEffect;
 		popup.Position = PopupPoint.GlobalPosition;
 		popup.SetLabelContent(content);
 		GetTree().CreateTween().TweenProperty(popup,"position", popup.Position + new Vector2(0,-30), 0.55f);
 
 		GetTree().CurrentScene.AddChild(popup);
 	}
+
+    
 }

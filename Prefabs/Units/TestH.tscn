@@ -3,7 +3,6 @@
 [ext_resource type="Script" path="res://Scripts/Units/Heroes/TestH.cs" id="1_1cg08"]
 [ext_resource type="Texture2D" uid="uid://cr2lb354w36mv" path="res://Sprites/TestH/chara.png" id="2_me2tq"]
 [ext_resource type="Resource" uid="uid://cole6tiatpmnm" path="res://Resources/UnitStats/TestH.tres" id="2_o08ap"]
-[ext_resource type="PackedScene" uid="uid://crbruay2rfa3p" path="res://Prefabs/Effects/PopupEffect.tscn" id="3_nihf5"]
 [ext_resource type="Script" path="res://Scripts/Movement.cs" id="3_or2d2"]
 [ext_resource type="Shader" path="res://Resources/Shaders/FlashSprite.gdshader" id="4_6jwi1"]
 [ext_resource type="Script" path="res://Scripts/PlayerStateController.cs" id="4_d4ftl"]
@@ -14,6 +13,7 @@
 [ext_resource type="Script" path="res://Scripts/PlayerHealth.cs" id="10_2wmys"]
 [ext_resource type="Resource" uid="uid://bi04y3hs068ht" path="res://Resources/Abilities/SmallEruption.tres" id="13_gw5g4"]
 [ext_resource type="Resource" uid="uid://dm1f0j6b5csfi" path="res://Resources/Abilities/LightningStrike.tres" id="13_xi61p"]
+[ext_resource type="PackedScene" uid="uid://cdkd8tavio2nn" path="res://Components/status_effects_controller.tscn" id="14_hugfx"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qxgrr"]
 resource_local_to_scene = true
@@ -125,6 +125,9 @@ tracks/2/keys = {
 }]
 }
 
+[sub_resource type="Animation" id="Animation_sk1m6"]
+resource_name = "Die"
+
 [sub_resource type="Animation" id="Animation_sah67"]
 resource_name = "idle"
 length = 0.15
@@ -185,9 +188,6 @@ tracks/0/keys = {
 "values": [0, 0, 2, 3, 4, 5]
 }
 
-[sub_resource type="Animation" id="Animation_sk1m6"]
-resource_name = "Die"
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_enmrb"]
 _data = {
 "Appear": SubResource("Animation_ag8rn"),
@@ -202,12 +202,13 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ipmpv"]
 size = Vector2(47, 142)
 
-[node name="TestH" type="CharacterBody2D" node_paths=PackedStringArray("playerAnim", "stateController", "PopupPoint")]
+[node name="TestH" type="CharacterBody2D" node_paths=PackedStringArray("playerAnim", "stateController", "STeffectCon", "animPlayer", "PopupPoint")]
 script = ExtResource("1_1cg08")
 playerAnim = NodePath("PlayerAnimation")
 stateController = NodePath("PlayerStateController")
 stats = ExtResource("2_o08ap")
-PopupPrefab = ExtResource("3_nihf5")
+STeffectCon = NodePath("StatusEffectsController")
+animPlayer = NodePath("AnimationPlayer")
 PopupPoint = NodePath("PopupPoint")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -245,6 +246,7 @@ spriteAnim = NodePath("../AnimationPlayer")
 position = Vector2(63, -93)
 
 [node name="AbilityHolder1" type="Node" parent="." node_paths=PackedStringArray("user", "stateCon")]
+process_mode = 3
 script = ExtResource("8_oqssg")
 ability = ExtResource("9_hfxfa")
 user = NodePath("..")
@@ -252,6 +254,7 @@ stateCon = NodePath("../PlayerStateController")
 numberOfCharges = 5
 
 [node name="AbilityHolder2" type="Node" parent="." node_paths=PackedStringArray("user", "stateCon")]
+process_mode = 3
 script = ExtResource("8_oqssg")
 ability = ExtResource("13_gw5g4")
 user = NodePath("..")
@@ -260,6 +263,7 @@ stateCon = NodePath("../PlayerStateController")
 numberOfCharges = 6
 
 [node name="AbilityHolder3" type="Node" parent="." node_paths=PackedStringArray("user", "stateCon")]
+process_mode = 3
 script = ExtResource("8_oqssg")
 ability = ExtResource("13_xi61p")
 user = NodePath("..")
@@ -273,3 +277,6 @@ position = Vector2(-5, -155)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-6.5, -71)
 shape = SubResource("RectangleShape2D_ipmpv")
+
+[node name="StatusEffectsController" parent="." node_paths=PackedStringArray("unit") instance=ExtResource("14_hugfx")]
+unit = NodePath("..")

@@ -11,4 +11,9 @@ public partial class TestH : BaseHero
     {
         base._ExitTree();
     }
+
+    public override void _PhysicsProcess(double delta)
+    {
+        base._PhysicsProcess(delta);
+    }
 }

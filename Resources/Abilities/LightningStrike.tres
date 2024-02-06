@@ -12,4 +12,5 @@ aDescription = "lighitng"
 castTime = 0.2
 cooldown = 0.5
 activeTime = 0.0
+effectsToApply = null
 Icon = ExtResource("1_e74uv")

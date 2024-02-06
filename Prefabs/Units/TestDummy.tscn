@@ -1,30 +1,33 @@
-[gd_scene load_steps=17 format=3 uid="uid://2wh87d6rrgjd"]
+[gd_scene load_steps=18 format=3 uid="uid://2wh87d6rrgjd"]
 
 [ext_resource type="Script" path="res://Scripts/Units/Enemies/BaseEnemy.cs" id="1_u3x8x"]
-[ext_resource type="Script" path="res://Scripts/Resources/UnitStat.cs" id="2_8jjst"]
-[ext_resource type="Script" path="res://Scripts/Resources/UnitStatList.cs" id="3_r1173"]
-[ext_resource type="PackedScene" uid="uid://crbruay2rfa3p" path="res://Prefabs/Effects/PopupEffect.tscn" id="4_0hvu2"]
+[ext_resource type="Script" path="res://Scripts/Resources/Stats/UnitStat.cs" id="2_igvpn"]
+[ext_resource type="Script" path="res://Scripts/Resources/Stats/UnitStatList.cs" id="3_ldn0c"]
 [ext_resource type="Shader" path="res://Resources/Shaders/FlashSprite.gdshader" id="4_86eem"]
 [ext_resource type="Texture2D" uid="uid://dximn6h8xrrf1" path="res://Sprites/dummy.png" id="4_x5y8s"]
-[ext_resource type="PackedScene" uid="uid://e5ccxwf8ehw1" path="res://Components/unit_health.tscn" id="5_cc7gc"]
+[ext_resource type="PackedScene" uid="uid://cdkd8tavio2nn" path="res://Components/status_effects_controller.tscn" id="7_4otk2"]
+[ext_resource type="PackedScene" uid="uid://e5ccxwf8ehw1" path="res://Components/unit_health.tscn" id="7_vfsc1"]
 
 [sub_resource type="Resource" id="Resource_vxwf6"]
-script = ExtResource("2_8jjst")
+script = ExtResource("2_igvpn")
 statType = 1
 BaseValue = 0.0
+numberOfMods = 0
 
 [sub_resource type="Resource" id="Resource_ge0c8"]
-script = ExtResource("2_8jjst")
+script = ExtResource("2_igvpn")
 statType = 3
 BaseValue = 0.0
+numberOfMods = 0
 
 [sub_resource type="Resource" id="Resource_7hmd1"]
-script = ExtResource("2_8jjst")
+script = ExtResource("2_igvpn")
 statType = 4
 BaseValue = 5.0
+numberOfMods = 0
 
 [sub_resource type="Resource" id="Resource_ndm0n"]
-script = ExtResource("3_r1173")
+script = ExtResource("3_ldn0c")
 StatList = [SubResource("Resource_vxwf6"), SubResource("Resource_ge0c8"), SubResource("Resource_7hmd1")]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_h271s"]
@@ -52,6 +55,23 @@ tracks/0/keys = {
 "values": [1.0, 1.0, 0.0]
 }
 
+[sub_resource type="Animation" id="Animation_oyt1r"]
+resource_name = "Die"
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+
 [sub_resource type="Animation" id="Animation_22ted"]
 length = 0.001
 tracks/0/type = "value"
@@ -70,13 +90,15 @@ tracks/0/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_le6d1"]
 _data = {
 "Damage": SubResource("Animation_c1uj6"),
+"Die": SubResource("Animation_oyt1r"),
 "RESET": SubResource("Animation_22ted")
 }
 
-[node name="TestDummy" type="CharacterBody2D" node_paths=PackedStringArray("PopupPoint")]
+[node name="TestDummy" type="CharacterBody2D" node_paths=PackedStringArray("STeffectCon", "animPlayer", "PopupPoint")]
 script = ExtResource("1_u3x8x")
 stats = SubResource("Resource_ndm0n")
-PopupPrefab = ExtResource("4_0hvu2")
+STeffectCon = NodePath("StatusEffectsController")
+animPlayer = NodePath("AnimationPlayer")
 PopupPoint = NodePath("PopupPoint")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -85,19 +107,22 @@ position = Vector2(8, -85)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("4_x5y8s")
 
-[node name="UnitHealth" parent="." node_paths=PackedStringArray("spriteAnim") instance=ExtResource("5_cc7gc")]
-currentHP = 5
-maxHP = 5
-spriteAnim = NodePath("../AnimationPlayer")
-
 [node name="Hitbox" type="CollisionShape2D" parent="."]
 position = Vector2(12, -86.25)
 shape = SubResource("RectangleShape2D_naai2")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+process_mode = 3
 libraries = {
 "": SubResource("AnimationLibrary_le6d1")
 }
 
 [node name="PopupPoint" type="Marker2D" parent="."]
 position = Vector2(26, -193)
+
+[node name="UnitHealth" parent="." node_paths=PackedStringArray("unit", "spriteAnim") instance=ExtResource("7_vfsc1")]
+unit = NodePath("..")
+spriteAnim = NodePath("../AnimationPlayer")
+
+[node name="StatusEffectsController" parent="." node_paths=PackedStringArray("unit") instance=ExtResource("7_4otk2")]
+unit = NodePath("..")

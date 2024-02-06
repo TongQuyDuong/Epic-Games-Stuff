@@ -3,25 +3,27 @@
 [ext_resource type="Shader" path="res://Resources/Shaders/FlashSprite.gdshader" id="1_51sfo"]
 [ext_resource type="Script" path="res://Scripts/Units/Enemies/Fireworm.cs" id="1_ips0r"]
 [ext_resource type="Resource" uid="uid://cybtmgs6be4wf" path="res://Resources/Abilities/FirewormsBall.tres" id="2_d7wmy"]
-[ext_resource type="Script" path="res://Scripts/Resources/UnitStat.cs" id="3_btw0b"]
 [ext_resource type="Texture2D" uid="uid://cp2np34uvawja" path="res://Sprites/Units/Enemies/Fireworm/Fireworm.png" id="3_gs0ia"]
+[ext_resource type="Script" path="res://Scripts/Resources/Stats/UnitStat.cs" id="3_nxvyh"]
 [ext_resource type="PackedScene" uid="uid://e5ccxwf8ehw1" path="res://Components/unit_health.tscn" id="4_3wxx6"]
-[ext_resource type="Script" path="res://Scripts/Resources/UnitStatList.cs" id="4_b11gh"]
-[ext_resource type="PackedScene" uid="uid://crbruay2rfa3p" path="res://Prefabs/Effects/PopupEffect.tscn" id="5_f23lf"]
+[ext_resource type="Script" path="res://Scripts/Resources/Stats/UnitStatList.cs" id="4_sycxn"]
+[ext_resource type="PackedScene" uid="uid://cdkd8tavio2nn" path="res://Components/status_effects_controller.tscn" id="9_fin62"]
 [ext_resource type="Script" path="res://Scripts/EnemyStateConftroller.cs" id="9_kffyc"]
 
 [sub_resource type="Resource" id="Resource_38ygo"]
-script = ExtResource("3_btw0b")
+script = ExtResource("3_nxvyh")
 statType = 2
 BaseValue = 1.0
+numberOfMods = 0
 
 [sub_resource type="Resource" id="Resource_3e0yd"]
-script = ExtResource("3_btw0b")
+script = ExtResource("3_nxvyh")
 statType = 4
 BaseValue = 3.0
+numberOfMods = 0
 
 [sub_resource type="Resource" id="Resource_tepcg"]
-script = ExtResource("4_b11gh")
+script = ExtResource("4_sycxn")
 StatList = [SubResource("Resource_38ygo"), SubResource("Resource_3e0yd")]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0s43q"]
@@ -232,15 +234,15 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b57jp"]
 size = Vector2(39, 48)
 
-[node name="Fireworm" type="CharacterBody2D" node_paths=PackedStringArray("stateCon", "animPlayer", "PopupPoint")]
+[node name="Fireworm" type="CharacterBody2D" node_paths=PackedStringArray("stateCon", "STeffectCon", "animPlayer", "PopupPoint")]
 scale = Vector2(2, 2)
 script = ExtResource("1_ips0r")
 ability = ExtResource("2_d7wmy")
 waitTime = 1.0
 stateCon = NodePath("EnemyStateConftroller")
-animPlayer = NodePath("AnimationPlayer")
 stats = SubResource("Resource_tepcg")
-PopupPrefab = ExtResource("5_f23lf")
+STeffectCon = NodePath("StatusEffectsController")
+animPlayer = NodePath("AnimationPlayer")
 PopupPoint = NodePath("PopupPoint")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -259,7 +261,8 @@ libraries = {
 "": SubResource("AnimationLibrary_uowhd")
 }
 
-[node name="UnitHealth" parent="." node_paths=PackedStringArray("spriteAnim") instance=ExtResource("4_3wxx6")]
+[node name="UnitHealth" parent="." node_paths=PackedStringArray("unit", "spriteAnim") instance=ExtResource("4_3wxx6")]
+unit = NodePath("..")
 spriteAnim = NodePath("../AnimationPlayer")
 
 [node name="PopupPoint" type="Marker2D" parent="."]
@@ -274,3 +277,6 @@ script = ExtResource("9_kffyc")
 
 [node name="FiringPoint" type="Marker2D" parent="."]
 position = Vector2(56.6667, -29.3333)
+
+[node name="StatusEffectsController" parent="." node_paths=PackedStringArray("unit") instance=ExtResource("9_fin62")]
+unit = NodePath("..")

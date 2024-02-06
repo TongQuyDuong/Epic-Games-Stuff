@@ -2,6 +2,7 @@ using Godot;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using MonoCustomResourceRegistry;
 
 [GlobalClass]
@@ -21,6 +22,32 @@ public partial class UnitStatList : Resource
             }
         }
         value = 0;
+        return false;
+    }
+
+    public bool TryAddStatMod(StatType statType, StatModifier modifier)
+    {
+        for (int i = 0; i < StatList.Count; i++)
+        {
+            if (StatList[i].statType == statType)
+            {
+                StatList[i].AddModifier(modifier);
+            }
+        }
+        
+        return false;
+    }
+
+    public bool TryRemoveStatMod(StatType statType, StatModifier modifier)
+    {
+        for (int i = 0; i < StatList.Count; i++)
+        {
+            if (StatList[i].statType == statType)
+            {
+                StatList[i].RemoveModifier(modifier);
+            }
+        }
+
         return false;
     }
 }

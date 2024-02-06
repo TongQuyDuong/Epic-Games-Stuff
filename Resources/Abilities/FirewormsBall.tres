@@ -1,5 +1,6 @@
-[gd_resource type="Resource" load_steps=3 format=3 uid="uid://cybtmgs6be4wf"]
+[gd_resource type="Resource" load_steps=4 format=3 uid="uid://cybtmgs6be4wf"]
 
+[ext_resource type="Resource" uid="uid://gmkt7n7042ln" path="res://Resources/StatusEffects/ControlEffects/TestStun.tres" id="1_chye2"]
 [ext_resource type="PackedScene" uid="uid://dxatt187mlk6s" path="res://Prefabs/Units/Enemies/fireworm_ball.tscn" id="1_d83xi"]
 [ext_resource type="Script" path="res://Scripts/Resources/Abilities/Ranged/ProjectileAbilities/ProjectileAbility.cs" id="1_ojh7j"]
 
@@ -11,3 +12,4 @@ aDescription = "ball"
 castTime = 0.0
 cooldown = 0.0
 activeTime = 0.0
+effectsToApply = Array[Resource]([ExtResource("1_chye2")])

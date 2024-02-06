@@ -1,8 +1,8 @@
 using Godot;
-using MonoCustomResourceRegistry;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 
 [GlobalClass]
 
@@ -10,6 +10,7 @@ public partial class UnitStat : Resource
 {
     [Export] public StatType statType { get; set; }
     [Export] public float BaseValue { get; set; }
+    [Export] public int numberOfMods = 0;
     protected float lastBaseValue = float.MinValue;
     public int CurrentValue
     {
@@ -45,6 +46,7 @@ public partial class UnitStat : Resource
         isDirty = true;
         statModifiers.Add(mod);
         statModifiers.Sort(CompareModOrder);
+        numberOfMods += 1;
     }
 
     public bool RemoveModifier(StatModifier mod)
@@ -53,10 +55,12 @@ public partial class UnitStat : Resource
         if (statModifiers.Remove(mod))
         {
             isDirty = true;
+            numberOfMods -= 1;
             return true;
         }
 
         return false;
+        
 
     }
 
@@ -67,22 +71,26 @@ public partial class UnitStat : Resource
 
         for (int i = 0; i < statModifiers.Count; i++)
         {
-            StatModifier mod = statModifiers[i];
-            switch (mod.Type)
+            switch (statModifiers[i].Type)
             {
                 case StatModType.Flat:
-                    finalValue += mod.Value;
+                    finalValue += statModifiers[i].Value;
                     break;
                 case StatModType.PercentAdd:
-                    sumPercentAdd += mod.Value;
+                    sumPercentAdd += statModifiers[i].Value;
                     if (i + 1 > statModifiers.Count || statModifiers[i + 1].Type != StatModType.PercentAdd)
                         finalValue *= sumPercentAdd;
                     break;
                 case StatModType.PercentMult:
-                    finalValue *= mod.Value;
+                    finalValue *= statModifiers[i].Value;
                     break;
+                default:
+                Debug.Print("Defaulted");
+                break;
+                    
             }
         }
+        
 
         return (int)Math.Round(finalValue, 4);
     }

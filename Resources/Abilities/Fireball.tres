@@ -13,4 +13,5 @@ aDescription = "Fireball"
 castTime = 0.1
 cooldown = 0.5
 activeTime = 0.0
+effectsToApply = null
 Icon = ExtResource("1_6wkdg")

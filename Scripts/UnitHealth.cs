@@ -1,10 +1,9 @@
 using Godot;
 using System;
 
-[Tool]
 public partial class UnitHealth : Node, IDamageable
 {
-	[Export] public BaseUnit unit;
+	[Export] protected BaseUnit unit;
 	[Export] public int currentHP;
 	[Export] private int maxHP;
 	[Export] public AnimationPlayer spriteAnim;
@@ -17,15 +16,14 @@ public partial class UnitHealth : Node, IDamageable
 
 	public override void _Ready()
 	{
-		unit = this.GetParent() as BaseUnit;
+		unit = GetParent<CharacterBody2D>() as BaseUnit;
 		unit.stats.TryGetStatValue(StatType.HP,out float value);
 		maxHP = (int)value;
 		currentHP = maxHP;
-
 	}
 	public virtual void TakeDamage(float amount)
 	{
-		int Damage = (int)Mathf.Round(amount);
+		int Damage = amount <= 0? 0 : (int)Mathf.Round(amount);
 		unit.ShowPopup(Damage.ToString());
 		currentHP -= Damage;
 		spriteAnim.Play("Damage");

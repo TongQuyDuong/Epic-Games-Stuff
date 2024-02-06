@@ -9,7 +9,7 @@ public partial class PlayerHealth : UnitHealth
 	}
 	public override void TakeDamage(float amount)
 	{
-		int Damage = (int)Mathf.Round(amount);
+		int Damage = amount <= 0 ? 0 : (int)Mathf.Round(amount);
 		unit.ShowPopup(Damage.ToString());
 		currentHP -= Damage;
 		spriteAnim.Play("Damage");

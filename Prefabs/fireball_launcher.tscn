@@ -1,8 +1,8 @@
 [gd_scene load_steps=8 format=3 uid="uid://biob266ihpwos"]
 
 [ext_resource type="Script" path="res://Scripts/Units/BaseUnit.cs" id="1_kfjwf"]
-[ext_resource type="Script" path="res://Scripts/Resources/UnitStat.cs" id="2_dku6i"]
-[ext_resource type="Script" path="res://Scripts/Resources/UnitStatList.cs" id="3_m0v0r"]
+[ext_resource type="Script" path="res://Scripts/Resources/Stats/UnitStat.cs" id="2_dku6i"]
+[ext_resource type="Script" path="res://Scripts/Resources/Stats/UnitStatList.cs" id="3_m0v0r"]
 [ext_resource type="Script" path="res://Scripts/ProjectileLauncher.cs" id="4_wt7i5"]
 [ext_resource type="Resource" uid="uid://mntob2ltyay2" path="res://Resources/Abilities/Fireball.tres" id="5_08r3b"]
 
