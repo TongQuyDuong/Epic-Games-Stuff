@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Linq;
 
 [GlobalClass]
 
@@ -56,9 +57,11 @@ public partial class UnitStat : Resource
         {
             isDirty = true;
             numberOfMods -= 1;
+            Debug.Print(statModifiers.Count.ToString());
             return true;
         }
 
+        Debug.Print(statModifiers.Count.ToString());
         return false;
         
 

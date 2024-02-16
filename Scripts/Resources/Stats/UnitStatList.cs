@@ -32,6 +32,7 @@ public partial class UnitStatList : Resource
             if (StatList[i].statType == statType)
             {
                 StatList[i].AddModifier(modifier);
+                return true;
             }
         }
         
@@ -44,7 +45,7 @@ public partial class UnitStatList : Resource
         {
             if (StatList[i].statType == statType)
             {
-                StatList[i].RemoveModifier(modifier);
+               return StatList[i].RemoveModifier(modifier);
             }
         }
 

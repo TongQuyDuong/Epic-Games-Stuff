@@ -1,0 +1,18 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://dbpsb2a7go4gn"]
+
+[ext_resource type="Texture2D" uid="uid://yqouxj4yvnrx" path="res://Sprites/StatusIcons/Poisoned.png" id="1_578sf"]
+[ext_resource type="Script" path="res://Scripts/Resources/StatusEffects/DamageOverTime.cs" id="1_dvcne"]
+
+[resource]
+resource_local_to_scene = true
+script = ExtResource("1_dvcne")
+interval = 1.0
+DamageMultiplier = 1.0
+DamageType = 2
+Name = "Poisoned"
+Description = ""
+isNegativeEffect = true
+isPermanentEffect = false
+duration = 2.0
+type = 1
+Icon = ExtResource("1_578sf")

@@ -7,8 +7,13 @@ public partial class Fireworm : BaseEnemy
 	[Export] public float waitTime;
 	private float countdown;
 
-	public override void _Ready()
+    public override void _EnterTree()
+    {
+        base._EnterTree();
+    }
+    public override void _Ready()
 	{
+		base._Ready();
 		countdown = waitTime;
 	}
 	public override void _PhysicsProcess(double delta)
@@ -87,10 +92,5 @@ public partial class Fireworm : BaseEnemy
         }
 	}
 
-	protected void Flip()
-	{
-		this.isFacingRight = !this.isFacingRight;
 
-		this.Scale = new Vector2(this.Scale.X * -1, this.Scale.Y);
-	}
 }

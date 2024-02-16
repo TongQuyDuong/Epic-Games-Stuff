@@ -3,13 +3,13 @@ using System;
 using System.Data.Common;
 using System.Threading;
 
-[GlobalClass]
 public partial class StatusEffect : Resource
 {
 	[Export] public StatusEffectData effect;
 	[Export] public float countdown;
-	
 	[Export] public StatusEffectType effectType;
+	//For StatChanges
+	public StatModifier mod;
 	//For DamageOverTime
 	public float Damage;
 	[Export] public float interval;
@@ -19,7 +19,7 @@ public partial class StatusEffect : Resource
 		effect = data;
 		countdown = data.duration;
 		effectType = data.type;
-		if(effectType == StatusEffectType.DamageOverTime) interval = ((DamageOverTime)data).interval;
+		if(effectType == StatusEffectType.StatChangeEffect) mod = ((StatChangeEffect)data).mod;
 		Damage = 0;
 	}
 
@@ -43,17 +43,6 @@ public partial class StatusEffect : Resource
 		interval = ((DamageOverTime)effect).interval;
 	}
 
-	public void ProcessDamageOverTime(double deltaTime,BaseUnit target)
-	{
-
-		interval -= (float)deltaTime;
-		if (interval <= 0)
-		{
-			((DamageOverTime)effect).DealDamage(Damage,target);
-			ResetInterval();
-		}
-
-	}
 }
 
 public enum StatusEffectType {

@@ -9,6 +9,7 @@ public partial class StatusEffectsController : Node2D
 {
 	[Export] BaseUnit unit;
 	[Export] public Godot.Collections.Array<StatusEffect> statusEffects = new Godot.Collections.Array<StatusEffect>();
+	[Export] private StatusBar statusBar;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
@@ -32,59 +33,102 @@ public partial class StatusEffectsController : Node2D
 
 			if (statusEffect.effectType == StatusEffectType.DamageOverTime)
 			{
-				statusEffect.ProcessDamageOverTime(deltaTime, unit);
+				statusEffect.interval -= (float)deltaTime;
+				// if (statusEffect.interval <= 0)
+				// {
+				// 	((DamageOverTime)statusEffect.effect).DealDamage(statusEffect.Damage, unit.GetNode<UnitHealth>("UnitHealth"));
+				// 	statusEffect.ResetInterval();
+				// }
 			}
 		}
 
 		IEnumerable<StatusEffect> timedOutEffects = statusEffects.Where(effect => effect.countdown <= 0);
+		IEnumerable<StatusEffect> triggeredEffects = statusEffects.Where(effect => effect.effectType == StatusEffectType.DamageOverTime && effect.interval <= 0f);
 
 		if (timedOutEffects.Count() > 0)
 		{
-			foreach (StatusEffect STeffect in timedOutEffects)
-			{
-				RemoveStatusEffect(STeffect);
-			}
+			RemoveStatusEffect(timedOutEffects.ToList());
 		}
+		
+		if(triggeredEffects.Count() > 0) {
+			float sumDamage = 0;
+			foreach(StatusEffect DoT in triggeredEffects) {
+				sumDamage += DoT.Damage;
+				DoT.ResetInterval();
+			}
+			unit.GetNode<UnitHealth>("UnitHealth").TakeDamage(sumDamage);
+			sumDamage = 0;
+		}
+
+
+
 
 
 	}
 
-	public void AddStatusEffect(StatusEffectData data)
+	public void AddStatusEffect(Godot.Collections.Array<StatusEffectData> datas, BaseUnit source)
 	{
 		if (unit.isStatusImmune) return;
 
-		if (data.type == StatusEffectType.StatChangeEffect)
-		{
-			statusEffects.Add(new StatusEffect(data));
-			data.TriggerEffect(unit);
+		for(int i = 0; i < datas.Count; i++) {
+			switch(datas[i].type) {
+				case StatusEffectType.StatChangeEffect:
+					datas[i].TriggerEffect(unit);
+					statusEffects.Add(new StatusEffect(datas[i]));
+
+					break;
+				case StatusEffectType.ControlEffect:
+						IEnumerable<StatusEffect> alreadyApplied = statusEffects.Where(STeffect => STeffect.effect.Name == datas[i].Name);
+						if (alreadyApplied.Count() > 0) {
+							alreadyApplied.First().ResetDuration();
+						} else {
+							statusEffects.Add(new StatusEffect(datas[i]));
+							datas[i].TriggerEffect(unit);
+						}
+					break;
+				case StatusEffectType.DamageOverTime:
+
+						alreadyApplied = statusEffects.Where(STeffect => STeffect.effect.Name == datas[i].Name);
+						if (alreadyApplied.Count() > 0)
+						{
+							alreadyApplied.First().ResetDuration();
+						}
+						else
+						{
+							float stat;
+							source.stats.TryGetStatValue(((DamageOverTime)datas[i]).DamageType, out stat);
+							float Damage = stat * ((DamageOverTime)datas[i]).DamageMultiplier;
+							statusEffects.Add(new StatusEffect(datas[i], Damage));
+						}
+					break;
+				default:
+				break;
+
+			}
 		}
-		else 
+		if(statusBar != null) {
+			statusBar.DisplayStatusEffects(statusEffects);
+		}
+
+	}
+
+	public void RemoveStatusEffect(List<StatusEffect> timedOutEffects)
+	{
+		for (int i = 0;i < timedOutEffects.Count; i++)
 		{
-			IEnumerable<StatusEffect> alreadyApplied = statusEffects.Where(STeffect => STeffect.effect.Name == data.Name);
-			if (alreadyApplied.Count() > 0) {
-				alreadyApplied.First().ResetDuration();
+			if(timedOutEffects[i].effectType == StatusEffectType.StatChangeEffect) {
+				((StatChangeEffect)timedOutEffects[i].effect).RemoveEffect(unit, timedOutEffects[i].mod);
+				statusEffects.Remove(timedOutEffects[i]).ToString();
 			} else {
-				statusEffects.Add(new StatusEffect(data));
-				data.TriggerEffect(unit);
+				timedOutEffects[i].effect.RemoveEffect(unit);
+				statusEffects.Remove(timedOutEffects[i]).ToString();
 			}
+
 		}
+		
 
-	}
+		statusBar.DisplayStatusEffects(statusEffects);
 
-	public void AddDamageOverTime(DamageOverTime data, BaseUnit source)
-	{
-		if (unit.isStatusImmune) return;
-		float stat;
-		source.stats.TryGetStatValue(data.DamageType,out stat);
-		float Damage = stat * data.DamageMultiplier;
-		statusEffects.Add(new StatusEffect(data, Damage));
-		data.TriggerEffect(unit);
-	}
-
-	public void RemoveStatusEffect(StatusEffect STeffect)
-	{
-		STeffect.effect.RemoveEffect(unit);
-		statusEffects.Remove(STeffect);
 	}
 
 	public void CleanseAllEffectsWith(System.Func<StatusEffect, bool> predicate)
@@ -92,7 +136,7 @@ public partial class StatusEffectsController : Node2D
 		IEnumerable<StatusEffect> removedEffects = statusEffects.Where(predicate);
 		foreach (StatusEffect effect in removedEffects)
 		{
-			RemoveStatusEffect(effect);
+			RemoveStatusEffect(removedEffects.ToList());
 		}
 	}
 }

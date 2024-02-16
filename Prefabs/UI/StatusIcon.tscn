@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://cfxf7nfemjxj0"]
+
+[ext_resource type="Texture2D" uid="uid://cvqmfi5kfcdrl" path="res://Sprites/StatusIcons/AttackBuff.png" id="1_hojb0"]
+[ext_resource type="PackedScene" uid="uid://b4mv7evfxy5bc" path="res://Prefabs/UI/PixelNumberDisplay.tscn" id="2_8v0yx"]
+[ext_resource type="Script" path="res://Scripts/UI/StatusIcon.cs" id="2_t5y8g"]
+
+[node name="StatusSlot1" type="Sprite2D" node_paths=PackedStringArray("label")]
+scale = Vector2(0.563, 0.563)
+texture = ExtResource("1_hojb0")
+script = ExtResource("2_t5y8g")
+label = NodePath("NumberOfCharges")
+
+[node name="NumberOfCharges" parent="." instance=ExtResource("2_8v0yx")]
+visible = true
+offset_left = -7.1048
+offset_top = -7.1048
+offset_right = 72.8952
+offset_bottom = 192.895
+scale = Vector2(0.07, 0.064)
+text = "0
+
+"

@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://b4mv7evfxy5bc"]
+
+[ext_resource type="FontFile" uid="uid://bch6ug3gayri3" path="res://Resources/Fonts/Karma Suture.otf" id="1_3pibm"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_4ahts"]
+font = ExtResource("1_3pibm")
+font_size = 80
+outline_size = 20
+outline_color = Color(0, 0, 0, 1)
+
+[node name="NumberOfCharges" type="Label"]
+visible = false
+offset_left = 1316.67
+offset_top = 250.0
+offset_right = 1422.67
+offset_bottom = 350.0
+scale = Vector2(6.5, 6)
+text = "x 1
+"
+label_settings = SubResource("LabelSettings_4ahts")

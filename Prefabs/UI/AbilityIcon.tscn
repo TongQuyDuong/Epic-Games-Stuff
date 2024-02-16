@@ -1,15 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://o145r5colibr"]
+[gd_scene load_steps=5 format=3 uid="uid://o145r5colibr"]
 
 [ext_resource type="Script" path="res://Scripts/UI/AbilityIcon.cs" id="1_w63t5"]
 [ext_resource type="Texture2D" uid="uid://mpnq6k2myn6r" path="res://Sprites/UI/AbilityMask.png" id="2_qj24g"]
-[ext_resource type="FontFile" uid="uid://bch6ug3gayri3" path="res://Resources/Fonts/Karma Suture.otf" id="4_4pro1"]
+[ext_resource type="PackedScene" uid="uid://b4mv7evfxy5bc" path="res://Prefabs/UI/PixelNumberDisplay.tscn" id="4_q6shk"]
 [ext_resource type="Texture2D" uid="uid://b24328mhw0rfc" path="res://Sprites/UI/AbilityBorder.png" id="4_wpjtq"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_4ahts"]
-font = ExtResource("4_4pro1")
-font_size = 80
-outline_size = 20
-outline_color = Color(0, 0, 0, 1)
 
 [node name="AbilityIcon" type="Control"]
 layout_mode = 3
@@ -54,14 +48,5 @@ offset_right = 1180.0
 offset_bottom = 1180.0
 texture = ExtResource("4_wpjtq")
 
-[node name="NumberOfCharges" type="Label" parent="."]
-visible = false
+[node name="NumberOfCharges" parent="." instance=ExtResource("4_q6shk")]
 layout_mode = 0
-offset_left = 1316.67
-offset_top = 250.0
-offset_right = 1422.67
-offset_bottom = 350.0
-scale = Vector2(6.5, 6)
-text = "x 1
-"
-label_settings = SubResource("LabelSettings_4ahts")

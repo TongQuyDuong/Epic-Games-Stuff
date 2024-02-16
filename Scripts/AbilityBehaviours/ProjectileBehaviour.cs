@@ -44,14 +44,7 @@ public partial class ProjectileBehaviour : RigidBody2D
 			IDamageable targetHealth = target.GetNode<IDamageable>("UnitHealth");
 			targetHealth.TakeDamage(Damage);
 			
-			for(int i = 0; i < effectsToApply.Count; i++) {
-				if (effectsToApply[i].type == StatusEffectType.DamageOverTime) {
-					target.STeffectCon.AddDamageOverTime((DamageOverTime)effectsToApply[i],caster);
-				} else {
-					target.STeffectCon.AddStatusEffect(effectsToApply[i]);
-				}
-				
-			}
+			target.STeffectCon.AddStatusEffect(effectsToApply,caster);
 		}
 	}
 

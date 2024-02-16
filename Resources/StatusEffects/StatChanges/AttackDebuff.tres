@@ -1,0 +1,17 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://cu8w4gfgl6rsu"]
+
+[ext_resource type="Texture2D" uid="uid://83knjamr7mkj" path="res://Sprites/StatusIcons/AttackDebuff.png" id="1_2b2c7"]
+[ext_resource type="Script" path="res://Scripts/Resources/StatusEffects/StatChangeEffect.cs" id="1_afwt5"]
+
+[resource]
+script = ExtResource("1_afwt5")
+modValue = -1.0
+modType = 200
+statType = 0
+Name = "AttackDebuff"
+Description = ""
+isNegativeEffect = true
+isPermanentEffect = false
+duration = 3.0
+type = 2
+Icon = ExtResource("1_2b2c7")

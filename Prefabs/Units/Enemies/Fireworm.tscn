@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://c25wg50qjajeh"]
+[gd_scene load_steps=24 format=3 uid="uid://c25wg50qjajeh"]
 
 [ext_resource type="Shader" path="res://Resources/Shaders/FlashSprite.gdshader" id="1_51sfo"]
 [ext_resource type="Script" path="res://Scripts/Units/Enemies/Fireworm.cs" id="1_ips0r"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://Scripts/Resources/Stats/UnitStatList.cs" id="4_sycxn"]
 [ext_resource type="PackedScene" uid="uid://cdkd8tavio2nn" path="res://Components/status_effects_controller.tscn" id="9_fin62"]
 [ext_resource type="Script" path="res://Scripts/EnemyStateConftroller.cs" id="9_kffyc"]
+[ext_resource type="PackedScene" uid="uid://d083ir4k8ax1b" path="res://Prefabs/UI/EnemyHPBar.tscn" id="10_xtgqr"]
 
 [sub_resource type="Resource" id="Resource_38ygo"]
 script = ExtResource("3_nxvyh")
@@ -19,12 +20,18 @@ numberOfMods = 0
 [sub_resource type="Resource" id="Resource_3e0yd"]
 script = ExtResource("3_nxvyh")
 statType = 4
-BaseValue = 3.0
+BaseValue = 20.0
+numberOfMods = 0
+
+[sub_resource type="Resource" id="Resource_g2m7x"]
+script = ExtResource("3_nxvyh")
+statType = 0
+BaseValue = 1.0
 numberOfMods = 0
 
 [sub_resource type="Resource" id="Resource_tepcg"]
 script = ExtResource("4_sycxn")
-StatList = [SubResource("Resource_38ygo"), SubResource("Resource_3e0yd")]
+StatList = [SubResource("Resource_38ygo"), SubResource("Resource_3e0yd"), SubResource("Resource_g2m7x")]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0s43q"]
 shader = ExtResource("1_51sfo")
@@ -234,12 +241,13 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b57jp"]
 size = Vector2(39, 48)
 
-[node name="Fireworm" type="CharacterBody2D" node_paths=PackedStringArray("stateCon", "STeffectCon", "animPlayer", "PopupPoint")]
+[node name="Fireworm" type="CharacterBody2D" node_paths=PackedStringArray("stateCon", "hpBar", "STeffectCon", "animPlayer", "PopupPoint")]
 scale = Vector2(2, 2)
 script = ExtResource("1_ips0r")
 ability = ExtResource("2_d7wmy")
 waitTime = 1.0
 stateCon = NodePath("EnemyStateConftroller")
+hpBar = NodePath("HpBar")
 stats = SubResource("Resource_tepcg")
 STeffectCon = NodePath("StatusEffectsController")
 animPlayer = NodePath("AnimationPlayer")
@@ -261,12 +269,13 @@ libraries = {
 "": SubResource("AnimationLibrary_uowhd")
 }
 
-[node name="UnitHealth" parent="." node_paths=PackedStringArray("unit", "spriteAnim") instance=ExtResource("4_3wxx6")]
+[node name="UnitHealth" parent="." node_paths=PackedStringArray("unit", "spriteAnim", "hpBar") instance=ExtResource("4_3wxx6")]
 unit = NodePath("..")
 spriteAnim = NodePath("../AnimationPlayer")
+hpBar = NodePath("../HpBar")
 
 [node name="PopupPoint" type="Marker2D" parent="."]
-position = Vector2(0, -61)
+position = Vector2(0, -69.5)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(10.5, -24)
@@ -278,5 +287,11 @@ script = ExtResource("9_kffyc")
 [node name="FiringPoint" type="Marker2D" parent="."]
 position = Vector2(56.6667, -29.3333)
 
-[node name="StatusEffectsController" parent="." node_paths=PackedStringArray("unit") instance=ExtResource("9_fin62")]
+[node name="StatusEffectsController" parent="." node_paths=PackedStringArray("unit", "statusBar") instance=ExtResource("9_fin62")]
 unit = NodePath("..")
+statusBar = NodePath("../HpBar/StatusBar")
+
+[node name="HpBar" parent="." instance=ExtResource("10_xtgqr")]
+position = Vector2(0, -65)
+
+[editable path="HpBar"]

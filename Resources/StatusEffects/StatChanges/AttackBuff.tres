@@ -1,0 +1,17 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://dthm322xoipbo"]
+
+[ext_resource type="Texture2D" uid="uid://cvqmfi5kfcdrl" path="res://Sprites/StatusIcons/AttackBuff.png" id="1_m2kd0"]
+[ext_resource type="Script" path="res://Scripts/Resources/StatusEffects/StatChangeEffect.cs" id="1_ubklw"]
+
+[resource]
+script = ExtResource("1_ubklw")
+modValue = 1.0
+modType = 100
+statType = 0
+Name = "AttackBuff"
+Description = ""
+isNegativeEffect = false
+isPermanentEffect = false
+duration = 7.0
+type = 2
+Icon = ExtResource("1_m2kd0")

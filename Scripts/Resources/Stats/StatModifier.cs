@@ -3,7 +3,7 @@ using Godot;
 using System;
 
 
-public partial class StatModifier : Resource
+public partial class StatModifier
 {
     public readonly float Value;
     public readonly StatModType Type;

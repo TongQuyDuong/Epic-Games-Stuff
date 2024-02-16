@@ -1,0 +1,42 @@
+[gd_scene load_steps=5 format=3 uid="uid://d083ir4k8ax1b"]
+
+[ext_resource type="Script" path="res://Scripts/UI/EnemyHPBar.cs" id="1_i4j1l"]
+[ext_resource type="Texture2D" uid="uid://dl761ho81rjkd" path="res://Sprites/UI/EnemyHPBarBorder.png" id="1_u1mxa"]
+[ext_resource type="Texture2D" uid="uid://bdjeq26q8f76w" path="res://Sprites/UI/EnemyHPBarProgress.png" id="2_m5a7b"]
+[ext_resource type="PackedScene" uid="uid://c7rjp3xx50qup" path="res://Prefabs/UI/status_bar.tscn" id="4_66ffg"]
+
+[node name="HpBar" type="Node2D" node_paths=PackedStringArray("hpBarMain", "hpBarUnder")]
+script = ExtResource("1_i4j1l")
+hpBarMain = NodePath("TextureRect/HpBarMain")
+hpBarUnder = NodePath("TextureRect/HpBarUnder")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_left = -18.0
+offset_top = -4.0
+offset_right = 18.0
+offset_bottom = 3.0
+scale = Vector2(1.5, 1.5)
+pivot_offset = Vector2(18, 4)
+texture = ExtResource("1_u1mxa")
+stretch_mode = 2
+
+[node name="HpBarUnder" type="TextureProgressBar" parent="TextureRect"]
+show_behind_parent = true
+layout_mode = 0
+offset_right = 36.0
+offset_bottom = 7.0
+value = 100.0
+texture_progress = ExtResource("2_m5a7b")
+tint_progress = Color(1, 0, 0, 1)
+
+[node name="HpBarMain" type="TextureProgressBar" parent="TextureRect"]
+show_behind_parent = true
+layout_mode = 0
+offset_right = 36.0
+offset_bottom = 7.0
+value = 100.0
+texture_progress = ExtResource("2_m5a7b")
+tint_progress = Color(0.34902, 1, 0.223529, 1)
+
+[node name="StatusBar" parent="." instance=ExtResource("4_66ffg")]
+position = Vector2(-18, -9)

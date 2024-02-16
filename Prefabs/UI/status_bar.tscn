@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://c7rjp3xx50qup"]
+
+[ext_resource type="Script" path="res://Scripts/UI/StatusBar.cs" id="1_bx68k"]
+[ext_resource type="PackedScene" uid="uid://cfxf7nfemjxj0" path="res://Prefabs/UI/StatusIcon.tscn" id="2_skiu0"]
+
+[node name="StatusBar" type="Node2D"]
+script = ExtResource("1_bx68k")
+statusIcon = ExtResource("2_skiu0")
+
+[node name="StatusSlot1" type="Marker2D" parent="."]
+
+[node name="StatusSlot2" type="Marker2D" parent="."]
+position = Vector2(9, 0)
+
+[node name="StatusSlot3" type="Marker2D" parent="."]
+position = Vector2(18, 0)
+
+[node name="StatusSlot4" type="Marker2D" parent="."]
+position = Vector2(27, 0)
+
+[node name="StatusSlot5" type="Marker2D" parent="."]
+position = Vector2(36, 0)

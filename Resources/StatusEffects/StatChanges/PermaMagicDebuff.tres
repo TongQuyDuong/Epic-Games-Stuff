@@ -1,8 +1,10 @@
-[gd_resource type="Resource" load_steps=2 format=3 uid="uid://dkq1m5ocbldml"]
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://dkq1m5ocbldml"]
 
 [ext_resource type="Script" path="res://Scripts/Resources/StatusEffects/StatChangeEffect.cs" id="1_2auvj"]
+[ext_resource type="Texture2D" uid="uid://8c85tlyf35jg" path="res://Sprites/StatusIcons/MagicDebuff.png" id="1_iwtaj"]
 
 [resource]
+resource_local_to_scene = true
 script = ExtResource("1_2auvj")
 modValue = -1.0
 modType = 100
@@ -11,5 +13,6 @@ Name = ""
 Description = ""
 isNegativeEffect = true
 isPermanentEffect = false
-duration = 5.0
+duration = 7.0
 type = 2
+Icon = ExtResource("1_iwtaj")

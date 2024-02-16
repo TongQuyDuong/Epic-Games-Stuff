@@ -1,0 +1,18 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://crtgv6w3644l8"]
+
+[ext_resource type="Texture2D" uid="uid://c8reo43o5ans4" path="res://Sprites/StatusIcons/Bleeding.png" id="1_alodx"]
+[ext_resource type="Script" path="res://Scripts/Resources/StatusEffects/DamageOverTime.cs" id="1_l5w72"]
+
+[resource]
+resource_local_to_scene = true
+script = ExtResource("1_l5w72")
+interval = 1.0
+DamageMultiplier = 1.0
+DamageType = 2
+Name = "Bleeding"
+Description = ""
+isNegativeEffect = true
+isPermanentEffect = false
+duration = 3.0
+type = 1
+Icon = ExtResource("1_alodx")
