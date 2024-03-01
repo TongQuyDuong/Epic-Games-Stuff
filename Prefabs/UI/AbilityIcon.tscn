@@ -50,3 +50,10 @@ texture = ExtResource("4_wpjtq")
 
 [node name="NumberOfCharges" parent="." instance=ExtResource("4_q6shk")]
 layout_mode = 0
+offset_left = 266.667
+offset_top = 650.0
+offset_right = 403.667
+offset_bottom = 750.0
+text = "1
+"
+horizontal_alignment = 2

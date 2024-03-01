@@ -1,0 +1,71 @@
+[gd_scene load_steps=7 format=3 uid="uid://dv4fg87laqbh3"]
+
+[ext_resource type="Script" path="res://Scripts/UI/SelectSkillButton.cs" id="1_51nog"]
+[ext_resource type="Texture2D" uid="uid://b0ybjs1ua2403" path="res://Sprites/UI/SkipButton.png" id="2_c7suv"]
+[ext_resource type="Texture2D" uid="uid://bs62cbvo30xbl" path="res://Sprites/UI/SmallIconSelector.png" id="3_xbwdp"]
+
+[sub_resource type="Animation" id="Animation_g2h23"]
+resource_name = "RESET"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Selector:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_xom5s"]
+resource_name = "Selected"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Selector:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xejeb"]
+_data = {
+"RESET": SubResource("Animation_g2h23"),
+"Selected": SubResource("Animation_xom5s")
+}
+
+[node name="SkipButton" type="Node2D" node_paths=PackedStringArray("animPlayer", "icon", "selector")]
+scale = Vector2(5.4, 5.4)
+script = ExtResource("1_51nog")
+animPlayer = NodePath("AnimationPlayer")
+icon = NodePath("Icon")
+selector = NodePath("Selector")
+buttonPos = Vector2(1, 3)
+isActive = true
+
+[node name="Selector" type="Sprite2D" parent="."]
+visible = false
+z_index = 1
+position = Vector2(-3.2, -1.3)
+scale = Vector2(1.47339, 0.657424)
+texture = ExtResource("3_xbwdp")
+offset = Vector2(11, 11)
+hframes = 2
+
+[node name="Icon" type="Sprite2D" parent="."]
+texture = ExtResource("2_c7suv")
+offset = Vector2(13, 6)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "RESET"
+libraries = {
+"": SubResource("AnimationLibrary_xejeb")
+}

@@ -9,7 +9,7 @@ public partial class Movement : Node2D
 	[Export] private BaseHero currentUnit;
 	[Export] private float cooldown;
 	protected float countdown;
-	[Export] private Vector2 axis;
+	private Vector2 axis;
 	
 	// Called when the node enters the scene tree for the first time.
 	public override void _EnterTree()
@@ -85,8 +85,10 @@ public partial class Movement : Node2D
 				MoveTo(nextPanel);
 			}
 		}
-		if (axis != new Vector2(0, 0)) countdown = cooldown;
-		axis = new Vector2(0, 0);
+		if (axis != new Vector2(0, 0)) {
+			countdown = cooldown;
+			axis = new Vector2(0, 0);
+		}
 	}
 	void MoveTo(Panel nextPanel)
 	{

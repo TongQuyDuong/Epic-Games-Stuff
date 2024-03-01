@@ -1,14 +1,9 @@
-[gd_resource type="Resource" load_steps=10 format=3 uid="uid://mntob2ltyay2"]
+[gd_resource type="Resource" load_steps=5 format=3 uid="uid://mntob2ltyay2"]
 
 [ext_resource type="Texture2D" uid="uid://s1sdbns2aekl" path="res://Sprites/Abilities/Ranged/Projectiles/Fireball/fireball.png" id="1_6wkdg"]
 [ext_resource type="Script" path="res://Scripts/Resources/Abilities/Ranged/ProjectileAbilities/ProjectileAbility.cs" id="1_afdio"]
 [ext_resource type="PackedScene" uid="uid://4kaxxey6eusy" path="res://Prefabs/Abilities/Ranged/Projectiles/fireball_projectile.tscn" id="1_gu2j1"]
-[ext_resource type="Resource" uid="uid://pstui3yo2rm3" path="res://Resources/StatusEffects/DamageOverTime/TestBurn.tres" id="2_uw1sa"]
-[ext_resource type="Resource" uid="uid://dkq1m5ocbldml" path="res://Resources/StatusEffects/StatChanges/PermaMagicDebuff.tres" id="3_r103p"]
-[ext_resource type="Resource" uid="uid://dbpsb2a7go4gn" path="res://Resources/StatusEffects/DamageOverTime/TestPoison.tres" id="4_pn17b"]
-[ext_resource type="Resource" uid="uid://crtgv6w3644l8" path="res://Resources/StatusEffects/DamageOverTime/TestBleed.tres" id="5_gd8i0"]
-[ext_resource type="Resource" uid="uid://cu8w4gfgl6rsu" path="res://Resources/StatusEffects/StatChanges/AttackDebuff.tres" id="6_w84y4"]
-[ext_resource type="Resource" uid="uid://dthm322xoipbo" path="res://Resources/StatusEffects/StatChanges/AttackBuff.tres" id="7_648wm"]
+[ext_resource type="Texture2D" uid="uid://koolenkhi7jn" path="res://Sprites/Abilities/Ranged/Projectiles/Fireball/FireballSmall.png" id="4_8ef06"]
 
 [resource]
 resource_local_to_scene = true
@@ -19,5 +14,6 @@ aDescription = "Fireball"
 castTime = 0.1
 cooldown = 0.5
 activeTime = 0.0
-effectsToApply = Array[Resource]([ExtResource("3_r103p"), ExtResource("2_uw1sa"), ExtResource("3_r103p"), ExtResource("4_pn17b"), ExtResource("5_gd8i0"), ExtResource("6_w84y4"), ExtResource("7_648wm")])
+effectsToApply = Array[Resource]([])
 Icon = ExtResource("1_6wkdg")
+smallIcon = ExtResource("4_8ef06")

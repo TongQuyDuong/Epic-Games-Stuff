@@ -1,0 +1,45 @@
+[gd_scene load_steps=7 format=3 uid="uid://r6kk6v6ydptd"]
+
+[ext_resource type="Script" path="res://Scripts/UI/SelectSkillButton.cs" id="1_0qml5"]
+[ext_resource type="Texture2D" uid="uid://fqrfa87ktg23" path="res://Sprites/UI/FuseButton.png" id="2_222ki"]
+[ext_resource type="Texture2D" uid="uid://b37irqll8h8l0" path="res://Sprites/UI/RectangleSelector.png" id="2_d7611"]
+
+[sub_resource type="Animation" id="Animation_g2h23"]
+resource_name = "RESET"
+
+[sub_resource type="Animation" id="Animation_xom5s"]
+resource_name = "Selected"
+length = 0.4
+loop_mode = 1
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xejeb"]
+_data = {
+"RESET": SubResource("Animation_g2h23"),
+"Selected": SubResource("Animation_xom5s")
+}
+
+[node name="FuseButton" type="Node2D" node_paths=PackedStringArray("animPlayer", "icon", "selector")]
+scale = Vector2(5.4, 5.4)
+script = ExtResource("1_0qml5")
+animPlayer = NodePath("AnimationPlayer")
+icon = NodePath("Icon")
+selector = NodePath("Selector")
+buttonPos = Vector2(0, 3)
+isActive = true
+
+[node name="Selector" type="Sprite2D" parent="."]
+z_index = 1
+position = Vector2(2, -5)
+texture = ExtResource("2_d7611")
+offset = Vector2(11, 11)
+hframes = 2
+
+[node name="Icon" type="Sprite2D" parent="."]
+texture = ExtResource("2_222ki")
+offset = Vector2(13, 6)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "RESET"
+libraries = {
+"": SubResource("AnimationLibrary_xejeb")
+}

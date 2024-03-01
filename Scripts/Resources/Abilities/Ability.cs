@@ -12,8 +12,9 @@ public partial class Ability : Resource
     [Export] public float activeTime;
     [Export] public Godot.Collections.Array<StatusEffectData> effectsToApply;
     public Action OnCast;
-    [Export] public CompressedTexture2D Icon; 
-    
+    [Export] public CompressedTexture2D Icon;
+    [Export] public CompressedTexture2D smallIcon;
+
     public virtual void Initialize() {
 
     }

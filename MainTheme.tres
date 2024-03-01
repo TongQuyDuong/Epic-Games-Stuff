@@ -1,0 +1,20 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://dvkdh8poahuwn"]
+
+[ext_resource type="FontFile" uid="uid://bch6ug3gayri3" path="res://Resources/Fonts/Karma Suture.otf" id="1_mk805"]
+
+[resource]
+HeaderLarge/base_type = &"Label"
+HeaderLarge/colors/font_color = Color(1, 1, 1, 1)
+HeaderLarge/colors/font_shadow_color = Color(0, 0, 0, 0)
+HeaderLarge/constants/outline_size = 10
+HeaderLarge/font_sizes/font_size = 30
+HeaderLarge/fonts/font = ExtResource("1_mk805")
+Label/colors/font_outline_color = Color(0, 0, 0, 1)
+Label/constants/outline_size = 8
+Label/font_sizes/font_size = 16
+Label/fonts/font = ExtResource("1_mk805")
+RedLabel/base_type = &"Label"
+RedLabel/colors/font_color = Color(1, 0, 0, 1)
+RedLabel/constants/outline_size = 10
+RedLabel/font_sizes/font_size = 30
+RedLabel/fonts/font = ExtResource("1_mk805")

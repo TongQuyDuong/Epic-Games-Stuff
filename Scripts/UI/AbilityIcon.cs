@@ -13,6 +13,7 @@ public partial class AbilityIcon : Control
 		base._EnterTree();
 		progBar = GetNode<TextureProgressBar>("TextureRect/TextureProgressBar");
 		label = GetNode<Label>("NumberOfCharges");
+		label.Visible = false;
     }
 
     public void SetImage(CompressedTexture2D image) {
@@ -22,7 +23,7 @@ public partial class AbilityIcon : Control
 	
     public void UpdateLabel() {
 		label.Visible = numberOfCharges <= 0 ? false : true;
-		label.Text = "x " + numberOfCharges;
+		label.Text = numberOfCharges.ToString();
 	}
 
 	public void BeginCooldown(float cooldown){

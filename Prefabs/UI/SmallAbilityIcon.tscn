@@ -1,0 +1,69 @@
+[gd_scene load_steps=7 format=3 uid="uid://17x4pgl3v6vx"]
+
+[ext_resource type="Texture2D" uid="uid://koolenkhi7jn" path="res://Sprites/Abilities/Ranged/Projectiles/Fireball/FireballSmall.png" id="1_r63la"]
+[ext_resource type="Script" path="res://Scripts/UI/SmallAbilityIcon.cs" id="1_v2du7"]
+[ext_resource type="Texture2D" uid="uid://bs62cbvo30xbl" path="res://Sprites/UI/SmallIconSelector.png" id="2_5gkui"]
+
+[sub_resource type="Animation" id="Animation_g2h23"]
+resource_name = "RESET"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Selector:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_xom5s"]
+resource_name = "Selected"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Selector:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xejeb"]
+_data = {
+"RESET": SubResource("Animation_g2h23"),
+"Selected": SubResource("Animation_xom5s")
+}
+
+[node name="SmallIcon" type="Node2D" node_paths=PackedStringArray("animPlayer", "icon", "selector")]
+scale = Vector2(3.7, 3.7)
+script = ExtResource("1_v2du7")
+animPlayer = NodePath("AnimationPlayer")
+icon = NodePath("Icon")
+selector = NodePath("Selector")
+
+[node name="Selector" type="Sprite2D" parent="."]
+visible = false
+z_index = 1
+position = Vector2(-2, -2)
+scale = Vector2(1, 1)
+texture = ExtResource("2_5gkui")
+offset = Vector2(11, 11)
+hframes = 2
+
+[node name="Icon" type="Sprite2D" parent="."]
+texture = ExtResource("1_r63la")
+offset = Vector2(9, 9)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "RESET"
+libraries = {
+"": SubResource("AnimationLibrary_xejeb")
+}

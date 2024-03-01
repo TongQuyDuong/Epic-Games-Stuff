@@ -9,7 +9,6 @@ outline_size = 20
 outline_color = Color(0, 0, 0, 1)
 
 [node name="NumberOfCharges" type="Label"]
-visible = false
 offset_left = 1316.67
 offset_top = 250.0
 offset_right = 1422.67

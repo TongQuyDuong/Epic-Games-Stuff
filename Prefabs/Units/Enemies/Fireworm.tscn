@@ -20,7 +20,7 @@ numberOfMods = 0
 [sub_resource type="Resource" id="Resource_3e0yd"]
 script = ExtResource("3_nxvyh")
 statType = 4
-BaseValue = 20.0
+BaseValue = 100.0
 numberOfMods = 0
 
 [sub_resource type="Resource" id="Resource_g2m7x"]

@@ -8,5 +8,5 @@ Name = "Stunned"
 Description = ""
 isNegativeEffect = true
 isPermanentEffect = false
-duration = 0.7
+duration = 5.0
 type = 0
