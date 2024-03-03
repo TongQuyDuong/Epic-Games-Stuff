@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Runtime.Serialization;
 
 public partial class SelectSkillBook : Control
@@ -9,14 +10,18 @@ public partial class SelectSkillBook : Control
 	[Export] float xOffset;
 	[Export] float yOffset;
 	[Export] public AddButton addButton;
+	[Export] public TextureRect displayIcon;
+	[Export] public Label displayName;
+	[Export] public Label displayDescription;
 	private Dictionary<Vector2,SelectSkillButton> buttons = new Dictionary<Vector2, SelectSkillButton>();
 	[Export] public Godot.Collections.Array<Ability> abilities = new Godot.Collections.Array<Ability>();
 	[Export] public Godot.Collections.Array<SelectSkillButton> fixedButtons = new Godot.Collections.Array<SelectSkillButton>();
-	[Export] public Godot.Collections.Array<AbilityHolder> abilityHolders = new Godot.Collections.Array<AbilityHolder>();
+	[Export] public Godot.Collections.Array<AbilityIcon> abilityIcons = new Godot.Collections.Array<AbilityIcon>();
 	[Export] PackedScene smallAbilityIcon;
 	[Export] Vector2 selectedPos;
-
-	private bool isOnAddButton = true;
+	private int currentSlotIndex = 0;
+	private bool isOnAddButton = false;
+	public static Action<Godot.Collections.Array<AbilityIcon>> onConfirmButtonPressed;
 
 
 	public override void _EnterTree()
@@ -30,12 +35,22 @@ public partial class SelectSkillBook : Control
 		emptyButton.isActive = false;
 		emptyButton.buttonPos = new Vector2(3, 3);
 		buttons[emptyButton.buttonPos] = emptyButton;
+
+		SmallAbilityIcon.onAbilityPress += SelectAbility;
 	}
 
 	public override void _Ready()
 	{
-		buttons[selectedPos].ToggleSelectOn();
+		SmallAbilityIcon nextButton = (SmallAbilityIcon)buttons[selectedPos];
+		nextButton.ToggleSelectOn();
+		UpdateDisplay(nextButton.ability);
 		UpdateAbilityIcons();
+		this.ProcessMode = ProcessModeEnum.Disabled;
+	}
+
+	public override void _ExitTree()
+	{
+		SmallAbilityIcon.onAbilityPress -= SelectAbility;
 	}
 
 	private void GenerateAbilityIcons() {
@@ -61,18 +76,37 @@ public partial class SelectSkillBook : Control
 
 	public override void _Process(double delta)
 	{
-		
 		ProcessInput();
 	}
 
 	private void ProcessInput() {
 		if(Input.IsActionJustPressed("Select")){
-			buttons[selectedPos].SelectButton();
+			if (isOnAddButton && currentSlotIndex < 3)
+			{
+				AddAbility();
+			} 
+			else if (selectedPos == new Vector2(0,3)) {
+				//FuseButton
+			}
+			else if (selectedPos == new Vector2(1, 3))
+			{
+				//SkipButton
+			}
+			else if (selectedPos == new Vector2(2, 3))
+			{
+				//ConfirmButton
+				onConfirmButtonPress();
+			}
+			else
+			{
+				//Ability buttons
+				buttons[selectedPos].SelectButton();
+			}
 		} else if (Input.IsActionJustPressed("Back")) {
 			if(isOnAddButton) {
 				DeSelectAddButton();
-			} else {
-				this.Visible = !this.Visible;
+			} else if (currentSlotIndex > 0) {
+				RemoveAbility();
 			}
 		}
 
@@ -80,54 +114,19 @@ public partial class SelectSkillBook : Control
 
 		if (Input.IsActionJustPressed("MoveUp"))
 		{
-			Vector2 nextPos = selectedPos + new Vector2(0, -1);
-			if (nextPos.Y < 0)
-			{
-				MoveToPosition(new Vector2(0, 3));
-			}
-			else
-			{
-				MoveTo(new Vector2(0, -1));
-			}
-			
+				MoveTo(new Vector2(0, -1));			
 		}
 		else if (Input.IsActionJustPressed("MoveDown"))
 		{
-			Vector2 nextPos = selectedPos + new Vector2(0, 1);
-			if (nextPos.Y > 3)
-			{
-				MoveToPosition(new Vector2(0, 0));
-			}
-			else if(buttons[nextPos].isActive == false)
-			{
-				MoveToPosition(new Vector2(0, 3));
-			} else {
 				MoveTo(new Vector2(0, 1));
-			}
 		}
 		else if (Input.IsActionJustPressed("MoveLeft"))
 		{
-			Vector2 nextPos = selectedPos + new Vector2(-1, 0);
-			if (nextPos.X < 0)
-			{
-				MoveToPosition(FindFurthestRightPos(selectedPos.Y));
-			}
-			else
-			{
 				MoveTo(new Vector2(-1,0));
-			}
 		}
 		else if (Input.IsActionJustPressed("MoveRight"))
 		{
-			Vector2 nextPos = selectedPos + new Vector2(1, 0);
-			if (nextPos.X > 3 || buttons[nextPos].isActive == false)
-			{
-				MoveToPosition(new Vector2(0,selectedPos.Y));
-			}
-			else
-			{
 				MoveTo(new Vector2(1,0));
-			}
 		}
 	}
 
@@ -136,10 +135,17 @@ public partial class SelectSkillBook : Control
 		while(loops < 4) {
 			loops++;
 			Vector2 nextPos = selectedPos + direction*loops;
-			if(buttons[nextPos].isActive && buttons[nextPos] != null) {
-				buttons[selectedPos].ToggleSelectOff();
-				selectedPos += direction*loops;
-				buttons[selectedPos].ToggleSelectOn();
+			if (nextPos.X < 0) {
+				MoveToPosition(FindFurthestRightPos(nextPos.Y));
+				break;
+			}
+			if(nextPos.Y < 0) {
+				MoveToPosition(new Vector2(0,3));
+				break;
+			}
+			nextPos = new Vector2(nextPos.X % 4,nextPos.Y % 4);
+			if(buttons[nextPos].isActive) {
+				MoveToPosition(nextPos);
 				break;
 			}
 		}
@@ -147,32 +153,121 @@ public partial class SelectSkillBook : Control
 
 	private void MoveToPosition(Vector2 Pos) {
 		buttons[selectedPos].ToggleSelectOff();
+
 		selectedPos = Pos;
 		buttons[selectedPos].ToggleSelectOn();
+
+		if(Pos.Y < 3) {
+			SmallAbilityIcon nextButton = (SmallAbilityIcon)buttons[selectedPos];
+			UpdateDisplay(nextButton.ability);
+		}
 	}
 
 	private Vector2 FindFurthestRightPos(float rowNumber) {
-		for(int i = 0; i < 4; i++) {
-			Vector2 nextPos = new Vector2(i+1,rowNumber);
-			if(nextPos.X > 3 || buttons[nextPos].isActive == false) {
+		for(int i = 3; i >= 0; i--) {
+			if(buttons[new Vector2(i, rowNumber)].isActive) {
 				return new Vector2(i,rowNumber);
 			}
 		}
 		return new Vector2(0,0);
 	}
 
+	private Vector2 FindFurthestLeftPos(float rowNumber)
+	{
+		for (int i = 0; i < 4; i++)
+		{
+			if (buttons[new Vector2(i, rowNumber)].isActive)
+			{
+				return new Vector2(i, rowNumber);
+			}
+		}
+		return new Vector2(0, 0);
+	}
+
 	private void SelectAddButton() {
-		buttons[selectedPos].ToggleSelectOff();
 		isOnAddButton = true;
 		addButton.ToggleSelectOn();
 	}
 
 	private void DeSelectAddButton()
 	{
-		buttons[selectedPos].ToggleSelectOn();
 		isOnAddButton = false;
+		addButton.numberOfCharges = 0;
+		addButton.numberDisplay.Text = 0.ToString();
 		addButton.ToggleSelectOff();
 	}
 
+	private void SelectAbility() {
+		SelectAddButton();
+	}
 
+	private void AddAbility() {
+		if(addButton.numberOfCharges == 0) {
+			DeSelectAddButton();
+			return;
+		}
+		SmallAbilityIcon currentButton = (SmallAbilityIcon)buttons[selectedPos];
+		abilityIcons[currentSlotIndex].SetAbility(currentButton.ability);
+		abilityIcons[currentSlotIndex].numberOfCharges = addButton.numberOfCharges;
+		abilityIcons[currentSlotIndex].UpdateLabel();
+		currentSlotIndex++;
+
+		addButton.numberOfCharges = 0;
+
+		currentButton.ToggleSelectOff();
+		currentButton.isActive = false;
+		currentButton.animPlayer.Play("Added");
+		selectedPos = FindFirstActiveAbility();
+		if (currentSlotIndex == 3)
+		{
+			selectedPos = new Vector2(2, 3);
+		}
+		buttons[selectedPos].ToggleSelectOn();
+		if (selectedPos.Y < 3)
+		{
+			SmallAbilityIcon nextButton = (SmallAbilityIcon)buttons[selectedPos];
+			UpdateDisplay(nextButton.ability);
+		}
+		DeSelectAddButton();
+	}
+
+	private void RemoveAbility() {
+		for (int i = 0; i < 3; i++)
+		{
+			for (int j = 0; j < 4;j++) {
+				if(((SmallAbilityIcon)buttons[new Vector2(j,i)]).ability == abilityIcons[currentSlotIndex - 1].ability) {
+					buttons[new Vector2(j,i)].isActive = true;
+					buttons[new Vector2(j, i)].animPlayer.Play("RESET");
+					break;
+				}
+			}
+		}
+		abilityIcons[currentSlotIndex - 1].ResetIcon();
+		currentSlotIndex--;
+	}
+
+	private Vector2 FindFirstActiveAbility() 
+	{
+		for (int i = 0; i < 4; i++) {
+			if (buttons[new Vector2(i,0)].isActive) {
+				return new Vector2(i, 0);
+			}
+		}
+		return new Vector2(0,0);
+	}
+
+	private void UpdateDisplay(Ability ability) {
+		if(ability != null) {
+			displayIcon.Texture = ability.Icon;
+			displayName.Text = ability.Name;
+			displayDescription.Text = ability.Description;
+		}
+	}
+
+	private void onConfirmButtonPress() {
+		onConfirmButtonPressed?.Invoke(abilityIcons);
+		foreach (AbilityIcon icon in abilityIcons) {
+			icon.ResetIcon();
+		}
+	}
 }

@@ -8,10 +8,10 @@ public partial class BattleAnnouncement : Control
 	[Export] public bool isBattleStart = true;
 	public override void _Ready()
 	{
+		GameManager.Instance.PauseBattle();
 		if(isBattleStart == false)
 		{ 
 			content.Text = "Battle\r\nOver!"; 
-			
 		} 
 		board.Position += new Vector2(0,-200);
 		TweenIn();

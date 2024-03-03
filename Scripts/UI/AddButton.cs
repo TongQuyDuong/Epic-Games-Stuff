@@ -31,13 +31,14 @@ public partial class AddButton : SelectSkillButton
 				numberOfCharges++;
 				numberDisplay.Text = numberOfCharges.ToString();
 			}
-
 		}
 	}
 
     public override void ToggleSelectOn()
     {
 		isSelected = true;
+		numberOfCharges = 1;
+		numberDisplay.Text = numberOfCharges.ToString();
 		animPlayer.Play("Selected");
 	}
 

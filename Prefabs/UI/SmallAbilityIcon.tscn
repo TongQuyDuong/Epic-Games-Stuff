@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://17x4pgl3v6vx"]
+[gd_scene load_steps=8 format=3 uid="uid://17x4pgl3v6vx"]
 
 [ext_resource type="Texture2D" uid="uid://koolenkhi7jn" path="res://Sprites/Abilities/Ranged/Projectiles/Fireball/FireballSmall.png" id="1_r63la"]
 [ext_resource type="Script" path="res://Scripts/UI/SmallAbilityIcon.cs" id="1_v2du7"]
@@ -6,6 +6,7 @@
 
 [sub_resource type="Animation" id="Animation_g2h23"]
 resource_name = "RESET"
+length = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -17,6 +18,18 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Icon:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_xom5s"]
@@ -36,8 +49,37 @@ tracks/0/keys = {
 "values": [0, 1]
 }
 
+[sub_resource type="Animation" id="Animation_c00pb"]
+resource_name = "Added"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Icon:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.494118, 0.494118, 0.494118, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Selector:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_xejeb"]
 _data = {
+"Added": SubResource("Animation_c00pb"),
 "RESET": SubResource("Animation_g2h23"),
 "Selected": SubResource("Animation_xom5s")
 }
@@ -53,10 +95,10 @@ selector = NodePath("Selector")
 visible = false
 z_index = 1
 position = Vector2(-2, -2)
-scale = Vector2(1, 1)
 texture = ExtResource("2_5gkui")
 offset = Vector2(11, 11)
 hframes = 2
+frame = 1
 
 [node name="Icon" type="Sprite2D" parent="."]
 texture = ExtResource("1_r63la")

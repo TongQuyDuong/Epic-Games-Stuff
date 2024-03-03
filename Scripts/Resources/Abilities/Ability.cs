@@ -5,8 +5,8 @@ using MonoCustomResourceRegistry;
 [RegisteredType(nameof(Ability), "", nameof(Resource))]
 public partial class Ability : Resource
 {
-    [Export] public string aName;
-    [Export] public string aDescription;
+    [Export] public string Name;
+    [Export] public string Description;
     [Export] public float castTime;
     [Export] public float cooldown;
     [Export] public float activeTime;

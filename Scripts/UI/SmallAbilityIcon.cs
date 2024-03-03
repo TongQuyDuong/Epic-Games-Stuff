@@ -4,7 +4,7 @@ using System;
 public partial class SmallAbilityIcon : SelectSkillButton
 {
 	[Export] public Ability ability;
-	public Action<Ability> onAbilityPress;
+	public static Action onAbilityPress;
 
 	public override void _Ready()
 	{
@@ -27,6 +27,6 @@ public partial class SmallAbilityIcon : SelectSkillButton
 
     public override void SelectButton()
     {
-        onAbilityPress?.Invoke(ability);
+        onAbilityPress?.Invoke();
     }
 }

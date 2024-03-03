@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Scripts/UI/SelectSkillButton.cs" id="1_51nog"]
 [ext_resource type="Texture2D" uid="uid://b0ybjs1ua2403" path="res://Sprites/UI/SkipButton.png" id="2_c7suv"]
-[ext_resource type="Texture2D" uid="uid://bs62cbvo30xbl" path="res://Sprites/UI/SmallIconSelector.png" id="3_xbwdp"]
+[ext_resource type="Texture2D" uid="uid://b37irqll8h8l0" path="res://Sprites/UI/RectangleSelector.png" id="2_msunf"]
 
 [sub_resource type="Animation" id="Animation_g2h23"]
 resource_name = "RESET"
@@ -54,9 +54,8 @@ isActive = true
 [node name="Selector" type="Sprite2D" parent="."]
 visible = false
 z_index = 1
-position = Vector2(-3.2, -1.3)
-scale = Vector2(1.47339, 0.657424)
-texture = ExtResource("3_xbwdp")
+position = Vector2(2, -5)
+texture = ExtResource("2_msunf")
 offset = Vector2(11, 11)
 hframes = 2
 

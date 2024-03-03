@@ -4,57 +4,49 @@ using System;
 public partial class BattleUI : Control
 {
 	public static BattleUI Instance;
-	[Export] public AbilityIcon Slot1;
-	[Export] public AbilityIcon Slot2;
-	[Export] public AbilityIcon Slot3;
+	[Export] public Godot.Collections.Array<AbilityIcon> icons = new Godot.Collections.Array<AbilityIcon>();
 	[Export] public TopLeftUI topLeftUI;
+	[Export] public SelectSkillBook selectSkillBook;
 	[Export] public PackedScene announcement;
 	[Export] public PackedScene PopupPrefab;
+
 
 	public override void _EnterTree()
 	{
 		PopupPrefab = GD.Load<PackedScene>("res://Prefabs/Effects/PopupEffect.tscn");
 		if (Instance == null) { Instance = this; }
-		
+
+		SelectSkillBook.onConfirmButtonPressed += HideSkillBook;
 	}
 	public override void _ExitTree()
 	{
-		base._ExitTree();
 		Instance = null;
+		SelectSkillBook.onConfirmButtonPressed -= HideSkillBook;
 	}
 
 //MoveUI elements out of the screen
 	public override void _Ready()
 	{
-		base._Ready();
 		topLeftUI.Position += new Vector2(0,-180);
-		Slot1.Position += new Vector2(-150,0);
-		Slot2.Position += new Vector2(-150, 0);
-		Slot3.Position += new Vector2(-150, 0);
+		foreach(AbilityIcon icon in icons) {
+			icon.Position += new Vector2(-150, 0);
+		}
 	}
 
 	public void SetMaxHP(int maxHP) {
 		topLeftUI.hpBar.SetMaxHP(maxHP);
 	}
-	public void DisplayAbility(int abilityIndex, CompressedTexture2D image, int numberOfCharges) {
-		switch(abilityIndex) {
-			case 0:
-				Slot1.SetImage(image);
-				Slot1.numberOfCharges = numberOfCharges;
-				Slot1.UpdateLabel();
-				break;
-			case 1:
-				Slot2.SetImage(image);
-				Slot2.numberOfCharges = numberOfCharges;
-				Slot2.UpdateLabel();
-				break;
-			case 2:
-				Slot3.SetImage(image);
-				Slot3.numberOfCharges = numberOfCharges;
-				Slot3.UpdateLabel();
-				break;
+
+	public void ResetIcon(int iconIndex) {
+		icons[iconIndex].ResetIcon();
+	}
+
+	public void DisplayAbility(Godot.Collections.Array<AbilityHolder> abilityHolders) {
+		for (int i = 0; i < 3; i++) {
+			icons[i].SetAbility(abilityHolders[i].ability);
+			icons[i].numberOfCharges = abilityHolders[i].numberOfCharges;
+			icons[i].UpdateLabel();
 		}
-		
 	}
 
 //MoveUI elements back in with animation
@@ -63,33 +55,38 @@ public partial class BattleUI : Control
 		tweenUI.SetEase(Tween.EaseType.Out);
 		tweenUI.SetParallel();
 		tweenUI.TweenProperty(topLeftUI,"position",new Vector2(0,0),0.5);
-		tweenUI.TweenProperty(Slot1, "position",Slot1.Position + new Vector2(150, 0), 0.5);
-		tweenUI.TweenProperty(Slot2, "position",Slot2.Position + new Vector2(150, 0), 0.5).SetDelay(0.1);
-		tweenUI.TweenProperty(Slot3, "position",Slot3.Position + new Vector2(150, 0), 0.5).SetDelay(0.2);
+		for (int i = 0; i < 3; i++) {
+			tweenUI.TweenProperty(icons[i], "position", icons[i].Position + new Vector2(150, 0), 0.5).SetDelay(i*0.1);
+		}
 		tweenUI.TweenInterval(0.2);
 		tweenUI.Finished += delegate {GameManager.Instance.UpdateGameState(GameState.SpawnHero);};
 	}
 
 	public void BeginCooldown(int abilityIndex,float cooldown) {
-		switch (abilityIndex)
-		{
-			case 0:
-				Slot1.BeginCooldown(cooldown);
-				break;
-			case 1:
-				Slot2.BeginCooldown(cooldown);
-				break;
-			case 2:
-				Slot3.BeginCooldown(cooldown);
-				break;
-		}
-		
+		icons[abilityIndex].BeginCooldown(cooldown);		
 	}
 
 	public void AnnounceBattle(bool isBattleStart) {
 		BattleAnnouncement announce = announcement.Instantiate<BattleAnnouncement>();
 		announce.isBattleStart = isBattleStart;
 		AddChild(announce);
+	}
 
+	public void ShowSkillBook() {
+		Tween tweenBook = GetTree().CreateTween();
+		tweenBook.SetEase(Tween.EaseType.Out);
+		tweenBook.TweenProperty(selectSkillBook,"position",new Vector2(0,0),0.5f);
+		tweenBook.Finished += delegate{selectSkillBook.ProcessMode = ProcessModeEnum.Inherit;};
+	}
+
+	public void HideSkillBook(Godot.Collections.Array<AbilityIcon> icons)
+	{
+		Tween tweenBook = GetTree().CreateTween();
+		tweenBook.SetEase(Tween.EaseType.In);
+		tweenBook.TweenProperty(selectSkillBook, "position", new Vector2(0, 654), 0.5f);
+		tweenBook.Finished += delegate { 
+			selectSkillBook.ProcessMode = ProcessModeEnum.Disabled;
+			AnnounceBattle(true);
+			};
 	}
 }

@@ -11,8 +11,8 @@
 [resource]
 script = ExtResource("1_li3ps")
 waveEffect = ExtResource("2_pwkui")
-aName = "SmallEruption"
-aDescription = "erupt"
+Name = "Small Eruption"
+Description = "Forward wave of small eruptions"
 castTime = 0.0
 cooldown = 3.0
 activeTime = 0.0

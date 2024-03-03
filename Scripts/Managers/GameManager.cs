@@ -41,6 +41,7 @@ public partial class GameManager : Node
 		{
 			case GameState.GenerateGrid:
 				GridManager.Instance.GenerateGrid();
+				PauseBattle();
 				break;
 			case GameState.GenerateUI:
 				BattleUI.Instance.GenerateUI();
@@ -52,9 +53,12 @@ public partial class GameManager : Node
 				UnitManager.Instance.SpawnEnemies();
 				break;
 			case GameState.BattleStart:
-				BattleUI.Instance.AnnounceBattle(true);
+				BattleUI.Instance.ShowSkillBook();
+				break;
+			case GameState.BattlePaused:
 				break;
 			case GameState.BattleActive:
+				ResumeBattle();
 				break;
 			case GameState.BattleEnd:
 				BattleUI.Instance.AnnounceBattle(false);
@@ -71,7 +75,13 @@ public partial class GameManager : Node
 	public void EndBattle() {
 		UpdateGameState(GameState.BattleEnd);
 	}
-
+	public void PauseBattle() {
+		UnitManager.Instance.ProcessMode = ProcessModeEnum.Disabled;
+	}
+	public void ResumeBattle()
+	{
+		UnitManager.Instance.ProcessMode = ProcessModeEnum.Inherit;
+	}
 	public void ExitBattle() {
 		this.GetTree().ChangeSceneToFile("res://main.tscn");
 	}
@@ -84,6 +94,7 @@ public enum GameState
 	SpawnEnemies,
 	BattleStart,
 	BattleActive,
+	BattlePaused,
 	BattleEnd,
 	Victory,
 	Defeat

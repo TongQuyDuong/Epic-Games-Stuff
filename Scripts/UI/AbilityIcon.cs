@@ -3,7 +3,7 @@ using System;
 
 public partial class AbilityIcon : Control
 {
-	
+	[Export] public Ability ability;
 	public int numberOfCharges;
 	[Export] public TextureProgressBar progBar;
 	[Export] public Label label;
@@ -15,7 +15,10 @@ public partial class AbilityIcon : Control
 		label = GetNode<Label>("NumberOfCharges");
 		label.Visible = false;
     }
-
+	public void SetAbility(Ability ability) {
+		this.ability = ability;
+		SetImage(ability.Icon);
+	}
     public void SetImage(CompressedTexture2D image) {
 		progBar.TextureUnder = image;
 		progBar.TextureProgress = image;
@@ -31,5 +34,13 @@ public partial class AbilityIcon : Control
 		UpdateLabel();
 		progBar.Value = 100;
 		GetTree().CreateTween().TweenProperty(progBar, "value", 0, cooldown);
+	}
+
+	public void ResetIcon() {
+		ability = null;
+		progBar.TextureUnder = null;
+		progBar.TextureProgress = null;
+		numberOfCharges = 0;
+		UpdateLabel();
 	}
 }

@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://ib51qwl44qfd"]
+[gd_scene load_steps=14 format=3 uid="uid://ib51qwl44qfd"]
 
 [ext_resource type="Script" path="res://Scripts/Managers/GameManager.cs" id="1_wgu4n"]
 [ext_resource type="Script" path="res://Scripts/Managers/GridManager.cs" id="2_ylql0"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://d0ckwq8cucbrt" path="res://Prefabs/UI/battle_announcement.tscn" id="9_fywl8"]
 [ext_resource type="Texture2D" uid="uid://b0fgwlwi7527l" path="res://Sprites/Backgrounds/ForestBackground.png" id="10_ax1fd"]
 [ext_resource type="PackedScene" uid="uid://bjwsaflrdm5j1" path="res://Prefabs/UI/TopLeftUI.tscn" id="10_knel8"]
+[ext_resource type="PackedScene" uid="uid://cerfofopsnw8d" path="res://Prefabs/UI/SelectSkillBook.tscn" id="12_xhlm1"]
 [ext_resource type="Script" path="res://Scripts/UI/BattleUI.cs" id="13_1dkkn"]
 
 [node name="TestBattle" type="Node2D"]
@@ -36,18 +37,16 @@ script = ExtResource("7_rp32s")
 [node name="GameManager" type="Node" parent="Managers"]
 script = ExtResource("1_wgu4n")
 
-[node name="BattleUI" type="Control" parent="." node_paths=PackedStringArray("Slot1", "Slot2", "Slot3", "topLeftUI")]
+[node name="BattleUI" type="Control" parent="." node_paths=PackedStringArray("icons", "topLeftUI", "selectSkillBook")]
 z_index = 10
 layout_mode = 3
 anchors_preset = 0
-offset_right = 1273.0
-offset_bottom = 654.0
-scale = Vector2(0.976097, 0.980784)
+offset_right = 1240.0
+offset_bottom = 641.0
 script = ExtResource("13_1dkkn")
-Slot1 = NodePath("AbilityIcon")
-Slot2 = NodePath("AbilityIcon2")
-Slot3 = NodePath("AbilityIcon3")
+icons = [NodePath("AbilityIcon"), NodePath("AbilityIcon2"), NodePath("AbilityIcon3")]
 topLeftUI = NodePath("TopLeftUI")
+selectSkillBook = NodePath("SkillSelectBook")
 announcement = ExtResource("9_fywl8")
 
 [node name="AbilityIcon" parent="BattleUI" instance=ExtResource("9_5rs6t")]
@@ -73,6 +72,11 @@ offset_bottom = 1358.0
 
 [node name="TopLeftUI" parent="BattleUI" instance=ExtResource("10_knel8")]
 offset_right = 584.0
+
+[node name="SkillSelectBook" parent="BattleUI" instance=ExtResource("12_xhlm1")]
+layout_mode = 1
+offset_top = 641.0
+offset_bottom = 641.0
 
 [node name="TextureRect" type="TextureRect" parent="."]
 offset_right = 672.0

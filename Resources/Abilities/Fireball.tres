@@ -9,8 +9,8 @@
 resource_local_to_scene = true
 script = ExtResource("1_afdio")
 projectile = ExtResource("1_gu2j1")
-aName = "Fireball"
-aDescription = "Fireball"
+Name = "Fireball"
+Description = "Its a fireball"
 castTime = 0.1
 cooldown = 0.5
 activeTime = 0.0

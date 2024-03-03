@@ -13,13 +13,12 @@ public partial class ProjectileAbility : RangedAbility
 	}
 	public override void TriggerAbility(BaseUnit caster)
 	{
-		firingPoint = caster.GetNode<Marker2D>("FiringPoint");
+		Marker2D firingPoint = caster.GetNode<Marker2D>("FiringPoint");
 
 		var proj = (ProjectileBehaviour)projectile.Instantiate();
 		proj.caster = caster;
 		proj.effectsToApply = effectsToApply;
 		proj.GlobalPosition = firingPoint.GlobalPosition;
 		caster.GetParent().AddChild(proj);
-		
 	}
 }

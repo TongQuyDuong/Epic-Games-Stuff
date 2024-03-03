@@ -13,19 +13,27 @@
 [ext_resource type="PackedScene" uid="uid://c13evx0caml2j" path="res://Prefabs/UI/go_button.tscn" id="11_41v3w"]
 [ext_resource type="PackedScene" uid="uid://roerxrlle0ej" path="res://Prefabs/UI/add_button.tscn" id="12_ok68w"]
 
-[node name="SkillSelectBook" type="Control" node_paths=PackedStringArray("firstSlotPosition", "fixedButtons")]
+[node name="SkillSelectBook" type="Control" node_paths=PackedStringArray("firstSlotPosition", "addButton", "displayIcon", "displayName", "displayDescription", "fixedButtons", "abilityIcons")]
+z_index = 5
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 6.0
+offset_right = 6.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_80rcg")
 firstSlotPosition = NodePath("TextureRect/FirstSlot")
 xOffset = 72.3
 yOffset = 72.375
-abilities = [ExtResource("2_2riju"), ExtResource("3_6rfoh"), ExtResource("4_5j6pc"), ExtResource("2_2riju"), ExtResource("4_5j6pc")]
+addButton = NodePath("TextureRect/AddButton")
+displayIcon = NodePath("TextureRect/SkillIcon")
+displayName = NodePath("TextureRect/VBoxContainer/SkillName")
+displayDescription = NodePath("TextureRect/VBoxContainer/Description")
+abilities = [ExtResource("2_2riju"), ExtResource("3_6rfoh"), ExtResource("4_5j6pc")]
 fixedButtons = [NodePath("TextureRect/FuseButton"), NodePath("TextureRect/SkipButton"), NodePath("TextureRect/GoButton")]
+abilityIcons = [NodePath("TextureRect/AbilityIcon1"), NodePath("TextureRect/AbilityIcon2"), NodePath("TextureRect/AbilityIcon3")]
 smallAbilityIcon = ExtResource("2_gp32q")
 
 [node name="TextureRect" type="TextureRect" parent="."]
@@ -38,9 +46,10 @@ offset_right = -6.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("1_sns21")
+expand_mode = 1
 stretch_mode = 5
 
-[node name="TextureRect" type="TextureRect" parent="TextureRect"]
+[node name="SkillIcon" type="TextureRect" parent="TextureRect"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.168
@@ -49,8 +58,8 @@ anchor_right = 0.841
 anchor_bottom = 0.908
 offset_left = 113.68
 offset_top = 52.283
-offset_right = -564.84
-offset_bottom = -348.028
+offset_right = -563.84
+offset_bottom = -347.028
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_j14rt")

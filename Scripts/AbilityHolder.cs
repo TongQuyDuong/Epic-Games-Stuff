@@ -16,8 +16,21 @@ public partial class AbilityHolder : Node
 
 	public override void _Ready()
 	{
-		ability.Initialize();
-		BattleUI.Instance.DisplayAbility((int)slotNumber,ability.Icon,numberOfCharges);
+	}
+
+	public void UpdateAbility(AbilityIcon icon) {
+		if (icon.ability != null) {
+			this.ability = icon.ability;
+			ability.Initialize();
+			this.numberOfCharges = icon.numberOfCharges;
+			cooldownTime = ability.cooldown;
+			castTime = ability.castTime;
+			activeTime = ability.activeTime;
+		} else {
+			ability = null;
+			numberOfCharges = 0;
+		}
+
 	}
 	public override void _PhysicsProcess(double delta)
 	{
@@ -33,7 +46,7 @@ public partial class AbilityHolder : Node
 					numberOfCharges -= 1;
 					if (numberOfCharges <= 0) {
 						
-						BattleUI.Instance.DisplayAbility((int)slotNumber, null, 0);
+						BattleUI.Instance.ResetIcon((int)slotNumber);
 						state = AbilityState.casting;
 						castTime = ability.castTime;
 						break; 

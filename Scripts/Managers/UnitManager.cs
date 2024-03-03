@@ -11,6 +11,7 @@ public partial class UnitManager : Node
 	[Export] public bool heroIsFacingRight = true;
 	[Export] private int EnemiesAlive = 0;
 	public Vector2 playerPos;
+	public BaseHero chara;
 	public override void _EnterTree()
 	{
 		if (Instance == null) { Instance = this; }
@@ -24,7 +25,7 @@ public partial class UnitManager : Node
 	}
 	public void SpawnHero()
 	{
-		BaseHero chara = SpawnUnit(new SpawnInfo(hero, GridManager.Instance.GetHeroSpawnPanel().Pos, true)) as BaseHero;
+		chara = SpawnUnit(new SpawnInfo(hero, GridManager.Instance.GetHeroSpawnPanel().Pos, true)) as BaseHero;
 		chara.playerAnim.AnimateEntrance();
 		playerPos = chara.currentPos;
 		GameManager.Instance.UpdateGameState(GameState.SpawnEnemies);
