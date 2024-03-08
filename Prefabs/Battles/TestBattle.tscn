@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://ib51qwl44qfd"]
+[gd_scene load_steps=17 format=3 uid="uid://ib51qwl44qfd"]
 
 [ext_resource type="Script" path="res://Scripts/Managers/GameManager.cs" id="1_wgu4n"]
 [ext_resource type="Script" path="res://Scripts/Managers/GridManager.cs" id="2_ylql0"]
@@ -11,8 +11,11 @@
 [ext_resource type="PackedScene" uid="uid://d0ckwq8cucbrt" path="res://Prefabs/UI/battle_announcement.tscn" id="9_fywl8"]
 [ext_resource type="Texture2D" uid="uid://b0fgwlwi7527l" path="res://Sprites/Backgrounds/ForestBackground.png" id="10_ax1fd"]
 [ext_resource type="PackedScene" uid="uid://bjwsaflrdm5j1" path="res://Prefabs/UI/TopLeftUI.tscn" id="10_knel8"]
-[ext_resource type="PackedScene" uid="uid://cerfofopsnw8d" path="res://Prefabs/UI/SelectSkillBook.tscn" id="12_xhlm1"]
+[ext_resource type="PackedScene" uid="uid://dsbcrkpoufpcd" path="res://Prefabs/UI/SelectSkillBook.tscn" id="12_xhlm1"]
 [ext_resource type="Script" path="res://Scripts/UI/BattleUI.cs" id="13_1dkkn"]
+[ext_resource type="Resource" uid="uid://mntob2ltyay2" path="res://Resources/Abilities/Fireball.tres" id="13_qd73o"]
+[ext_resource type="Resource" uid="uid://bi04y3hs068ht" path="res://Resources/Abilities/SmallEruption.tres" id="15_d6t36"]
+[ext_resource type="Resource" uid="uid://dm1f0j6b5csfi" path="res://Resources/Fonts/LightningStrike.tres" id="16_ggacg"]
 
 [node name="TestBattle" type="Node2D"]
 
@@ -51,24 +54,24 @@ announcement = ExtResource("9_fywl8")
 
 [node name="AbilityIcon" parent="BattleUI" instance=ExtResource("9_5rs6t")]
 layout_mode = 1
-offset_left = -601.5
-offset_top = -150.0
-offset_right = 1428.5
-offset_bottom = 1200.0
+offset_left = -583.0
+offset_top = -148.5
+offset_right = 1447.0
+offset_bottom = 1201.5
 
 [node name="AbilityIcon2" parent="BattleUI" instance=ExtResource("9_5rs6t")]
 layout_mode = 1
-offset_left = -601.5
-offset_top = -71.0
-offset_right = 1428.5
-offset_bottom = 1279.0
+offset_left = -583.0
+offset_top = -69.5
+offset_right = 1447.0
+offset_bottom = 1280.5
 
 [node name="AbilityIcon3" parent="BattleUI" instance=ExtResource("9_5rs6t")]
 layout_mode = 1
-offset_left = -601.5
-offset_top = 8.0
-offset_right = 1428.5
-offset_bottom = 1358.0
+offset_left = -583.0
+offset_top = 9.5
+offset_right = 1447.0
+offset_bottom = 1359.5
 
 [node name="TopLeftUI" parent="BattleUI" instance=ExtResource("10_knel8")]
 offset_right = 584.0
@@ -77,6 +80,7 @@ offset_right = 584.0
 layout_mode = 1
 offset_top = 641.0
 offset_bottom = 641.0
+abilities = [ExtResource("13_qd73o"), ExtResource("16_ggacg"), ExtResource("15_d6t36"), ExtResource("13_qd73o"), ExtResource("16_ggacg"), ExtResource("15_d6t36"), ExtResource("13_qd73o"), ExtResource("16_ggacg"), ExtResource("15_d6t36"), ExtResource("13_qd73o"), ExtResource("16_ggacg"), ExtResource("15_d6t36")]
 
 [node name="TextureRect" type="TextureRect" parent="."]
 offset_right = 672.0

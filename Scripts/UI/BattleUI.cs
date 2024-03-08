@@ -37,6 +37,10 @@ public partial class BattleUI : Control
 		topLeftUI.hpBar.SetMaxHP(maxHP);
 	}
 
+	public void SetStartingSP(int amount) {
+		topLeftUI.ShowSP(amount);
+	}
+
 	public void ResetIcon(int iconIndex) {
 		icons[iconIndex].ResetIcon();
 	}
@@ -87,6 +91,8 @@ public partial class BattleUI : Control
 		tweenBook.Finished += delegate { 
 			selectSkillBook.ProcessMode = ProcessModeEnum.Disabled;
 			AnnounceBattle(true);
+			selectSkillBook.ResetBook();
 			};
+
 	}
 }

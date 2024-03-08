@@ -32,6 +32,7 @@ public partial class GameManager : Node
     {
         base._Process(delta);
 		if(Input.IsActionJustPressed("EndBattle")) Events.OnBattleEnd?.Invoke();
+		if(Input.IsActionJustPressed("Pause")) UpdateGameState(GameState.BattleStart);
 	}
 
     public void UpdateGameState(GameState newState)
@@ -41,7 +42,6 @@ public partial class GameManager : Node
 		{
 			case GameState.GenerateGrid:
 				GridManager.Instance.GenerateGrid();
-				PauseBattle();
 				break;
 			case GameState.GenerateUI:
 				BattleUI.Instance.GenerateUI();
@@ -54,6 +54,7 @@ public partial class GameManager : Node
 				break;
 			case GameState.BattleStart:
 				BattleUI.Instance.ShowSkillBook();
+				PauseBattle();
 				break;
 			case GameState.BattlePaused:
 				break;
@@ -77,10 +78,12 @@ public partial class GameManager : Node
 	}
 	public void PauseBattle() {
 		UnitManager.Instance.ProcessMode = ProcessModeEnum.Disabled;
+		BattleUI.Instance.ProcessMode = ProcessModeEnum.Disabled;
 	}
 	public void ResumeBattle()
 	{
 		UnitManager.Instance.ProcessMode = ProcessModeEnum.Inherit;
+		BattleUI.Instance.ProcessMode = ProcessModeEnum.Inherit;
 	}
 	public void ExitBattle() {
 		this.GetTree().ChangeSceneToFile("res://main.tscn");

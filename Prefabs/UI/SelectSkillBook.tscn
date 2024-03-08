@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://cerfofopsnw8d"]
+[gd_scene load_steps=15 format=3 uid="uid://dsbcrkpoufpcd"]
 
 [ext_resource type="Script" path="res://Scripts/UI/SelectSkillBook.cs" id="1_80rcg"]
 [ext_resource type="Texture2D" uid="uid://x8rpny1sa7i0" path="res://Sprites/UI/SelectSkillUIBook.png" id="1_sns21"]
@@ -6,14 +6,16 @@
 [ext_resource type="PackedScene" uid="uid://17x4pgl3v6vx" path="res://Prefabs/UI/SmallAbilityIcon.tscn" id="2_gp32q"]
 [ext_resource type="Texture2D" uid="uid://s1sdbns2aekl" path="res://Sprites/Abilities/Ranged/Projectiles/Fireball/fireball.png" id="2_j14rt"]
 [ext_resource type="PackedScene" uid="uid://o145r5colibr" path="res://Prefabs/UI/AbilityIcon.tscn" id="3_0ja6b"]
-[ext_resource type="Resource" uid="uid://dm1f0j6b5csfi" path="res://Resources/Abilities/LightningStrike.tres" id="3_6rfoh"]
+[ext_resource type="Resource" uid="uid://dm1f0j6b5csfi" path="res://Resources/Fonts/LightningStrike.tres" id="3_p0rpn"]
 [ext_resource type="Resource" uid="uid://bi04y3hs068ht" path="res://Resources/Abilities/SmallEruption.tres" id="4_5j6pc"]
 [ext_resource type="PackedScene" uid="uid://r6kk6v6ydptd" path="res://Prefabs/UI/fuse_button.tscn" id="9_2u587"]
 [ext_resource type="PackedScene" uid="uid://dv4fg87laqbh3" path="res://Prefabs/UI/skip_button.tscn" id="10_j7hnl"]
 [ext_resource type="PackedScene" uid="uid://c13evx0caml2j" path="res://Prefabs/UI/go_button.tscn" id="11_41v3w"]
 [ext_resource type="PackedScene" uid="uid://roerxrlle0ej" path="res://Prefabs/UI/add_button.tscn" id="12_ok68w"]
+[ext_resource type="PackedScene" uid="uid://c63mrv2sdfli7" path="res://Prefabs/UI/transmutation_soul.tscn" id="13_7dnw0"]
+[ext_resource type="PackedScene" uid="uid://b4mv7evfxy5bc" path="res://Prefabs/UI/PixelNumberDisplay.tscn" id="13_sgj2e"]
 
-[node name="SkillSelectBook" type="Control" node_paths=PackedStringArray("firstSlotPosition", "addButton", "displayIcon", "displayName", "displayDescription", "fixedButtons", "abilityIcons")]
+[node name="SkillSelectBook" type="Control" node_paths=PackedStringArray("firstSlotPosition", "addButton", "displayIcon", "displayName", "displayDescription", "SoulPowerAmount", "fixedButtons", "abilityIcons")]
 z_index = 5
 layout_mode = 3
 anchors_preset = 15
@@ -25,13 +27,12 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_80rcg")
 firstSlotPosition = NodePath("TextureRect/FirstSlot")
-xOffset = 72.3
-yOffset = 72.375
 addButton = NodePath("TextureRect/AddButton")
 displayIcon = NodePath("TextureRect/SkillIcon")
 displayName = NodePath("TextureRect/VBoxContainer/SkillName")
 displayDescription = NodePath("TextureRect/VBoxContainer/Description")
-abilities = [ExtResource("2_2riju"), ExtResource("3_6rfoh"), ExtResource("4_5j6pc")]
+SoulPowerAmount = NodePath("TextureRect/SoulPowerNumber")
+abilities = [ExtResource("2_2riju"), ExtResource("3_p0rpn"), ExtResource("4_5j6pc")]
 fixedButtons = [NodePath("TextureRect/FuseButton"), NodePath("TextureRect/SkipButton"), NodePath("TextureRect/GoButton")]
 abilityIcons = [NodePath("TextureRect/AbilityIcon1"), NodePath("TextureRect/AbilityIcon2"), NodePath("TextureRect/AbilityIcon3")]
 smallAbilityIcon = ExtResource("2_gp32q")
@@ -121,3 +122,28 @@ position = Vector2(944, 402)
 
 [node name="AddButton" parent="TextureRect" instance=ExtResource("12_ok68w")]
 position = Vector2(653, 403)
+
+[node name="TransmutationSoul" parent="TextureRect" instance=ExtResource("13_7dnw0")]
+position = Vector2(844, 85)
+scale = Vector2(4, 4)
+
+[node name="SoulPowerNumber" parent="TextureRect" instance=ExtResource("13_sgj2e")]
+layout_mode = 0
+offset_left = 824.0
+offset_top = 107.0
+offset_right = 961.0
+offset_bottom = 207.0
+scale = Vector2(0.3, 0.277)
+text = "100
+"
+horizontal_alignment = 1
+
+[node name="NumberOfCharges" parent="." instance=ExtResource("13_sgj2e")]
+layout_mode = 0
+offset_left = 740.0
+offset_top = 560.0
+offset_right = 1456.0
+offset_bottom = 660.0
+scale = Vector2(0.25, 0.231)
+text = "[Space]: Hide Book
+"

@@ -17,12 +17,14 @@ public partial class SmallAbilityIcon : SelectSkillButton
 		isActive = true;
 		icon.Texture = ability.smallIcon;
 		this.Visible = true;
+		animPlayer.Play("RESET");
 	}
 
 	public void RemoveAbility() {
 		ability = null;
 		isActive = false;
 		this.Visible = false;
+		
 	}
 
     public override void SelectButton()

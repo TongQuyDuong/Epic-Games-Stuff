@@ -8,23 +8,28 @@ public partial class AbilityIcon : Control
 	[Export] public TextureProgressBar progBar;
 	[Export] public Label label;
 
-    public override void _EnterTree()
-    {
+	public override void _EnterTree()
+	{
 		base._EnterTree();
 		progBar = GetNode<TextureProgressBar>("TextureRect/TextureProgressBar");
 		label = GetNode<Label>("NumberOfCharges");
 		label.Visible = false;
-    }
-	public void SetAbility(Ability ability) {
-		this.ability = ability;
-		SetImage(ability.Icon);
 	}
-    public void SetImage(CompressedTexture2D image) {
+	public void SetAbility(Ability ability) {
+		if(ability != null) {
+			this.ability = ability;
+			SetImage(ability.Icon);
+		} else {
+			ResetIcon();
+		}
+
+	}
+	public void SetImage(CompressedTexture2D image) {
 		progBar.TextureUnder = image;
 		progBar.TextureProgress = image;
 	}
 	
-    public void UpdateLabel() {
+	public void UpdateLabel() {
 		label.Visible = numberOfCharges <= 0 ? false : true;
 		label.Text = numberOfCharges.ToString();
 	}

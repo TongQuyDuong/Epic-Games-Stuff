@@ -14,11 +14,11 @@ public partial class BaseUnit : CharacterBody2D
 	[Export] public Marker2D PopupPoint;
 	[Export] public bool isFacingRight;
 	[Export] public bool isStatusImmune;
-	public bool isControlled = false;
+	public bool isControlled;
 
 	public override void _EnterTree()
 	{
-		this.ProcessMode = ProcessModeEnum.Disabled;
+		isControlled = true;
 		Events.OnBattleActive += Enable;
 		Events.OnBattleEnd += Disable;
 		if(isFacingRight == false) this.Scale = new Vector2(this.Scale.X * -1,this.Scale.Y);
@@ -31,10 +31,12 @@ public partial class BaseUnit : CharacterBody2D
 	public void Enable()
 	{
 		this.ProcessMode = ProcessModeEnum.Inherit;
+		this.isControlled = false;
 	}
 	public void Disable()
 	{
 		this.ProcessMode = ProcessModeEnum.Disabled;
+		this.isControlled = true;
 	}
 	public void ShowPopup(string content) 
 	{

@@ -3,25 +3,28 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Runtime.Serialization;
+using System.Security.Principal;
 
 public partial class SelectSkillBook : Control
 {
 	[Export] Marker2D firstSlotPosition;
-	[Export] float xOffset;
-	[Export] float yOffset;
+	float xOffset = 72.3f;
+	float yOffset = 72.375f;
 	[Export] public AddButton addButton;
 	[Export] public TextureRect displayIcon;
 	[Export] public Label displayName;
 	[Export] public Label displayDescription;
+	[Export] private Label SoulPowerAmount;
 	private Dictionary<Vector2,SelectSkillButton> buttons = new Dictionary<Vector2, SelectSkillButton>();
 	[Export] public Godot.Collections.Array<Ability> abilities = new Godot.Collections.Array<Ability>();
 	[Export] public Godot.Collections.Array<SelectSkillButton> fixedButtons = new Godot.Collections.Array<SelectSkillButton>();
 	[Export] public Godot.Collections.Array<AbilityIcon> abilityIcons = new Godot.Collections.Array<AbilityIcon>();
 	[Export] PackedScene smallAbilityIcon;
-	[Export] Vector2 selectedPos;
+	Vector2 selectedPos;
 	private int currentSlotIndex = 0;
 	private bool isOnAddButton = false;
 	public static Action<Godot.Collections.Array<AbilityIcon>> onConfirmButtonPressed;
+	public int currentSoulPower = 0;
 
 
 	public override void _EnterTree()
@@ -41,10 +44,14 @@ public partial class SelectSkillBook : Control
 
 	public override void _Ready()
 	{
+		Initialize();
+	}
+
+	public void Initialize() {
+		UpdateAbilityIcons();
 		SmallAbilityIcon nextButton = (SmallAbilityIcon)buttons[selectedPos];
 		nextButton.ToggleSelectOn();
 		UpdateDisplay(nextButton.ability);
-		UpdateAbilityIcons();
 		this.ProcessMode = ProcessModeEnum.Disabled;
 	}
 
@@ -74,12 +81,18 @@ public partial class SelectSkillBook : Control
 		}
 	}
 
+	
+
 	public override void _Process(double delta)
 	{
 		ProcessInput();
 	}
 
 	private void ProcessInput() {
+		if(Input.IsActionJustPressed("Flip")) this.Visible = !this.Visible;
+
+		if(!this.Visible) return;
+
 		if(Input.IsActionJustPressed("Select")){
 			if (isOnAddButton && currentSlotIndex < 3)
 			{
@@ -269,5 +282,17 @@ public partial class SelectSkillBook : Control
 		foreach (AbilityIcon icon in abilityIcons) {
 			icon.ResetIcon();
 		}
+	}
+
+	public void ResetBook() {
+		for (int i = 0; i < 12; i++)
+		{
+			if (buttons[new Vector2(i%4, i/4)].isActive)
+			{
+				((SmallAbilityIcon)buttons[new Vector2(i % 4, i / 4)]).RemoveAbility();
+			}
+		}
+		currentSlotIndex = 0;
+		UpdateAbilityIcons();
 	}
 }

@@ -127,5 +127,6 @@ public enum StatType
     Defence,
     Magic,
     Resistance,
-    HP
+    HP,
+    StartingSP
 }

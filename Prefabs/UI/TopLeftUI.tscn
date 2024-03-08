@@ -1,19 +1,26 @@
-[gd_scene load_steps=7 format=3 uid="uid://bjwsaflrdm5j1"]
+[gd_scene load_steps=10 format=3 uid="uid://bjwsaflrdm5j1"]
 
 [ext_resource type="Script" path="res://Scripts/UI/TopLeftUI.cs" id="1_kuspj"]
 [ext_resource type="Texture2D" uid="uid://b17g1x747duc" path="res://Sprites/UI/HpbarBorder.png" id="1_yn17c"]
 [ext_resource type="Texture2D" uid="uid://dwh34t8mj55rn" path="res://Sprites/UI/HpbarPortrait.png" id="2_qkj4u"]
 [ext_resource type="Texture2D" uid="uid://ova4grfinsue" path="res://Sprites/TestH/TestPortrait.png" id="3_1jq3u"]
+[ext_resource type="PackedScene" uid="uid://c63mrv2sdfli7" path="res://Prefabs/UI/transmutation_soul.tscn" id="3_ycdfd"]
+[ext_resource type="PackedScene" uid="uid://b4mv7evfxy5bc" path="res://Prefabs/UI/PixelNumberDisplay.tscn" id="4_dn6do"]
 [ext_resource type="Texture2D" uid="uid://dkht6a2t36lkv" path="res://Sprites/UI/HpbarProgress.png" id="4_iuk8l"]
 [ext_resource type="Script" path="res://Scripts/UI/HpBar.cs" id="5_a1rj0"]
+[ext_resource type="PackedScene" uid="uid://b17vfqeuw2074" path="res://Prefabs/UI/glowable_bar.tscn" id="9_d3aff"]
 
-[node name="TopLeftUI" type="Control"]
+[node name="TopLeftUI" type="Control" node_paths=PackedStringArray("Portrait", "hpBar", "SoulPowerDisplay", "SoulPowerBar")]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 583.0
 offset_bottom = 180.0
 script = ExtResource("1_kuspj")
 maxHP = 20
+Portrait = NodePath("PortraitBack")
+hpBar = NodePath("HpBar")
+SoulPowerDisplay = NodePath("Border/NumberOfCharges")
+SoulPowerBar = NodePath("SoulPower")
 
 [node name="Border" type="TextureRect" parent="."]
 z_index = 2
@@ -26,8 +33,23 @@ texture = ExtResource("1_yn17c")
 expand_mode = 1
 stretch_mode = 2
 
+[node name="TransmutationSoul" parent="Border" instance=ExtResource("3_ycdfd")]
+position = Vector2(79.6, 48.4)
+scale = Vector2(0.3, 0.3)
+
+[node name="NumberOfCharges" parent="Border" instance=ExtResource("4_dn6do")]
+layout_mode = 0
+offset_left = 68.4
+offset_top = 43.6
+offset_right = 174.4
+offset_bottom = 143.6
+scale = Vector2(0.07, 0.064)
+text = "100"
+horizontal_alignment = 1
+
 [node name="PortraitBack" type="TextureRect" parent="."]
 clip_children = 2
+z_index = 1
 layout_mode = 0
 offset_top = -38.0
 offset_right = 256.0
@@ -65,7 +87,7 @@ scale = Vector2(2.5, 2.5)
 max_value = 20.0
 value = 20.0
 texture_progress = ExtResource("4_iuk8l")
-tint_progress = Color(0.0862745, 1, 0.0705882, 1)
+tint_progress = Color(0.0313726, 1, 0.27451, 1)
 
 [node name="HpBarUnder" type="TextureProgressBar" parent="HpBar"]
 layout_mode = 0
@@ -80,3 +102,12 @@ texture_under = ExtResource("4_iuk8l")
 texture_progress = ExtResource("4_iuk8l")
 tint_under = Color(0.294118, 0.294118, 0.294118, 1)
 tint_progress = Color(1, 0.74902, 0, 1)
+
+[node name="SoulPower" parent="." instance=ExtResource("9_d3aff")]
+modulate = Color(0.996078, 0.905882, 0.121569, 1)
+layout_mode = 1
+offset_left = 140.0
+offset_top = 67.0
+offset_right = 140.0
+offset_bottom = 67.0
+scale = Vector2(2.5, 2.5)

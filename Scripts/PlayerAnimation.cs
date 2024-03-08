@@ -37,6 +37,5 @@ public partial class PlayerAnimation : Node
 
 	public void AnimateEntrance() {
 		animPlayer.Play("Appear");
-		animPlayer.Queue("RESET");
 	}
 }

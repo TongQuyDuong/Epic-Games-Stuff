@@ -103,9 +103,11 @@ public partial class Movement : Node2D
 	{
 		Events.OnMove?.Invoke();
 		yield return Timing.WaitForSeconds(delay);
-		int yDifference = (int)(nextPanel.Pos.Y - currentUnit.currentPos.Y);
-		nextPanel.SetUnit(currentUnit);
-		UnitManager.Instance.playerPos = currentUnit.currentPos;
-		if(yDifference != 0) Events.OnRowChange?.Invoke(currentUnit,yDifference);
+		if (nextPanel.occupiedUnit == null) {
+			int yDifference = (int)(nextPanel.Pos.Y - currentUnit.currentPos.Y);
+			nextPanel.SetUnit(currentUnit);
+			UnitManager.Instance.playerPos = currentUnit.currentPos;
+			if (yDifference != 0) Events.OnRowChange?.Invoke(currentUnit, yDifference);
+		}
 	}
 }

@@ -2,6 +2,7 @@ using Godot;
 using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using MEC;
 
 public partial class UnitManager : Node
 {
@@ -26,9 +27,8 @@ public partial class UnitManager : Node
 	public void SpawnHero()
 	{
 		chara = SpawnUnit(new SpawnInfo(hero, GridManager.Instance.GetHeroSpawnPanel().Pos, true)) as BaseHero;
-		chara.playerAnim.AnimateEntrance();
 		playerPos = chara.currentPos;
-		GameManager.Instance.UpdateGameState(GameState.SpawnEnemies);
+		Timing.RunCoroutine(waitForSecondsAndSpawnEnemies(1f));
 	}
 
 	public BaseUnit SpawnUnit(SpawnInfo info)
@@ -37,8 +37,8 @@ public partial class UnitManager : Node
 		spawnedUnit.isFacingRight = info.isFacingRight;
 		Panel spawnPanel = GridManager.Instance.GetPanelAtPosition(info.spawnLocation);
 		spawnPanel.SetUnit(spawnedUnit);
-		AddChild(spawnedUnit);
 		SpriteLayerManager.Instance.AdjustLayerOnInstantiation(spawnedUnit, (int)spawnedUnit.currentPos.Y);
+		AddChild(spawnedUnit);
 		return spawnedUnit;
 	}
 
@@ -64,5 +64,11 @@ public partial class UnitManager : Node
 		{
 			Events.OnBattleEnd?.Invoke();
 		}
+	}
+
+	IEnumerator<double> waitForSecondsAndSpawnEnemies(float delay)
+	{
+		yield return Timing.WaitForSeconds(delay);
+		GameManager.Instance.UpdateGameState(GameState.SpawnEnemies);
 	}
 }

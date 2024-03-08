@@ -11,6 +11,8 @@ public partial class BaseHero : BaseUnit
         base._EnterTree();
         stats.TryGetStatValue(StatType.HP,out float maxHP);
         BattleUI.Instance.SetMaxHP((int)maxHP);
+        
+        BattleUI.Instance.SetStartingSP(20);
 
         SelectSkillBook.onConfirmButtonPressed += LoadAbilities;
     }
