@@ -1,7 +1,7 @@
 using Godot;
 using System;
 using MonoCustomResourceRegistry;
-using System.Diagnostics;
+
 
 [RegisteredType(nameof(ProjectileAbility), "", nameof(Resource))]
 public partial class ProjectileAbility : RangedAbility

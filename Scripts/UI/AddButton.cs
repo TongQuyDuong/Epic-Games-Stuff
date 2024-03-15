@@ -5,6 +5,8 @@ public partial class AddButton : SelectSkillButton
 {
 	[Export] public Label numberDisplay;
 	[Export] public int numberOfCharges = 0;
+	public static Action<bool> onAmountChanged;
+	public int maxCharges;
 
 	public override void _Ready()
 	{
@@ -23,13 +25,15 @@ public partial class AddButton : SelectSkillButton
 			if(numberOfCharges > 0) {
 				numberOfCharges--;
 				numberDisplay.Text = numberOfCharges.ToString();
+				onAmountChanged?.Invoke(false);
 			}
 		} else if (Input.IsActionJustPressed("MoveRight"))
 		{
-			if (numberOfCharges < 99)
+			if (numberOfCharges < maxCharges && numberOfCharges < 99)
 			{
 				numberOfCharges++;
 				numberDisplay.Text = numberOfCharges.ToString();
+				onAmountChanged?.Invoke(true);
 			}
 		}
 	}
@@ -37,8 +41,6 @@ public partial class AddButton : SelectSkillButton
     public override void ToggleSelectOn()
     {
 		isSelected = true;
-		numberOfCharges = 1;
-		numberDisplay.Text = numberOfCharges.ToString();
 		animPlayer.Play("Selected");
 	}
 

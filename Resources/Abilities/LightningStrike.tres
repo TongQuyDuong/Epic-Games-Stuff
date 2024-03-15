@@ -11,6 +11,7 @@ script = ExtResource("1_sfj0v")
 smiteEffect = ExtResource("3_h4fcy")
 Name = "Lightning Strike"
 Description = "Lightning strikes the first enemy in sight"
+SPCost = 2
 castTime = 0.2
 cooldown = 0.5
 activeTime = 0.0

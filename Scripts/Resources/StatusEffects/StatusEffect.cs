@@ -13,6 +13,8 @@ public partial class StatusEffect : Resource
 	//For DamageOverTime
 	public float Damage;
 	[Export] public float interval;
+	// For ControlEffects
+	public Node2D Ceffect;
 
 
 	public StatusEffect(StatusEffectData data) {
@@ -20,6 +22,7 @@ public partial class StatusEffect : Resource
 		countdown = data.duration;
 		effectType = data.type;
 		if(effectType == StatusEffectType.StatChangeEffect) mod = ((StatChangeEffect)data).mod;
+		if (effectType == StatusEffectType.ControlEffect) Ceffect = ((ControlEffect)data).Ceffect;
 		Damage = 0;
 	}
 

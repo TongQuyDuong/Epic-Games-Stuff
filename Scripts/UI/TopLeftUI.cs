@@ -18,21 +18,32 @@ public partial class TopLeftUI : Control
 	public int currentSoulPower = 0;
 	private float rechargeSpeed;
 	private double rechargeInterval;
+
+	public static Action onSpOverFlow;
 	// Called when the node enters the scene tree for the first time.
 	public override void _EnterTree()
 	{
 		SoulPowerBar.Value = SoulPowerStartValue;
 		SoulPowerDisplay.Visible = false;
+		this.ProcessMode = ProcessModeEnum.Disabled;
+		onSpOverFlow += UpdateSpNumberColor;
+	}
+
+	public override void _ExitTree() {
+		onSpOverFlow -= UpdateSpNumberColor;
 	}
 
     public override void _PhysicsProcess(double delta)
     {
 		if(currentSoulPower < maxSoulPowerPerCycle) {
 			_timeElasped += GetPhysicsProcessDeltaTime();
-			if(_timeElasped >= rechargeInterval) {
+			if(_timeElasped >= rechargeInterval*(currentSoulPower < soulPowerPerCycle? 1 : 2)) {
 				_timeElasped = 0;
 				currentSoulPower += 1;
 				SoulPowerDisplay.Text = currentSoulPower.ToString();
+			}
+			if(currentSoulPower == soulPowerPerCycle) {
+				onSpOverFlow?.Invoke();
 			}
 		}
     }
@@ -50,7 +61,9 @@ public partial class TopLeftUI : Control
 		_timeElasped = 0;
 		SoulPowerBar.Value = SoulPowerStartValue;
 		SoulPowerBar.StopGlow();
+		SoulPowerDisplay.Modulate = Color.FromHtml("#ffffff");
 		StartTween();
+
 	}
 
 	public void StartTween() {
@@ -65,5 +78,9 @@ public partial class TopLeftUI : Control
 		currentSoulPower = SP;
 		SoulPowerDisplay.Text = currentSoulPower.ToString();
 		SoulPowerDisplay.Visible = true;
+	}
+
+	private void UpdateSpNumberColor() {
+		SoulPowerDisplay.Modulate = Color.FromHtml("#ef45ff");
 	}
 }

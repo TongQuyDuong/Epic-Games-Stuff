@@ -1,9 +1,11 @@
-[gd_resource type="Resource" load_steps=2 format=3 uid="uid://gmkt7n7042ln"]
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://gmkt7n7042ln"]
 
+[ext_resource type="PackedScene" uid="uid://ckg27l0smb1re" path="res://Prefabs/stunned_effect.tscn" id="1_lohs0"]
 [ext_resource type="Script" path="res://Scripts/Resources/StatusEffects/ControlEffect.cs" id="1_shu5t"]
 
 [resource]
 script = ExtResource("1_shu5t")
+controlEffect = ExtResource("1_lohs0")
 Name = "Stunned"
 Description = ""
 isNegativeEffect = true

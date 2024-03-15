@@ -199,7 +199,7 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ipmpv"]
 size = Vector2(47, 142)
 
-[node name="TestH" type="CharacterBody2D" node_paths=PackedStringArray("playerAnim", "stateController", "abilityHolders", "STeffectCon", "animPlayer", "PopupPoint")]
+[node name="TestH" type="CharacterBody2D" node_paths=PackedStringArray("playerAnim", "stateController", "abilityHolders", "STeffectCon", "animPlayer", "PopupPoint", "CenterPoint")]
 script = ExtResource("1_1cg08")
 playerAnim = NodePath("PlayerAnimation")
 stateController = NodePath("PlayerStateController")
@@ -208,6 +208,7 @@ stats = ExtResource("2_o08ap")
 STeffectCon = NodePath("StatusEffectsController")
 animPlayer = NodePath("AnimationPlayer")
 PopupPoint = NodePath("PopupPoint")
+CenterPoint = NodePath("CenterPoint")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_qxgrr")
@@ -225,50 +226,50 @@ cooldown = 0.1
 [node name="PlayerStateController" type="Node2D" parent="."]
 script = ExtResource("4_d4ftl")
 
+[node name="StatusEffectsController" parent="." node_paths=PackedStringArray("unit") instance=ExtResource("14_hugfx")]
+unit = NodePath("..")
+
+[node name="PlayerAnimation" type="Node" parent="." node_paths=PackedStringArray("animPlayer")]
+script = ExtResource("5_2gvfl")
+animPlayer = NodePath("../AnimationPlayer")
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "Appear"
 libraries = {
 "": SubResource("AnimationLibrary_enmrb")
 }
 
-[node name="PlayerAnimation" type="Node" parent="." node_paths=PackedStringArray("animPlayer")]
-script = ExtResource("5_2gvfl")
-animPlayer = NodePath("../AnimationPlayer")
-
 [node name="UnitHealth" parent="." node_paths=PackedStringArray("unit", "spriteAnim") instance=ExtResource("7_lwkil")]
 script = ExtResource("10_2wmys")
 unit = NodePath("..")
 spriteAnim = NodePath("../AnimationPlayer")
 
-[node name="FiringPoint" type="Marker2D" parent="."]
-position = Vector2(63, -93)
-
 [node name="AbilityHolder1" type="Node" parent="." node_paths=PackedStringArray("user", "stateCon")]
-process_mode = 3
 script = ExtResource("8_oqssg")
 user = NodePath("..")
 stateCon = NodePath("../PlayerStateController")
 
 [node name="AbilityHolder2" type="Node" parent="." node_paths=PackedStringArray("user", "stateCon")]
-process_mode = 3
 script = ExtResource("8_oqssg")
 user = NodePath("..")
 slotNumber = 1
 stateCon = NodePath("../PlayerStateController")
 
 [node name="AbilityHolder3" type="Node" parent="." node_paths=PackedStringArray("user", "stateCon")]
-process_mode = 3
 script = ExtResource("8_oqssg")
 user = NodePath("..")
 slotNumber = 2
 stateCon = NodePath("../PlayerStateController")
 
+[node name="FiringPoint" type="Marker2D" parent="."]
+position = Vector2(63, -93)
+
 [node name="PopupPoint" type="Marker2D" parent="."]
 position = Vector2(-5, -155)
+
+[node name="CenterPoint" type="Marker2D" parent="."]
+position = Vector2(-4, -76)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-6.5, -71)
 shape = SubResource("RectangleShape2D_ipmpv")
-
-[node name="StatusEffectsController" parent="." node_paths=PackedStringArray("unit") instance=ExtResource("14_hugfx")]
-unit = NodePath("..")

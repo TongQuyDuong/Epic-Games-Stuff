@@ -6,11 +6,12 @@ public partial class GameManager : Node
 	
 	public static GameManager Instance;
 	public GameState currentState;
-
+	private bool isSelectSkillReady = false;
 
 	public override void _EnterTree()
 	{
 		if (Instance == null) { Instance = this; }
+		
 	}
     public override void _Ready()
     {
@@ -18,6 +19,7 @@ public partial class GameManager : Node
 		UpdateGameState(GameState.GenerateGrid);
 		Events.OnBattleActive += BeginBattle;
 		Events.OnBattleEnd += EndBattle;
+		TopLeftUI.onSpOverFlow += EnableSelectSkill;
 	}
 
     public override void _ExitTree()
@@ -25,6 +27,7 @@ public partial class GameManager : Node
         base._ExitTree();
 		Events.OnBattleActive -= BeginBattle;
 		Events.OnBattleEnd -= EndBattle;
+		TopLeftUI.onSpOverFlow -= EnableSelectSkill;
 		Instance = null;
 	}
 
@@ -32,7 +35,7 @@ public partial class GameManager : Node
     {
         base._Process(delta);
 		if(Input.IsActionJustPressed("EndBattle")) Events.OnBattleEnd?.Invoke();
-		if(Input.IsActionJustPressed("Pause")) UpdateGameState(GameState.BattleStart);
+		if(Input.IsActionJustPressed("SelectSkill") && isSelectSkillReady) UpdateGameState(GameState.BattleStart);
 	}
 
     public void UpdateGameState(GameState newState)
@@ -78,15 +81,21 @@ public partial class GameManager : Node
 	}
 	public void PauseBattle() {
 		UnitManager.Instance.ProcessMode = ProcessModeEnum.Disabled;
-		BattleUI.Instance.ProcessMode = ProcessModeEnum.Disabled;
+		BattleUI.Instance.topLeftUI.ProcessMode = ProcessModeEnum.Disabled;
 	}
 	public void ResumeBattle()
 	{
 		UnitManager.Instance.ProcessMode = ProcessModeEnum.Inherit;
-		BattleUI.Instance.ProcessMode = ProcessModeEnum.Inherit;
+		BattleUI.Instance.topLeftUI.ProcessMode = ProcessModeEnum.Inherit;
+		BattleUI.Instance.topLeftUI.ResetSoulPower();
+		isSelectSkillReady = false;
 	}
 	public void ExitBattle() {
 		this.GetTree().ChangeSceneToFile("res://main.tscn");
+	}
+
+	private void EnableSelectSkill() {
+		isSelectSkillReady = true;
 	}
 }
 public enum GameState

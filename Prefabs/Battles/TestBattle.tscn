@@ -1,10 +1,10 @@
-[gd_scene load_steps=17 format=3 uid="uid://ib51qwl44qfd"]
+[gd_scene load_steps=18 format=3 uid="uid://ib51qwl44qfd"]
 
 [ext_resource type="Script" path="res://Scripts/Managers/GameManager.cs" id="1_wgu4n"]
 [ext_resource type="Script" path="res://Scripts/Managers/GridManager.cs" id="2_ylql0"]
 [ext_resource type="Script" path="res://Scripts/Managers/UnitManager.cs" id="3_xm58r"]
-[ext_resource type="Resource" uid="uid://cx4aoi357yfc7" path="res://Resources/SpawnFormations/FireWormForma.tres" id="4_15gn5"]
 [ext_resource type="PackedScene" uid="uid://dj3s5sndljpr1" path="res://Prefabs/Units/TestH.tscn" id="4_h2i1f"]
+[ext_resource type="Resource" uid="uid://dr8lqcu4ih6io" path="res://Resources/SpawnFormations/TestForma.tres" id="4_u6xsm"]
 [ext_resource type="Script" path="res://Scripts/Managers/SpriteLayerManager.cs" id="6_8aygl"]
 [ext_resource type="Script" path="res://Scripts/Managers/SpriteManager.cs" id="7_rp32s"]
 [ext_resource type="PackedScene" uid="uid://o145r5colibr" path="res://Prefabs/UI/AbilityIcon.tscn" id="9_5rs6t"]
@@ -15,6 +15,7 @@
 [ext_resource type="Script" path="res://Scripts/UI/BattleUI.cs" id="13_1dkkn"]
 [ext_resource type="Resource" uid="uid://mntob2ltyay2" path="res://Resources/Abilities/Fireball.tres" id="13_qd73o"]
 [ext_resource type="Resource" uid="uid://bi04y3hs068ht" path="res://Resources/Abilities/SmallEruption.tres" id="15_d6t36"]
+[ext_resource type="Resource" uid="uid://bej6id1hervvf" path="res://Resources/Abilities/Melee/WindCirSlice.tres" id="16_do1c7"]
 [ext_resource type="Resource" uid="uid://dm1f0j6b5csfi" path="res://Resources/Fonts/LightningStrike.tres" id="16_ggacg"]
 
 [node name="TestBattle" type="Node2D"]
@@ -29,7 +30,7 @@ offsetY = 60.0
 [node name="UnitManager" type="Node" parent="Managers"]
 script = ExtResource("3_xm58r")
 hero = ExtResource("4_h2i1f")
-formation = ExtResource("4_15gn5")
+formation = ExtResource("4_u6xsm")
 
 [node name="SpriteLayerManager" type="Node" parent="Managers"]
 script = ExtResource("6_8aygl")
@@ -80,7 +81,7 @@ offset_right = 584.0
 layout_mode = 1
 offset_top = 641.0
 offset_bottom = 641.0
-abilities = [ExtResource("13_qd73o"), ExtResource("16_ggacg"), ExtResource("15_d6t36"), ExtResource("13_qd73o"), ExtResource("16_ggacg"), ExtResource("15_d6t36"), ExtResource("13_qd73o"), ExtResource("16_ggacg"), ExtResource("15_d6t36"), ExtResource("13_qd73o"), ExtResource("16_ggacg"), ExtResource("15_d6t36")]
+abilities = [ExtResource("13_qd73o"), ExtResource("16_ggacg"), ExtResource("15_d6t36"), ExtResource("16_do1c7")]
 
 [node name="TextureRect" type="TextureRect" parent="."]
 offset_right = 672.0

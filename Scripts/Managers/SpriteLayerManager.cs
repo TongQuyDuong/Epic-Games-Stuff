@@ -22,10 +22,10 @@ public partial class SpriteLayerManager : Node
     }
     private void AdjustLayerOnMovement(BaseUnit unit,int yDifference)
     {
-        unit.ZIndex += yDifference;
+        unit.ZIndex += yDifference*10;
     }
     public void AdjustLayerOnInstantiation(Node2D unit, int rowNumber)
     {
-        unit.ZIndex += rowNumber;
+        unit.ZIndex += rowNumber*10;
     }
 }

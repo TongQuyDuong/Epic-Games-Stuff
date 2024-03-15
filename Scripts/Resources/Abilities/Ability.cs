@@ -7,6 +7,7 @@ public partial class Ability : Resource
 {
     [Export] public string Name;
     [Export] public string Description;
+    [Export] public int SPCost;
     [Export] public float castTime;
     [Export] public float cooldown;
     [Export] public float activeTime;
@@ -14,6 +15,7 @@ public partial class Ability : Resource
     public Action OnCast;
     [Export] public CompressedTexture2D Icon;
     [Export] public CompressedTexture2D smallIcon;
+
 
     public virtual void Initialize() {
 

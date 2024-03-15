@@ -12,6 +12,7 @@ public partial class BaseUnit : CharacterBody2D
 	[Export] public StatusEffectsController STeffectCon;
 	[Export] public AnimationPlayer animPlayer;
 	[Export] public Marker2D PopupPoint;
+	[Export] public Marker2D CenterPoint;
 	[Export] public bool isFacingRight;
 	[Export] public bool isStatusImmune;
 	public bool isControlled;
@@ -48,5 +49,17 @@ public partial class BaseUnit : CharacterBody2D
 		GetTree().CurrentScene.AddChild(popup);
 	}
 
-    
+    public void ShowControlEffect(Node2D effect) {
+		effect.Position = PopupPoint.Position;
+		AddChild(effect);
+		animPlayer.ProcessMode = ProcessModeEnum.Disabled;
+	}
+
+	public void RemoveControlEffect(Node2D effect) {
+		effect.QueueFree();
+		animPlayer.ProcessMode = ProcessModeEnum.Inherit;
+		animPlayer.Play("RESET");
+	}
+
+
 }

@@ -23,12 +23,14 @@ public partial class AbilityHolder : Node
 			this.ability = icon.ability;
 			ability.Initialize();
 			this.numberOfCharges = icon.numberOfCharges;
-			cooldownTime = ability.cooldown;
-			castTime = ability.castTime;
-			activeTime = ability.activeTime;
+			cooldownTime = 0;
+			castTime = 0;
+			activeTime = 0;
+			state = AbilityState.ready;
 		} else {
 			ability = null;
 			numberOfCharges = 0;
+			state = AbilityState.empty;
 		}
 
 	}
@@ -113,7 +115,6 @@ public enum AbilityState
 	active,
 	cooldown,
 	empty
-
 }
 
 public enum AbilitySlot

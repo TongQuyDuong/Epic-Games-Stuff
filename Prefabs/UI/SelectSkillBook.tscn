@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://dsbcrkpoufpcd"]
+[gd_scene load_steps=16 format=3 uid="uid://dsbcrkpoufpcd"]
 
 [ext_resource type="Script" path="res://Scripts/UI/SelectSkillBook.cs" id="1_80rcg"]
 [ext_resource type="Texture2D" uid="uid://x8rpny1sa7i0" path="res://Sprites/UI/SelectSkillUIBook.png" id="1_sns21"]
@@ -14,8 +14,9 @@
 [ext_resource type="PackedScene" uid="uid://roerxrlle0ej" path="res://Prefabs/UI/add_button.tscn" id="12_ok68w"]
 [ext_resource type="PackedScene" uid="uid://c63mrv2sdfli7" path="res://Prefabs/UI/transmutation_soul.tscn" id="13_7dnw0"]
 [ext_resource type="PackedScene" uid="uid://b4mv7evfxy5bc" path="res://Prefabs/UI/PixelNumberDisplay.tscn" id="13_sgj2e"]
+[ext_resource type="Texture2D" uid="uid://edijlynr1nkq" path="res://Sprites/UI/SPIcon.png" id="15_1scge"]
 
-[node name="SkillSelectBook" type="Control" node_paths=PackedStringArray("firstSlotPosition", "addButton", "displayIcon", "displayName", "displayDescription", "SoulPowerAmount", "fixedButtons", "abilityIcons")]
+[node name="SkillSelectBook" type="Control" node_paths=PackedStringArray("firstSlotPosition", "addButton", "displayIcon", "displayName", "displayDescription", "SPcost", "SoulPowerAmount", "fixedButtons", "abilityIcons")]
 z_index = 5
 layout_mode = 3
 anchors_preset = 15
@@ -31,6 +32,7 @@ addButton = NodePath("TextureRect/AddButton")
 displayIcon = NodePath("TextureRect/SkillIcon")
 displayName = NodePath("TextureRect/VBoxContainer/SkillName")
 displayDescription = NodePath("TextureRect/VBoxContainer/Description")
+SPcost = NodePath("TextureRect/SKillStats/MarginContainer/SPCost")
 SoulPowerAmount = NodePath("TextureRect/SoulPowerNumber")
 abilities = [ExtResource("2_2riju"), ExtResource("3_p0rpn"), ExtResource("4_5j6pc")]
 fixedButtons = [NodePath("TextureRect/FuseButton"), NodePath("TextureRect/SkipButton"), NodePath("TextureRect/GoButton")]
@@ -57,9 +59,9 @@ anchor_left = 0.168
 anchor_top = 0.037
 anchor_right = 0.841
 anchor_bottom = 0.908
-offset_left = 113.68
+offset_left = 30.68
 offset_top = 52.283
-offset_right = -563.84
+offset_right = -646.84
 offset_bottom = -347.028
 grow_horizontal = 2
 grow_vertical = 2
@@ -136,6 +138,32 @@ offset_bottom = 207.0
 scale = Vector2(0.3, 0.277)
 text = "100
 "
+horizontal_alignment = 1
+
+[node name="SKillStats" type="GridContainer" parent="TextureRect"]
+layout_mode = 0
+offset_left = 407.0
+offset_top = 73.0
+offset_right = 570.0
+offset_bottom = 236.0
+columns = 2
+
+[node name="SPIcon" type="TextureRect" parent="TextureRect/SKillStats"]
+layout_mode = 2
+texture = ExtResource("15_1scge")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="MarginContainer" type="MarginContainer" parent="TextureRect/SKillStats"]
+layout_mode = 2
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_bottom = -4
+
+[node name="SPCost" type="Label" parent="TextureRect/SKillStats/MarginContainer"]
+layout_mode = 2
+theme_override_constants/line_spacing = 0
+theme_override_font_sizes/font_size = 30
+text = "0"
 horizontal_alignment = 1
 
 [node name="NumberOfCharges" parent="." instance=ExtResource("13_sgj2e")]

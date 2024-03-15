@@ -82,8 +82,8 @@ public partial class StatusEffectsController : Node2D
 						if (alreadyApplied.Count() > 0) {
 							alreadyApplied.First().ResetDuration();
 						} else {
-							statusEffects.Add(new StatusEffect(datas[i]));
-							datas[i].TriggerEffect(unit);
+						datas[i].TriggerEffect(unit);
+						statusEffects.Add(new StatusEffect(datas[i]));
 						}
 					break;
 				case StatusEffectType.DamageOverTime:
@@ -116,12 +116,19 @@ public partial class StatusEffectsController : Node2D
 	{
 		for (int i = 0;i < timedOutEffects.Count; i++)
 		{
-			if(timedOutEffects[i].effectType == StatusEffectType.StatChangeEffect) {
-				((StatChangeEffect)timedOutEffects[i].effect).RemoveEffect(unit, timedOutEffects[i].mod);
-				statusEffects.Remove(timedOutEffects[i]).ToString();
-			} else {
-				timedOutEffects[i].effect.RemoveEffect(unit);
-				statusEffects.Remove(timedOutEffects[i]).ToString();
+			switch(timedOutEffects[i].effectType) {
+				case StatusEffectType.StatChangeEffect:
+					((StatChangeEffect)timedOutEffects[i].effect).RemoveEffect(unit, timedOutEffects[i].mod);
+					statusEffects.Remove(timedOutEffects[i]).ToString();
+					break;
+				case StatusEffectType.ControlEffect:
+					((ControlEffect)timedOutEffects[i].effect).RemoveEffect(unit, timedOutEffects[i].Ceffect);
+					statusEffects.Remove(timedOutEffects[i]).ToString();
+					break;
+				default:
+					timedOutEffects[i].effect.RemoveEffect(unit);
+					statusEffects.Remove(timedOutEffects[i]).ToString();
+					break;
 			}
 
 		}

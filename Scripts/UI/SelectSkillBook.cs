@@ -10,10 +10,11 @@ public partial class SelectSkillBook : Control
 	[Export] Marker2D firstSlotPosition;
 	float xOffset = 72.3f;
 	float yOffset = 72.375f;
-	[Export] public AddButton addButton;
-	[Export] public TextureRect displayIcon;
-	[Export] public Label displayName;
-	[Export] public Label displayDescription;
+	[Export] private AddButton addButton;
+	[Export] private TextureRect displayIcon;
+	[Export] private Label displayName;
+	[Export] private Label displayDescription;
+	[Export] private Label SPcost;
 	[Export] private Label SoulPowerAmount;
 	private Dictionary<Vector2,SelectSkillButton> buttons = new Dictionary<Vector2, SelectSkillButton>();
 	[Export] public Godot.Collections.Array<Ability> abilities = new Godot.Collections.Array<Ability>();
@@ -40,6 +41,7 @@ public partial class SelectSkillBook : Control
 		buttons[emptyButton.buttonPos] = emptyButton;
 
 		SmallAbilityIcon.onAbilityPress += SelectAbility;
+		AddButton.onAmountChanged += AdjustSoulPower;
 	}
 
 	public override void _Ready()
@@ -58,6 +60,7 @@ public partial class SelectSkillBook : Control
 	public override void _ExitTree()
 	{
 		SmallAbilityIcon.onAbilityPress -= SelectAbility;
+		AddButton.onAmountChanged -= AdjustSoulPower;
 	}
 
 	private void GenerateAbilityIcons() {
@@ -81,7 +84,23 @@ public partial class SelectSkillBook : Control
 		}
 	}
 
-	
+	public bool UpdateSoulPower(int amount) {
+		if(currentSoulPower + amount >= 0) {
+			currentSoulPower += amount;
+			SoulPowerAmount.Text = currentSoulPower.ToString();
+			return true;
+		} 
+		return false;
+	}
+
+	private void AdjustSoulPower(bool isIncrease) {
+		SmallAbilityIcon currentButton = (SmallAbilityIcon)buttons[selectedPos];
+		if(isIncrease) {
+			UpdateSoulPower(-1*currentButton.ability.SPCost);
+		} else {
+			UpdateSoulPower(currentButton.ability.SPCost);
+		}
+	}
 
 	public override void _Process(double delta)
 	{
@@ -199,12 +218,18 @@ public partial class SelectSkillBook : Control
 
 	private void SelectAddButton() {
 		isOnAddButton = true;
+		SmallAbilityIcon currentButton = (SmallAbilityIcon)buttons[selectedPos];
+		addButton.maxCharges = currentSoulPower/currentButton.ability.SPCost;
 		addButton.ToggleSelectOn();
 	}
 
 	private void DeSelectAddButton()
 	{
 		isOnAddButton = false;
+		if(selectedPos.Y < 3) {
+			SmallAbilityIcon currentButton = (SmallAbilityIcon)buttons[selectedPos];
+			UpdateSoulPower(currentButton.ability.SPCost * addButton.numberOfCharges);
+		}
 		addButton.numberOfCharges = 0;
 		addButton.numberDisplay.Text = 0.ToString();
 		addButton.ToggleSelectOff();
@@ -245,17 +270,19 @@ public partial class SelectSkillBook : Control
 	}
 
 	private void RemoveAbility() {
+		AbilityIcon currentSlot = abilityIcons[currentSlotIndex - 1];
 		for (int i = 0; i < 3; i++)
 		{
 			for (int j = 0; j < 4;j++) {
-				if(((SmallAbilityIcon)buttons[new Vector2(j,i)]).ability == abilityIcons[currentSlotIndex - 1].ability) {
+				if(((SmallAbilityIcon)buttons[new Vector2(j,i)]).ability == currentSlot.ability) {
 					buttons[new Vector2(j,i)].isActive = true;
 					buttons[new Vector2(j, i)].animPlayer.Play("RESET");
 					break;
 				}
 			}
 		}
-		abilityIcons[currentSlotIndex - 1].ResetIcon();
+		UpdateSoulPower(currentSlot.ability.SPCost*currentSlot.numberOfCharges);
+		currentSlot.ResetIcon();
 		currentSlotIndex--;
 	}
 
@@ -274,6 +301,7 @@ public partial class SelectSkillBook : Control
 			displayIcon.Texture = ability.Icon;
 			displayName.Text = ability.Name;
 			displayDescription.Text = ability.Description;
+			SPcost.Text = ability.SPCost.ToString();
 		}
 	}
 

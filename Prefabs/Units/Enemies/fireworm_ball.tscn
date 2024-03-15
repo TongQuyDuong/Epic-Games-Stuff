@@ -110,4 +110,5 @@ scale = Vector2(2.35316, 2.49646)
 shape = SubResource("CircleShape2D_bl4dc")
 
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="ScreenExited"]
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

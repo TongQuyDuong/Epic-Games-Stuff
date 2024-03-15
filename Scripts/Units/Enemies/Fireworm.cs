@@ -3,9 +3,7 @@ using System;
 
 public partial class Fireworm : BaseEnemy
 {
-	[Export] public Ability ability;
-	[Export] public float waitTime;
-	private float countdown;
+
 
     public override void _EnterTree()
     {
@@ -19,25 +17,10 @@ public partial class Fireworm : BaseEnemy
 	public override void _PhysicsProcess(double delta)
 	{
 		base._PhysicsProcess(delta);
-		switch (stateCon.currentState) {
-			case EnemyState.Idling:
-			if(countdown > 0) {
-				countdown -= (float)GetProcessDeltaTime(); 
-			} else {
-				PerformAction();
-			}
-
-			break;
-			case EnemyState.Pursuing:
-			break;
-			case EnemyState.Attacking:
-			break;
-			default:
-			break;
-		}
 	}
 
-	public void PerformAction() {
+	protected override void PerformAction() {
+		if(isControlled) return;
 		if(isFacingRight) {
 			if(this.currentPos.X - UnitManager.Instance.playerPos.X > 0) Flip();
 		} else {
@@ -60,12 +43,7 @@ public partial class Fireworm : BaseEnemy
 		ability.TriggerAbility(this);
 	}
 
-	public void ReturnToIdle() {
-		animPlayer.Play("Idle");
-		countdown = waitTime;
-		stateCon.ChangeState(EnemyState.Idling);
-		
-	}
+
 
 	public void Move(float direction) {
 		direction = direction > 0? 1 : -1;

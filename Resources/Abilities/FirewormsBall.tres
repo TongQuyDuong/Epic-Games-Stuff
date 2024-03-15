@@ -8,6 +8,7 @@ script = ExtResource("1_ojh7j")
 projectile = ExtResource("1_d83xi")
 Name = ""
 Description = ""
+SPCost = 0
 castTime = 0.0
 cooldown = 0.0
 activeTime = 0.0

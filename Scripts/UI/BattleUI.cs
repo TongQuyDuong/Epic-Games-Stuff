@@ -77,10 +77,13 @@ public partial class BattleUI : Control
 	}
 
 	public void ShowSkillBook() {
+		selectSkillBook.UpdateSoulPower(topLeftUI.currentSoulPower);
 		Tween tweenBook = GetTree().CreateTween();
 		tweenBook.SetEase(Tween.EaseType.Out);
 		tweenBook.TweenProperty(selectSkillBook,"position",new Vector2(0,0),0.5f);
-		tweenBook.Finished += delegate{selectSkillBook.ProcessMode = ProcessModeEnum.Inherit;};
+		tweenBook.Finished += delegate{
+			selectSkillBook.ProcessMode = ProcessModeEnum.Inherit;
+			};
 	}
 
 	public void HideSkillBook(Godot.Collections.Array<AbilityIcon> icons)
@@ -92,7 +95,7 @@ public partial class BattleUI : Control
 			selectSkillBook.ProcessMode = ProcessModeEnum.Disabled;
 			AnnounceBattle(true);
 			selectSkillBook.ResetBook();
-			};
+		};
 
 	}
 }

@@ -1,0 +1,19 @@
+[gd_resource type="Resource" load_steps=5 format=3 uid="uid://b3ie26gxcwyna"]
+
+[ext_resource type="Script" path="res://Scripts/Resources/Abilities/Ranged/HitscanAbilities/SmiteAbility.cs" id="1_e4mxn"]
+[ext_resource type="Texture2D" uid="uid://ccydxpb36b462" path="res://Sprites/Abilities/Ranged/Smites/FireTower/FireTowerIcon.png" id="1_f0e7w"]
+[ext_resource type="PackedScene" uid="uid://cldmp1knvrd1" path="res://Prefabs/Abilities/Ranged/Smite/fire_tower.tscn" id="2_05cv7"]
+[ext_resource type="Texture2D" uid="uid://dxo880hajd567" path="res://Sprites/Abilities/Ranged/Smites/FireTower/FireTowerSmall.png" id="3_qqaww"]
+
+[resource]
+script = ExtResource("1_e4mxn")
+smiteEffect = ExtResource("2_05cv7")
+Name = "Fire Tower"
+Description = "Summons a pillar of fire at your enemys feet"
+SPCost = 3
+castTime = 0.2
+cooldown = 1.0
+activeTime = 0.0
+effectsToApply = null
+Icon = ExtResource("1_f0e7w")
+smallIcon = ExtResource("3_qqaww")

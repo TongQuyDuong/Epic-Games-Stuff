@@ -9,7 +9,7 @@ public partial class ProjectileBehaviour : RigidBody2D
 	[Export] private Node2D impactPoint;
 	[Export] public int rowNumber;
 	[Export] private AnimationPlayer animationPlayer;
-	[Export] public Godot.Collections.Array<StatusEffectData> effectsToApply;
+	[Export] public Godot.Collections.Array<StatusEffectData> effectsToApply = new Godot.Collections.Array<StatusEffectData>();
 	public float Damage;
 	Vector2 velo = new Vector2();
 
@@ -19,13 +19,13 @@ public partial class ProjectileBehaviour : RigidBody2D
 		rowNumber = (int)caster.currentPos.Y;
 		SpriteLayerManager.Instance.AdjustLayerOnInstantiation(this, rowNumber);
 		caster.stats.TryGetStatValue(StatType.Magic, out Damage);
-		if (!caster.isFacingRight) this.Scale = new Vector2(this.Scale.X*-1,this.Scale.Y);
+		if (!caster.isFacingRight) this.Scale = new Vector2(this.Scale.X * -1, this.Scale.Y);
 		projectileSpeed *= caster.isFacingRight ? 1 : -1;
 	}
 
 	public override void _PhysicsProcess(double delta)
-	{	
-		velo.X = projectileSpeed*(float)delta;
+	{
+		velo.X = projectileSpeed * (float)delta;
 		Translate(velo);
 		projectileDuration -= (float)GetPhysicsProcessDeltaTime();
 		if (projectileDuration <= 0f) this.QueueFree();
@@ -33,26 +33,45 @@ public partial class ProjectileBehaviour : RigidBody2D
 
 	private void _on_area_2d_body_entered(Node2D body)
 	{
-		BaseUnit target = (BaseUnit)body;
-		if (target.currentPos.Y == rowNumber)
+		if (body is BaseUnit)
+		{
+			BaseUnit target = (BaseUnit)body;
+			if (target.currentPos.Y == rowNumber)
+			{
+				this.Sleeping = true;
+				this.SetPhysicsProcess(false);
+				this.GlobalPosition = impactPoint.GlobalPosition;
+				animationPlayer.Play("Explode");
+
+				IDamageable targetHealth = target.GetNode<IDamageable>("UnitHealth");
+				targetHealth.TakeDamage(Damage);
+
+				target.STeffectCon.AddStatusEffect(effectsToApply, caster);
+			}
+		}
+		else
 		{
 			this.Sleeping = true;
 			this.SetPhysicsProcess(false);
 			this.GlobalPosition = impactPoint.GlobalPosition;
 			animationPlayer.Play("Explode");
-
-			IDamageable targetHealth = target.GetNode<IDamageable>("UnitHealth");
-			targetHealth.TakeDamage(Damage);
-			
-			target.STeffectCon.AddStatusEffect(effectsToApply,caster);
 		}
+
 	}
 
-	private void ScreenExited() 
+	private void _on_area_2d_area_entered(Area2D area)
+	{
+		this.Sleeping = true;
+		this.SetPhysicsProcess(false);
+		this.GlobalPosition = impactPoint.GlobalPosition;
+		animationPlayer.Play("Explode");
+	}
+
+	private void ScreenExited()
 	{
 		this.QueueFree();
 	}
-	
+
 
 }
 

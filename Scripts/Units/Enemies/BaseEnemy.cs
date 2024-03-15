@@ -5,6 +5,10 @@ public partial class BaseEnemy : BaseUnit
 {
     [Export] protected EnemyStateConftroller stateCon;
     [Export] protected EnemyHPBar hpBar;
+    [Export] public float waitTime;
+    [Export] public Ability ability;
+
+    protected float countdown;
 
     public override void _EnterTree()
     {
@@ -21,6 +25,30 @@ public partial class BaseEnemy : BaseUnit
     public override void _PhysicsProcess(double delta)
     {
         base._PhysicsProcess(delta);
+        switch (stateCon.currentState)
+        {
+            case EnemyState.Idling:
+                if (countdown > 0)
+                {
+                    countdown -= (float)GetProcessDeltaTime();
+                }
+                else
+                {
+                    PerformAction();
+                }
+
+                break;
+            case EnemyState.Pursuing:
+                break;
+            case EnemyState.Attacking:
+                break;
+            default:
+                break;
+        }
+    }
+
+    protected virtual void PerformAction() {
+        
     }
 
     protected void Flip()
@@ -29,5 +57,12 @@ public partial class BaseEnemy : BaseUnit
 
         this.Scale = new Vector2(this.Scale.X * -1, this.Scale.Y);
         hpBar.Flip();
+    }
+
+    public void ReturnToIdle()
+    {
+        animPlayer.Play("Idle");
+        countdown = waitTime;
+        stateCon.ChangeState(EnemyState.Idling);
     }
 }

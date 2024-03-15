@@ -13,7 +13,7 @@ public partial class BaseHero : BaseUnit
         BattleUI.Instance.SetMaxHP((int)maxHP);
         
         BattleUI.Instance.SetStartingSP(20);
-
+        BattleUI.Instance.topLeftUI.UpdateSPInfo(50,1);
         SelectSkillBook.onConfirmButtonPressed += LoadAbilities;
     }
 

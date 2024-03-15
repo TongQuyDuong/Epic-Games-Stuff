@@ -1,32 +1,21 @@
-[gd_scene load_steps=9 format=3 uid="uid://4kaxxey6eusy"]
+[gd_scene load_steps=10 format=3 uid="uid://4kaxxey6eusy"]
 
 [ext_resource type="Script" path="res://Scripts/AbilityBehaviours/ProjectileBehaviour.cs" id="1_xlxy3"]
-[ext_resource type="Texture2D" uid="uid://i0gqoyoyncq8" path="res://Sprites/Abilities/Ranged/Projectiles/Fireball/fire_proj.png" id="2_re0v1"]
+[ext_resource type="Texture2D" uid="uid://dq0ofqjk6sxrd" path="res://Sprites/Abilities/Ranged/Projectiles/Fireball/fire_proj2.png" id="2_qxmtw"]
 [ext_resource type="Script" path="res://Scripts/ProjectileImpact.cs" id="3_bdvcb"]
+[ext_resource type="Texture2D" uid="uid://dojubtge13xgw" path="res://Sprites/Abilities/Ranged/Projectiles/Fireball/fire_explosion2.png" id="3_gs2yu"]
 
 [sub_resource type="Animation" id="Animation_n0sv6"]
 resource_name = "Explode"
 length = 0.2
 step = 0.04
-tracks/0/type = "value"
+tracks/0/type = "method"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/path = NodePath(".")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.04, 0.08, 0.12, 0.16),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 1,
-"values": [4, 5, 6, 7, 8]
-}
-tracks/1/type = "method"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
 "times": PackedFloat32Array(0.2),
 "transitions": PackedFloat32Array(1),
 "values": [{
@@ -34,13 +23,49 @@ tracks/1/keys = {
 "method": &"queue_free"
 }]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Explosion:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.04, 0.08, 0.12, 0.16),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Proj:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Explosion:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_loaam"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/path = NodePath("Proj:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -49,23 +74,58 @@ tracks/0/keys = {
 "update": 1,
 "values": [0]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Explosion:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
 
 [sub_resource type="Animation" id="Animation_l64i1"]
 resource_name = "fireball"
-length = 0.4
+length = 1.1
 loop_mode = 1
-step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/path = NodePath("Proj:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [0, 1, 2, 3]
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Proj:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Explosion:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_be1kr"]
@@ -85,11 +145,18 @@ projectileSpeed = 1000.0
 impactPoint = NodePath("ImpactPoint")
 animationPlayer = NodePath("AnimationPlayer")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(-3, 0)
-scale = Vector2(2, 2)
-texture = ExtResource("2_re0v1")
-hframes = 9
+[node name="Proj" type="Sprite2D" parent="."]
+position = Vector2(-19, 0)
+scale = Vector2(3, 3)
+texture = ExtResource("2_qxmtw")
+hframes = 6
+vframes = 2
+
+[node name="Explosion" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(11, -6)
+texture = ExtResource("3_gs2yu")
+hframes = 5
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "fireball"
@@ -109,5 +176,6 @@ shape = SubResource("CircleShape2D_1qs5a")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="ScreenExited"]

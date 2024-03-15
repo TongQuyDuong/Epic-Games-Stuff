@@ -16,9 +16,8 @@ public partial class SmiteAbility : RangedAbility
 	public override void TriggerAbility(BaseUnit caster)
 	{
 		int direction = caster.isFacingRight? 1 : -1;
-		Panel panel;
 		for (int i = (int)caster.currentPos.X + direction; i >= 0 && i < 8; i += direction ) {
-			panel = GridManager.Instance.GetPanelAtPosition(new Vector2(i,caster.currentPos.Y));
+			Panel panel = GridManager.Instance.GetPanelAtPosition(new Vector2(i,caster.currentPos.Y));
 			if(panel.occupiedUnit != null) {
 				panel.animationPlayer.Play("Warning");
 
@@ -27,6 +26,14 @@ public partial class SmiteAbility : RangedAbility
 				break;
 			}
 		}
+	}
+
+	public void TriggerAbilityAtPosition(BaseUnit caster, Vector2 pos) {
+		Panel panel = GridManager.Instance.GetPanelAtPosition(pos);
+		panel.animationPlayer.Play("Warning");
+
+		caster.stats.TryGetStatValue(StatType.Magic, out float Damage);
+		Timing.RunCoroutine(waitForSecondsAndStrike(0.5f, panel, Damage));
 	}
 
 	IEnumerator<double> waitForSecondsAndStrike(float delay, Panel panel,float Damage)

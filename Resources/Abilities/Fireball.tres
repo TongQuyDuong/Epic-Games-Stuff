@@ -11,6 +11,7 @@ script = ExtResource("1_afdio")
 projectile = ExtResource("1_gu2j1")
 Name = "Fireball"
 Description = "Its a fireball"
+SPCost = 3
 castTime = 0.1
 cooldown = 0.5
 activeTime = 0.0

@@ -1,0 +1,19 @@
+[gd_resource type="Resource" load_steps=5 format=3 uid="uid://bej6id1hervvf"]
+
+[ext_resource type="Script" path="res://Scripts/Resources/Abilities/Melee/Non-Movement/CircularSlice.cs" id="1_mo4bt"]
+[ext_resource type="Texture2D" uid="uid://dg7qjcsovdh3b" path="res://Sprites/Abilities/Melee/WindCirSliceIcon.png" id="1_vwu3d"]
+[ext_resource type="PackedScene" uid="uid://bf7a7iehybrkt" path="res://Prefabs/Abilities/Melee/circular_slice.tscn" id="2_m60bg"]
+[ext_resource type="Texture2D" uid="uid://dt346gkripe" path="res://Sprites/Abilities/Melee/WindCirSliceSmallIcon.png" id="4_uenoo"]
+
+[resource]
+script = ExtResource("1_mo4bt")
+slashEffect = ExtResource("2_m60bg")
+Name = "Wind Circular Slice"
+Description = "Slices 360 degrees around you"
+SPCost = 5
+castTime = 0.2
+cooldown = 1.0
+activeTime = 0.0
+effectsToApply = Array[Resource]([])
+Icon = ExtResource("1_vwu3d")
+smallIcon = ExtResource("4_uenoo")

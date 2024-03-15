@@ -8,6 +8,7 @@ using System.Collections.Generic;
 public partial class WaveAbility : RangedAbility
 {
 	[Export] PackedScene waveEffect;
+	[Export] float delay;
 	public override void Initialize()
 	{
 		//Makes the casting animation that of a Ranged Ability animation
@@ -23,7 +24,7 @@ public partial class WaveAbility : RangedAbility
 		{
 			panel = GridManager.Instance.GetPanelAtPosition(new Vector2(i, caster.currentPos.Y));
 			caster.stats.TryGetStatValue(StatType.Magic, out float Damage);
-			Timing.RunCoroutine(waitForSecondsAndSpawn(index*0.5f, panel, Damage));
+			Timing.RunCoroutine(waitForSecondsAndSpawn(index*delay, panel, Damage));
 			index++;
 		}
 	}
