@@ -3,8 +3,8 @@ using System;
 using MonoCustomResourceRegistry;
 
 
-[RegisteredType(nameof(CircularSlice), "", nameof(Resource))]
-public partial class CircularSlice : MeleeAbility
+[RegisteredType(nameof(NormalSlash), "", nameof(Resource))]
+public partial class NormalSlash : MeleeAbility
 {
 	public override void Initialize()
 	{
@@ -14,11 +14,12 @@ public partial class CircularSlice : MeleeAbility
 
 	public override void TriggerAbility(BaseUnit caster)
 	{
-		var slash = slashEffect.Instantiate<CircularSlashBehaviour>();
+		var slash = slashEffect.Instantiate<NormalSlashBehaviour>();
+		slash.slashPos = caster.currentPos + new Vector2I(caster.isFacingRight? 1 : -1,0);
 		slash.damageType = scaleStat;
 		slash.caster = caster;
 		slash.effectsToApply = effectsToApply;
-		slash.Position = caster.CenterPoint. Position;
+		slash.Position = caster.CenterPoint.Position;
 		caster.AddChild(slash);
 	}
 }

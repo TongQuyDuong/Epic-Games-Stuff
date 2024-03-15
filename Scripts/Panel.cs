@@ -4,7 +4,7 @@ using System;
 public partial class Panel : Node2D
 {
 	public bool _isWalkable = true;
-	[Export] public Vector2 Pos;
+	[Export] public Vector2I Pos;
 	[Export] public BaseUnit occupiedUnit = null;
 	[Export] public bool Walkable;
 	[Export] public AnimationPlayer animationPlayer;
@@ -17,6 +17,12 @@ public partial class Panel : Node2D
 	private void UpdateWalkability()
 	{
 		Walkable = _isWalkable && occupiedUnit==null;
+		if(Walkable) {
+			GridManager.Instance.aStarGrid2D.SetPointSolid(Pos,false);
+		} else {
+			GridManager.Instance.aStarGrid2D.SetPointSolid(Pos, true);
+		}
+		
 	}
 
 	public void SetUnit(BaseUnit unit)

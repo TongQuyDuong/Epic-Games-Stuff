@@ -3,66 +3,70 @@ using System;
 
 public partial class BaseEnemy : BaseUnit
 {
-    [Export] protected EnemyStateConftroller stateCon;
-    [Export] protected EnemyHPBar hpBar;
-    [Export] public float waitTime;
-    [Export] public Ability ability;
+	[Export] protected EnemyStateConftroller stateCon;
+	[Export] public EnemyHPBar hpBar;
+	[Export] public float waitTime;
+	[Export] public Ability ability;
 
-    protected float countdown;
+	protected float countdown;
 
-    public override void _EnterTree()
-    {
-        base._EnterTree();
-        stats.TryGetStatValue(StatType.HP, out float maxHP);
-        hpBar.SetMaxHP((int)maxHP);
-        if (isFacingRight == false) hpBar.Flip();
-    }
-    public override void _ExitTree()
-    {
-        base._ExitTree();
-    }
+	public override void _EnterTree()
+	{
+		base._EnterTree();
+		stats.TryGetStatValue(StatType.HP, out float maxHP);
+		hpBar.SetMaxHP((int)maxHP);
+		if (isFacingRight == false) hpBar.Flip();
+	}
+	public override void _ExitTree()
+	{
+		base._ExitTree();
+	}
 
-    public override void _PhysicsProcess(double delta)
-    {
-        base._PhysicsProcess(delta);
-        switch (stateCon.currentState)
-        {
-            case EnemyState.Idling:
-                if (countdown > 0)
-                {
-                    countdown -= (float)GetProcessDeltaTime();
-                }
-                else
-                {
-                    PerformAction();
-                }
+	public override void _Ready() {
+		base._Ready();
+		countdown = waitTime;
+	}
 
-                break;
-            case EnemyState.Pursuing:
-                break;
-            case EnemyState.Attacking:
-                break;
-            default:
-                break;
-        }
-    }
+	public override void _PhysicsProcess(double delta)
+	{
+		switch (stateCon.currentState)
+		{
+			case EnemyState.Idling:
+				if (countdown > 0)
+				{
+					countdown -= (float)GetProcessDeltaTime();
+				}
+				else
+				{
+					PerformAction();
+				}
 
-    protected virtual void PerformAction() {
-        
-    }
+				break;
+			case EnemyState.Pursuing:
+				break;
+			case EnemyState.Attacking:
+				break;
+			default:
+				break;
+		}
+	}
 
-    protected void Flip()
-    {
-        this.isFacingRight = !this.isFacingRight;
+	protected virtual void PerformAction() {
+		
+	}
 
-        this.Scale = new Vector2(this.Scale.X * -1, this.Scale.Y);
-        hpBar.Flip();
-    }
+	protected void Flip()
+	{
+		this.isFacingRight = !this.isFacingRight;
 
-    public void ReturnToIdle()
-    {
-        animPlayer.Play("Idle");
-        countdown = waitTime;
-        stateCon.ChangeState(EnemyState.Idling);
-    }
+		this.Scale = new Vector2(this.Scale.X * -1, this.Scale.Y);
+		hpBar.Flip();
+	}
+
+	public void ReturnToIdle()
+	{
+		animPlayer.Play("Idle");
+		countdown = waitTime;
+		stateCon.ChangeState(EnemyState.Idling);
+	}
 }

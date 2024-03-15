@@ -56,7 +56,7 @@ public partial class StatusEffectsController : Node2D
 				sumDamage += DoT.Damage;
 				DoT.ResetInterval();
 			}
-			unit.GetNode<UnitHealth>("UnitHealth").TakeDamage(sumDamage);
+			unit.GetNode<UnitHealth>("UnitHealth").TakeDamageWithoutAnimation(sumDamage);
 			sumDamage = 0;
 		}
 

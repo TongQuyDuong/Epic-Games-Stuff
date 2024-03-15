@@ -17,18 +17,18 @@ public partial class SmiteAbility : RangedAbility
 	{
 		int direction = caster.isFacingRight? 1 : -1;
 		for (int i = (int)caster.currentPos.X + direction; i >= 0 && i < 8; i += direction ) {
-			Panel panel = GridManager.Instance.GetPanelAtPosition(new Vector2(i,caster.currentPos.Y));
+			Panel panel = GridManager.Instance.GetPanelAtPosition(new Vector2I(i,caster.currentPos.Y));
 			if(panel.occupiedUnit != null) {
 				panel.animationPlayer.Play("Warning");
 
-				caster.stats.TryGetStatValue(StatType.Magic, out float Damage);
+				caster.stats.TryGetStatValue(scaleStat, out float Damage);
 				Timing.RunCoroutine(waitForSecondsAndStrike(0.5f,panel,Damage));
 				break;
 			}
 		}
 	}
 
-	public void TriggerAbilityAtPosition(BaseUnit caster, Vector2 pos) {
+	public void TriggerAbilityAtPosition(BaseUnit caster, Vector2I pos) {
 		Panel panel = GridManager.Instance.GetPanelAtPosition(pos);
 		panel.animationPlayer.Play("Warning");
 

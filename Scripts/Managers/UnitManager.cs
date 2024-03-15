@@ -11,7 +11,7 @@ public partial class UnitManager : Node
 	[Export] private SpawnFormation formation;
 	[Export] public bool heroIsFacingRight = true;
 	[Export] private int EnemiesAlive = 0;
-	public Vector2 playerPos;
+	public Vector2I playerPos;
 	public BaseHero chara;
 	public override void _EnterTree()
 	{

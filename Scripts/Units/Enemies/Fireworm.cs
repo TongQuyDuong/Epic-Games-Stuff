@@ -12,7 +12,6 @@ public partial class Fireworm : BaseEnemy
     public override void _Ready()
 	{
 		base._Ready();
-		countdown = waitTime;
 	}
 	public override void _PhysicsProcess(double delta)
 	{
@@ -42,8 +41,6 @@ public partial class Fireworm : BaseEnemy
 	public void UseAbility() {
 		ability.TriggerAbility(this);
 	}
-
-
 
 	public void Move(float direction) {
 		direction = direction > 0? 1 : -1;

@@ -16,6 +16,7 @@ public partial class ProjectileAbility : RangedAbility
 		Marker2D firingPoint = caster.GetNode<Marker2D>("FiringPoint");
 
 		var proj = (ProjectileBehaviour)projectile.Instantiate();
+		proj.damageType = scaleStat;
 		proj.caster = caster;
 		proj.effectsToApply = effectsToApply;
 		proj.GlobalPosition = firingPoint.GlobalPosition;

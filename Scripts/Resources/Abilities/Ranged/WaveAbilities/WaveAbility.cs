@@ -22,8 +22,8 @@ public partial class WaveAbility : RangedAbility
 		int index = 0;
 		for (int i = (int)caster.currentPos.X + direction; i >= 0 && i < 8; i += direction)
 		{
-			panel = GridManager.Instance.GetPanelAtPosition(new Vector2(i, caster.currentPos.Y));
-			caster.stats.TryGetStatValue(StatType.Magic, out float Damage);
+			panel = GridManager.Instance.GetPanelAtPosition(new Vector2I(i, caster.currentPos.Y));
+			caster.stats.TryGetStatValue(scaleStat, out float Damage);
 			Timing.RunCoroutine(waitForSecondsAndSpawn(index*delay, panel, Damage));
 			index++;
 		}

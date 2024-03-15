@@ -10,6 +10,7 @@ script = ExtResource("1_e4mxn")
 smiteEffect = ExtResource("2_05cv7")
 Name = "Fire Tower"
 Description = "Summons a pillar of fire at your enemys feet"
+scaleStat = 2
 SPCost = 3
 castTime = 0.2
 cooldown = 1.0

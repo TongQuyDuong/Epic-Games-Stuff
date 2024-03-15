@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://2wh87d6rrgjd"]
+[gd_scene load_steps=20 format=3 uid="uid://2wh87d6rrgjd"]
 
 [ext_resource type="Script" path="res://Scripts/Units/Enemies/BaseEnemy.cs" id="1_u3x8x"]
 [ext_resource type="Script" path="res://Scripts/Resources/Stats/UnitStat.cs" id="2_igvpn"]
@@ -7,6 +7,8 @@
 [ext_resource type="Texture2D" uid="uid://dximn6h8xrrf1" path="res://Sprites/dummy.png" id="4_x5y8s"]
 [ext_resource type="PackedScene" uid="uid://cdkd8tavio2nn" path="res://Components/status_effects_controller.tscn" id="7_4otk2"]
 [ext_resource type="PackedScene" uid="uid://e5ccxwf8ehw1" path="res://Components/unit_health.tscn" id="7_vfsc1"]
+[ext_resource type="PackedScene" uid="uid://d083ir4k8ax1b" path="res://Prefabs/UI/EnemyHPBar.tscn" id="8_1jkj8"]
+[ext_resource type="Script" path="res://Scripts/EnemyStateConftroller.cs" id="9_qxkmu"]
 
 [sub_resource type="Resource" id="Resource_vxwf6"]
 script = ExtResource("2_igvpn")
@@ -94,8 +96,10 @@ _data = {
 "RESET": SubResource("Animation_22ted")
 }
 
-[node name="TestDummy" type="CharacterBody2D" node_paths=PackedStringArray("STeffectCon", "animPlayer", "PopupPoint")]
+[node name="TestDummy" type="CharacterBody2D" node_paths=PackedStringArray("stateCon", "hpBar", "STeffectCon", "animPlayer", "PopupPoint")]
 script = ExtResource("1_u3x8x")
+stateCon = NodePath("StateCon")
+hpBar = NodePath("HpBar")
 stats = SubResource("Resource_ndm0n")
 STeffectCon = NodePath("StatusEffectsController")
 animPlayer = NodePath("AnimationPlayer")
@@ -126,3 +130,10 @@ spriteAnim = NodePath("../AnimationPlayer")
 
 [node name="StatusEffectsController" parent="." node_paths=PackedStringArray("unit") instance=ExtResource("7_4otk2")]
 unit = NodePath("..")
+
+[node name="HpBar" parent="." instance=ExtResource("8_1jkj8")]
+position = Vector2(26, -199)
+scale = Vector2(2, 2)
+
+[node name="StateCon" type="Node2D" parent="."]
+script = ExtResource("9_qxkmu")

@@ -7,8 +7,6 @@ public partial class UnitHealth : Node, IDamageable
 	[Export] public int currentHP;
 	[Export] private int maxHP;
 	[Export] public AnimationPlayer spriteAnim;
-	//For Enemies
-	[Export] private EnemyHPBar hpBar;
 
 	// public UnitHealth(int aMaxHp  )
 	// {
@@ -27,11 +25,24 @@ public partial class UnitHealth : Node, IDamageable
 	{
 		int Damage = amount <= 0? 0 : (int)Mathf.Round(amount);
 		unit.ShowPopup(Damage.ToString());
-		hpBar.UpdateHealth(Damage);
 		currentHP -= Damage;
 		spriteAnim.Play("Damage");
 		if (currentHP <= 0) { Die(); }
-		
+		if (unit is BaseEnemy)
+		{
+			((BaseEnemy)unit).hpBar.UpdateHealth(Damage);
+		}
+	}
+
+	public virtual void TakeDamageWithoutAnimation(float amount) {
+		int Damage = amount <= 0 ? 0 : (int)Mathf.Round(amount);
+		unit.ShowPopup(Damage.ToString());
+		if (unit is BaseEnemy)
+		{
+			((BaseEnemy)unit).hpBar.UpdateHealth(Damage);
+		}
+		currentHP -= Damage;
+		if (currentHP <= 0) { Die(); }
 	}
 
 

@@ -26,6 +26,6 @@ public partial class SpriteLayerManager : Node
     }
     public void AdjustLayerOnInstantiation(Node2D unit, int rowNumber)
     {
-        unit.ZIndex += rowNumber*10;
+        unit.ZIndex = rowNumber*10;
     }
 }

@@ -1,0 +1,300 @@
+[gd_scene load_steps=23 format=3 uid="uid://10u2o5ps04t3"]
+
+[ext_resource type="Script" path="res://Scripts/Units/Enemies/LightBandit.cs" id="1_0qqio"]
+[ext_resource type="Script" path="res://Scripts/Resources/Stats/UnitStat.cs" id="2_itwgq"]
+[ext_resource type="Resource" uid="uid://bi721bwio75q1" path="res://Resources/Abilities/Melee/NormalSlash.tres" id="2_tkhix"]
+[ext_resource type="Shader" path="res://Resources/Shaders/FlashSprite.gdshader" id="2_tqu1r"]
+[ext_resource type="Script" path="res://Scripts/Resources/Stats/UnitStatList.cs" id="3_kni4l"]
+[ext_resource type="Texture2D" uid="uid://b2tfh8favl2va" path="res://Sprites/Units/Enemies/LightBandit/LightBandit.png" id="3_trcot"]
+[ext_resource type="PackedScene" uid="uid://e5ccxwf8ehw1" path="res://Components/unit_health.tscn" id="4_k7agj"]
+[ext_resource type="Script" path="res://Scripts/EnemyStateConftroller.cs" id="5_ww7tl"]
+[ext_resource type="PackedScene" uid="uid://cdkd8tavio2nn" path="res://Components/status_effects_controller.tscn" id="6_h5mdw"]
+[ext_resource type="PackedScene" uid="uid://d083ir4k8ax1b" path="res://Prefabs/UI/EnemyHPBar.tscn" id="7_62324"]
+
+[sub_resource type="Resource" id="Resource_u24yb"]
+script = ExtResource("2_itwgq")
+statType = 0
+BaseValue = 10.0
+numberOfMods = 0
+
+[sub_resource type="Resource" id="Resource_t5g2i"]
+script = ExtResource("2_itwgq")
+statType = 4
+BaseValue = 5.0
+numberOfMods = 0
+
+[sub_resource type="Resource" id="Resource_5ybjq"]
+script = ExtResource("3_kni4l")
+StatList = [SubResource("Resource_u24yb"), SubResource("Resource_t5g2i")]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6f87a"]
+shader = ExtResource("2_tqu1r")
+shader_parameter/quantity = 0.0
+
+[sub_resource type="Animation" id="Animation_mi2af"]
+resource_name = "Attack"
+length = 0.81
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [23, 22, 21, 20, 19, 18, 17, 16]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.35, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"UseAbility"
+}, {
+"args": [],
+"method": &"ReturnToIdle"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_aacqj"]
+resource_name = "Damage"
+length = 0.31
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [38, 37, 4]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:material:shader_parameter/quantity")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(0.55109, 1e-05),
+"update": 0,
+"values": [1.0, 0.0]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.3),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"ReturnToIdle"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_dwjs0"]
+resource_name = "Die"
+length = 0.61
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [24, 25, 26, 31, 35]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:material:shader_parameter/quantity")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1e-05),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_umgsy"]
+resource_name = "Idle"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [4, 5, 6, 7]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:material:shader_parameter/quantity")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1e-05),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_xpjgf"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.001),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:material:shader_parameter/quantity")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"ReturnToIdle"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_4b8aa"]
+resource_name = "Walk"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [15, 14, 13, 12, 11, 10, 9, 8]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_uowhd"]
+_data = {
+"Attack": SubResource("Animation_mi2af"),
+"Damage": SubResource("Animation_aacqj"),
+"Die": SubResource("Animation_dwjs0"),
+"Idle": SubResource("Animation_umgsy"),
+"RESET": SubResource("Animation_xpjgf"),
+"Walk": SubResource("Animation_4b8aa")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yimqv"]
+size = Vector2(24, 56)
+
+[node name="LightBandit" type="CharacterBody2D" node_paths=PackedStringArray("stateCon", "hpBar", "STeffectCon", "animPlayer", "PopupPoint", "CenterPoint")]
+script = ExtResource("1_0qqio")
+stateCon = NodePath("EnemyStateConftroller")
+hpBar = NodePath("HpBar")
+waitTime = 1.0
+ability = ExtResource("2_tkhix")
+stats = SubResource("Resource_5ybjq")
+STeffectCon = NodePath("StatusEffectsController")
+animPlayer = NodePath("AnimationPlayer")
+PopupPoint = NodePath("PopupPoint")
+CenterPoint = NodePath("FiringPoint")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_6f87a")
+scale = Vector2(3.75, 3.75)
+texture = ExtResource("3_trcot")
+offset = Vector2(0, -23)
+hframes = 8
+vframes = 5
+frame = 16
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "Idle"
+libraries = {
+"": SubResource("AnimationLibrary_uowhd")
+}
+
+[node name="UnitHealth" parent="." node_paths=PackedStringArray("unit", "spriteAnim") instance=ExtResource("4_k7agj")]
+unit = NodePath("..")
+spriteAnim = NodePath("../AnimationPlayer")
+
+[node name="PopupPoint" type="Marker2D" parent="."]
+position = Vector2(-7, -170)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -28)
+shape = SubResource("RectangleShape2D_yimqv")
+
+[node name="EnemyStateConftroller" type="Node2D" parent="."]
+script = ExtResource("5_ww7tl")
+
+[node name="StatusEffectsController" parent="." instance=ExtResource("6_h5mdw")]
+
+[node name="HpBar" parent="." instance=ExtResource("7_62324")]
+position = Vector2(-7, -177)
+scale = Vector2(2.5, 2.5)
+
+[node name="FiringPoint" type="Marker2D" parent="."]
+position = Vector2(3, -112)

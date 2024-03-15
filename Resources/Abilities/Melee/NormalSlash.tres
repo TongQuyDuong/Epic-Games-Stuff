@@ -1,0 +1,20 @@
+[gd_resource type="Resource" load_steps=5 format=3 uid="uid://bi721bwio75q1"]
+
+[ext_resource type="Script" path="res://Scripts/Resources/Abilities/Melee/Non-Movement/NormalSlash.cs" id="1_kxil6"]
+[ext_resource type="Texture2D" uid="uid://bn7uc0d7o8iex" path="res://Sprites/Abilities/Melee/NormalSlashIcon.png" id="1_vxb11"]
+[ext_resource type="PackedScene" uid="uid://yucv7t4vohfo" path="res://Prefabs/Abilities/Melee/normal_slash.tscn" id="2_g54ed"]
+[ext_resource type="Texture2D" uid="uid://dpkffnejhyane" path="res://Sprites/Abilities/Melee/NormalSlashSmall.png" id="4_dq3l8"]
+
+[resource]
+script = ExtResource("1_kxil6")
+slashEffect = ExtResource("2_g54ed")
+Name = "Normal Slash"
+Description = "Slashes in front of you"
+scaleStat = 0
+SPCost = 3
+castTime = 0.0
+cooldown = 1.0
+activeTime = 0.0
+effectsToApply = Array[Resource]([])
+Icon = ExtResource("1_vxb11")
+smallIcon = ExtResource("4_dq3l8")

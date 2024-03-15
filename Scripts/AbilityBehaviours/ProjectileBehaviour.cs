@@ -4,6 +4,7 @@ using System;
 public partial class ProjectileBehaviour : RigidBody2D
 {
 	[Export] public BaseUnit caster;
+	public StatType damageType;
 	[Export] private float projectileDuration;
 	[Export] private float projectileSpeed;
 	[Export] private Node2D impactPoint;
@@ -18,7 +19,7 @@ public partial class ProjectileBehaviour : RigidBody2D
 	{
 		rowNumber = (int)caster.currentPos.Y;
 		SpriteLayerManager.Instance.AdjustLayerOnInstantiation(this, rowNumber);
-		caster.stats.TryGetStatValue(StatType.Magic, out Damage);
+		caster.stats.TryGetStatValue(damageType, out Damage);
 		if (!caster.isFacingRight) this.Scale = new Vector2(this.Scale.X * -1, this.Scale.Y);
 		projectileSpeed *= caster.isFacingRight ? 1 : -1;
 	}

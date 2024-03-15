@@ -11,7 +11,6 @@ public partial class FireMage : BaseEnemy
 	public override void _Ready()
 	{
 		base._Ready();
-		countdown = waitTime;
 		if(currentPos.Y == 0f) isMovingUp = false;
 	}
 	public override void _PhysicsProcess(double delta)

@@ -10,6 +10,7 @@ script = ExtResource("1_mo4bt")
 slashEffect = ExtResource("2_m60bg")
 Name = "Wind Circular Slice"
 Description = "Slices 360 degrees around you"
+scaleStat = 0
 SPCost = 5
 castTime = 0.2
 cooldown = 1.0

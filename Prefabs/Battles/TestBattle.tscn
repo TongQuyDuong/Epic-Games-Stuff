@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://ib51qwl44qfd"]
+[gd_scene load_steps=20 format=3 uid="uid://ib51qwl44qfd"]
 
 [ext_resource type="Script" path="res://Scripts/Managers/GameManager.cs" id="1_wgu4n"]
 [ext_resource type="Script" path="res://Scripts/Managers/GridManager.cs" id="2_ylql0"]
@@ -17,6 +17,8 @@
 [ext_resource type="Resource" uid="uid://bi04y3hs068ht" path="res://Resources/Abilities/SmallEruption.tres" id="15_d6t36"]
 [ext_resource type="Resource" uid="uid://bej6id1hervvf" path="res://Resources/Abilities/Melee/WindCirSlice.tres" id="16_do1c7"]
 [ext_resource type="Resource" uid="uid://dm1f0j6b5csfi" path="res://Resources/Fonts/LightningStrike.tres" id="16_ggacg"]
+[ext_resource type="Resource" uid="uid://b3ie26gxcwyna" path="res://Resources/Abilities/FireTower.tres" id="17_wqp4l"]
+[ext_resource type="Resource" uid="uid://bi721bwio75q1" path="res://Resources/Abilities/Melee/NormalSlash.tres" id="18_j0dj7"]
 
 [node name="TestBattle" type="Node2D"]
 
@@ -42,7 +44,7 @@ script = ExtResource("7_rp32s")
 script = ExtResource("1_wgu4n")
 
 [node name="BattleUI" type="Control" parent="." node_paths=PackedStringArray("icons", "topLeftUI", "selectSkillBook")]
-z_index = 10
+z_index = 40
 layout_mode = 3
 anchors_preset = 0
 offset_right = 1240.0
@@ -81,7 +83,7 @@ offset_right = 584.0
 layout_mode = 1
 offset_top = 641.0
 offset_bottom = 641.0
-abilities = [ExtResource("13_qd73o"), ExtResource("16_ggacg"), ExtResource("15_d6t36"), ExtResource("16_do1c7")]
+abilities = [ExtResource("13_qd73o"), ExtResource("16_ggacg"), ExtResource("15_d6t36"), ExtResource("16_do1c7"), ExtResource("17_wqp4l"), ExtResource("18_j0dj7")]
 
 [node name="TextureRect" type="TextureRect" parent="."]
 offset_right = 672.0

@@ -1,39 +1,44 @@
 using Godot;
 using System;
 using Godot.Collections;
+using System.Diagnostics;
 
 public partial class GridManager : Node
 {
 	private int _width = 8, _height = 3;
 	
 	[Export] public float offsetX, offsetY, camX, camY;
-	private Dictionary<Vector2, Panel> _panels;
+	private Dictionary<Vector2I, Panel> _panels;
 	public static GridManager Instance;
+	public AStarGrid2D aStarGrid2D = new AStarGrid2D();
 
 	public override void _EnterTree()
 	{
 		if(Instance == null) Instance = this;
 	}
 
-    public override void _ExitTree()
-    {
-        base._ExitTree();
+	public override void _ExitTree()
+	{
+		base._ExitTree();
 		Instance = null;
-    }
+	}
 
-    public void GenerateGrid(){
-		_panels = new Dictionary<Vector2, Panel>();
+	public void GenerateGrid(){
+		GenerateAstar();
+		_panels = new Dictionary<Vector2I, Panel>();
 		var _panelPrefab = GD.Load<PackedScene>("res://Prefabs/Panels/panel.tscn");
-		for (float x = 230, i = 0; i < _width; i++)
+		float x = 230;
+		for (int i = 0; i < _width; i++)
 		{
-			for (float y = 450, j = 0; j < _height; j++)
+			float y = 450;
+			for (int j = 0; j < _height; j++)
 			{
 				Panel spawnedPanel = _panelPrefab.Instantiate<Node2D>() as Panel;
 				spawnedPanel.Position = new Vector2(x, y);
 				y += offsetY;
-				_panels[new Vector2(i, j)] = spawnedPanel;
-				spawnedPanel.Pos = new Vector2(i, j);
-				spawnedPanel.Scale = new Vector2(1,1);
+				_panels[new Vector2I(i, j)] = spawnedPanel;
+				spawnedPanel.Pos = new Vector2I(i, j);
+				spawnedPanel.Scale = new Vector2I(1,1);
 				AddChild(spawnedPanel);
 				Tween tweenPanel = GetTree().CreateTween();
 				tweenPanel.TweenProperty(spawnedPanel,"scale",new Vector2(30,30),0.5).SetDelay(i*0.1);
@@ -41,13 +46,15 @@ public partial class GridManager : Node
 			}
 			x += offsetX;
 		}
-		 
-		
-		
-
 	}
 
-	public Panel GetPanelAtPosition(Vector2 pos)
+	private void GenerateAstar() {
+		aStarGrid2D.Region = new Rect2I(Vector2I.Zero, new Vector2I(8,3));
+		aStarGrid2D.DiagonalMode = AStarGrid2D.DiagonalModeEnum.Never;
+		aStarGrid2D.Update();
+	}
+
+	public Panel GetPanelAtPosition(Vector2I pos)
 	{
 		if (_panels.TryGetValue(pos, out var panel))
 		{
@@ -58,22 +65,22 @@ public partial class GridManager : Node
 
 	public Panel GetHeroSpawnPanel()
 	{
-		Panel spawnPanel = _panels[new Vector2(1, 1)];
+		Panel spawnPanel = _panels[new Vector2I(1, 1)];
 		return spawnPanel;
 
 	}
 
-	public Panel NextPanelHorizontal(Vector2 currentPos, float direction)
+	public Panel NextPanelHorizontal(Vector2I currentPos, float direction)
 	{
-		Vector2 Next = currentPos + new Vector2(direction, 0);
+		Vector2I Next = currentPos + new Vector2I((int)direction, 0);
 		if (Next.X is >= 0 and <= 7 && Next.Y is >= 0 and <= 2) { return _panels[Next]; }
 		else { return null; }
 
 	}
 
-	public Panel NextPanelVertical(Vector2 currentPos, float direction)
+	public Panel NextPanelVertical(Vector2I currentPos, float direction)
 	{
-		Vector2 Next = currentPos + new Vector2(0, direction);
+		Vector2I Next = currentPos + new Vector2I(0, (int)direction);
 		if (Next.X is >= 0 and <= 7 && Next.Y is >= 0 and <= 2) { return _panels[Next]; }
 		else { return null; }
 	}

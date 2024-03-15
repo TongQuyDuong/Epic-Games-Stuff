@@ -7,6 +7,7 @@ public partial class Ability : Resource
 {
     [Export] public string Name;
     [Export] public string Description;
+    [Export] public StatType scaleStat;
     [Export] public int SPCost;
     [Export] public float castTime;
     [Export] public float cooldown;

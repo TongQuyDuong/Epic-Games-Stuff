@@ -1,11 +1,12 @@
-[gd_scene load_steps=7 format=3 uid="uid://bf7a7iehybrkt"]
+[gd_scene load_steps=7 format=3 uid="uid://yucv7t4vohfo"]
 
-[ext_resource type="Texture2D" uid="uid://g2t54dktlito" path="res://Sprites/Abilities/Melee/CircularSlice.png" id="1_otsj8"]
-[ext_resource type="Script" path="res://Scripts/AbilityBehaviours/CircularSlashBehaviour.cs" id="1_p518t"]
+[ext_resource type="Script" path="res://Scripts/AbilityBehaviours/NormalSlashBehaviour.cs" id="1_236bu"]
+[ext_resource type="Texture2D" uid="uid://0cnn5sfv4vgx" path="res://Sprites/Abilities/Melee/NormalSlash.png" id="1_lc6u2"]
 
-[sub_resource type="Animation" id="Animation_nwic5"]
-resource_name = "Idle"
-length = 0.7
+[sub_resource type="Animation" id="Animation_xa1lq"]
+resource_name = "Slash"
+length = 0.3
+step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -13,10 +14,10 @@ tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [0, 1, 2, 3, 4, 5, 6]
+"values": [0, 1, 2, 3, 4, 5]
 }
 tracks/1/type = "method"
 tracks/1/imported = false
@@ -25,7 +26,7 @@ tracks/1/path = NodePath(".")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0.6),
+"times": PackedFloat32Array(0.25),
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
@@ -39,13 +40,13 @@ tracks/2/path = NodePath("Area2D/CollisionShape2D:disabled")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.2),
+"times": PackedFloat32Array(0, 0.1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [true, false]
 }
 
-[sub_resource type="Animation" id="Animation_psnc7"]
+[sub_resource type="Animation" id="Animation_fvvj6"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -60,35 +61,36 @@ tracks/0/keys = {
 "values": [0]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_xbmii"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3u7xe"]
 _data = {
-"Idle": SubResource("Animation_nwic5"),
-"RESET": SubResource("Animation_psnc7")
+"RESET": SubResource("Animation_fvvj6"),
+"Slash": SubResource("Animation_xa1lq")
 }
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_2m3ku"]
-radius = 90.0222
+[sub_resource type="CircleShape2D" id="CircleShape2D_7ok2w"]
+radius = 14.0089
 
-[node name="CircularSlice" type="Node2D"]
-z_index = 5
-scale = Vector2(1.5, 1.5)
-script = ExtResource("1_p518t")
+[node name="NormalSlash" type="Node2D"]
+scale = Vector2(4, 4)
+script = ExtResource("1_236bu")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(4, 4)
-texture = ExtResource("1_otsj8")
-hframes = 7
+position = Vector2(-0.0630646, -0.0708523)
+scale = Vector2(-1, 1)
+texture = ExtResource("1_lc6u2")
+offset = Vector2(-6.44301, -0.422325)
+hframes = 6
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-autoplay = "Idle"
+autoplay = "Slash"
 libraries = {
-"": SubResource("AnimationLibrary_xbmii")
+"": SubResource("AnimationLibrary_3u7xe")
 }
 
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource("CircleShape2D_2m3ku")
-disabled = true
+position = Vector2(15, 1)
+shape = SubResource("CircleShape2D_7ok2w")
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

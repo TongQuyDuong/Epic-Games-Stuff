@@ -17,7 +17,6 @@ public partial class PlayerHealth : UnitHealth
 		BattleUI.Instance.topLeftUI.hpBar.UpdateHealth(Damage);
 
 		if (currentHP <= 0) { 
-			Events.OnBattleEnd?.Invoke();
 			Die(); 
 			}
 
@@ -25,7 +24,10 @@ public partial class PlayerHealth : UnitHealth
 	
 	protected override void Die() {
 		GridManager.Instance.GetPanelAtPosition(unit.currentPos).ResetPanel();
-		spriteAnim.Play("Vanish");
-		this.GetParent().QueueFree();
+		spriteAnim.Play("Die");
+	}
+
+	public void EndBattle() {
+		Events.OnBattleEnd?.Invoke();
 	}
 }

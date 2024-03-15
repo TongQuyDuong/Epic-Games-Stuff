@@ -7,7 +7,7 @@ using System.Linq;
 public partial class BaseUnit : CharacterBody2D
 {
 	public Panel occupiedPanel;
-	[Export] public Vector2 currentPos;
+	[Export] public Vector2I currentPos;
 	[Export] public UnitStatList stats;
 	[Export] public StatusEffectsController STeffectCon;
 	[Export] public AnimationPlayer animPlayer;
