@@ -65,6 +65,7 @@ public partial class GameManager : Node
 				ResumeBattle();
 				break;
 			case GameState.BattleEnd:
+
 				BattleUI.Instance.AnnounceBattle(false);
 				break;
 			default:

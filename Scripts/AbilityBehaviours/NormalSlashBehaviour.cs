@@ -14,10 +14,13 @@ public partial class NormalSlashBehaviour : SlashBehaviour
 		{
 			BaseUnit target = (BaseUnit)body;
 			if (target == caster || target.currentPos != slashPos) return;
+
+			target.STeffectCon.AddStatusEffect(effectsToApply, caster);
+
 			IDamageable targetHealth = target.GetNode<IDamageable>("UnitHealth");
 			targetHealth.TakeDamage(Damage);
 
-			target.STeffectCon.AddStatusEffect(effectsToApply, caster);
+			
 		}
 	}
 }

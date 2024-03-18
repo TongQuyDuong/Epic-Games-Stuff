@@ -119,31 +119,31 @@ public partial class StatusEffectsController : Node2D
 			switch(timedOutEffects[i].effectType) {
 				case StatusEffectType.StatChangeEffect:
 					((StatChangeEffect)timedOutEffects[i].effect).RemoveEffect(unit, timedOutEffects[i].mod);
-					statusEffects.Remove(timedOutEffects[i]).ToString();
+					statusEffects.Remove(timedOutEffects[i]);
 					break;
 				case StatusEffectType.ControlEffect:
 					((ControlEffect)timedOutEffects[i].effect).RemoveEffect(unit, timedOutEffects[i].Ceffect);
-					statusEffects.Remove(timedOutEffects[i]).ToString();
+					statusEffects.Remove(timedOutEffects[i]);
+					Debug.Print("Here");
 					break;
 				default:
 					timedOutEffects[i].effect.RemoveEffect(unit);
-					statusEffects.Remove(timedOutEffects[i]).ToString();
+					statusEffects.Remove(timedOutEffects[i]);
 					break;
 			}
 
 		}
 		
+		if(statusBar != null) statusBar.DisplayStatusEffects(statusEffects);
 
-		statusBar.DisplayStatusEffects(statusEffects);
 
 	}
 
 	public void CleanseAllEffectsWith(System.Func<StatusEffect, bool> predicate)
 	{
 		IEnumerable<StatusEffect> removedEffects = statusEffects.Where(predicate);
-		foreach (StatusEffect effect in removedEffects)
-		{
-			RemoveStatusEffect(removedEffects.ToList());
-		}
+		Debug.Print(removedEffects.Count().ToString());
+		RemoveStatusEffect(removedEffects.ToList());
+
 	}
 }

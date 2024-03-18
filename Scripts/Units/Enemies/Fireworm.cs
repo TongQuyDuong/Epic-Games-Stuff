@@ -29,6 +29,11 @@ public partial class Fireworm : BaseEnemy
 		float yDifference = UnitManager.Instance.playerPos.Y - this.currentPos.Y;
 
 		if (yDifference == 0) {
+			if(CheckForAlliesInTheWay()) {
+				ReturnToIdle();
+				return;
+			}
+			
 			stateCon.ChangeState(EnemyState.Attacking);
 			animPlayer.Play("Attack");
  
@@ -48,10 +53,14 @@ public partial class Fireworm : BaseEnemy
 
 		Panel nextPanel = GridManager.Instance.NextPanelVertical(currentPos,direction);
 		if(nextPanel != null && nextPanel.occupiedUnit == null) {
-            Tween tween = GetTree().CreateTween();
-            tween.TweenProperty(this,"position",nextPanel.GlobalPosition, 0.5);
-			tween.Finished += delegate {
-                if(nextPanel.occupiedUnit != null) {
+			runningAnimTween = GetTree().CreateTween();
+			runningAnimTween.TweenProperty(this, "position", nextPanel.GlobalPosition, 0.5);
+			runningAnimTween.Finished += delegate {
+				if (stateCon.currentState == EnemyState.Damaged)
+				{
+					this.occupiedPanel.SetUnit(this);
+				}
+				else if (nextPanel.occupiedUnit != null) {
                     this.occupiedPanel.SetUnit(this);
                     PerformAction();
                 } else {
@@ -67,5 +76,19 @@ public partial class Fireworm : BaseEnemy
         }
 	}
 
+	private bool CheckForAlliesInTheWay() {
+		int direction = isFacingRight ? 1 : -1;
+		for (int i = currentPos.X + direction; i >= 0 && i < 8; i += direction)
+		{
+			Panel panel = GridManager.Instance.GetPanelAtPosition(new Vector2I(i, currentPos.Y));
+			if (panel.occupiedUnit != null && panel.occupiedUnit is BaseEnemy)
+			{
+				return true;
+			} else if(panel.occupiedUnit != null && panel.occupiedUnit is BaseHero) {
+				return false;
+			}
+		}
+		return false;
+	}
 
 }

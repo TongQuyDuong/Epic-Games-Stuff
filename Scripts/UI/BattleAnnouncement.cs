@@ -8,7 +8,7 @@ public partial class BattleAnnouncement : Control
 	[Export] public bool isBattleStart = true;
 	public override void _Ready()
 	{
-		GameManager.Instance.PauseBattle();
+		GameManager.Instance.CallDeferred("PauseBattle");
 		if(isBattleStart == false)
 		{ 
 			content.Text = "Battle\r\nOver!"; 

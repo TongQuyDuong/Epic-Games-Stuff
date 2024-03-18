@@ -44,10 +44,12 @@ public partial class ProjectileBehaviour : RigidBody2D
 				this.GlobalPosition = impactPoint.GlobalPosition;
 				animationPlayer.Play("Explode");
 
+				target.STeffectCon.AddStatusEffect(effectsToApply, caster);
+
 				IDamageable targetHealth = target.GetNode<IDamageable>("UnitHealth");
 				targetHealth.TakeDamage(Damage);
 
-				target.STeffectCon.AddStatusEffect(effectsToApply, caster);
+
 			}
 		}
 		else

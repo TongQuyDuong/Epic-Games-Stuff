@@ -3,10 +3,11 @@ using System;
 
 public partial class BaseEnemy : BaseUnit
 {
-	[Export] protected EnemyStateConftroller stateCon;
+	[Export] public EnemyStateConftroller stateCon;
 	[Export] public EnemyHPBar hpBar;
 	[Export] public float waitTime;
 	[Export] public Ability ability;
+	protected Tween runningAnimTween;
 
 	protected float countdown;
 
@@ -68,5 +69,16 @@ public partial class BaseEnemy : BaseUnit
 		animPlayer.Play("Idle");
 		countdown = waitTime;
 		stateCon.ChangeState(EnemyState.Idling);
+	}
+
+	public void AbortRunningTweens() {
+		if(runningAnimTween != null) {
+			runningAnimTween.Kill();
+		}
+		this.occupiedPanel.SetUnit(this);
+	}
+
+	public void FreeCurrentPanel() {
+		occupiedPanel.ResetPanel();
 	}
 }

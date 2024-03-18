@@ -1,0 +1,29 @@
+[gd_resource type="Resource" load_steps=9 format=3 uid="uid://dje7t5v8brx5i"]
+
+[ext_resource type="Script" path="res://Scripts/Resources/SpawnFormation.cs" id="1_f7yvc"]
+[ext_resource type="Script" path="res://Scripts/Resources/SpawnInfo.cs" id="2_xix7q"]
+[ext_resource type="PackedScene" uid="uid://c25wg50qjajeh" path="res://Prefabs/Units/Enemies/Fireworm.tscn" id="3_h81qh"]
+[ext_resource type="PackedScene" uid="uid://10u2o5ps04t3" path="res://Prefabs/Units/Enemies/light_bandit.tscn" id="4_ubgls"]
+[ext_resource type="PackedScene" uid="uid://cj7sh8nkbqqct" path="res://Prefabs/Units/Enemies/fire_mage.tscn" id="5_33g3k"]
+
+[sub_resource type="Resource" id="Resource_de4ov"]
+script = ExtResource("2_xix7q")
+unitToSpawn = ExtResource("3_h81qh")
+spawnLocation = Vector2i(5, 1)
+isFacingRight = false
+
+[sub_resource type="Resource" id="Resource_ivlml"]
+script = ExtResource("2_xix7q")
+unitToSpawn = ExtResource("4_ubgls")
+spawnLocation = Vector2i(6, 2)
+isFacingRight = false
+
+[sub_resource type="Resource" id="Resource_4ox73"]
+script = ExtResource("2_xix7q")
+unitToSpawn = ExtResource("5_33g3k")
+spawnLocation = Vector2i(7, 0)
+isFacingRight = false
+
+[resource]
+script = ExtResource("1_f7yvc")
+spawns = [SubResource("Resource_de4ov"), SubResource("Resource_ivlml"), SubResource("Resource_4ox73")]

@@ -1,7 +1,7 @@
 using Godot;
 using System;
 using MonoCustomResourceRegistry;
-using MEC;
+using System.Diagnostics;
 
 [RegisteredType(nameof(ControlEffect), "", nameof(Resource))]
 
@@ -20,5 +20,6 @@ public partial class ControlEffect : StatusEffectData
     {
         target.isControlled = false;
         target.RemoveControlEffect(Ceffect);
+       
     }
 }

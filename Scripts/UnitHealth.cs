@@ -25,13 +25,15 @@ public partial class UnitHealth : Node, IDamageable
 	{
 		int Damage = amount <= 0? 0 : (int)Mathf.Round(amount);
 		unit.ShowPopup(Damage.ToString());
-		currentHP -= Damage;
-		spriteAnim.Play("Damage");
-		if (currentHP <= 0) { Die(); }
 		if (unit is BaseEnemy)
 		{
 			((BaseEnemy)unit).hpBar.UpdateHealth(Damage);
+			((BaseEnemy)unit).stateCon.ChangeState(EnemyState.Damaged);
 		}
+		currentHP -= Damage;
+		spriteAnim.Play("Damage");
+		if (currentHP <= 0) { Die(); }
+		
 	}
 
 	public virtual void TakeDamageWithoutAnimation(float amount) {
@@ -59,6 +61,8 @@ public partial class UnitHealth : Node, IDamageable
 	}
 	protected virtual void Die()
 	{
+		unit.STeffectCon.CleanseAllEffectsWith(effect => effect.effectType == StatusEffectType.ControlEffect);
+		unit.isControlled = true;
 		GridManager.Instance.GetPanelAtPosition(unit.currentPos).ResetPanel();
 		if(unit is BaseEnemy) {
 			Events.OnEnemyDeath?.Invoke();

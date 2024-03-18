@@ -24,13 +24,31 @@ public partial class TopLeftUI : Control
 	public override void _EnterTree()
 	{
 		SoulPowerBar.Value = SoulPowerStartValue;
-		SoulPowerDisplay.Visible = false;
 		this.ProcessMode = ProcessModeEnum.Disabled;
+		
+		SoulPowerDisplay.Visible = false;
+
 		onSpOverFlow += UpdateSpNumberColor;
+		Events.OnBattleActive += Enable;
+		Events.OnBattleEnd += Disable;
+	}
+	public void Enable()
+	{
+		this.SetPhysicsProcess(true);
+	}
+	public void Disable()
+	{
+		this.SetPhysicsProcess(false);
 	}
 
-	public override void _ExitTree() {
+    public override void _Ready()
+    {
+        SetPhysicsProcess(false);
+    }
+    public override void _ExitTree() {
 		onSpOverFlow -= UpdateSpNumberColor;
+		Events.OnBattleActive -= Enable;
+		Events.OnBattleEnd -= Disable;
 	}
 
     public override void _PhysicsProcess(double delta)

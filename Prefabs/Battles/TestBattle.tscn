@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://Scripts/Managers/GridManager.cs" id="2_ylql0"]
 [ext_resource type="Script" path="res://Scripts/Managers/UnitManager.cs" id="3_xm58r"]
 [ext_resource type="PackedScene" uid="uid://dj3s5sndljpr1" path="res://Prefabs/Units/TestH.tscn" id="4_h2i1f"]
-[ext_resource type="Resource" uid="uid://dr8lqcu4ih6io" path="res://Resources/SpawnFormations/TestForma.tres" id="4_u6xsm"]
+[ext_resource type="Resource" uid="uid://cx4aoi357yfc7" path="res://Resources/SpawnFormations/FireWormForma.tres" id="4_q325h"]
 [ext_resource type="Script" path="res://Scripts/Managers/SpriteLayerManager.cs" id="6_8aygl"]
 [ext_resource type="Script" path="res://Scripts/Managers/SpriteManager.cs" id="7_rp32s"]
 [ext_resource type="PackedScene" uid="uid://o145r5colibr" path="res://Prefabs/UI/AbilityIcon.tscn" id="9_5rs6t"]
@@ -32,7 +32,7 @@ offsetY = 60.0
 [node name="UnitManager" type="Node" parent="Managers"]
 script = ExtResource("3_xm58r")
 hero = ExtResource("4_h2i1f")
-formation = ExtResource("4_u6xsm")
+formation = ExtResource("4_q325h")
 
 [node name="SpriteLayerManager" type="Node" parent="Managers"]
 script = ExtResource("6_8aygl")

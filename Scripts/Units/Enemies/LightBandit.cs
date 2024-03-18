@@ -50,7 +50,7 @@ public partial class LightBandit : BaseEnemy
 
 
 	private void Pursue() {
-		
+		if(isControlled) return;
 		currentPath = GridManager.Instance.aStarGrid2D.GetIdPath(currentPos, UnitManager.Instance.playerPos + new Vector2I(isFacingRight ? -1 : 1, 0));
 		if (currentPath.Count <= 1) {
 			pathBlocked = true;
@@ -63,19 +63,21 @@ public partial class LightBandit : BaseEnemy
 			pathBlocked = false;
 		}
 
-		if (stateCon.currentState != EnemyState.Pursuing) {
-			stateCon.currentState = EnemyState.Pursuing;
-		}
+		stateCon.ChangeState(EnemyState.Pursuing);
 
 		animPlayer.Play("Walk");
 		Panel nextPanel = GridManager.Instance.GetPanelAtPosition(currentPath.Slice(1).First());
 		if (nextPanel != null && nextPanel.Walkable == true)
 		{
-			Tween tween = GetTree().CreateTween();
-			tween.TweenProperty(this, "position", nextPanel.GlobalPosition, 0.5);
-			tween.Finished += delegate
+			runningAnimTween = CreateTween();
+			runningAnimTween.BindNode(this);
+			runningAnimTween.TweenProperty(this, "position", nextPanel.GlobalPosition, 0.5);
+			runningAnimTween.Finished += delegate
 			{
-				if (nextPanel.Walkable == false)
+				if( stateCon.currentState == EnemyState.Damaged) {
+					this.occupiedPanel.SetUnit(this);
+				}
+				else if (nextPanel.Walkable == false)
 				{
 					this.occupiedPanel.SetUnit(this);
 					PerformAction();

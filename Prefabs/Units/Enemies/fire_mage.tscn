@@ -14,7 +14,7 @@
 [sub_resource type="Resource" id="Resource_4sda6"]
 script = ExtResource("2_hirhd")
 statType = 2
-BaseValue = 1.0
+BaseValue = 2.0
 numberOfMods = 0
 
 [sub_resource type="Resource" id="Resource_ivkq0"]
@@ -128,9 +128,12 @@ tracks/1/path = NodePath(".")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0.5),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1),
 "values": [{
+"args": [],
+"method": &"FreeCurrentPanel"
+}, {
 "args": [],
 "method": &"queue_free"
 }]
@@ -274,10 +277,9 @@ libraries = {
 "": SubResource("AnimationLibrary_uowhd")
 }
 
-[node name="UnitHealth" parent="." node_paths=PackedStringArray("unit", "spriteAnim", "hpBar") instance=ExtResource("4_tt3wu")]
+[node name="UnitHealth" parent="." node_paths=PackedStringArray("unit", "spriteAnim") instance=ExtResource("4_tt3wu")]
 unit = NodePath("..")
 spriteAnim = NodePath("../AnimationPlayer")
-hpBar = NodePath("../HpBar")
 
 [node name="PopupPoint" type="Marker2D" parent="."]
 position = Vector2(-4, -82)

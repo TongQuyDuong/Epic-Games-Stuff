@@ -1,15 +1,28 @@
-[gd_resource type="Resource" load_steps=5 format=3 uid="uid://cx4aoi357yfc7"]
+[gd_resource type="Resource" load_steps=8 format=3 uid="uid://cx4aoi357yfc7"]
 
 [ext_resource type="Script" path="res://Scripts/Resources/SpawnFormation.cs" id="1_juujd"]
 [ext_resource type="Script" path="res://Scripts/Resources/SpawnInfo.cs" id="2_h4cqm"]
 [ext_resource type="PackedScene" uid="uid://c25wg50qjajeh" path="res://Prefabs/Units/Enemies/Fireworm.tscn" id="3_4rml0"]
+[ext_resource type="PackedScene" uid="uid://2wh87d6rrgjd" path="res://Prefabs/Units/TestDummy.tscn" id="4_yo057"]
 
 [sub_resource type="Resource" id="Resource_5mckh"]
 script = ExtResource("2_h4cqm")
 unitToSpawn = ExtResource("3_4rml0")
-spawnLocation = Vector2(7, 1)
+spawnLocation = Vector2i(6, 1)
+isFacingRight = false
+
+[sub_resource type="Resource" id="Resource_1qv27"]
+script = ExtResource("2_h4cqm")
+unitToSpawn = ExtResource("4_yo057")
+spawnLocation = Vector2i(4, 1)
+isFacingRight = false
+
+[sub_resource type="Resource" id="Resource_sda08"]
+script = ExtResource("2_h4cqm")
+unitToSpawn = ExtResource("4_yo057")
+spawnLocation = Vector2i(0, 0)
 isFacingRight = false
 
 [resource]
 script = ExtResource("1_juujd")
-spawns = [SubResource("Resource_5mckh")]
+spawns = [SubResource("Resource_5mckh"), SubResource("Resource_1qv27"), SubResource("Resource_sda08")]

@@ -62,7 +62,8 @@ public partial class UnitManager : Node
 		EnemiesAlive -= 1;
 		if (EnemiesAlive == 0)
 		{
-			Events.OnBattleEnd?.Invoke();
+			chara.isControlled = true;
+			Timing.RunCoroutine(waitForSecondsAndEndBattle(1f));
 		}
 	}
 
@@ -70,5 +71,11 @@ public partial class UnitManager : Node
 	{
 		yield return Timing.WaitForSeconds(delay);
 		GameManager.Instance.UpdateGameState(GameState.SpawnEnemies);
+	}
+
+	IEnumerator<double> waitForSecondsAndEndBattle(float delay)
+	{
+		yield return Timing.WaitForSeconds(delay);
+		Events.OnBattleEnd?.Invoke();
 	}
 }

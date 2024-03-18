@@ -8,14 +8,14 @@
 resource_local_to_scene = true
 script = ExtResource("2_dxjax")
 unitToSpawn = ExtResource("3_pfr6n")
-spawnLocation = Vector2(6, 0)
+spawnLocation = Vector2i(0, 0)
 isFacingRight = false
 
 [sub_resource type="Resource" id="Resource_wojsa"]
 resource_local_to_scene = true
 script = ExtResource("2_dxjax")
 unitToSpawn = ExtResource("3_pfr6n")
-spawnLocation = Vector2(6, 2)
+spawnLocation = Vector2i(0, 0)
 isFacingRight = false
 
 [resource]

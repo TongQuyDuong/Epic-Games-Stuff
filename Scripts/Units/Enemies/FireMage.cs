@@ -57,6 +57,7 @@ public partial class FireMage : BaseEnemy
 
 	public void Move(float direction)
 	{
+		if (isControlled) return;
 		direction = direction > 0 ? 1 : -1;
 		animPlayer.Play("Walk");
 

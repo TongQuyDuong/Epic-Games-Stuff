@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Diagnostics;
 
 public partial class BaseUnit : CharacterBody2D
 {
@@ -21,24 +22,18 @@ public partial class BaseUnit : CharacterBody2D
 	{
 		isControlled = true;
 		Events.OnBattleActive += Enable;
-		Events.OnBattleEnd += Disable;
 		if(isFacingRight == false) this.Scale = new Vector2(this.Scale.X * -1,this.Scale.Y);
 	}
 	public override void _ExitTree()
 	{
 		Events.OnBattleActive -= Enable;
-		Events.OnBattleEnd -= Disable;
 	}
 	public void Enable()
 	{
 		this.ProcessMode = ProcessModeEnum.Inherit;
 		this.isControlled = false;
 	}
-	public void Disable()
-	{
-		this.ProcessMode = ProcessModeEnum.Disabled;
-		this.isControlled = true;
-	}
+	
 	public void ShowPopup(string content) 
 	{
 		var popup = BattleUI.Instance.PopupPrefab.Instantiate<Marker2D>() as PopupEffect;

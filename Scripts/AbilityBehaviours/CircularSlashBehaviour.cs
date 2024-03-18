@@ -16,10 +16,12 @@ public partial class CircularSlashBehaviour : SlashBehaviour
 		{
 			BaseUnit target = (BaseUnit)body;
 			if (target == caster || Math.Abs(target.currentPos.Y - caster.currentPos.Y) > 1) return;
+			target.STeffectCon.AddStatusEffect(effectsToApply, caster);
+			
 			IDamageable targetHealth = target.GetNode<IDamageable>("UnitHealth");
 			targetHealth.TakeDamage(Damage);
 
-			target.STeffectCon.AddStatusEffect(effectsToApply, caster);
+			
 		}
 	}
 }

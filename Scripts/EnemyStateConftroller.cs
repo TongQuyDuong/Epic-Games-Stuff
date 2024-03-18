@@ -17,5 +17,6 @@ public enum EnemyState {
 	Idling,
 	Attacking,
 	Pursuing,
+	Damaged,
 	Controlled
 }

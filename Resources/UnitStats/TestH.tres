@@ -6,7 +6,7 @@
 [sub_resource type="Resource" id="Resource_3q0h6"]
 script = ExtResource("1_kpeox")
 statType = 0
-BaseValue = 1.0
+BaseValue = 5.0
 numberOfMods = 0
 
 [sub_resource type="Resource" id="Resource_3k6l5"]
@@ -18,7 +18,7 @@ numberOfMods = 0
 [sub_resource type="Resource" id="Resource_wstnj"]
 script = ExtResource("1_kpeox")
 statType = 2
-BaseValue = 1.0
+BaseValue = 3.0
 numberOfMods = 0
 
 [sub_resource type="Resource" id="Resource_fk4od"]
@@ -30,7 +30,7 @@ numberOfMods = 0
 [sub_resource type="Resource" id="Resource_2r3bo"]
 script = ExtResource("1_kpeox")
 statType = 4
-BaseValue = 20.0
+BaseValue = 200.0
 numberOfMods = 0
 
 [resource]
