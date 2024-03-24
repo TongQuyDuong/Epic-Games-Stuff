@@ -1,16 +1,19 @@
-[gd_scene load_steps=3 format=3 uid="uid://84w4aiqpct83"]
+[gd_scene load_steps=4 format=3 uid="uid://84w4aiqpct83"]
 
 [ext_resource type="Script" path="res://Scripts/main.cs" id="1_k5dwc"]
 [ext_resource type="PackedScene" uid="uid://ib51qwl44qfd" path="res://Prefabs/Battles/TestBattle.tscn" id="2_xyov7"]
+[ext_resource type="PackedScene" uid="uid://bt6uqptmr2y7c" path="res://Prefabs/Effects/circle_transition.tscn" id="3_oc86i"]
 
-[node name="Main" type="Node2D"]
+[node name="Main" type="Node2D" node_paths=PackedStringArray("transitionEffect")]
 script = ExtResource("1_k5dwc")
 battleScene = ExtResource("2_xyov7")
+transitionEffect = NodePath("CircleTransition")
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
-offset_right = 40.0
+offset_left = 42.0
+offset_right = 82.0
 offset_bottom = 40.0
 
 [node name="Play" type="Button" parent="Control"]
@@ -31,6 +34,9 @@ text = "Quit"
 
 [node name="Camera2D" type="Camera2D" parent="Control"]
 position = Vector2(577, 321)
+
+[node name="CircleTransition" parent="." instance=ExtResource("3_oc86i")]
+position = Vector2(620, 0)
 
 [connection signal="pressed" from="Control/Play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="Control/Quit" to="." method="_on_quit_pressed"]

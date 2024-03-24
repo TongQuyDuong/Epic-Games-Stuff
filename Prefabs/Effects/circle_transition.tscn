@@ -1,0 +1,74 @@
+[gd_scene load_steps=9 format=3 uid="uid://bt6uqptmr2y7c"]
+
+[ext_resource type="Shader" path="res://Resources/Shaders/CutoutTransition.gdshader" id="1_8txed"]
+[ext_resource type="Texture2D" uid="uid://bt50rgmvnu5gg" path="res://Sprites/White-Circle-PNG-HD-Image.png" id="2_oswnj"]
+[ext_resource type="Script" path="res://Scripts/Transition.cs" id="3_bsgel"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lbto2"]
+shader = ExtResource("1_8txed")
+shader_parameter/scale = 0.1
+shader_parameter/mask = ExtResource("2_oswnj")
+
+[sub_resource type="Animation" id="Animation_88i2q"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:material:shader_parameter/scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [null]
+}
+
+[sub_resource type="Animation" id="Animation_5oebn"]
+resource_name = "Clode"
+length = 1.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:material:shader_parameter/scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [1.0, 0.9, 0.8, 0.7, 0.6, 0.5, 0.4, 0.3, 0.2, 0.1, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_lnoev"]
+_data = {
+"Open": SubResource("Animation_5oebn"),
+"RESET": SubResource("Animation_88i2q")
+}
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_v2yja"]
+shader = ExtResource("1_8txed")
+shader_parameter/scale = 0.0
+shader_parameter/mask = ExtResource("2_oswnj")
+
+[node name="CircleTransition" type="Node2D" node_paths=PackedStringArray("animationPlayer")]
+material = SubResource("ShaderMaterial_lbto2")
+script = ExtResource("3_bsgel")
+animationPlayer = NodePath("AnimationPlayer")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "Open"
+libraries = {
+"": SubResource("AnimationLibrary_lnoev")
+}
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_v2yja")
+offset_left = -1240.0
+offset_top = -641.0
+offset_right = 1240.0
+offset_bottom = 641.0
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_finished"]

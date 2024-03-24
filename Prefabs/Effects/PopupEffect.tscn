@@ -62,7 +62,7 @@ _data = {
 }
 
 [node name="FloatingNumber" type="Marker2D" node_paths=PackedStringArray("label", "anim")]
-z_index = 3
+z_index = 50
 texture_filter = 1
 scale = Vector2(0.04, 0.04)
 script = ExtResource("1_y38ga")

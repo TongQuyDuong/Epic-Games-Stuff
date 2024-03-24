@@ -26,7 +26,7 @@ public partial class UnitManager : Node
 	}
 	public void SpawnHero()
 	{
-		chara = SpawnUnit(new SpawnInfo(hero, GridManager.Instance.GetHeroSpawnPanel().Pos, true)) as BaseHero;
+		chara = SpawnUnit(new SpawnInfo(hero, formation.playerSpawnPos, true)) as BaseHero;
 		playerPos = chara.currentPos;
 		Timing.RunCoroutine(waitForSecondsAndSpawnEnemies(1f));
 	}

@@ -34,6 +34,7 @@ public partial class PlayerStateController : Node2D
 
 	public void ReturnToIdle(){
 		ChangePlayerState(PlayerState.Idling);
+		Events.OnIdle?.Invoke();
 	}
 	private void ChangePlayerState(PlayerState newState)
 	{
@@ -46,5 +47,6 @@ public enum PlayerState
 {
 	Idling,
 	Moving,
-	Attacking
+	Attacking,
+	Flinched
 }
