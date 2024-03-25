@@ -36,7 +36,7 @@ public partial class PlayerStateController : Node2D
 		ChangePlayerState(PlayerState.Idling);
 		Events.OnIdle?.Invoke();
 	}
-	private void ChangePlayerState(PlayerState newState)
+	public void ChangePlayerState(PlayerState newState)
 	{
 		if (currentState == newState) return;
 		currentState = newState;
