@@ -9,9 +9,10 @@ public partial class TestHOverworld : CharacterBody2D
 
 	[Export] private PlayerStateController StateController;
 	[Export] private AnimationTree animTree;
+	[Export] public Transition transition;
 	
 	private AnimationNodeStateMachinePlayback stateMachine;
-	private Vector2 blendPos;
+	public Vector2 blendPos;
 	private StringName[] blendPosPaths = {
 		"parameters/idle/idle_bs2d/blend_position",
 		"parameters/move/move_bs2d/blend_position"
@@ -25,7 +26,6 @@ public partial class TestHOverworld : CharacterBody2D
 
 	public override void _Ready() {
 		stateMachine = (AnimationNodeStateMachinePlayback)animTree.Get(new StringName("parameters/playback"));
-		blendPos = Vector2.Zero;
 	}
 	public override void _PhysicsProcess(double delta)
 	{

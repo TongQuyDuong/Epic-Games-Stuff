@@ -1,7 +1,7 @@
 using Godot;
 using System;
-using System.Data.Common;
-using System.Threading;
+
+
 
 public partial class StatusEffect : Resource
 {

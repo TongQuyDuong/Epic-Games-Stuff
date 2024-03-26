@@ -1,43 +1,12 @@
-[gd_scene load_steps=35 format=3 uid="uid://cvyhsh2cfm20t"]
+[gd_scene load_steps=36 format=3 uid="uid://cvyhsh2cfm20t"]
 
 [ext_resource type="Texture2D" uid="uid://b0h20slp7kipf" path="res://Sprites/Units/Heroes/BetterTestChara.png" id="1_1w2nh"]
 [ext_resource type="Script" path="res://Scripts/Overworld/TestHOverworld.cs" id="1_i8w06"]
 [ext_resource type="Script" path="res://Scripts/PlayerStateController.cs" id="4_iwv50"]
+[ext_resource type="PackedScene" uid="uid://bt6uqptmr2y7c" path="res://Prefabs/Effects/circle_transition.tscn" id="4_xj6nx"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qpdfu"]
 radius = 7.0
-
-[sub_resource type="Animation" id="Animation_qhbmd"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-
-[sub_resource type="Animation" id="Animation_ofag7"]
-resource_name = "Moving"
-length = 0.6
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [5, 6, 7, 8, 9, 10]
-}
 
 [sub_resource type="Animation" id="Animation_uau6n"]
 resource_name = "IdleDown"
@@ -54,89 +23,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
 "values": [11, 12, 13, 14, 15]
-}
-
-[sub_resource type="Animation" id="Animation_ggkj7"]
-resource_name = "MovingDown"
-length = 0.6
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [16, 17, 18, 19, 20, 21]
-}
-
-[sub_resource type="Animation" id="Animation_6lfg3"]
-resource_name = "PickUp"
-length = 0.5
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 1,
-"values": [22, 23, 24, 25, 26]
-}
-
-[sub_resource type="Animation" id="Animation_fqame"]
-resource_name = "IdleUp"
-loop_mode = 1
-step = 0.2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 1,
-"values": [27, 28, 29, 30, 31]
-}
-
-[sub_resource type="Animation" id="Animation_70g47"]
-resource_name = "MovingUp"
-length = 0.6
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [32, 33, 34, 35, 36, 37]
-}
-
-[sub_resource type="Animation" id="Animation_h8iba"]
-resource_name = "Interact"
-length = 0.3
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [38, 39, 40]
 }
 
 [sub_resource type="Animation" id="Animation_nqqsq"]
@@ -175,6 +61,73 @@ tracks/0/keys = {
 "values": [41, 42, 43, 44]
 }
 
+[sub_resource type="Animation" id="Animation_fqame"]
+resource_name = "IdleUp"
+loop_mode = 1
+step = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [27, 28, 29, 30, 31]
+}
+
+[sub_resource type="Animation" id="Animation_h8iba"]
+resource_name = "Interact"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [38, 39, 40]
+}
+
+[sub_resource type="Animation" id="Animation_ofag7"]
+resource_name = "Moving"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [5, 6, 7, 8, 9, 10]
+}
+
+[sub_resource type="Animation" id="Animation_ggkj7"]
+resource_name = "MovingDown"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [16, 17, 18, 19, 20, 21]
+}
+
 [sub_resource type="Animation" id="Animation_26ag2"]
 resource_name = "MovingRight"
 length = 0.6
@@ -190,6 +143,54 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [46, 47, 48, 49, 50, 51]
+}
+
+[sub_resource type="Animation" id="Animation_70g47"]
+resource_name = "MovingUp"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [32, 33, 34, 35, 36, 37]
+}
+
+[sub_resource type="Animation" id="Animation_6lfg3"]
+resource_name = "PickUp"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [22, 23, 24, 25, 26]
+}
+
+[sub_resource type="Animation" id="Animation_qhbmd"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_o6ys6"]
@@ -288,11 +289,13 @@ states/move/node = SubResource("AnimationNodeBlendTree_nou8i")
 states/move/position = Vector2(384, 154)
 transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_njds7"), "idle", "move", SubResource("AnimationNodeStateMachineTransition_yuf4b"), "move", "idle", SubResource("AnimationNodeStateMachineTransition_lewf6")]
 
-[node name="TestHOverworld" type="CharacterBody2D" node_paths=PackedStringArray("StateController", "animTree")]
+[node name="TestHOverworld" type="CharacterBody2D" node_paths=PackedStringArray("StateController", "animTree", "transition")]
+z_index = 1
 y_sort_enabled = true
 script = ExtResource("1_i8w06")
 StateController = NodePath("PlayerState")
 animTree = NodePath("AnimationTree")
+transition = NodePath("CircleTransition")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -2)
@@ -333,3 +336,7 @@ drag_left_margin = 0.1
 drag_top_margin = 0.1
 drag_right_margin = 0.1
 drag_bottom_margin = 0.1
+
+[node name="CircleTransition" parent="." instance=ExtResource("4_xj6nx")]
+z_index = 50
+position = Vector2(-2, -22)
