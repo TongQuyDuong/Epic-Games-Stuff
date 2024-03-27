@@ -1,0 +1,145 @@
+[gd_scene load_steps=15 format=3 uid="uid://dkwcbnbv4g13j"]
+
+[ext_resource type="Script" path="res://Scripts/Overworld/EnemyOverworld.cs" id="1_eyvce"]
+[ext_resource type="Texture2D" uid="uid://cp2np34uvawja" path="res://Sprites/Units/Enemies/Fireworm/Fireworm.png" id="2_cqpay"]
+[ext_resource type="Resource" uid="uid://cx4aoi357yfc7" path="res://Resources/SpawnFormations/FireWormForma.tres" id="2_qshhl"]
+[ext_resource type="Texture2D" uid="uid://cminbdqebhu16" path="res://Sprites/OverworldShadow.png" id="2_tig6v"]
+[ext_resource type="Shader" path="res://Resources/Shaders/OuterOutline.gdshader" id="2_uxdhy"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ifj8x"]
+radius = 101.005
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_yheha"]
+radius = 19.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w7ykx"]
+size = Vector2(15, 4)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vyk2p"]
+shader = ExtResource("2_uxdhy")
+shader_parameter/line_color = Color(1, 0, 0, 1)
+shader_parameter/line_thickness = 0.575
+
+[sub_resource type="Animation" id="Animation_4ernk"]
+resource_name = "Attack"
+length = 0.5
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 12, 13, 14, 15]
+}
+
+[sub_resource type="Animation" id="Animation_6yyuk"]
+resource_name = "Idle"
+length = 0.9
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [48, 49, 50, 51, 52, 53, 54, 55, 56]
+}
+
+[sub_resource type="Animation" id="Animation_88mtx"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [48]
+}
+
+[sub_resource type="Animation" id="Animation_1iasy"]
+resource_name = "Run"
+length = 0.9
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [64, 65, 66, 67, 68, 69, 70, 71, 72]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2hpg7"]
+_data = {
+"Attack": SubResource("Animation_4ernk"),
+"Idle": SubResource("Animation_6yyuk"),
+"RESET": SubResource("Animation_88mtx"),
+"Run": SubResource("Animation_1iasy")
+}
+
+[node name="FirewormOverworld" type="CharacterBody2D" node_paths=PackedStringArray("animPlayer", "sprite")]
+z_index = 1
+y_sort_enabled = true
+script = ExtResource("1_eyvce")
+animPlayer = NodePath("AnimationPlayer")
+sprite = NodePath("Sprite2D")
+spawnFormation = ExtResource("2_qshhl")
+
+[node name="DetectionZone" type="Area2D" parent="."]
+position = Vector2(-2, -7)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionZone"]
+shape = SubResource("CircleShape2D_ifj8x")
+debug_color = Color(0, 0.647059, 0.172549, 0.419608)
+
+[node name="EncounterZone" type="Area2D" parent="."]
+position = Vector2(-2, -7)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EncounterZone"]
+shape = SubResource("CircleShape2D_yheha")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+position = Vector2(2, -2)
+shape = SubResource("RectangleShape2D_w7ykx")
+debug_color = Color(0.756863, 0, 0.690196, 0.419608)
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(2, -2)
+scale = Vector2(1, 0.5)
+texture = ExtResource("2_tig6v")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_vyk2p")
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_cqpay")
+offset = Vector2(0, -24)
+hframes = 16
+vframes = 5
+frame = 48
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "Idle"
+libraries = {
+"": SubResource("AnimationLibrary_2hpg7")
+}
+
+[connection signal="body_entered" from="DetectionZone" to="." method="_on_body_detected"]
+[connection signal="body_exited" from="DetectionZone" to="." method="_on_body_lost"]
+[connection signal="body_entered" from="EncounterZone" to="." method="_on_body_encountered"]

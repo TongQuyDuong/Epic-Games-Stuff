@@ -1,7 +1,7 @@
-[gd_scene load_steps=36 format=3 uid="uid://cvyhsh2cfm20t"]
+[gd_scene load_steps=37 format=3 uid="uid://cvyhsh2cfm20t"]
 
 [ext_resource type="Texture2D" uid="uid://b0h20slp7kipf" path="res://Sprites/Units/Heroes/BetterTestChara.png" id="1_1w2nh"]
-[ext_resource type="Script" path="res://Scripts/Overworld/TestHOverworld.cs" id="1_i8w06"]
+[ext_resource type="Script" path="res://Scripts/Overworld/PlayerOverworld.cs" id="1_kycm4"]
 [ext_resource type="Script" path="res://Scripts/PlayerStateController.cs" id="4_iwv50"]
 [ext_resource type="PackedScene" uid="uid://bt6uqptmr2y7c" path="res://Prefabs/Effects/circle_transition.tscn" id="4_xj6nx"]
 
@@ -289,10 +289,13 @@ states/move/node = SubResource("AnimationNodeBlendTree_nou8i")
 states/move/position = Vector2(384, 154)
 transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_njds7"), "idle", "move", SubResource("AnimationNodeStateMachineTransition_yuf4b"), "move", "idle", SubResource("AnimationNodeStateMachineTransition_lewf6")]
 
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_ey2fs"]
+polygon = PackedVector2Array(0, 0, 7, 0, 5, 4, 0, 4, -4, 3, -7, 2, -7, -1, -5, -2, 0, -2, 4, -2, 6, -2, 7, 0)
+
 [node name="TestHOverworld" type="CharacterBody2D" node_paths=PackedStringArray("StateController", "animTree", "transition")]
 z_index = 1
 y_sort_enabled = true
-script = ExtResource("1_i8w06")
+script = ExtResource("1_kycm4")
 StateController = NodePath("PlayerState")
 animTree = NodePath("AnimationTree")
 transition = NodePath("CircleTransition")
@@ -302,12 +305,14 @@ position = Vector2(0, -2)
 shape = SubResource("CircleShape2D_qpdfu")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+light_mask = 32
 texture = ExtResource("1_1w2nh")
 offset = Vector2(0, -14)
 hframes = 7
 vframes = 8
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+process_mode = 3
 libraries = {
 "": SubResource("AnimationLibrary_o6ys6")
 }
@@ -316,6 +321,7 @@ libraries = {
 script = ExtResource("4_iwv50")
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
+process_mode = 3
 tree_root = SubResource("AnimationNodeStateMachine_dvei4")
 anim_player = NodePath("../AnimationPlayer")
 active = true
@@ -340,3 +346,7 @@ drag_bottom_margin = 0.1
 [node name="CircleTransition" parent="." instance=ExtResource("4_xj6nx")]
 z_index = 50
 position = Vector2(-2, -22)
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+occluder = SubResource("OccluderPolygon2D_ey2fs")
+occluder_light_mask = 64

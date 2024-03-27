@@ -1,5 +1,6 @@
-[gd_scene load_steps=21 format=3 uid="uid://ib51qwl44qfd"]
+[gd_scene load_steps=22 format=3 uid="uid://ib51qwl44qfd"]
 
+[ext_resource type="Script" path="res://Scripts/BattleScene.cs" id="1_03c5o"]
 [ext_resource type="Script" path="res://Scripts/Managers/GameManager.cs" id="1_wgu4n"]
 [ext_resource type="Script" path="res://Scripts/Managers/GridManager.cs" id="2_ylql0"]
 [ext_resource type="Script" path="res://Scripts/Managers/UnitManager.cs" id="3_xm58r"]
@@ -21,7 +22,9 @@
 [ext_resource type="Resource" uid="uid://bi721bwio75q1" path="res://Resources/Abilities/Melee/NormalSlash.tres" id="18_j0dj7"]
 [ext_resource type="PackedScene" uid="uid://bt6uqptmr2y7c" path="res://Prefabs/Effects/circle_transition.tscn" id="20_bfy8c"]
 
-[node name="TestBattle" type="Node2D"]
+[node name="TestBattle" type="Node2D" node_paths=PackedStringArray("transitionEffect")]
+script = ExtResource("1_03c5o")
+transitionEffect = NodePath("CircleTransition")
 
 [node name="Managers" type="Node2D" parent="."]
 
@@ -41,9 +44,8 @@ script = ExtResource("6_8aygl")
 [node name="SpriteManager" type="Node" parent="Managers"]
 script = ExtResource("7_rp32s")
 
-[node name="GameManager" type="Node" parent="Managers" node_paths=PackedStringArray("transitionEffect")]
+[node name="GameManager" type="Node" parent="Managers"]
 script = ExtResource("1_wgu4n")
-transitionEffect = NodePath("../../CircleTransition")
 
 [node name="BattleUI" type="Control" parent="." node_paths=PackedStringArray("icons", "topLeftUI", "selectSkillBook")]
 z_index = 40

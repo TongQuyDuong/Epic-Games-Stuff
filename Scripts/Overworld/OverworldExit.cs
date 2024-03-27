@@ -10,7 +10,7 @@ public partial class OverworldExit : Area2D
 	[Export] public String nextEntranceName;
 
 	private void _on_body_entered(Node2D body) {
-		if(body is TestHOverworld) {
+		if(body is PlayerOverworld) {
 			OverworldLevel.onPlayerExited?.Invoke(this);
 			QueueFree();
 		}

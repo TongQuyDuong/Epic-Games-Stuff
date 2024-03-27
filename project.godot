@@ -111,6 +111,16 @@ SelectSkill={
 ]
 }
 
+[layer_names]
+
+2d_render/layer_1="global default"
+2d_render/layer_2="background lit"
+2d_render/layer_3="background occlusion"
+2d_render/layer_4="prop lit"
+2d_render/layer_5="prop occlusion"
+2d_render/layer_6="player lit"
+2d_render/layer_7="player occlusion"
+
 [physics]
 
 2d/default_gravity=0.0

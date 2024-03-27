@@ -36,7 +36,7 @@ public partial class BattleAnnouncement : Control
 		if(isBattleStart) {
 			Events.OnBattleActive?.Invoke();
 		} else {
-			GameManager.Instance.ExitBattle();
+			BattleScene.onReturnToOverworld?.Invoke();
 		}
 		
 		this.QueueFree(); 

@@ -24,6 +24,10 @@ public partial class UnitManager : Node
 		Instance = null;
 		Events.OnEnemyDeath -= RemoveEnemiesAlive;
 	}
+
+	public void UpdateFormation(SpawnFormation formation) {
+		this.formation = formation;
+	}
 	public void SpawnHero()
 	{
 		chara = SpawnUnit(new SpawnInfo(hero, formation.playerSpawnPos, true)) as BaseHero;

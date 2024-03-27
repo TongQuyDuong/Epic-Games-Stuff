@@ -3,7 +3,6 @@ using System;
 
 public partial class GameManager : Node
 {
-	[Export] Transition transitionEffect;
 	public static GameManager Instance;
 	public GameState currentState;
 	private bool isSelectSkillReady = false;
@@ -11,18 +10,10 @@ public partial class GameManager : Node
 	public override void _EnterTree()
 	{
 		if (Instance == null) { Instance = this; }
-		
-	}
-    public override async void _Ready()
-    {
-        base._Ready();
 		Events.OnBattleActive += BeginBattle;
 		Events.OnBattleEnd += EndBattle;
 		TopLeftUI.onSpOverFlow += EnableSelectSkill;
-		await ToSignal(transitionEffect,"finished");
-		UpdateGameState(GameState.GenerateGrid);
 	}
-
     public override void _ExitTree()
     {
         base._ExitTree();
@@ -91,12 +82,7 @@ public partial class GameManager : Node
 		BattleUI.Instance.topLeftUI.ResetSoulPower();
 		isSelectSkillReady = false;
 	}
-	public async void ExitBattle() {
-		transitionEffect.FadeOut();
-		await ToSignal(transitionEffect,"finished");
-		this.GetTree().ChangeSceneToFile("res://main.tscn");
-	}
-
+	
 	private void EnableSelectSkill() {
 		isSelectSkillReady = true;
 	}

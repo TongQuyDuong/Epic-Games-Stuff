@@ -1,11 +1,12 @@
 using Godot;
 using System;
 
-public partial class TestHOverworld : CharacterBody2D
+public partial class PlayerOverworld : CharacterBody2D
 {
 	const int ACCELERATION = 10000;
 	const int FRICTION = 500;
 	const int MAXSPEED = 240;
+	const int MAXSPEEDRUNNING = 400;
 
 	[Export] private PlayerStateController StateController;
 	[Export] private AnimationTree animTree;
@@ -62,10 +63,10 @@ public partial class TestHOverworld : CharacterBody2D
 	private void ApplyMovement(Vector2 amount)
 	{
 		Velocity += amount;
-		Velocity = Velocity.LimitLength(MAXSPEED);
+		Velocity = Velocity.LimitLength(Input.IsActionPressed("Back")? MAXSPEEDRUNNING : MAXSPEED);
 	}
 
-	private void Animate() {
+	public void Animate() {
 		stateMachine.Travel(animTreeStateKeys[(int)StateController.CurrentPlayerState]);
 		animTree.Set(blendPosPaths[(int)StateController.CurrentPlayerState],blendPos);
 	}
