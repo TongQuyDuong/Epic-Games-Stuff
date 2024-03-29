@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://bq5gjcerijh8p"]
+
+[ext_resource type="Script" path="res://Scripts/Overworld/Interactable.cs" id="1_meenx"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_sh60p"]
+radius = 15.0
+
+[node name="Interactable" type="Area2D"]
+collision_layer = 16
+collision_mask = 0
+script = ExtResource("1_meenx")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_sh60p")

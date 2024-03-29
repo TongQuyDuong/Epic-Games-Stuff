@@ -24,6 +24,12 @@ config/icon="res://icon.svg"
 [autoload]
 
 SceneGlobalManager="*res://Scripts/Managers/SceneGlobalManager.cs"
+DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
+
+[dialogue_manager]
+
+general/states=["SceneGlobalManager"]
+general/balloon_path="res://Dialogue/Balloon.tscn"
 
 [display]
 
@@ -37,7 +43,7 @@ project/assembly_name="Godot Project"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/MonoCustomResourceRegistry/plugin.cfg")
+enabled=PackedStringArray("res://addons/MonoCustomResourceRegistry/plugin.cfg", "res://addons/dialogue_manager/plugin.cfg")
 
 [gui]
 
@@ -111,6 +117,10 @@ SelectSkill={
 ]
 }
 
+[internationalization]
+
+locale/translations_pot_files=PackedStringArray("res://Dialogue/TestDialog.dialogue")
+
 [layer_names]
 
 2d_render/layer_1="global default"
@@ -120,6 +130,7 @@ SelectSkill={
 2d_render/layer_5="prop occlusion"
 2d_render/layer_6="player lit"
 2d_render/layer_7="player occlusion"
+2d_physics/layer_5="Interactables"
 
 [physics]
 

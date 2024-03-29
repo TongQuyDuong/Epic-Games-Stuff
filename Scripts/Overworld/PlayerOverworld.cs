@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using DialogueManagerRuntime;
 
 public partial class PlayerOverworld : CharacterBody2D
 {
@@ -11,7 +12,10 @@ public partial class PlayerOverworld : CharacterBody2D
 	[Export] private PlayerStateController StateController;
 	[Export] private AnimationTree animTree;
 	[Export] public Transition transition;
-	
+	[Export] private Area2D interactFinder;
+	Vector2 inputVector;
+
+
 	private AnimationNodeStateMachinePlayback stateMachine;
 	public Vector2 blendPos;
 	private StringName[] blendPosPaths = {
@@ -28,7 +32,20 @@ public partial class PlayerOverworld : CharacterBody2D
 	public override void _Ready() {
 		stateMachine = (AnimationNodeStateMachinePlayback)animTree.Get(new StringName("parameters/playback"));
 	}
-	public override void _PhysicsProcess(double delta)
+
+    public override void _UnhandledInput(InputEvent @event)
+    {
+        if(Input.IsActionJustPressed("Select")) {
+			Godot.Collections.Array<Area2D> interactables = interactFinder.GetOverlappingAreas();
+			if(interactables.Count > 0) {
+				((Interactable)interactables[0]).Action();
+				inputVector = Vector2.Zero;
+			}
+		}
+
+		inputVector = Input.GetVector("MoveLeft", "MoveRight", "MoveUp", "MoveDown");
+	}
+    public override void _PhysicsProcess(double delta)
 	{
 		Move(delta);
 		Animate();
@@ -36,7 +53,6 @@ public partial class PlayerOverworld : CharacterBody2D
 
 	private void Move(double delta)
 	{
-		Vector2 inputVector = Input.GetVector("MoveLeft", "MoveRight", "MoveUp", "MoveDown");
 		if (inputVector == Vector2.Zero)
 		{
 			StateController.ChangePlayerState(PlayerState.Idling);

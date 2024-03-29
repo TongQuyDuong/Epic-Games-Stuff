@@ -1,8 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://dvl5jlrb0yagf"]
+[gd_scene load_steps=8 format=3 uid="uid://dvl5jlrb0yagf"]
 
 [ext_resource type="Script" path="res://Scripts/Overworld/OverworldLevel.cs" id="1_yw02f"]
 [ext_resource type="TileSet" uid="uid://cmhx25chy20jg" path="res://Resources/TileSet/TileSet1.tres" id="2_g1o82"]
 [ext_resource type="PackedScene" uid="uid://dkwcbnbv4g13j" path="res://Prefabs/Overworld/fireworm_overworld.tscn" id="5_joicw"]
+[ext_resource type="PackedScene" uid="uid://bq5gjcerijh8p" path="res://Prefabs/Overworld/interactable.tscn" id="6_x68lx"]
+[ext_resource type="Resource" uid="uid://bsmwub6om04e3" path="res://Dialogue/TestDialog.dialogue" id="7_jimp1"]
 [ext_resource type="PackedScene" uid="uid://cvyhsh2cfm20t" path="res://Prefabs/Units/PlayerOverworld.tscn" id="15_cek5h"]
 [ext_resource type="PackedScene" uid="uid://dj1aiehvvof46" path="res://Prefabs/Overworld/OverworldExit.tscn" id="17_vv1w3"]
 
@@ -95,7 +97,12 @@ nextEntranceName = "South"
 [node name="FirewormOverworld" parent="." instance=ExtResource("5_joicw")]
 position = Vector2(361.5, 119.5)
 
+[node name="Interactable" parent="." instance=ExtResource("6_x68lx")]
+position = Vector2(168, 167.5)
+dialougeResource = ExtResource("7_jimp1")
+
 [editable path="Exit"]
 [editable path="Exit2"]
 [editable path="Exit3"]
 [editable path="Exit4"]
+[editable path="Interactable"]
