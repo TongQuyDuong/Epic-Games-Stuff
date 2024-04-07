@@ -3,6 +3,7 @@
 [ext_resource type="Script" path="res://Scripts/Overworld/OverworldExit.cs" id="1_qpj5p"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ooafe"]
+resource_local_to_scene = true
 size = Vector2(32.5, 37)
 
 [node name="Exit" type="Area2D"]

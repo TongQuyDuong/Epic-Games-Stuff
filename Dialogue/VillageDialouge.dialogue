@@ -1,0 +1,17 @@
+~ talk_to_red
+
+Red: Welcome to our village.Feel free to look around!
+Player: Can i ask you about...
+- The Tree
+	Player: Is there a really big tree here?
+	Red: Yeah, theres one right up the hill.
+	Player: Thanks.
+- Services
+	Player: What are the services in this town?
+	Red: We have a shop to the West, and a blacksmith on the SouthWest.
+	Player: Thanks.
+- Nevermind => END
+	
+Red: See you around!
+
+=> END

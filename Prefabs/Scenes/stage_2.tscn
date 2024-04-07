@@ -1,13 +1,21 @@
-[gd_scene load_steps=7 format=3 uid="uid://b7okqq25j7tpo"]
+[gd_scene load_steps=9 format=3 uid="uid://b7okqq25j7tpo"]
 
 [ext_resource type="Script" path="res://Scripts/Overworld/OverworldLevel.cs" id="1_dmsed"]
 [ext_resource type="TileSet" uid="uid://cmhx25chy20jg" path="res://Resources/TileSet/TileSet1.tres" id="2_1ujnk"]
 [ext_resource type="PackedScene" uid="uid://cvyhsh2cfm20t" path="res://Prefabs/Units/PlayerOverworld.tscn" id="16_rs37p"]
 [ext_resource type="PackedScene" uid="uid://dj1aiehvvof46" path="res://Prefabs/Overworld/OverworldExit.tscn" id="17_j3r33"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_iqqcl"]
+resource_local_to_scene = true
+size = Vector2(32.5, 37)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rwfgb"]
+resource_local_to_scene = true
+size = Vector2(32.5, 37)
+
 [sub_resource type="Gradient" id="Gradient_fk7m0"]
 interpolation_mode = 2
-offsets = PackedFloat32Array(0, 0.773077)
+offsets = PackedFloat32Array(0, 0.646154)
 colors = PackedColorArray(0.650128, 0.650128, 0.650128, 1, 0, 0, 0, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_qhvjx"]
@@ -15,13 +23,14 @@ gradient = SubResource("Gradient_fk7m0")
 fill = 1
 fill_from = Vector2(0.517094, 0.504274)
 
-[node name="Stage2" type="Node2D" node_paths=PackedStringArray("player", "exits", "enemies")]
+[node name="Stage2" type="Node2D" node_paths=PackedStringArray("player", "exits", "enemies", "camera")]
 y_sort_enabled = true
 scale = Vector2(2, 2)
 script = ExtResource("1_dmsed")
 player = NodePath("TestHOverworld")
 exits = [NodePath("Exit"), NodePath("Exit4")]
 enemies = []
+camera = NodePath("TestHOverworld/Camera2D")
 
 [node name="TileMap" type="TileMap" parent="."]
 light_mask = 6
@@ -58,7 +67,7 @@ layer_4/modulate = Color(1, 1, 1, 1)
 layer_4/y_sort_enabled = true
 layer_4/y_sort_origin = 0
 layer_4/z_index = 1
-layer_4/tile_data = PackedInt32Array(1376266, 262150, 0, 1376272, 6, 0, 1376278, 262150, 0, 1376284, 262150, 0, 1376261, 524294, 7, 1376257, 262150, 7, 786432, 1048582, 7, 655361, 786438, 0, 1048576, 6, 0, 1310723, 786438, 0, 1245184, 786438, 0, 1310739, 262150, 7, 1310745, 262150, 7, 1441805, 262150, 7, 1441799, 262150, 7, 1310757, 524294, 0, 458752, 262150, 0, 262145, 786438, 0, 131072, 262150, 0, 131078, 6, 0, 65539, 6, 7, 262147, 262150, 0, 393218, 786438, 0, 458757, 1703948, 22, 786454, 1769484, 1, 196627, 1441804, 10, 131094, 917516, 5, 327701, 1835020, 7, 589843, 1703948, 12, 786462, 1769484, 1, 262177, 1703948, 12, 524321, 1441804, 10, 131102, 917516, 5, 327711, 1835020, 7, 851987, 1703948, 12, 852001, 1703948, 12, 65562, 458767, 1, 1048616, 524306, 0, 655400, 786438, 13, 262184, 786438, 13, 131108, 786438, 7, 65569, 786438, 7, 65552, 524294, 7, 65555, 262150, 0, 1376290, 524294, 0, 1310751, 524294, 0)
+layer_4/tile_data = PackedInt32Array(1376266, 262150, 0, 1376272, 6, 0, 1376278, 262150, 0, 1376284, 262150, 0, 1376261, 524294, 7, 1376257, 262150, 7, 786432, 1048582, 7, 655361, 786438, 0, 1048576, 6, 0, 1310723, 786438, 0, 1245184, 786438, 0, 1310739, 262150, 7, 1310745, 262150, 7, 1441805, 262150, 7, 1441799, 262150, 7, 458752, 262150, 0, 262145, 786438, 0, 131072, 262150, 0, 131078, 6, 0, 65539, 6, 7, 262147, 262150, 0, 393218, 786438, 0, 458757, 1703948, 22, 786454, 1769484, 1, 196627, 1441804, 10, 131094, 917516, 5, 327701, 1835020, 7, 589843, 1703948, 12, 786462, 1769484, 1, 262177, 1703948, 12, 524321, 1441804, 10, 131102, 917516, 5, 327711, 1835020, 7, 851987, 1703948, 12, 65562, 458767, 1, 655400, 786438, 13, 262184, 786438, 13, 131108, 786438, 7, 65569, 786438, 7, 65552, 524294, 7, 65555, 262150, 0, 852001, 1703948, 12)
 
 [node name="SpecialProps" type="TileMap" parent="."]
 light_mask = 8
@@ -68,10 +77,24 @@ format = 2
 layer_0/name = "Props"
 layer_0/y_sort_enabled = true
 layer_0/z_index = 1
-layer_0/tile_data = PackedInt32Array(983076, 65556, 0)
+layer_0/tile_data = PackedInt32Array(983076, 65556, 0, 1310751, 524294, 0, 1376290, 524294, 0, 1310757, 524294, 0, 1048616, 524306, 0)
 
 [node name="TestHOverworld" parent="." instance=ExtResource("16_rs37p")]
 position = Vector2(110.5, 180)
+
+[node name="Camera2D" type="Camera2D" parent="TestHOverworld"]
+process_mode = 3
+zoom = Vector2(1.75, 1.75)
+limit_left = 0
+limit_top = 0
+limit_right = 1240
+limit_bottom = 641
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
+drag_left_margin = 0.1
+drag_top_margin = 0.1
+drag_right_margin = 0.1
+drag_bottom_margin = 0.1
 
 [node name="Collisions" type="StaticBody2D" parent="."]
 
@@ -88,6 +111,7 @@ nextEntranceName = "East"
 
 [node name="CollisionShape2D" parent="Exit" index="0"]
 position = Vector2(-0.5, 0)
+shape = SubResource("RectangleShape2D_iqqcl")
 
 [node name="Exit4" parent="." instance=ExtResource("17_j3r33")]
 position = Vector2(423.5, -26)
@@ -95,6 +119,9 @@ pushDistance = 50
 nextScenePath = &"res://Prefabs/Scenes/stage_1.tscn"
 name = "Cave"
 nextEntranceName = "South"
+
+[node name="CollisionShape2D" parent="Exit4" index="0"]
+shape = SubResource("RectangleShape2D_rwfgb")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color(0.611765, 0.611765, 0.611765, 1)
@@ -104,7 +131,7 @@ color = Color(0.611765, 0.611765, 0.611765, 1)
 [node name="PointLight2D" type="PointLight2D" parent="Node2D"]
 position = Vector2(584.5, 268)
 color = Color(0.996094, 0.996094, 0.339844, 1)
-energy = 0.7
+energy = 1.01
 range_item_cull_mask = 43
 texture = SubResource("GradientTexture2D_qhvjx")
 texture_scale = 3.68
@@ -112,13 +139,13 @@ texture_scale = 3.68
 [node name="Shadow" type="PointLight2D" parent="Node2D"]
 position = Vector2(584.5, 268)
 color = Color(0.996094, 0.996094, 0.339844, 1)
-energy = 0.6
+energy = 0.5
 range_z_max = 1
 range_item_cull_mask = 35
 shadow_enabled = true
 shadow_item_cull_mask = 68
 texture = SubResource("GradientTexture2D_qhvjx")
-texture_scale = 3.0
+texture_scale = 4.27
 
 [editable path="Exit"]
 [editable path="Exit4"]

@@ -8,21 +8,36 @@ public partial class OverworldLevel : GameScene
 	[Export] public PlayerOverworld player;
 	[Export] Godot.Collections.Array<OverworldExit> exits;
 	[Export] Godot.Collections.Array<EnemyOverworld> enemies;
+	[Export] Camera2D camera;
+
 
 	public override void _EnterTree() {
 		onPlayerExited += OnPlayerExited;
 		onEnemyEncountered += OnEnemyEncountered;
+		Interactable.onDialogueStart += PauseGame;
+		Interactable.onDialogueEnd += ResumeGame;
 	}
 
 	public override void _ExitTree() {
 		onPlayerExited -= OnPlayerExited;
 		onEnemyEncountered -= OnEnemyEncountered;
+		Interactable.onDialogueStart -= PauseGame;
+		Interactable.onDialogueEnd -= ResumeGame;
 	}
 	public override async void _Ready() {
-		player.SetPhysicsProcess(false);
+		GetTree().Paused = true;
 		player.Animate();
 		await ToSignal(player.transition,"finished");
-		player.SetPhysicsProcess(true);
+		GetTree().Paused = false;
+	}
+
+	private void PauseGame() {
+		GetTree().Paused = true;
+	}
+
+	private void ResumeGame()
+	{
+		GetTree().Paused = false;
 	}
 
 	public void EnterLevel() {
@@ -50,7 +65,7 @@ public partial class OverworldLevel : GameScene
 	}
 
 	private void OnPlayerExited(OverworldExit exit) {
-		player.SetPhysicsProcess(false);
+		GetTree().Paused = true;
 		data = new LevelDataHandoff(exit.nextEntranceName);
 		SceneGlobalManager manager = GetTree().Root.GetNode("SceneGlobalManager") as SceneGlobalManager;
 		manager.ChangeToNewScene(exit.nextScenePath);

@@ -20,6 +20,7 @@ public partial class BattleScene : GameScene
 		}
 
 		await ToSignal(transitionEffect, "finished");
+		
 		GameManager.Instance.UpdateGameState(GameState.GenerateGrid);
 	}
 

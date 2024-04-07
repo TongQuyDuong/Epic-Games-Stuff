@@ -399,7 +399,7 @@ states/move/position = Vector2(384, 154)
 transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_njds7"), "idle", "move", SubResource("AnimationNodeStateMachineTransition_yuf4b"), "move", "idle", SubResource("AnimationNodeStateMachineTransition_lewf6")]
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_ey2fs"]
-polygon = PackedVector2Array(0, 0, 7, 0, 5, 4, 0, 4, -4, 3, -7, 2, -7, -1, -5, -2, 0, -2, 4, -2, 6, -2, 7, 0)
+polygon = PackedVector2Array(2, 4, 0, 4, -5, 3, -7, 1, -6, -2, -1, -2, 2, -2, 6, -2, 7, -1, 7, 1, 6, 3)
 
 [node name="TestHOverworld" type="CharacterBody2D" node_paths=PackedStringArray("StateController", "animTree", "transition", "interactFinder")]
 z_index = 1
@@ -432,19 +432,6 @@ parameters/idle/TimeScale/scale = 1.0
 parameters/idle/idle_bs2d/blend_position = Vector2(0, 0)
 parameters/move/TimeScale/scale = 1.0
 parameters/move/move_bs2d/blend_position = Vector2(0, 0)
-
-[node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(1.75, 1.75)
-limit_left = 0
-limit_top = 0
-limit_right = 1240
-limit_bottom = 641
-drag_horizontal_enabled = true
-drag_vertical_enabled = true
-drag_left_margin = 0.1
-drag_top_margin = 0.1
-drag_right_margin = 0.1
-drag_bottom_margin = 0.1
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]
 occluder = SubResource("OccluderPolygon2D_ey2fs")

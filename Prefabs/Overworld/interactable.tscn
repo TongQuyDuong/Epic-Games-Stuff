@@ -3,6 +3,7 @@
 [ext_resource type="Script" path="res://Scripts/Overworld/Interactable.cs" id="1_meenx"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_sh60p"]
+resource_local_to_scene = true
 radius = 15.0
 
 [node name="Interactable" type="Area2D"]

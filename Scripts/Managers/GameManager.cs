@@ -4,7 +4,7 @@ using System;
 public partial class GameManager : Node
 {
 	public static GameManager Instance;
-	public GameState currentState;
+	[Export] public GameState currentState;
 	private bool isSelectSkillReady = false;
 
 	public override void _EnterTree()
@@ -16,7 +16,6 @@ public partial class GameManager : Node
 	}
     public override void _ExitTree()
     {
-        base._ExitTree();
 		Events.OnBattleActive -= BeginBattle;
 		Events.OnBattleEnd -= EndBattle;
 		TopLeftUI.onSpOverFlow -= EnableSelectSkill;
@@ -32,6 +31,7 @@ public partial class GameManager : Node
 
     public void UpdateGameState(GameState newState)
 	{
+		if (currentState == newState) return;
 		currentState = newState;
 		switch (newState)
 		{
@@ -89,7 +89,7 @@ public partial class GameManager : Node
 }
 public enum GameState
 {
-	GenerateGrid,
+	GenerateGrid = 1,
 	GenerateUI,
 	SpawnHero,
 	SpawnEnemies,

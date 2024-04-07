@@ -1,0 +1,205 @@
+[gd_scene load_steps=10 format=3 uid="uid://s864oelsoifw"]
+
+[ext_resource type="Script" path="res://Scripts/Overworld/Bookmark.cs" id="1_5nk28"]
+[ext_resource type="Texture2D" uid="uid://bbvypkxucwlis" path="res://Sprites/UI/Overworld/BookmarkAppear.png" id="2_xpoal"]
+[ext_resource type="Texture2D" uid="uid://edijlynr1nkq" path="res://Sprites/UI/SPIcon.png" id="3_f6tx0"]
+
+[sub_resource type="Animation" id="Animation_t028e"]
+resource_name = "PopOut"
+length = 0.7
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BookMark:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Icon:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.2, 0.3, 0.6),
+"transitions": PackedFloat32Array(215.269, 324.114, 916.735),
+"update": 0,
+"values": [Vector2(30, 12.196), Vector2(23.7141, 12.196), Vector2(20, 12.196)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Icon:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_faube"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_lutbm"]
+resource_name = "Selected"
+length = 0.7
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BookMark:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [3]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Icon:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(324.114),
+"update": 0,
+"values": [Vector2(23.7141, 12.196)]
+}
+
+[sub_resource type="Animation" id="Animation_8q02d"]
+resource_name = "PopIn"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BookMark:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Icon:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.2, 0.3, 0.5),
+"transitions": PackedFloat32Array(215.269, 324.114, 916.735),
+"update": 1,
+"values": [Vector2(30, 12.196), Vector2(23.7141, 12.196), Vector2(20, 12.196)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Icon:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.1, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+
+[sub_resource type="Animation" id="Animation_kmgbx"]
+resource_name = "Normal"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BookMark:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Icon:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(20, 12.196)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_k40x6"]
+_data = {
+"Normal": SubResource("Animation_kmgbx"),
+"PopIn": SubResource("Animation_8q02d"),
+"PopOut": SubResource("Animation_t028e"),
+"RESET": SubResource("Animation_faube"),
+"Selected": SubResource("Animation_lutbm")
+}
+
+[node name="Bookmark" type="Control" node_paths=PackedStringArray("animationPlayer")]
+visible = false
+custom_minimum_size = Vector2(0, 31)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.4, 1.4)
+script = ExtResource("1_5nk28")
+animationPlayer = NodePath("AnimationPlayer")
+
+[node name="BookMark" type="Sprite2D" parent="."]
+position = Vector2(25.0972, 13.5751)
+texture = ExtResource("2_xpoal")
+hframes = 5
+frame = 4
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_k40x6")
+}
+
+[node name="Icon" type="Sprite2D" parent="."]
+position = Vector2(20, 12.196)
+texture = ExtResource("3_f6tx0")
