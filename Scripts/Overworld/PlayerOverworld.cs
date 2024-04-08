@@ -35,6 +35,8 @@ public partial class PlayerOverworld : CharacterBody2D
 
     public override void _UnhandledInput(InputEvent @event)
     {
+		if (OverworldLevel.isActive == false) return;
+
         if(Input.IsActionJustPressed("Select")) {
 			Godot.Collections.Array<Area2D> interactables = interactFinder.GetOverlappingAreas();
 			if(interactables.Count > 0) {
@@ -43,10 +45,16 @@ public partial class PlayerOverworld : CharacterBody2D
 			}
 		}
 
+		if(Input.IsActionJustPressed("Menu")) {
+			OpenMenu();
+		}
+
 		inputVector = Input.GetVector("MoveLeft", "MoveRight", "MoveUp", "MoveDown");
 	}
     public override void _PhysicsProcess(double delta)
 	{
+		if (OverworldLevel.isActive == false) return;
+		
 		Move(delta);
 		Animate();
 	}
@@ -85,5 +93,9 @@ public partial class PlayerOverworld : CharacterBody2D
 	public void Animate() {
 		stateMachine.Travel(animTreeStateKeys[(int)StateController.CurrentPlayerState]);
 		animTree.Set(blendPosPaths[(int)StateController.CurrentPlayerState],blendPos);
+	}
+
+	private void OpenMenu() {
+		OverworldLevel.onMenuOpened?.Invoke();
 	}
 }

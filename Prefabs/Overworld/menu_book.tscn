@@ -1,11 +1,14 @@
-[gd_scene load_steps=10 format=3 uid="uid://tua6wgq2ab16"]
+[gd_scene load_steps=15 format=3 uid="uid://tua6wgq2ab16"]
 
+[ext_resource type="Script" path="res://Scripts/Overworld/MenuBook.cs" id="1_j7ko2"]
 [ext_resource type="Texture2D" uid="uid://emdwqkx0dadp" path="res://Sprites/UI/Overworld/BookOpen1.png" id="1_jnin0"]
 [ext_resource type="Script" path="res://Scripts/Overworld/BookmarkManager.cs" id="2_edq4k"]
 [ext_resource type="PackedScene" uid="uid://s864oelsoifw" path="res://Prefabs/Overworld/bookmark.tscn" id="3_eht64"]
 [ext_resource type="Texture2D" uid="uid://ic6lbyfg5adc" path="res://Sprites/UI/Overworld/BookmarkIcon.png" id="4_gdpjo"]
 [ext_resource type="Texture2D" uid="uid://c15g1p7c7w7nn" path="res://Sprites/UI/Overworld/InventoryIcon.png" id="5_evyo3"]
 [ext_resource type="Texture2D" uid="uid://0y4qveq5whva" path="res://Sprites/UI/Overworld/SettingsIcon.png" id="6_bagcg"]
+[ext_resource type="PackedScene" uid="uid://csxirw7jkgxha" path="res://Prefabs/Overworld/menu_layout.tscn" id="6_e2dem"]
+[ext_resource type="Script" path="res://Scripts/Overworld/MenuLayoutManager.cs" id="9_2wmpd"]
 
 [sub_resource type="Animation" id="Animation_ywesy"]
 resource_name = "Open"
@@ -17,7 +20,7 @@ tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"times": PackedFloat32Array(0, 0.3, 0.4, 0.5, 0.6),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 3, 4]
@@ -41,11 +44,37 @@ tracks/2/path = NodePath("Bookmarks")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0.6),
+"times": PackedFloat32Array(0.7),
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
 "method": &"PopOutAllBookmarks"
+}]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite2D:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(620, 900), Vector2(620, 270)]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.7),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"SetInitialLayout"
 }]
 }
 
@@ -63,20 +92,111 @@ tracks/0/keys = {
 "update": 1,
 "values": [0]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(620, 270)]
+}
+
+[sub_resource type="Animation" id="Animation_iyfhk"]
+resource_name = "CloseMenu"
+length = 1.3
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Bookmarks")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"PopInAllBookmarks"
+}]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.6, 0.7, 0.8, 0.9, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [4, 3, 2, 1, 0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1, 1.3),
+"transitions": PackedFloat32Array(1, 1, 2.54913),
+"update": 0,
+"values": [Vector2(620, 270), Vector2(620, 270), Vector2(620, 1000)]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(1.3),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"ResumeGameAfterClosing"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_myvho"]
+resource_name = "FlipPage"
+length = 0.7
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [6, 7, 8, 9, 10, 11, 4]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_u5lhr"]
 _data = {
+"CloseMenu": SubResource("Animation_iyfhk"),
+"FlipPage": SubResource("Animation_myvho"),
 "Open": SubResource("Animation_ywesy"),
 "RESET": SubResource("Animation_j8xpy")
 }
 
-[node name="MenuBook" type="CanvasLayer"]
+[node name="MenuBook" type="CanvasLayer" node_paths=PackedStringArray("animationPlayer", "bookmarkManager", "layoutManager")]
+script = ExtResource("1_j7ko2")
+animationPlayer = NodePath("AnimationPlayer")
+bookmarkManager = NodePath("Bookmarks")
+layoutManager = NodePath("MenuLayoutManager")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(620, 270)
 scale = Vector2(1.4, 1.4)
 texture = ExtResource("1_jnin0")
-hframes = 5
+hframes = 6
+vframes = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "Open"
@@ -97,14 +217,27 @@ bookmarks = [NodePath("Bookmark"), NodePath("Bookmark2"), NodePath("Bookmark3"),
 [node name="Bookmark" parent="Bookmarks" instance=ExtResource("3_eht64")]
 layout_mode = 2
 icon = ExtResource("4_gdpjo")
+menuLayout = ExtResource("6_e2dem")
 
 [node name="Bookmark2" parent="Bookmarks" instance=ExtResource("3_eht64")]
 layout_mode = 2
 icon = ExtResource("5_evyo3")
+menuLayout = ExtResource("6_e2dem")
 
 [node name="Bookmark3" parent="Bookmarks" instance=ExtResource("3_eht64")]
 layout_mode = 2
+menuLayout = ExtResource("6_e2dem")
 
 [node name="Bookmark4" parent="Bookmarks" instance=ExtResource("3_eht64")]
 layout_mode = 2
 icon = ExtResource("6_bagcg")
+menuLayout = ExtResource("6_e2dem")
+
+[node name="MenuLayoutManager" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 190.0
+offset_top = 83.0
+offset_right = 1062.0
+offset_bottom = 576.0
+script = ExtResource("9_2wmpd")

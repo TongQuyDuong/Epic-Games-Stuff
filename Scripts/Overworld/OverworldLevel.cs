@@ -5,13 +5,18 @@ public partial class OverworldLevel : GameScene
 {
 	public static Action<OverworldExit> onPlayerExited;
 	public static Action<SpawnFormation> onEnemyEncountered;
+	public static Action onMenuOpened;
+	public static bool isActive = false;
 	[Export] public PlayerOverworld player;
 	[Export] Godot.Collections.Array<OverworldExit> exits;
 	[Export] Godot.Collections.Array<EnemyOverworld> enemies;
 	[Export] Camera2D camera;
 
+	private PackedScene menu;
+
 
 	public override void _EnterTree() {
+		onMenuOpened += OpenMenu;
 		onPlayerExited += OnPlayerExited;
 		onEnemyEncountered += OnEnemyEncountered;
 		Interactable.onDialogueStart += PauseGame;
@@ -19,6 +24,7 @@ public partial class OverworldLevel : GameScene
 	}
 
 	public override void _ExitTree() {
+		onMenuOpened -= OpenMenu;
 		onPlayerExited -= OnPlayerExited;
 		onEnemyEncountered -= OnEnemyEncountered;
 		Interactable.onDialogueStart -= PauseGame;
@@ -26,9 +32,13 @@ public partial class OverworldLevel : GameScene
 	}
 	public override async void _Ready() {
 		GetTree().Paused = true;
+
+		menu = GD.Load<PackedScene>("res://Prefabs/Overworld/menu_book.tscn");
+
 		player.Animate();
 		await ToSignal(player.transition,"finished");
 		GetTree().Paused = false;
+		isActive = true;
 	}
 
 	private void PauseGame() {
@@ -75,5 +85,10 @@ public partial class OverworldLevel : GameScene
 		player.SetPhysicsProcess(false);
 		SceneGlobalManager manager = GetTree().Root.GetNode("SceneGlobalManager") as SceneGlobalManager;
 		manager.InitBattle(spawnFormation);
+	}
+
+	private void OpenMenu() {
+		isActive = false;
+		AddChild(menu.Instantiate<MenuBook>());
 	}
 }

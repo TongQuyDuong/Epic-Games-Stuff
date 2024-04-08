@@ -15,7 +15,9 @@ public partial class EnemyOverworld : CharacterBody2D
 	}
     public override void _PhysicsProcess(double delta)
     {
-        if(isChasing) {
+		if (OverworldLevel.isActive == false) return;
+		
+		if (isChasing) {
 			Vector2 moveVelo = (player.Position - this.Position).Normalized();
 			Velocity += moveVelo * (float)delta * ACCELERATION;
 			Velocity = Velocity.LimitLength(MAXSPEED);

@@ -1,0 +1,46 @@
+[gd_scene load_steps=3 format=3 uid="uid://csxirw7jkgxha"]
+
+[ext_resource type="Script" path="res://Scripts/Overworld/MenuLayout.cs" id="1_5m8hy"]
+[ext_resource type="PackedScene" uid="uid://b4mv7evfxy5bc" path="res://Prefabs/UI/PixelNumberDisplay.tscn" id="1_jrpg1"]
+
+[node name="MenuLayout" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -368.0
+offset_bottom = -148.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_5m8hy")
+
+[node name="NumberOfCharges" parent="." instance=ExtResource("1_jrpg1")]
+layout_mode = 0
+offset_left = 128.857
+offset_top = 7.48122
+offset_right = 312.857
+offset_bottom = 107.481
+scale = Vector2(0.7, 0.646)
+text = "Menu
+"
+
+[node name="Center1stPage" type="Marker2D" parent="."]
+position = Vector2(193, 30)
+
+[node name="Center2ndPage" type="Marker2D" parent="."]
+position = Vector2(654, 30)
+
+[node name="NumberOfCharges2" parent="." instance=ExtResource("1_jrpg1")]
+offset_left = 590.662
+offset_top = 6.2612
+offset_right = 774.662
+offset_bottom = 106.261
+scale = Vector2(0.7, 0.646)
+text = "Menu
+"
+
+[node name="End1stPage" type="Marker2D" parent="."]
+position = Vector2(407.4, 168.898)
+
+[node name="Start2ndPage" type="Marker2D" parent="."]
+position = Vector2(460, 168.898)
