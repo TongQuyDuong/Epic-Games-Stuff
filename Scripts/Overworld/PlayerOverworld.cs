@@ -9,10 +9,12 @@ public partial class PlayerOverworld : CharacterBody2D
 	const int MAXSPEED = 240;
 	const int MAXSPEEDRUNNING = 400;
 
+	[Export] public UnitStatList playerStats;
 	[Export] private PlayerStateController StateController;
 	[Export] private AnimationTree animTree;
 	[Export] public Transition transition;
 	[Export] private Area2D interactFinder;
+	public int currentHealth;
 	Vector2 inputVector;
 
 

@@ -22,7 +22,6 @@ public partial class BookmarkManager : VBoxContainer
 
 	public void PopOutAllBookmarks() {
 		for (int i = 0; i < bookmarks.Count; i++) {
-			Debug.Print("Before Coroutine");
 			Timing.RunCoroutine(waitForSecondsAndPopOut(0.2*i,i));
 		}
 	}

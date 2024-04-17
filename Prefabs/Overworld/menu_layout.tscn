@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://csxirw7jkgxha"]
 
-[ext_resource type="Script" path="res://Scripts/Overworld/MenuLayout.cs" id="1_5m8hy"]
+[ext_resource type="Script" path="res://Scripts/Overworld/Menus/MenuLayout.cs" id="1_7mgjp"]
 [ext_resource type="PackedScene" uid="uid://b4mv7evfxy5bc" path="res://Prefabs/UI/PixelNumberDisplay.tscn" id="1_jrpg1"]
 
 [node name="MenuLayout" type="Control"]
@@ -12,7 +12,7 @@ offset_right = -368.0
 offset_bottom = -148.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_5m8hy")
+script = ExtResource("1_7mgjp")
 
 [node name="NumberOfCharges" parent="." instance=ExtResource("1_jrpg1")]
 layout_mode = 0
@@ -31,6 +31,7 @@ position = Vector2(193, 30)
 position = Vector2(654, 30)
 
 [node name="NumberOfCharges2" parent="." instance=ExtResource("1_jrpg1")]
+layout_mode = 0
 offset_left = 590.662
 offset_top = 6.2612
 offset_right = 774.662
