@@ -8,6 +8,8 @@ public partial class MenuBook : CanvasLayer
 	public static Action<int, bool> onMovementInputReceived;
 	public static Action<int> onSelectInputReceived;
 	public static Action<int> onBackInputReceived;
+
+	public PlayerOverworld player;
 	public static bool isActive = false;
 	private int currentUiLayer = 0;
 	private int currentBookmarkIndex = 0;
@@ -63,7 +65,7 @@ public partial class MenuBook : CanvasLayer
 
 
 	public void SetInitialLayout() {
-		layoutManager.AddLayout(bookmarkManager.bookmarks[0].menuLayout);
+		layoutManager.AddLayout(bookmarkManager.bookmarks[0].menuLayout,player);
 	}
 
 	private void CloseMenu() {
@@ -84,7 +86,7 @@ public partial class MenuBook : CanvasLayer
 
 	IEnumerator<double> waitforSecondsAndSetlayout(double duration, PackedScene layout) {
 		yield return Timing.WaitForSeconds(duration);
-		layoutManager.AddLayout(layout);
+		layoutManager.AddLayout(layout,player);
 	}
 
 	public void ResumeGameAfterClosing() {

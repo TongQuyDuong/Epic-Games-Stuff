@@ -10,8 +10,9 @@ public partial class MenuLayoutManager : Control
 		}
 	}
 
-	public void AddLayout(PackedScene layout) {
+	public void AddLayout(PackedScene layout,PlayerOverworld player) {
 		MenuLayout newLayout = layout.Instantiate<MenuLayout>();
+		newLayout.player = player;
 		AddChild(newLayout);
 	}
 }

@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://csxirw7jkgxha"]
 
 [ext_resource type="Script" path="res://Scripts/Overworld/Menus/MenuLayout.cs" id="1_7mgjp"]
-[ext_resource type="PackedScene" uid="uid://b4mv7evfxy5bc" path="res://Prefabs/UI/PixelNumberDisplay.tscn" id="1_jrpg1"]
+[ext_resource type="PackedScene" uid="uid://d1pnehgy07weu" path="res://Prefabs/UI/menu_title_text.tscn" id="3_igx3d"]
 
 [node name="MenuLayout" type="Control"]
 layout_mode = 3
@@ -14,34 +14,44 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_7mgjp")
 
-[node name="NumberOfCharges" parent="." instance=ExtResource("1_jrpg1")]
-layout_mode = 0
-offset_left = 128.857
-offset_top = 7.48122
-offset_right = 312.857
-offset_bottom = 107.481
-scale = Vector2(0.7, 0.646)
-text = "Menu
-"
-
-[node name="Center1stPage" type="Marker2D" parent="."]
-position = Vector2(193, 30)
-
 [node name="Center2ndPage" type="Marker2D" parent="."]
 position = Vector2(654, 30)
 
-[node name="NumberOfCharges2" parent="." instance=ExtResource("1_jrpg1")]
-layout_mode = 0
-offset_left = 590.662
-offset_top = 6.2612
-offset_right = 774.662
-offset_bottom = 106.261
-scale = Vector2(0.7, 0.646)
+[node name="Start2ndPage" type="Marker2D" parent="."]
+position = Vector2(460, 168.898)
+
+[node name="1stPage" type="VBoxContainer" parent="."]
+custom_minimum_size = Vector2(407, 493)
+layout_mode = 2
+offset_right = 407.0
+offset_bottom = 493.0
+
+[node name="Center1stPage" type="Marker2D" parent="1stPage"]
+position = Vector2(203.721, 25.7955)
+
+[node name="End1stPage" type="Marker2D" parent="1stPage"]
+position = Vector2(407.4, 168.898)
+
+[node name="Control" parent="1stPage" instance=ExtResource("3_igx3d")]
+layout_mode = 2
+
+[node name="NumberOfCharges" parent="1stPage/Control" index="0"]
 text = "Menu
 "
 
-[node name="End1stPage" type="Marker2D" parent="."]
-position = Vector2(407.4, 168.898)
+[node name="VBoxContainer2" type="VBoxContainer" parent="."]
+custom_minimum_size = Vector2(407, 493)
+layout_mode = 2
+offset_left = 460.0
+offset_right = 867.0
+offset_bottom = 493.0
 
-[node name="Start2ndPage" type="Marker2D" parent="."]
-position = Vector2(460, 168.898)
+[node name="Control" parent="VBoxContainer2" instance=ExtResource("3_igx3d")]
+layout_mode = 2
+
+[node name="NumberOfCharges" parent="VBoxContainer2/Control" index="0"]
+text = "Menu
+"
+
+[editable path="1stPage/Control"]
+[editable path="VBoxContainer2/Control"]

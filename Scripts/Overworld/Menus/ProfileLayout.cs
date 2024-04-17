@@ -7,4 +7,9 @@ public partial class ProfileLayout : MenuLayout
 	public int currentHealth;
 	public UnitStatList statList;
 
+	public override void _Ready() {
+		portrait = player.portrait;
+		currentHealth = player.currentHealth;
+		statList = player.playerStats;
+	}
 }

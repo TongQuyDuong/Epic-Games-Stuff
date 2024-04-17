@@ -89,6 +89,8 @@ public partial class OverworldLevel : GameScene
 
 	private void OpenMenu() {
 		isActive = false;
-		AddChild(menu.Instantiate<MenuBook>());
+		MenuBook book = menu.Instantiate<MenuBook>();
+		book.player = player;
+		AddChild(book);
 	}
 }
