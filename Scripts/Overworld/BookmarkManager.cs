@@ -6,6 +6,7 @@ using System.Diagnostics;
 
 public partial class BookmarkManager : VBoxContainer
 {
+	const int UI_LAYER_NUMBER = 0;
 	[Export] public Godot.Collections.Array<Bookmark> bookmarks;
 	public Action<int, PackedScene> onBookmarkChanged;
 	public int selectedIndex = 0;
@@ -43,7 +44,7 @@ public partial class BookmarkManager : VBoxContainer
 	}
 
 	private void ChangeSelectedBookmark(int UiLayer, bool isMovingUp) {
-		if(UiLayer == 0) {
+		if(UiLayer == UI_LAYER_NUMBER) {
 			bookmarks[selectedIndex].Deselect();
 			selectedIndex += isMovingUp? -1 : 1;
 			if(selectedIndex < 0) {
@@ -56,7 +57,7 @@ public partial class BookmarkManager : VBoxContainer
 	}
 
 	private void ApplyBookmark(int currentUiLayer) {
-		if(currentUiLayer == 1) {
+		if(currentUiLayer == (UI_LAYER_NUMBER+1)) {
 			onBookmarkChanged?.Invoke(selectedIndex, bookmarks[selectedIndex].menuLayout);
 		}
 	}

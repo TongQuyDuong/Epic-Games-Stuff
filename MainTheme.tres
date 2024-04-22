@@ -1,6 +1,20 @@
-[gd_resource type="Theme" load_steps=2 format=3 uid="uid://dvkdh8poahuwn"]
+[gd_resource type="Theme" load_steps=4 format=3 uid="uid://dvkdh8poahuwn"]
 
 [ext_resource type="FontFile" uid="uid://bch6ug3gayri3" path="res://Resources/Fonts/Karma Suture.otf" id="1_mk805"]
+[ext_resource type="Texture2D" uid="uid://cso0tfvpgk2y3" path="res://Sprites/UI/Overworld/BookBorder.png" id="2_4srlu"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_igt7s"]
+texture = ExtResource("2_4srlu")
+texture_margin_left = 9.0
+texture_margin_top = 9.0
+texture_margin_right = 9.0
+texture_margin_bottom = 9.0
+expand_margin_left = 5.0
+expand_margin_top = 5.0
+expand_margin_right = 5.0
+expand_margin_bottom = 5.0
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
 
 [resource]
 HeaderLarge/base_type = &"Label"
@@ -13,6 +27,8 @@ Label/colors/font_outline_color = Color(0, 0, 0, 1)
 Label/constants/outline_size = 8
 Label/font_sizes/font_size = 16
 Label/fonts/font = ExtResource("1_mk805")
+MenuBookPanel/base_type = &"Panel"
+MenuBookPanel/styles/panel = SubResource("StyleBoxTexture_igt7s")
 RedLabel/base_type = &"Label"
 RedLabel/colors/font_color = Color(1, 0, 0, 1)
 RedLabel/constants/outline_size = 10

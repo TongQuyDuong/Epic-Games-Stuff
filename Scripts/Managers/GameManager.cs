@@ -3,9 +3,11 @@ using System;
 
 public partial class GameManager : Node
 {
+	[Export] public PlayerData playerData;
 	public static GameManager Instance;
 	[Export] public GameState currentState;
 	private bool isSelectSkillReady = false;
+
 
 	public override void _EnterTree()
 	{
@@ -24,7 +26,6 @@ public partial class GameManager : Node
 
     public override void _Process(double delta)
     {
-        base._Process(delta);
 		if(Input.IsActionJustPressed("EndBattle")) Events.OnBattleEnd?.Invoke();
 		if(Input.IsActionJustPressed("SelectSkill") && isSelectSkillReady) UpdateGameState(GameState.BattleStart);
 	}
@@ -57,6 +58,7 @@ public partial class GameManager : Node
 				ResumeBattle();
 				break;
 			case GameState.BattleEnd:
+				playerData.currentHP = BattleUI.Instance.topLeftUI.hpBar.getCurrentHp();
 				BattleUI.Instance.AnnounceBattle(false);
 				break;
 			default:

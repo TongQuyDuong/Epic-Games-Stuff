@@ -6,6 +6,7 @@ public partial class PlayerHealth : UnitHealth
 	public override void _Ready()
 	{
 		base._Ready();
+		currentHP = GameManager.Instance.playerData.currentHP;
 	}
 	public override void TakeDamage(float amount)
 	{

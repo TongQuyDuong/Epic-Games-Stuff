@@ -1,0 +1,119 @@
+[gd_scene load_steps=5 format=3 uid="uid://bcqmi8e0l0itl"]
+
+[ext_resource type="Script" path="res://Scripts/Overworld/Menus/InventoryLayout.cs" id="1_o8vt3"]
+[ext_resource type="PackedScene" uid="uid://d1pnehgy07weu" path="res://Prefabs/UI/menu_title_text.tscn" id="2_eslp5"]
+[ext_resource type="PackedScene" uid="uid://boueby18tbc0j" path="res://Prefabs/Overworld/menu_choice.tscn" id="3_vbs36"]
+[ext_resource type="PackedScene" uid="uid://bcq16aj436rmw" path="res://Prefabs/Overworld/menu_book_panel.tscn" id="4_d76er"]
+
+[node name="InventoryLayout" type="Control" node_paths=PackedStringArray("menuChoices")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_o8vt3")
+menuChoices = [NodePath("1stPage/MenuChoice"), NodePath("1stPage/MenuChoice2"), NodePath("1stPage/MenuChoice3"), NodePath("1stPage/MenuChoice4"), NodePath("1stPage/MenuChoice5")]
+
+[node name="1stPage" type="VBoxContainer" parent="."]
+custom_minimum_size = Vector2(407, 493)
+layout_mode = 0
+offset_right = 407.0
+offset_bottom = 493.0
+theme_override_constants/separation = 15
+
+[node name="Center1stPage" type="Marker2D" parent="1stPage"]
+position = Vector2(203.721, 25.7955)
+
+[node name="End1stPage" type="Marker2D" parent="1stPage"]
+position = Vector2(407.4, 168.898)
+
+[node name="Control" parent="1stPage" instance=ExtResource("2_eslp5")]
+layout_mode = 2
+
+[node name="NumberOfCharges" parent="1stPage/Control" index="0"]
+text = "Inventory
+"
+
+[node name="MenuChoice" parent="1stPage" instance=ExtResource("3_vbs36")]
+layout_mode = 2
+
+[node name="NumberOfCharges" parent="1stPage/MenuChoice/MenuTitleText" index="0"]
+text = "All
+"
+
+[node name="MenuChoice2" parent="1stPage" instance=ExtResource("3_vbs36")]
+layout_mode = 2
+
+[node name="NumberOfCharges" parent="1stPage/MenuChoice2/MenuTitleText" index="0"]
+text = "Equipments"
+
+[node name="MenuChoice3" parent="1stPage" instance=ExtResource("3_vbs36")]
+layout_mode = 2
+
+[node name="NumberOfCharges" parent="1stPage/MenuChoice3/MenuTitleText" index="0"]
+text = "Consumables
+"
+
+[node name="MenuChoice4" parent="1stPage" instance=ExtResource("3_vbs36")]
+layout_mode = 2
+
+[node name="NumberOfCharges" parent="1stPage/MenuChoice4/MenuTitleText" index="0"]
+text = "Monster Drops
+"
+
+[node name="MenuChoice5" parent="1stPage" instance=ExtResource("3_vbs36")]
+layout_mode = 2
+
+[node name="NumberOfCharges" parent="1stPage/MenuChoice5/MenuTitleText" index="0"]
+text = "Key Items
+"
+
+[node name="2ndPage" type="VBoxContainer" parent="."]
+custom_minimum_size = Vector2(407, 493)
+layout_mode = 0
+offset_left = 460.0
+offset_right = 867.0
+offset_bottom = 493.0
+theme_override_constants/separation = 10
+
+[node name="Center2ndPage" type="Marker2D" parent="2ndPage"]
+position = Vector2(194, 30)
+
+[node name="Start2ndPage" type="Marker2D" parent="2ndPage"]
+position = Vector2(0, 168.898)
+
+[node name="MarginContainer" type="MarginContainer" parent="2ndPage"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 7.0
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = -5
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 0
+
+[node name="MenuBookPanel" parent="2ndPage/MarginContainer" instance=ExtResource("4_d76er")]
+layout_mode = 2
+
+[node name="MarginContainer2" type="MarginContainer" parent="2ndPage"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.0
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="MenuBookPanel" parent="2ndPage/MarginContainer2" instance=ExtResource("4_d76er")]
+layout_mode = 2
+
+[editable path="1stPage/Control"]
+[editable path="1stPage/MenuChoice"]
+[editable path="1stPage/MenuChoice/MenuTitleText"]
+[editable path="1stPage/MenuChoice2"]
+[editable path="1stPage/MenuChoice2/MenuTitleText"]
+[editable path="1stPage/MenuChoice3"]
+[editable path="1stPage/MenuChoice3/MenuTitleText"]
+[editable path="1stPage/MenuChoice4"]
+[editable path="1stPage/MenuChoice4/MenuTitleText"]
+[editable path="1stPage/MenuChoice5"]
+[editable path="1stPage/MenuChoice5/MenuTitleText"]

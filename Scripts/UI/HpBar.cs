@@ -53,16 +53,21 @@ public partial class HpBar : Control
 			
 		}
 	}
-	public void SetMaxHP(int maxHP) {
+	public void SetHP(int maxHP, int currentHP) {
 		//Inflate the value so the tween looks smoother
 		int trueValue = maxHP*10;
+		int trueCurrentValue = currentHP*10;
 		hpBarMain.MaxValue = trueValue;
 		hpBarUnder.MaxValue = trueValue;
-		hpBarMain.Value = trueValue;
-		hpBarUnder.Value = trueValue;
+		hpBarMain.Value = trueCurrentValue;
+		hpBarUnder.Value = trueCurrentValue;
+
+		UpdateColor();
 	}
 
-
+	public int getCurrentHp() {
+		return (int)hpBarMain.Value / 10;
+	}
 
 
 }

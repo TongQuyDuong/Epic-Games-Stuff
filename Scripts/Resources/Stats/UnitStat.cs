@@ -67,6 +67,19 @@ public partial class UnitStat : Resource
 
     }
 
+    public bool RemoveModifier(StatModType type, float value) {
+        StatModifier modToRemove = statModifiers.Where(mod => mod.Type == type && mod.Value == value).First();
+        if (modToRemove != null) {
+            statModifiers.Remove(modToRemove);
+            numberOfMods -= 1;
+            Debug.Print(statModifiers.Count.ToString());
+            return true;
+        }
+
+        Debug.Print(statModifiers.Count.ToString());
+        return false;
+    }
+
     protected int CalculateFinalValue()
     {
         float finalValue = BaseValue;

@@ -1,9 +1,23 @@
-[gd_scene load_steps=3 format=3 uid="uid://csxirw7jkgxha"]
+[gd_scene load_steps=11 format=3 uid="uid://csxirw7jkgxha"]
 
-[ext_resource type="Script" path="res://Scripts/Overworld/Menus/MenuLayout.cs" id="1_7mgjp"]
+[ext_resource type="Script" path="res://Scripts/Overworld/Menus/ProfileLayout.cs" id="1_qaw4d"]
+[ext_resource type="Texture2D" uid="uid://baj7p78t084vw" path="res://Sprites/UI/Overworld/BookProfileBorder.png" id="3_1m75w"]
 [ext_resource type="PackedScene" uid="uid://d1pnehgy07weu" path="res://Prefabs/UI/menu_title_text.tscn" id="3_igx3d"]
+[ext_resource type="Texture2D" uid="uid://ova4grfinsue" path="res://Sprites/TestH/TestPortrait.png" id="4_oncm8"]
+[ext_resource type="Texture2D" uid="uid://rh1dwln1unxf" path="res://Sprites/UI/Overworld/MenuBook/HPIcon.png" id="5_w0fib"]
+[ext_resource type="Texture2D" uid="uid://dcaq1ipupujck" path="res://Sprites/UI/Overworld/MenuBook/AtkIcon.png" id="6_iyoaj"]
+[ext_resource type="Texture2D" uid="uid://dwc6aay53mji" path="res://Sprites/UI/Overworld/MenuBook/DefIcon.png" id="7_5nbr5"]
+[ext_resource type="Texture2D" uid="uid://de52f2po2ncmj" path="res://Sprites/UI/Overworld/MenuBook/MagicIcon.png" id="8_a65j8"]
+[ext_resource type="Texture2D" uid="uid://d1rcma8rvti4u" path="res://Sprites/UI/Overworld/MenuBook/ResIcon.png" id="9_j1ov2"]
 
-[node name="MenuLayout" type="Control"]
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_t15oi"]
+texture = ExtResource("3_1m75w")
+texture_margin_left = 14.0
+texture_margin_top = 14.0
+texture_margin_right = 14.0
+texture_margin_bottom = 14.0
+
+[node name="ProfileLayout" type="Control" node_paths=PackedStringArray("currentHpDisplay", "maxHpDisplay", "atkDisplay", "defDisplay", "magicDisplay", "resDisplay", "portraitDisplay")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -12,13 +26,14 @@ offset_right = -368.0
 offset_bottom = -148.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_7mgjp")
-
-[node name="Center2ndPage" type="Marker2D" parent="."]
-position = Vector2(654, 30)
-
-[node name="Start2ndPage" type="Marker2D" parent="."]
-position = Vector2(460, 168.898)
+script = ExtResource("1_qaw4d")
+currentHpDisplay = NodePath("2ndPage/Hbox/MenuTitleText/NumberOfCharges")
+maxHpDisplay = NodePath("2ndPage/Hbox/MenuTitleText3/NumberOfCharges")
+atkDisplay = NodePath("2ndPage/Hbox2/MenuTitleText/NumberOfCharges")
+defDisplay = NodePath("2ndPage/Hbox3/MenuTitleText/NumberOfCharges")
+magicDisplay = NodePath("2ndPage/Hbox4/MenuTitleText/NumberOfCharges")
+resDisplay = NodePath("2ndPage/Hbox5/MenuTitleText/NumberOfCharges")
+portraitDisplay = NodePath("2ndPage/Panel/TextureRect")
 
 [node name="1stPage" type="VBoxContainer" parent="."]
 custom_minimum_size = Vector2(407, 493)
@@ -39,19 +54,189 @@ layout_mode = 2
 text = "Menu
 "
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="."]
+[node name="2ndPage" type="VBoxContainer" parent="."]
 custom_minimum_size = Vector2(407, 493)
 layout_mode = 2
 offset_left = 460.0
 offset_right = 867.0
 offset_bottom = 493.0
+theme_override_constants/separation = 15
 
-[node name="Control" parent="VBoxContainer2" instance=ExtResource("3_igx3d")]
+[node name="Center2ndPage" type="Marker2D" parent="2ndPage"]
+position = Vector2(194, 30)
+
+[node name="Start2ndPage" type="Marker2D" parent="2ndPage"]
+position = Vector2(0, 168.898)
+
+[node name="Control" parent="2ndPage" instance=ExtResource("3_igx3d")]
 layout_mode = 2
 
-[node name="NumberOfCharges" parent="VBoxContainer2/Control" index="0"]
-text = "Menu
+[node name="NumberOfCharges" parent="2ndPage/Control" index="0"]
+text = "Profile
+"
+
+[node name="Panel" type="Panel" parent="2ndPage"]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_styles/panel = SubResource("StyleBoxTexture_t15oi")
+
+[node name="TextureRect" type="TextureRect" parent="2ndPage/Panel"]
+show_behind_parent = true
+layout_mode = 0
+offset_right = 150.0
+offset_bottom = 150.0
+texture = ExtResource("4_oncm8")
+
+[node name="Hbox" type="HBoxContainer" parent="2ndPage"]
+layout_mode = 2
+theme_override_constants/separation = 50
+
+[node name="MarginContainer" type="MarginContainer" parent="2ndPage/Hbox"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 10
+
+[node name="TextureRect" type="TextureRect" parent="2ndPage/Hbox/MarginContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture = ExtResource("5_w0fib")
+stretch_mode = 5
+
+[node name="MenuTitleText" parent="2ndPage/Hbox" instance=ExtResource("3_igx3d")]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+
+[node name="NumberOfCharges" parent="2ndPage/Hbox/MenuTitleText" index="0"]
+scale = Vector2(0.4, 0.368)
+text = "100
+"
+
+[node name="MenuTitleText2" parent="2ndPage/Hbox" instance=ExtResource("3_igx3d")]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+
+[node name="NumberOfCharges" parent="2ndPage/Hbox/MenuTitleText2" index="0"]
+scale = Vector2(0.4, 0.368)
+text = "/
+"
+
+[node name="MenuTitleText3" parent="2ndPage/Hbox" instance=ExtResource("3_igx3d")]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+
+[node name="NumberOfCharges" parent="2ndPage/Hbox/MenuTitleText3" index="0"]
+scale = Vector2(0.4, 0.368)
+text = "100
+"
+
+[node name="Hbox2" type="HBoxContainer" parent="2ndPage"]
+layout_mode = 2
+theme_override_constants/separation = 40
+
+[node name="MarginContainer" type="MarginContainer" parent="2ndPage/Hbox2"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 20
+
+[node name="TextureRect" type="TextureRect" parent="2ndPage/Hbox2/MarginContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture = ExtResource("6_iyoaj")
+stretch_mode = 5
+
+[node name="MenuTitleText" parent="2ndPage/Hbox2" instance=ExtResource("3_igx3d")]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+
+[node name="NumberOfCharges" parent="2ndPage/Hbox2/MenuTitleText" index="0"]
+scale = Vector2(0.4, 0.368)
+text = "100
+"
+
+[node name="Hbox3" type="HBoxContainer" parent="2ndPage"]
+layout_mode = 2
+theme_override_constants/separation = 40
+
+[node name="MarginContainer" type="MarginContainer" parent="2ndPage/Hbox3"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 20
+
+[node name="TextureRect" type="TextureRect" parent="2ndPage/Hbox3/MarginContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture = ExtResource("7_5nbr5")
+stretch_mode = 5
+
+[node name="MenuTitleText" parent="2ndPage/Hbox3" instance=ExtResource("3_igx3d")]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+
+[node name="NumberOfCharges" parent="2ndPage/Hbox3/MenuTitleText" index="0"]
+scale = Vector2(0.4, 0.368)
+text = "100
+"
+
+[node name="Hbox4" type="HBoxContainer" parent="2ndPage"]
+layout_mode = 2
+theme_override_constants/separation = 40
+
+[node name="MarginContainer" type="MarginContainer" parent="2ndPage/Hbox4"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 20
+
+[node name="TextureRect" type="TextureRect" parent="2ndPage/Hbox4/MarginContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture = ExtResource("8_a65j8")
+stretch_mode = 5
+
+[node name="MenuTitleText" parent="2ndPage/Hbox4" instance=ExtResource("3_igx3d")]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+
+[node name="NumberOfCharges" parent="2ndPage/Hbox4/MenuTitleText" index="0"]
+scale = Vector2(0.4, 0.368)
+text = "100
+"
+
+[node name="Hbox5" type="HBoxContainer" parent="2ndPage"]
+layout_mode = 2
+theme_override_constants/separation = 40
+
+[node name="MarginContainer" type="MarginContainer" parent="2ndPage/Hbox5"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 20
+
+[node name="TextureRect" type="TextureRect" parent="2ndPage/Hbox5/MarginContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture = ExtResource("9_j1ov2")
+stretch_mode = 5
+
+[node name="MenuTitleText" parent="2ndPage/Hbox5" instance=ExtResource("3_igx3d")]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+
+[node name="NumberOfCharges" parent="2ndPage/Hbox5/MenuTitleText" index="0"]
+scale = Vector2(0.4, 0.368)
+text = "100
 "
 
 [editable path="1stPage/Control"]
-[editable path="VBoxContainer2/Control"]
+[editable path="2ndPage/Control"]
+[editable path="2ndPage/Hbox/MenuTitleText"]
+[editable path="2ndPage/Hbox/MenuTitleText2"]
+[editable path="2ndPage/Hbox/MenuTitleText3"]
+[editable path="2ndPage/Hbox2/MenuTitleText"]
+[editable path="2ndPage/Hbox3/MenuTitleText"]
+[editable path="2ndPage/Hbox4/MenuTitleText"]
+[editable path="2ndPage/Hbox5/MenuTitleText"]

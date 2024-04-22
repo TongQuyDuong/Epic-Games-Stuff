@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://tua6wgq2ab16"]
+[gd_scene load_steps=16 format=3 uid="uid://tua6wgq2ab16"]
 
 [ext_resource type="Script" path="res://Scripts/Overworld/MenuBook.cs" id="1_j7ko2"]
 [ext_resource type="Texture2D" uid="uid://emdwqkx0dadp" path="res://Sprites/UI/Overworld/BookOpen1.png" id="1_jnin0"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://c15g1p7c7w7nn" path="res://Sprites/UI/Overworld/InventoryIcon.png" id="5_evyo3"]
 [ext_resource type="Texture2D" uid="uid://0y4qveq5whva" path="res://Sprites/UI/Overworld/SettingsIcon.png" id="6_bagcg"]
 [ext_resource type="PackedScene" uid="uid://csxirw7jkgxha" path="res://Prefabs/Overworld/menu_layout.tscn" id="6_e2dem"]
+[ext_resource type="PackedScene" uid="uid://bcqmi8e0l0itl" path="res://Prefabs/Overworld/inventory_layout.tscn" id="8_2d61j"]
 [ext_resource type="Script" path="res://Scripts/Overworld/MenuLayoutManager.cs" id="9_2wmpd"]
 
 [sub_resource type="Animation" id="Animation_iyfhk"]
@@ -222,7 +223,7 @@ menuLayout = ExtResource("6_e2dem")
 [node name="Bookmark2" parent="Bookmarks" instance=ExtResource("3_eht64")]
 layout_mode = 2
 icon = ExtResource("5_evyo3")
-menuLayout = ExtResource("6_e2dem")
+menuLayout = ExtResource("8_2d61j")
 
 [node name="Bookmark3" parent="Bookmarks" instance=ExtResource("3_eht64")]
 layout_mode = 2

@@ -31,10 +31,13 @@ public partial class BattleUI : Control
 		foreach(AbilityIcon icon in icons) {
 			icon.Position += new Vector2(-150, 0);
 		}
+		
+		GameManager.Instance.playerData.playerStats.TryGetStatValue(StatType.HP, out float maxHP);
+		SetHP((int)maxHP,GameManager.Instance.playerData.currentHP);
 	}
 
-	public void SetMaxHP(int maxHP) {
-		topLeftUI.hpBar.SetMaxHP(maxHP);
+	public void SetHP(int maxHP,int currentHP) {
+		topLeftUI.hpBar.SetHP(maxHP,currentHP);
 	}
 
 	public void SetStartingSP(int amount) {

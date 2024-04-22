@@ -1,0 +1,9 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://uykmgy44tu00"]
+
+[ext_resource type="Script" path="res://Scripts/Resources/PlayerData.cs" id="1_4syv7"]
+[ext_resource type="Resource" uid="uid://cole6tiatpmnm" path="res://Resources/UnitStats/TestH.tres" id="1_jwdxk"]
+
+[resource]
+script = ExtResource("1_4syv7")
+currentHP = 100
+playerStats = ExtResource("1_jwdxk")

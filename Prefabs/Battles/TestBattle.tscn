@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://ib51qwl44qfd"]
+[gd_scene load_steps=23 format=3 uid="uid://ib51qwl44qfd"]
 
 [ext_resource type="Script" path="res://Scripts/BattleScene.cs" id="1_03c5o"]
 [ext_resource type="Script" path="res://Scripts/Managers/GameManager.cs" id="1_wgu4n"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" path="res://Scripts/Managers/SpriteManager.cs" id="7_rp32s"]
 [ext_resource type="PackedScene" uid="uid://o145r5colibr" path="res://Prefabs/UI/AbilityIcon.tscn" id="9_5rs6t"]
 [ext_resource type="PackedScene" uid="uid://d0ckwq8cucbrt" path="res://Prefabs/UI/battle_announcement.tscn" id="9_fywl8"]
+[ext_resource type="Resource" uid="uid://uykmgy44tu00" path="res://Resources/SaveData/PlayerData1.tres" id="9_yqayn"]
 [ext_resource type="Texture2D" uid="uid://b0fgwlwi7527l" path="res://Sprites/Backgrounds/ForestBackground.png" id="10_ax1fd"]
 [ext_resource type="PackedScene" uid="uid://bjwsaflrdm5j1" path="res://Prefabs/UI/TopLeftUI.tscn" id="10_knel8"]
 [ext_resource type="PackedScene" uid="uid://dsbcrkpoufpcd" path="res://Prefabs/UI/SelectSkillBook.tscn" id="12_xhlm1"]
@@ -46,6 +47,7 @@ script = ExtResource("7_rp32s")
 
 [node name="GameManager" type="Node" parent="Managers"]
 script = ExtResource("1_wgu4n")
+playerData = ExtResource("9_yqayn")
 
 [node name="BattleUI" type="Control" parent="." node_paths=PackedStringArray("icons", "topLeftUI", "selectSkillBook")]
 z_index = 40

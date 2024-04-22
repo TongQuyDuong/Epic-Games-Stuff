@@ -7,12 +7,7 @@ public partial class UnitHealth : Node, IDamageable
 	[Export] public int currentHP;
 	[Export] private int maxHP;
 	[Export] public AnimationPlayer spriteAnim;
-
-	// public UnitHealth(int aMaxHp  )
-	// {
-	// 	maxHP = aMaxHp;
-	// 	currentHP = maxHP;
-	// }
+	
 
 	public override void _Ready()
 	{

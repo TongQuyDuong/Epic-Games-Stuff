@@ -51,4 +51,17 @@ public partial class UnitStatList : Resource
 
         return false;
     }
+
+    public bool TryRemoveStatMod(StatType statType, StatModType modType,float value)
+    {
+        for (int i = 0; i < StatList.Count; i++)
+        {
+            if (StatList[i].statType == statType)
+            {
+                return StatList[i].RemoveModifier(modType,value);
+            }
+        }
+
+        return false;
+    }
 }

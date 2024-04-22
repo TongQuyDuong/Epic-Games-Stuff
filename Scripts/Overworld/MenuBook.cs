@@ -8,10 +8,11 @@ public partial class MenuBook : CanvasLayer
 	public static Action<int, bool> onMovementInputReceived;
 	public static Action<int> onSelectInputReceived;
 	public static Action<int> onBackInputReceived;
+	public static Action<int> onRequestUIFocus;
 
 	public PlayerOverworld player;
 	public static bool isActive = false;
-	private int currentUiLayer = 0;
+	[Export] private int currentUiLayer = 0;
 	private int currentBookmarkIndex = 0;
 
 	[Export] private AnimationPlayer animationPlayer;
@@ -20,10 +21,12 @@ public partial class MenuBook : CanvasLayer
 
 	public override void _EnterTree() {
 		bookmarkManager.onBookmarkChanged += FlipPage;
+		onRequestUIFocus += GrantUIFocus;
 	}
 
 	public override void _ExitTree() {
 		bookmarkManager.onBookmarkChanged -= FlipPage;
+		onRequestUIFocus -= GrantUIFocus;
 	}
 
 	public override void _Ready() {
@@ -74,7 +77,10 @@ public partial class MenuBook : CanvasLayer
 	}
 
 	private void FlipPage(int bookmarkIndex, PackedScene menuLayout) {
-		if (bookmarkIndex == currentBookmarkIndex) return;
+		if (bookmarkIndex == currentBookmarkIndex) {
+			onSelectInputReceived?.Invoke(10);
+			return;
+		}
 		currentBookmarkIndex = bookmarkIndex;
 
 		layoutManager.RemoveLayout();
@@ -92,5 +98,9 @@ public partial class MenuBook : CanvasLayer
 	public void ResumeGameAfterClosing() {
 		OverworldLevel.isActive = true;
 		this.QueueFree();
+	}
+
+	private void GrantUIFocus(int uiLayer) {
+		currentUiLayer = uiLayer;
 	}
 }

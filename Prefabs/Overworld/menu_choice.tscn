@@ -1,0 +1,46 @@
+[gd_scene load_steps=4 format=3 uid="uid://boueby18tbc0j"]
+
+[ext_resource type="Script" path="res://Scripts/Overworld/MenuChoice.cs" id="1_jfu82"]
+[ext_resource type="Texture2D" uid="uid://cxphxv67g1ati" path="res://Sprites/UI/Overworld/MenuBook/SelectorIcon.png" id="2_f040f"]
+[ext_resource type="PackedScene" uid="uid://d1pnehgy07weu" path="res://Prefabs/UI/menu_title_text.tscn" id="3_nqojc"]
+
+[node name="MenuChoice" type="HBoxContainer" node_paths=PackedStringArray("selector")]
+custom_minimum_size = Vector2(407, 36)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -833.0
+offset_bottom = -605.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_jfu82")
+selector = NodePath("MarginContainer/TextureRect")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+custom_minimum_size = Vector2(122, 36)
+layout_mode = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 90
+theme_override_constants/margin_bottom = 0
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer"]
+visible = false
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture = ExtResource("2_f040f")
+stretch_mode = 5
+
+[node name="MenuTitleText" parent="." instance=ExtResource("3_nqojc")]
+custom_minimum_size = Vector2(0, 0)
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_stretch_ratio = 4.33
+
+[node name="NumberOfCharges" parent="MenuTitleText" index="0"]
+scale = Vector2(0.4, 0.369)
+text = "Text
+"
+horizontal_alignment = 0
+
+[editable path="MenuTitleText"]
