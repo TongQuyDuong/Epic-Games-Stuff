@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://cxphxv67g1ati" path="res://Sprites/UI/Overworld/MenuBook/SelectorIcon.png" id="2_f040f"]
 [ext_resource type="PackedScene" uid="uid://d1pnehgy07weu" path="res://Prefabs/UI/menu_title_text.tscn" id="3_nqojc"]
 
-[node name="MenuChoice" type="HBoxContainer" node_paths=PackedStringArray("selector")]
+[node name="MenuChoice" type="HBoxContainer" node_paths=PackedStringArray("selector", "numberDisplay")]
 custom_minimum_size = Vector2(407, 36)
 anchors_preset = 15
 anchor_right = 1.0
@@ -14,7 +14,8 @@ offset_bottom = -605.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_jfu82")
-selector = NodePath("MarginContainer/TextureRect")
+selector = NodePath("MarginContainer/Selector")
+numberDisplay = NodePath("MarginContainer2/MenuTitleText2/NumberOfCharges")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 custom_minimum_size = Vector2(122, 36)
@@ -24,7 +25,7 @@ theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 90
 theme_override_constants/margin_bottom = 0
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer"]
+[node name="Selector" type="TextureRect" parent="MarginContainer"]
 visible = false
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
@@ -38,9 +39,30 @@ size_flags_horizontal = 2
 size_flags_stretch_ratio = 4.33
 
 [node name="NumberOfCharges" parent="MenuTitleText" index="0"]
+offset_left = -201.0
+offset_top = 0.0
+offset_right = 558.0
+offset_bottom = 100.0
 scale = Vector2(0.4, 0.369)
 text = "Text
 "
 horizontal_alignment = 0
+text_overrun_behavior = 3
+
+[node name="MarginContainer2" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = -200
+
+[node name="MenuTitleText2" parent="MarginContainer2" instance=ExtResource("3_nqojc")]
+custom_minimum_size = Vector2(0, 0)
+layout_mode = 2
+
+[node name="NumberOfCharges" parent="MarginContainer2/MenuTitleText2" index="0"]
+visible = false
+scale = Vector2(0.4, 0.369)
+text = "x0
+"
+horizontal_alignment = 2
 
 [editable path="MenuTitleText"]
+[editable path="MarginContainer2/MenuTitleText2"]
