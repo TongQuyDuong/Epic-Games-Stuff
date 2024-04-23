@@ -9,6 +9,8 @@ public partial class Item : Resource
     [Export] public string itemName;
     [Export] public string itemDescription;
     [Export] public ItemType itemType;
+    [Export] public bool isStackable;
+    [Export] public int quantity;
 
 }
 

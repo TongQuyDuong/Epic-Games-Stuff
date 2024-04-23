@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Diagnostics;
 
 public partial class InventoryLayout : MenuLayout
 {
@@ -10,14 +11,14 @@ public partial class InventoryLayout : MenuLayout
 	public override void _EnterTree()
 	{
 		MenuBook.onMovementInputReceived += ChangeSelectedChoice;
-		MenuBook.onSelectInputReceived += GainFocus;
+		MenuBook.onSelectInputReceived += GainFocusFromBookmark;
 		MenuBook.onBackInputReceived += LoseFocus;
 	}
 
 	public override void _ExitTree()
 	{
 		MenuBook.onMovementInputReceived -= ChangeSelectedChoice;
-		MenuBook.onSelectInputReceived -= GainFocus;
+		MenuBook.onSelectInputReceived -= GainFocusFromBookmark;
 		MenuBook.onBackInputReceived -= LoseFocus;
 	}
 
@@ -47,14 +48,17 @@ public partial class InventoryLayout : MenuLayout
 	private void LoseFocus(int uiLayer) {
 		if (uiLayer == UI_LAYER_NUMBER) {
 			menuChoices[selectedIndex].ToggleSelect();
+			Debug.Print(UI_LAYER_NUMBER + "Lose Focus");
+			return;
 		}
 	}
 
-	private void GainFocus(int uiLayer) {
+	private void GainFocusFromBookmark(int uiLayer) {
 		if (uiLayer == 10)
 		{
 			menuChoices[selectedIndex].ToggleSelect();
 			MenuBook.onRequestUIFocus?.Invoke(UI_LAYER_NUMBER);
 		}
 	}
+	
 }

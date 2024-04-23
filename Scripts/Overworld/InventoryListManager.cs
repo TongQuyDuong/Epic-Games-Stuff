@@ -1,12 +1,15 @@
 using Godot;
 using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 
 public partial class InventoryListManager : VBoxContainer
 {
 	const int UI_LAYER_NUMBER = 2;
-	[Export] Godot.Collections.Array<MenuChoice> itemChoices;
-	[Export] public Godot.Collections.Array<Item> itemList;
-	private int selectedIndex = 0;
+	[Export] Godot.Collections.Array<MenuChoice> itemChoices = new Godot.Collections.Array<MenuChoice>();
+	private Dictionary<int,Item> itemList;
+
+	[Export] private int selectedIndex = 0;
 
 	public override void _EnterTree()
 	{
@@ -30,7 +33,9 @@ public partial class InventoryListManager : VBoxContainer
 	}
 
 	private void DisplayItems(Godot.Collections.Array<Item> items) {
-		
+		foreach (Item item in items) {
+			
+		}
 	}
 
 	private void ChangeSelectedChoice(int UiLayer, bool isMovingUp)
@@ -56,6 +61,7 @@ public partial class InventoryListManager : VBoxContainer
 		if (uiLayer == UI_LAYER_NUMBER)
 		{
 			itemChoices[selectedIndex].ToggleSelect();
+			Debug.Print(UI_LAYER_NUMBER + "Lose Focus");
 		}
 	}
 
@@ -63,6 +69,7 @@ public partial class InventoryListManager : VBoxContainer
 	{
 		if (uiLayer == UI_LAYER_NUMBER)
 		{
+			selectedIndex = 0;
 			itemChoices[selectedIndex].ToggleSelect();
 			MenuBook.onRequestUIFocus?.Invoke(UI_LAYER_NUMBER);
 		}

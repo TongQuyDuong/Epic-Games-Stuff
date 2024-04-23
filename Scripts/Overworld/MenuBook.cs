@@ -2,6 +2,7 @@ using Godot;
 using System;
 using MEC;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 public partial class MenuBook : CanvasLayer
 {
@@ -57,7 +58,6 @@ public partial class MenuBook : CanvasLayer
 			{
 				onBackInputReceived?.Invoke(currentUiLayer);
 				currentUiLayer -= 1;
-				onSelectInputReceived(currentUiLayer);
 			}
 			else
 			{
@@ -102,5 +102,6 @@ public partial class MenuBook : CanvasLayer
 
 	private void GrantUIFocus(int uiLayer) {
 		currentUiLayer = uiLayer;
+		Debug.Print("Grant focus to layer" + uiLayer);
 	}
 }
