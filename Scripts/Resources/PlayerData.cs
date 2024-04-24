@@ -7,4 +7,5 @@ public partial class PlayerData : Resource
 {
 	[Export] public int currentHP;
 	[Export] public UnitStatList playerStats;
+	[Export] public Godot.Collections.Array<Item> inventory;
 }

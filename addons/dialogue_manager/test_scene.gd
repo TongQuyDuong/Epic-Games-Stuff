@@ -5,7 +5,7 @@ const DialogueSettings = preload("./settings.gd")
 
 
 @onready var title: String = DialogueSettings.get_user_value("run_title")
-@onready var resource: Resource = load(DialogueSettings.get_user_value("run_resource_path"))
+@onready var resource: DialogueResource = load(DialogueSettings.get_user_value("run_resource_path"))
 
 
 func _ready():
@@ -27,5 +27,5 @@ func _enter_tree() -> void:
 ### Signals
 
 
-func _on_dialogue_ended(_resource: Resource):
+func _on_dialogue_ended(_resource: DialogueResource):
 	get_tree().quit()

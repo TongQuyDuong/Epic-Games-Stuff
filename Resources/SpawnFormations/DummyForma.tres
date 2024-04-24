@@ -21,3 +21,4 @@ isFacingRight = false
 [resource]
 script = ExtResource("1_npk1i")
 spawns = [SubResource("Resource_wfcw2"), SubResource("Resource_wojsa")]
+playerSpawnPos = Vector2i(1, 1)

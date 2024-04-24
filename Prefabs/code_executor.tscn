@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bmkh5lhkyi2f0"]
+
+[ext_resource type="Script" path="res://CodeExecutor.cs" id="1_65ghh"]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_65ghh")

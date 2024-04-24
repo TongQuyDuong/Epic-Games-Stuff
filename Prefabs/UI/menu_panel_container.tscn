@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3 uid="uid://bnng8wqyxseb"]
+
+[ext_resource type="Theme" uid="uid://dvkdh8poahuwn" path="res://MainTheme.tres" id="1_k0bcs"]
+
+[node name="MenuPanelContainer" type="PanelContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -990.0
+offset_bottom = -536.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_k0bcs")
+theme_type_variation = &"MenuPanelContainer"
+
+[node name="ColorRect" type="ColorRect" parent="."]
+show_behind_parent = true
+layout_mode = 2
+color = Color(0.94902, 0.54902, 0.321569, 1)

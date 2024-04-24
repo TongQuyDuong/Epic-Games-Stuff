@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://73jm5qjy52vq"]
 
-[ext_resource type="Script" path="res://Dialogue/example_balloon.gd" id="1_36de5"]
+[ext_resource type="Script" path="res://addons/dialogue_manager/example_balloon/example_balloon.gd" id="1_36de5"]
 [ext_resource type="PackedScene" uid="uid://ckvgyvclnwggo" path="res://addons/dialogue_manager/dialogue_label.tscn" id="2_a8ve6"]
 [ext_resource type="Script" path="res://addons/dialogue_manager/dialogue_reponses_menu.gd" id="3_72ixx"]
 
@@ -66,8 +66,6 @@ Panel/styles/panel = SubResource("StyleBoxFlat_uy0d5")
 [node name="ExampleBalloon" type="CanvasLayer"]
 layer = 100
 script = ExtResource("1_36de5")
-next_action = &"Select"
-skip_action = &"Back"
 
 [node name="Balloon" type="Control" parent="."]
 unique_name_in_owner = true

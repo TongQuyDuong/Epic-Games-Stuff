@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://cxphxv67g1ati" path="res://Sprites/UI/Overworld/MenuBook/SelectorIcon.png" id="2_f040f"]
 [ext_resource type="PackedScene" uid="uid://d1pnehgy07weu" path="res://Prefabs/UI/menu_title_text.tscn" id="3_nqojc"]
 
-[node name="MenuChoice" type="HBoxContainer" node_paths=PackedStringArray("selector", "numberDisplay")]
+[node name="MenuChoice" type="HBoxContainer" node_paths=PackedStringArray("selector", "textDisplay", "numberDisplay")]
 custom_minimum_size = Vector2(407, 36)
 anchors_preset = 15
 anchor_right = 1.0
@@ -15,6 +15,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_jfu82")
 selector = NodePath("MarginContainer/Selector")
+textDisplay = NodePath("MenuTitleText/NumberOfCharges")
 numberDisplay = NodePath("MarginContainer2/MenuTitleText2/NumberOfCharges")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]

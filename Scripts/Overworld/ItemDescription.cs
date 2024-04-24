@@ -12,6 +12,7 @@ public partial class ItemDescription : HBoxContainer
 	}
 
 	public void UpdateItem(Item item) {
+		this.Visible = true;
 		itemDisplay.Texture = item.icon;
 		itemNameDisplay.Text = item.itemName;
 		itemDescriptionDisplay.Text = item.itemDescription;
