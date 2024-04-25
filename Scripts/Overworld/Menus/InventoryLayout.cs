@@ -54,7 +54,7 @@ public partial class InventoryLayout : MenuLayout
 			if(selectedIndex == 0) {
 				displayList.DisplayItems(playerData.inventory);
 			} else {
-				displayList.DisplayItems(playerData.inventory.Where(item => (int)item.itemType == selectedIndex));
+				displayList.DisplayItems(playerData.inventory.Where(item => (int)item.Key.itemType == selectedIndex));
 			}
 		}
 	}

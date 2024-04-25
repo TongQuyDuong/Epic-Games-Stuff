@@ -1,140 +1,15 @@
-[gd_resource type="Resource" load_steps=25 format=3 uid="uid://uykmgy44tu00"]
+[gd_resource type="Resource" load_steps=5 format=3 uid="uid://uykmgy44tu00"]
 
+[ext_resource type="Resource" uid="uid://8xb7eovgsau8" path="res://Resources/Items/Equipments/MageHat.tres" id="1_1ddf3"]
 [ext_resource type="Script" path="res://Scripts/Resources/PlayerData.cs" id="1_4syv7"]
 [ext_resource type="Resource" uid="uid://cole6tiatpmnm" path="res://Resources/UnitStats/TestH.tres" id="1_jwdxk"]
-[ext_resource type="Texture2D" uid="uid://qni3g4bi3jkd" path="res://Sprites/Items/Items199.png" id="1_niik7"]
-[ext_resource type="Script" path="res://Scripts/Resources/Inventory/Item.cs" id="1_qj8rw"]
-[ext_resource type="Texture2D" uid="uid://b1jjqem3g7nnx" path="res://Sprites/Items/Items201.png" id="3_m6txr"]
-[ext_resource type="Texture2D" uid="uid://rouyvucu8n8f" path="res://Sprites/Items/Items196.png" id="4_ui38w"]
-[ext_resource type="Texture2D" uid="uid://dqcuqj7ov6dw2" path="res://Sprites/Items/Items195.png" id="5_b7qdb"]
-[ext_resource type="Texture2D" uid="uid://bymt4bl18d2cs" path="res://Sprites/Items/Items212.png" id="6_s8hfe"]
-[ext_resource type="Texture2D" uid="uid://bjsvds7lnr0rg" path="res://Sprites/Items/Items211.png" id="7_yxe3w"]
-[ext_resource type="Texture2D" uid="uid://85chqgm8qqbe" path="res://Sprites/Items/Items214.png" id="8_cjufg"]
-
-[sub_resource type="Resource" id="Resource_t6iu5"]
-resource_local_to_scene = true
-script = ExtResource("1_qj8rw")
-icon = ExtResource("1_niik7")
-itemName = "Crude Sword"
-itemDescription = "Atk +1"
-itemType = 1
-isStackable = false
-quantity = 1
-
-[sub_resource type="Resource" id="Resource_aui5r"]
-script = ExtResource("1_qj8rw")
-icon = ExtResource("3_m6txr")
-itemName = "Normal Bow"
-itemDescription = "Atk +2"
-itemType = 1
-isStackable = false
-quantity = 1
-
-[sub_resource type="Resource" id="Resource_1a30s"]
-script = ExtResource("1_qj8rw")
-icon = ExtResource("4_ui38w")
-itemName = "Ranger's Hat"
-itemDescription = "Def +3"
-itemType = 1
-isStackable = false
-quantity = 1
-
-[sub_resource type="Resource" id="Resource_xhp4g"]
-resource_local_to_scene = true
-script = ExtResource("1_qj8rw")
-icon = ExtResource("5_b7qdb")
-itemName = "Mage's Hat"
-itemDescription = "Res + 2 /n Def + 2"
-itemType = 1
-isStackable = false
-quantity = 1
-
-[sub_resource type="Resource" id="Resource_u0uyq"]
-script = ExtResource("1_qj8rw")
-icon = ExtResource("6_s8hfe")
-itemName = "Ranger's Cloak"
-itemDescription = "Res + 3 /n Def + 2"
-itemType = 1
-isStackable = false
-quantity = 1
-
-[sub_resource type="Resource" id="Resource_qfqfq"]
-script = ExtResource("1_qj8rw")
-itemName = "Item3"
-itemDescription = ""
-itemType = 0
-isStackable = false
-quantity = 1
-
-[sub_resource type="Resource" id="Resource_y7kxq"]
-script = ExtResource("1_qj8rw")
-icon = ExtResource("7_yxe3w")
-itemName = "Mage's Cloak"
-itemDescription = "Res + 7"
-itemType = 1
-isStackable = false
-quantity = 1
-
-[sub_resource type="Resource" id="Resource_tyqpl"]
-script = ExtResource("1_qj8rw")
-icon = ExtResource("8_cjufg")
-itemName = "Basic Spellbook"
-itemDescription = "Magic + 5"
-itemType = 1
-isStackable = false
-quantity = 1
-
-[sub_resource type="Resource" id="Resource_0migu"]
-script = ExtResource("1_qj8rw")
-itemName = "Item3"
-itemDescription = ""
-itemType = 0
-isStackable = false
-quantity = 1
-
-[sub_resource type="Resource" id="Resource_7i33q"]
-resource_local_to_scene = true
-script = ExtResource("1_qj8rw")
-itemName = "Item1"
-itemDescription = ""
-itemType = 0
-isStackable = false
-quantity = 1
-
-[sub_resource type="Resource" id="Resource_ka7jg"]
-script = ExtResource("1_qj8rw")
-itemName = "Item2"
-itemDescription = ""
-itemType = 0
-isStackable = false
-quantity = 1
-
-[sub_resource type="Resource" id="Resource_k805l"]
-script = ExtResource("1_qj8rw")
-itemName = "Item3"
-itemDescription = ""
-itemType = 0
-isStackable = false
-quantity = 1
-
-[sub_resource type="Resource" id="Resource_p7fu3"]
-script = ExtResource("1_qj8rw")
-itemName = "Item2"
-itemDescription = ""
-itemType = 0
-isStackable = false
-quantity = 1
-
-[sub_resource type="Resource" id="Resource_o58ni"]
-script = ExtResource("1_qj8rw")
-itemName = "Item3"
-itemDescription = ""
-itemType = 0
-isStackable = false
-quantity = 1
+[ext_resource type="Resource" uid="uid://ca336qmnglkyk" path="res://Resources/Items/Equipments/CrudeSword.tres" id="2_fhvxs"]
 
 [resource]
 script = ExtResource("1_4syv7")
 currentHP = 100
 playerStats = ExtResource("1_jwdxk")
-inventory = Array[Object]([SubResource("Resource_t6iu5"), SubResource("Resource_aui5r"), SubResource("Resource_1a30s"), SubResource("Resource_xhp4g"), SubResource("Resource_u0uyq"), SubResource("Resource_qfqfq"), SubResource("Resource_y7kxq"), SubResource("Resource_tyqpl"), SubResource("Resource_0migu"), SubResource("Resource_7i33q"), SubResource("Resource_ka7jg"), SubResource("Resource_k805l"), SubResource("Resource_p7fu3"), SubResource("Resource_o58ni")])
+inventory = {
+ExtResource("1_1ddf3"): 4,
+ExtResource("2_fhvxs"): 1
+}

@@ -22,9 +22,4 @@ public partial class Equipment : Item
 			data.playerStats.TryRemoveStatMod(mod.statType, mod.modtype, mod.modValue);
 		}
 	}
-
-	public Equipment(string name, ItemType type, bool isStackable, int quantity) : base(name,type,isStackable,quantity)
-	{
-
-	}
 }

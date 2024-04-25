@@ -11,7 +11,7 @@ public partial class InventoryListManager : VBoxContainer
 	public Action<Item> onSelectedItemChanged;
 	public static Action<Item> onItemSelected;
 	[Export] Godot.Collections.Array<MenuChoice> itemChoices = new Godot.Collections.Array<MenuChoice>();
-	private Dictionary<int,Item> itemList = new Dictionary<int, Item>();
+	private Dictionary<int,ItemData> itemList = new Dictionary<int, ItemData>();
 
 	[Export] private int selectedIndex = 0;
 	[Export] private int currentOffset = 0;
@@ -38,19 +38,19 @@ public partial class InventoryListManager : VBoxContainer
 
 	}
 
-	public void DisplayItems(IEnumerable<Item> items) {
+	public void DisplayItems(IEnumerable<KeyValuePair<Item, int>> items) {
 		selectedIndex = 0;
 		currentOffset = 0;
 		Debug.Print("Items :" + items.Count());
 		itemList.Clear();
 		int i = 0;
-		foreach (Item item in items) {
-			if(item.isStackable) {
-				itemList[i] = item;
+		foreach (KeyValuePair<Item, int> item in items) {
+			if(item.Key.isStackable) {
+				itemList[i] = new ItemData(item.Key,item.Value);
 				i++;
 			} else {
-				for (int j = 0; j < item.quantity; j++) {
-					itemList[i] = item;
+				for (int j = 0; j < item.Value; j++) {
+					itemList[i] = new ItemData(item.Key);
 					i++;
 				}
 			}
@@ -117,7 +117,7 @@ public partial class InventoryListManager : VBoxContainer
 				itemChoices[selectedIndex - currentOffset].ToggleSelect();
 			}
 
-			onSelectedItemChanged?.Invoke(itemList[selectedIndex]);
+			onSelectedItemChanged?.Invoke(itemList[selectedIndex].item);
 			
 		}
 	}
@@ -138,11 +138,11 @@ public partial class InventoryListManager : VBoxContainer
 			if (itemList.Count == 0) return;
 			itemChoices[selectedIndex-currentOffset].ToggleSelect();
 			MenuBook.onRequestUIFocus?.Invoke(UI_LAYER_NUMBER);
-			onSelectedItemChanged?.Invoke(itemList[selectedIndex-currentOffset]);
+			onSelectedItemChanged?.Invoke(itemList[selectedIndex-currentOffset].item);
 		}
 
 		if (uiLayer == (UI_LAYER_NUMBER + 1)) {
-			onItemSelected?.Invoke(itemList[selectedIndex]);
+			onItemSelected?.Invoke(itemList[selectedIndex].item);
 		}
 	}
 }

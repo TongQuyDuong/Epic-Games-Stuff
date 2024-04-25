@@ -1,6 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://bmkh5lhkyi2f0"]
+[gd_scene load_steps=4 format=3 uid="uid://bmkh5lhkyi2f0"]
 
 [ext_resource type="Script" path="res://CodeExecutor.cs" id="1_65ghh"]
+[ext_resource type="Resource" uid="uid://uykmgy44tu00" path="res://Resources/SaveData/PlayerData1.tres" id="2_chrbx"]
+[ext_resource type="Resource" uid="uid://ca336qmnglkyk" path="res://Resources/Items/Equipments/CrudeSword.tres" id="2_iq2fe"]
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_65ghh")
+playerData = ExtResource("2_chrbx")
+itemToAdd = ExtResource("2_iq2fe")

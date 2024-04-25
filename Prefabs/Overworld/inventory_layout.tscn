@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bcqmi8e0l0itl"]
+[gd_scene load_steps=11 format=3 uid="uid://bcqmi8e0l0itl"]
 
 [ext_resource type="Script" path="res://Scripts/Overworld/Menus/InventoryLayout.cs" id="1_o8vt3"]
 [ext_resource type="PackedScene" uid="uid://d1pnehgy07weu" path="res://Prefabs/UI/menu_title_text.tscn" id="2_eslp5"]
@@ -10,8 +10,6 @@
 [ext_resource type="Script" path="res://Scripts/Overworld/ItemDescription.cs" id="6_wtrc4"]
 [ext_resource type="PackedScene" uid="uid://bnng8wqyxseb" path="res://Prefabs/UI/menu_panel_container.tscn" id="9_aogla"]
 [ext_resource type="Script" path="res://Scripts/Overworld/ItemAction.cs" id="10_k1d7r"]
-[ext_resource type="Script" path="res://Scripts/Overworld/MenuChoice.cs" id="11_0g5q8"]
-[ext_resource type="Texture2D" uid="uid://cxphxv67g1ati" path="res://Sprites/UI/Overworld/MenuBook/SelectorIcon.png" id="12_1v7j8"]
 
 [node name="InventoryLayout" type="Control" node_paths=PackedStringArray("menuChoices", "displayList", "descriptionDisplay")]
 layout_mode = 3
@@ -429,173 +427,59 @@ layout_mode = 2
 size_flags_vertical = 8
 alignment = 2
 
-[node name="MenuChoice" type="HBoxContainer" parent="MenuPanelContainer/MarginContainer/VBoxContainer" node_paths=PackedStringArray("selector", "textDisplay", "numberDisplay")]
+[node name="MenuChoice" parent="MenuPanelContainer/MarginContainer/VBoxContainer" instance=ExtResource("3_vbs36")]
 custom_minimum_size = Vector2(0, 28)
 layout_mode = 2
-size_flags_vertical = 8
-script = ExtResource("11_0g5q8")
-selector = NodePath("../../../../2ndPage/Margin1/MenuBookPanel/Margin2/VBoxContainer/MenuChoice/MarginContainer/Selector")
-textDisplay = NodePath("../../../../2ndPage/Margin1/MenuBookPanel/Margin2/VBoxContainer/MenuChoice/MenuTitleText/NumberOfCharges")
-numberDisplay = NodePath("../../../../2ndPage/Margin1/MenuBookPanel/Margin2/VBoxContainer/MenuChoice/MarginContainer2/MenuTitleText2/NumberOfCharges")
 
-[node name="MarginContainer" type="MarginContainer" parent="MenuPanelContainer/MarginContainer/VBoxContainer/MenuChoice"]
+[node name="MarginContainer" parent="MenuPanelContainer/MarginContainer/VBoxContainer/MenuChoice" index="0"]
 custom_minimum_size = Vector2(80, 28)
-layout_mode = 2
-theme_override_constants/margin_left = 0
-theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 60
-theme_override_constants/margin_bottom = 0
 
-[node name="Selector" type="TextureRect" parent="MenuPanelContainer/MarginContainer/VBoxContainer/MenuChoice/MarginContainer"]
-visible = false
+[node name="Selector" parent="MenuPanelContainer/MarginContainer/VBoxContainer/MenuChoice/MarginContainer" index="0"]
 custom_minimum_size = Vector2(28, 28)
-layout_mode = 2
-texture = ExtResource("12_1v7j8")
-stretch_mode = 5
-
-[node name="MenuTitleText" parent="MenuPanelContainer/MarginContainer/VBoxContainer/MenuChoice" instance=ExtResource("2_eslp5")]
-custom_minimum_size = Vector2(0, 0)
-layout_mode = 2
-size_flags_horizontal = 2
-size_flags_stretch_ratio = 4.33
 
 [node name="NumberOfCharges" parent="MenuPanelContainer/MarginContainer/VBoxContainer/MenuChoice/MenuTitleText" index="0"]
-offset_left = -201.0
-offset_top = 0.0
-offset_right = 243.0
-offset_bottom = 100.0
+offset_right = 130.0
 scale = Vector2(0.3, 0.277)
-text = "Option1
-"
-horizontal_alignment = 0
-text_overrun_behavior = 3
 
-[node name="MarginContainer2" type="MarginContainer" parent="MenuPanelContainer/MarginContainer/VBoxContainer/MenuChoice"]
+[node name="MarginContainer2" parent="MenuPanelContainer/MarginContainer/VBoxContainer/MenuChoice" index="2"]
 visible = false
-layout_mode = 2
-theme_override_constants/margin_left = -200
 
-[node name="MenuTitleText2" parent="MenuPanelContainer/MarginContainer/VBoxContainer/MenuChoice/MarginContainer2" instance=ExtResource("2_eslp5")]
-custom_minimum_size = Vector2(0, 0)
-layout_mode = 2
-
-[node name="NumberOfCharges" parent="MenuPanelContainer/MarginContainer/VBoxContainer/MenuChoice/MarginContainer2/MenuTitleText2" index="0"]
-scale = Vector2(0.3, 0.277)
-text = "x0
-"
-horizontal_alignment = 2
-
-[node name="MenuChoice2" type="HBoxContainer" parent="MenuPanelContainer/MarginContainer/VBoxContainer" node_paths=PackedStringArray("selector", "textDisplay", "numberDisplay")]
+[node name="MenuChoice2" parent="MenuPanelContainer/MarginContainer/VBoxContainer" instance=ExtResource("3_vbs36")]
 custom_minimum_size = Vector2(0, 28)
 layout_mode = 2
-size_flags_vertical = 8
-script = ExtResource("11_0g5q8")
-selector = NodePath("../../../../2ndPage/Margin1/MenuBookPanel/Margin2/VBoxContainer/MenuChoice/MarginContainer/Selector")
-textDisplay = NodePath("../../../../2ndPage/Margin1/MenuBookPanel/Margin2/VBoxContainer/MenuChoice/MenuTitleText/NumberOfCharges")
-numberDisplay = NodePath("../../../../2ndPage/Margin1/MenuBookPanel/Margin2/VBoxContainer/MenuChoice/MarginContainer2/MenuTitleText2/NumberOfCharges")
 
-[node name="MarginContainer" type="MarginContainer" parent="MenuPanelContainer/MarginContainer/VBoxContainer/MenuChoice2"]
+[node name="MarginContainer" parent="MenuPanelContainer/MarginContainer/VBoxContainer/MenuChoice2" index="0"]
 custom_minimum_size = Vector2(80, 28)
-layout_mode = 2
-theme_override_constants/margin_left = 0
-theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 60
-theme_override_constants/margin_bottom = 0
 
-[node name="Selector" type="TextureRect" parent="MenuPanelContainer/MarginContainer/VBoxContainer/MenuChoice2/MarginContainer"]
-visible = false
+[node name="Selector" parent="MenuPanelContainer/MarginContainer/VBoxContainer/MenuChoice2/MarginContainer" index="0"]
 custom_minimum_size = Vector2(28, 28)
-layout_mode = 2
-texture = ExtResource("12_1v7j8")
-stretch_mode = 5
-
-[node name="MenuTitleText" parent="MenuPanelContainer/MarginContainer/VBoxContainer/MenuChoice2" instance=ExtResource("2_eslp5")]
-custom_minimum_size = Vector2(0, 0)
-layout_mode = 2
-size_flags_horizontal = 2
-size_flags_stretch_ratio = 4.33
 
 [node name="NumberOfCharges" parent="MenuPanelContainer/MarginContainer/VBoxContainer/MenuChoice2/MenuTitleText" index="0"]
-offset_left = -201.0
-offset_top = 0.0
-offset_right = 243.0
-offset_bottom = 100.0
+offset_right = 130.0
 scale = Vector2(0.3, 0.277)
-text = "Option2
-"
-horizontal_alignment = 0
-text_overrun_behavior = 3
 
-[node name="MarginContainer2" type="MarginContainer" parent="MenuPanelContainer/MarginContainer/VBoxContainer/MenuChoice2"]
+[node name="MarginContainer2" parent="MenuPanelContainer/MarginContainer/VBoxContainer/MenuChoice2" index="2"]
 visible = false
-layout_mode = 2
-theme_override_constants/margin_left = -200
 
-[node name="MenuTitleText2" parent="MenuPanelContainer/MarginContainer/VBoxContainer/MenuChoice2/MarginContainer2" instance=ExtResource("2_eslp5")]
-custom_minimum_size = Vector2(0, 0)
-layout_mode = 2
-
-[node name="NumberOfCharges" parent="MenuPanelContainer/MarginContainer/VBoxContainer/MenuChoice2/MarginContainer2/MenuTitleText2" index="0"]
-scale = Vector2(0.3, 0.277)
-text = "x0
-"
-horizontal_alignment = 2
-
-[node name="MenuChoice3" type="HBoxContainer" parent="MenuPanelContainer/MarginContainer/VBoxContainer" node_paths=PackedStringArray("selector", "textDisplay", "numberDisplay")]
+[node name="MenuChoice3" parent="MenuPanelContainer/MarginContainer/VBoxContainer" instance=ExtResource("3_vbs36")]
 custom_minimum_size = Vector2(0, 28)
 layout_mode = 2
-size_flags_vertical = 8
-script = ExtResource("11_0g5q8")
-selector = NodePath("../../../../2ndPage/Margin1/MenuBookPanel/Margin2/VBoxContainer/MenuChoice/MarginContainer/Selector")
-textDisplay = NodePath("../../../../2ndPage/Margin1/MenuBookPanel/Margin2/VBoxContainer/MenuChoice/MenuTitleText/NumberOfCharges")
-numberDisplay = NodePath("../../../../2ndPage/Margin1/MenuBookPanel/Margin2/VBoxContainer/MenuChoice/MarginContainer2/MenuTitleText2/NumberOfCharges")
 
-[node name="MarginContainer" type="MarginContainer" parent="MenuPanelContainer/MarginContainer/VBoxContainer/MenuChoice3"]
+[node name="MarginContainer" parent="MenuPanelContainer/MarginContainer/VBoxContainer/MenuChoice3" index="0"]
 custom_minimum_size = Vector2(80, 28)
-layout_mode = 2
-theme_override_constants/margin_left = 0
-theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 60
-theme_override_constants/margin_bottom = 0
 
-[node name="Selector" type="TextureRect" parent="MenuPanelContainer/MarginContainer/VBoxContainer/MenuChoice3/MarginContainer"]
-visible = false
+[node name="Selector" parent="MenuPanelContainer/MarginContainer/VBoxContainer/MenuChoice3/MarginContainer" index="0"]
 custom_minimum_size = Vector2(28, 28)
-layout_mode = 2
-texture = ExtResource("12_1v7j8")
-stretch_mode = 5
-
-[node name="MenuTitleText" parent="MenuPanelContainer/MarginContainer/VBoxContainer/MenuChoice3" instance=ExtResource("2_eslp5")]
-custom_minimum_size = Vector2(0, 0)
-layout_mode = 2
-size_flags_horizontal = 2
-size_flags_stretch_ratio = 4.33
 
 [node name="NumberOfCharges" parent="MenuPanelContainer/MarginContainer/VBoxContainer/MenuChoice3/MenuTitleText" index="0"]
-offset_left = -201.0
-offset_top = 0.0
-offset_right = 243.0
-offset_bottom = 100.0
+offset_right = 130.0
 scale = Vector2(0.3, 0.277)
-text = "Option3
-"
-horizontal_alignment = 0
-text_overrun_behavior = 3
 
-[node name="MarginContainer2" type="MarginContainer" parent="MenuPanelContainer/MarginContainer/VBoxContainer/MenuChoice3"]
+[node name="MarginContainer2" parent="MenuPanelContainer/MarginContainer/VBoxContainer/MenuChoice3" index="2"]
 visible = false
-layout_mode = 2
-theme_override_constants/margin_left = -200
-
-[node name="MenuTitleText2" parent="MenuPanelContainer/MarginContainer/VBoxContainer/MenuChoice3/MarginContainer2" instance=ExtResource("2_eslp5")]
-custom_minimum_size = Vector2(0, 0)
-layout_mode = 2
-
-[node name="NumberOfCharges" parent="MenuPanelContainer/MarginContainer/VBoxContainer/MenuChoice3/MarginContainer2/MenuTitleText2" index="0"]
-scale = Vector2(0.3, 0.277)
-text = "x0
-"
-horizontal_alignment = 2
 
 [editable path="1stPage/Control"]
 [editable path="1stPage/MenuChoice"]
@@ -648,9 +532,12 @@ horizontal_alignment = 2
 [editable path="2ndPage/Margin1/MenuBookPanel/Margin2/VBoxContainer/MenuChoice11/MarginContainer2/MenuTitleText2"]
 [editable path="2ndPage/MarginContainer2/MenuBookPanel/HBoxContainer/MarginContainer2/VBoxContainer/MenuTitleText"]
 [editable path="2ndPage/MarginContainer2/MenuBookPanel/HBoxContainer/MarginContainer2/VBoxContainer/MarginContainer/MenuTitleText2"]
+[editable path="MenuPanelContainer/MarginContainer/VBoxContainer/MenuChoice"]
 [editable path="MenuPanelContainer/MarginContainer/VBoxContainer/MenuChoice/MenuTitleText"]
 [editable path="MenuPanelContainer/MarginContainer/VBoxContainer/MenuChoice/MarginContainer2/MenuTitleText2"]
+[editable path="MenuPanelContainer/MarginContainer/VBoxContainer/MenuChoice2"]
 [editable path="MenuPanelContainer/MarginContainer/VBoxContainer/MenuChoice2/MenuTitleText"]
 [editable path="MenuPanelContainer/MarginContainer/VBoxContainer/MenuChoice2/MarginContainer2/MenuTitleText2"]
+[editable path="MenuPanelContainer/MarginContainer/VBoxContainer/MenuChoice3"]
 [editable path="MenuPanelContainer/MarginContainer/VBoxContainer/MenuChoice3/MenuTitleText"]
 [editable path="MenuPanelContainer/MarginContainer/VBoxContainer/MenuChoice3/MarginContainer2/MenuTitleText2"]

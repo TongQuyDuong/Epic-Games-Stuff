@@ -25,12 +25,12 @@ public partial class MenuChoice : HBoxContainer
 		textDisplay.Text = content;
 	}
 
-	public void SetContent(Item item)
+	public void SetContent(ItemData itemData)
 	{
-		if(item != null) {
-			textDisplay.Text = item.itemName;
-			if (item.isStackable) {
-				SetNumberDisplay(item.quantity);
+		if(itemData != null) {
+			textDisplay.Text = itemData.item.itemName;
+			if (itemData.item.isStackable) {
+				SetNumberDisplay(itemData.quantity);
 			} else {
 				HideNumber();
 			}

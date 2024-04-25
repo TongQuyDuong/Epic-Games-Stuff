@@ -1,0 +1,20 @@
+[gd_resource type="Resource" load_steps=5 format=3 uid="uid://8xb7eovgsau8"]
+
+[ext_resource type="Texture2D" uid="uid://dqcuqj7ov6dw2" path="res://Sprites/Items/Items195.png" id="1_lcxdf"]
+[ext_resource type="Script" path="res://Scripts/Resources/Inventory/Equipment.cs" id="1_qb83f"]
+[ext_resource type="Script" path="res://Scripts/Resources/Stats/StatModGlobal.cs" id="3_nwijr"]
+
+[sub_resource type="Resource" id="Resource_n6iww"]
+script = ExtResource("3_nwijr")
+modtype = 0
+modValue = 5.0
+statType = 3
+
+[resource]
+script = ExtResource("1_qb83f")
+statMods = Array[Object]([SubResource("Resource_n6iww")])
+icon = ExtResource("1_lcxdf")
+itemName = "Mage's Hat"
+itemDescription = "Res + 5"
+itemType = 1
+isStackable = false

@@ -1,0 +1,20 @@
+[gd_resource type="Resource" load_steps=5 format=3 uid="uid://ca336qmnglkyk"]
+
+[ext_resource type="Script" path="res://Scripts/Resources/Inventory/Equipment.cs" id="1_dyoph"]
+[ext_resource type="Texture2D" uid="uid://qni3g4bi3jkd" path="res://Sprites/Items/Items199.png" id="1_wko7f"]
+[ext_resource type="Script" path="res://Scripts/Resources/Stats/StatModGlobal.cs" id="3_23k67"]
+
+[sub_resource type="Resource" id="Resource_n6hmm"]
+script = ExtResource("3_23k67")
+modtype = 0
+modValue = 5.0
+statType = 0
+
+[resource]
+script = ExtResource("1_dyoph")
+statMods = Array[Object]([SubResource("Resource_n6hmm")])
+icon = ExtResource("1_wko7f")
+itemName = "Crude Sword"
+itemDescription = "Atk + 5"
+itemType = 1
+isStackable = false
