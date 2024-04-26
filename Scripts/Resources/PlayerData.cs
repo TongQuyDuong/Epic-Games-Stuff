@@ -8,6 +8,7 @@ using System.Diagnostics;
 [RegisteredType(nameof(PlayerData), "", nameof(Resource))]
 public partial class PlayerData : Resource
 {
+	public static Action onPlayerInventoryChanged;
 	[Export] public int currentHP;
 	[Export] public UnitStatList playerStats;
 	[Export] public Godot.Collections.Dictionary<Item,int> inventory;
@@ -23,5 +24,25 @@ public partial class PlayerData : Resource
 		Debug.Print(inventory.Count.ToString());
 
 		ResourceSaver.Save(this);
+		onPlayerInventoryChanged?.Invoke();
+	}
+
+	public void RemoveItem(Item item, int quantity)
+	{
+		if (inventory.ContainsKey(item))
+		{
+			inventory[item] -= quantity;
+		}
+		else
+		{
+			return;
+		}
+
+		if (inventory[item] <= 0) {
+			inventory.Remove(item);
+		}
+
+		ResourceSaver.Save(this);
+		onPlayerInventoryChanged?.Invoke();
 	}
 }

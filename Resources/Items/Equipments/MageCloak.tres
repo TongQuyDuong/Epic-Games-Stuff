@@ -1,0 +1,26 @@
+[gd_resource type="Resource" load_steps=6 format=3 uid="uid://chu5xpd42s0v7"]
+
+[ext_resource type="Texture2D" uid="uid://bjsvds7lnr0rg" path="res://Sprites/Items/Items211.png" id="1_6uapr"]
+[ext_resource type="Script" path="res://Scripts/Resources/Inventory/Equipment.cs" id="1_qyg2h"]
+[ext_resource type="Script" path="res://Scripts/Resources/Stats/StatModGlobal.cs" id="3_ltcbj"]
+
+[sub_resource type="Resource" id="Resource_yheaw"]
+script = ExtResource("3_ltcbj")
+modtype = 100
+modValue = 3.0
+statType = 1
+
+[sub_resource type="Resource" id="Resource_a06ul"]
+script = ExtResource("3_ltcbj")
+modtype = 100
+modValue = 3.0
+statType = 3
+
+[resource]
+script = ExtResource("1_qyg2h")
+statMods = Array[Object]([SubResource("Resource_yheaw"), SubResource("Resource_a06ul")])
+icon = ExtResource("1_6uapr")
+itemName = "Mage's Cloak"
+itemDescription = "Def + 3 \\n Res + 3"
+itemType = 1
+isStackable = false

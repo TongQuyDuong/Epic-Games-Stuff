@@ -32,7 +32,9 @@ public partial class InventoryLayout : MenuLayout
 	public override void _Ready() {
 		MenuBook.onRequestUIFocus.Invoke(UI_LAYER_NUMBER);
 		menuChoices[0].ToggleSelect();
-		displayList.DisplayItems(playerData.inventory);
+
+		displayList.playerData = player.playerData;
+		displayList.DisplayItems(ItemType.None);
 	}
 
 	private void ChangeSelectedChoice(int UiLayer, bool isMovingUp)
@@ -52,9 +54,9 @@ public partial class InventoryLayout : MenuLayout
 			menuChoices[selectedIndex].ToggleSelect();
 			
 			if(selectedIndex == 0) {
-				displayList.DisplayItems(playerData.inventory);
+				displayList.DisplayItems(ItemType.None);
 			} else {
-				displayList.DisplayItems(playerData.inventory.Where(item => (int)item.Key.itemType == selectedIndex));
+				displayList.DisplayItems((ItemType)selectedIndex);
 			}
 		}
 	}

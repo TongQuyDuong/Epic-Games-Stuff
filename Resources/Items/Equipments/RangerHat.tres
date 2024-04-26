@@ -1,0 +1,26 @@
+[gd_resource type="Resource" load_steps=6 format=3 uid="uid://blbxwgd4fl5it"]
+
+[ext_resource type="Texture2D" uid="uid://rouyvucu8n8f" path="res://Sprites/Items/Items196.png" id="1_dkx4h"]
+[ext_resource type="Script" path="res://Scripts/Resources/Inventory/Equipment.cs" id="1_tgcso"]
+[ext_resource type="Script" path="res://Scripts/Resources/Stats/StatModGlobal.cs" id="3_b6mm2"]
+
+[sub_resource type="Resource" id="Resource_4814n"]
+script = ExtResource("3_b6mm2")
+modtype = 0
+modValue = 3.0
+statType = 1
+
+[sub_resource type="Resource" id="Resource_o16e2"]
+script = ExtResource("3_b6mm2")
+modtype = 0
+modValue = 3.0
+statType = 3
+
+[resource]
+script = ExtResource("1_tgcso")
+statMods = Array[Object]([SubResource("Resource_4814n"), SubResource("Resource_o16e2")])
+icon = ExtResource("1_dkx4h")
+itemName = "Ranger's Hat"
+itemDescription = "Def + 3 \\n Res + 3"
+itemType = 1
+isStackable = false

@@ -25,6 +25,7 @@ config/icon="res://icon.svg"
 
 SceneGlobalManager="*res://Scripts/Managers/SceneGlobalManager.cs"
 DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
+PlayerDataGlobalManager="*res://Scripts/Managers/PlayerDataGlobalManager.cs"
 
 [dialogue_manager]
 

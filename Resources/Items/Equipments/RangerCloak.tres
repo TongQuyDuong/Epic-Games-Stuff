@@ -1,0 +1,20 @@
+[gd_resource type="Resource" load_steps=5 format=3 uid="uid://7flutnl36j8r"]
+
+[ext_resource type="Texture2D" uid="uid://bymt4bl18d2cs" path="res://Sprites/Items/Items212.png" id="1_jhngx"]
+[ext_resource type="Script" path="res://Scripts/Resources/Inventory/Equipment.cs" id="1_qjli4"]
+[ext_resource type="Script" path="res://Scripts/Resources/Stats/StatModGlobal.cs" id="3_vej8t"]
+
+[sub_resource type="Resource" id="Resource_lpqlv"]
+script = ExtResource("3_vej8t")
+modtype = 0
+modValue = 5.0
+statType = 1
+
+[resource]
+script = ExtResource("1_qjli4")
+statMods = Array[Object]([SubResource("Resource_lpqlv")])
+icon = ExtResource("1_jhngx")
+itemName = "Ranger's Cloak"
+itemDescription = "Def + 5"
+itemType = 1
+isStackable = false

@@ -33,29 +33,29 @@ public partial class ItemAction : PanelContainer
 	public void PopOut(Item item) {
 		switch(item.itemType) {
 			case ItemType.Equipment:
-			numberOfActions = 3;
-			actionChoices[0].SetContent("Equip");
-			actionChoices[1].SetContent("Unequip");
-			actionChoices[2].SetContent("Drop");
-			break;
+				numberOfActions = 3;
+				actionChoices[0].SetContent("Equip");
+				actionChoices[1].SetContent("Unequip");
+				actionChoices[2].SetContent("Drop");
+				break;
 			case ItemType.Consumable:
-			numberOfActions = 2;
-			actionChoices[0].SetContent("Use");
-			actionChoices[1].SetContent("Drop");
-			actionChoices[2].Visible = false;
-			break;
+				numberOfActions = 2;
+				actionChoices[0].SetContent("Use");
+				actionChoices[1].SetContent("Drop");
+				actionChoices[2].Visible = false;
+				break;
 			case ItemType.MonsterLoot:
-			numberOfActions = 1;
-			actionChoices[0].SetContent("Drop");
-			actionChoices[1].Visible = false;
-			actionChoices[2].Visible = false;
-			break;
+				numberOfActions = 1;
+				actionChoices[0].SetContent("Drop");
+				actionChoices[1].Visible = false;
+				actionChoices[2].Visible = false;
+				break;
 			case ItemType.KeyItem:
-			numberOfActions = 2;
-			actionChoices[0].SetContent("Use");
-			actionChoices[1].SetContent("Drop");
-			actionChoices[2].Visible = false;
-			break;
+				numberOfActions = 2;
+				actionChoices[0].SetContent("Use");
+				actionChoices[1].SetContent("Drop");
+				actionChoices[2].Visible = false;
+				break;
 		}
 		this.Visible = true;
 	}
@@ -100,6 +100,7 @@ public partial class ItemAction : PanelContainer
 
 		if(uiLayer == (UI_LAYER_NUMBER + 1)) {
 			onItemActionSelected?.Invoke(actionChoices[selectedIndex].GetText());
+			actionChoices[selectedIndex].ToggleSelect();
 			this.Visible = false;
 			MenuBook.onRequestUIFocus?.Invoke(UI_LAYER_NUMBER - 1);
 		}

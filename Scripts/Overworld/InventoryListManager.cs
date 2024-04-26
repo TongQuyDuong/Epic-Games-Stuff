@@ -12,7 +12,8 @@ public partial class InventoryListManager : VBoxContainer
 	public static Action<Item> onItemSelected;
 	[Export] Godot.Collections.Array<MenuChoice> itemChoices = new Godot.Collections.Array<MenuChoice>();
 	private Dictionary<int,ItemData> itemList = new Dictionary<int, ItemData>();
-
+	public PlayerData playerData;
+	public ItemType currentFilter;
 	[Export] private int selectedIndex = 0;
 	[Export] private int currentOffset = 0;
 	[Export] private int maxOffset;
@@ -22,6 +23,8 @@ public partial class InventoryListManager : VBoxContainer
 		MenuBook.onMovementInputReceived += ChangeSelectedChoice;
 		MenuBook.onSelectInputReceived += GainFocus;
 		MenuBook.onBackInputReceived += LoseFocus;
+		ItemAction.onItemActionSelected += PerformActionOnItem;
+		PlayerData.onPlayerInventoryChanged += SyncInventory;
 	}
 
 	public override void _ExitTree()
@@ -29,6 +32,8 @@ public partial class InventoryListManager : VBoxContainer
 		MenuBook.onMovementInputReceived -= ChangeSelectedChoice;
 		MenuBook.onSelectInputReceived -= GainFocus;
 		MenuBook.onBackInputReceived -= LoseFocus;
+		ItemAction.onItemActionSelected -= PerformActionOnItem;
+		PlayerData.onPlayerInventoryChanged -= SyncInventory;
 	}
 
 	public override void _Ready() {
@@ -38,22 +43,65 @@ public partial class InventoryListManager : VBoxContainer
 
 	}
 
-	public void DisplayItems(IEnumerable<KeyValuePair<Item, int>> items) {
-		selectedIndex = 0;
-		currentOffset = 0;
-		Debug.Print("Items :" + items.Count());
+	public void BuildItemList() {
 		itemList.Clear();
 		int i = 0;
-		foreach (KeyValuePair<Item, int> item in items) {
-			if(item.Key.isStackable) {
-				itemList[i] = new ItemData(item.Key,item.Value);
+		foreach (KeyValuePair<Item, int> item in playerData.inventory)
+		{
+			if (item.Key.isStackable)
+			{
+				itemList[i] = new ItemData(item.Key, item.Value);
 				i++;
-			} else {
-				for (int j = 0; j < item.Value; j++) {
+			}
+			else
+			{
+				for (int j = 0; j < item.Value; j++)
+				{
 					itemList[i] = new ItemData(item.Key);
 					i++;
 				}
 			}
+		}
+
+	}
+
+	public void BuildItemList(Func<KeyValuePair<Item,int>,bool> predicate)
+	{
+		IEnumerable<KeyValuePair<Item,int>> filteredItems = playerData.inventory.Where(predicate);
+		itemList.Clear();
+		int i = 0;
+		foreach (KeyValuePair<Item, int> item in filteredItems)
+		{
+			if (item.Key.isStackable)
+			{
+				itemList[i] = new ItemData(item.Key, item.Value);
+				i++;
+			}
+			else
+			{
+				for (int j = 0; j < item.Value; j++)
+				{
+					itemList[i] = new ItemData(item.Key);
+					i++;
+				}
+			}
+		}
+
+
+	}
+
+	public void DisplayItems(ItemType filter) {
+		selectedIndex = 0;
+		currentOffset = 0;
+		currentFilter = filter;
+
+		if (currentFilter == ItemType.None)
+		{
+			BuildItemList();
+		}
+		else
+		{
+			BuildItemList(item => item.Key.itemType == currentFilter);
 		}
 
 		Debug.Print("Items list :" + itemList.Count);
@@ -62,7 +110,7 @@ public partial class InventoryListManager : VBoxContainer
 		maxOffset = itemList.Count > itemChoices.Count ? itemList.Count - itemChoices.Count : 0;
 
 
-		for (i = 0; i < itemChoices.Count; i++) {
+		for (int i = 0; i < itemChoices.Count; i++) {
 			if (i >= itemList.Count) { 
 				itemChoices[i].Visible = false;
 				continue;
@@ -75,8 +123,12 @@ public partial class InventoryListManager : VBoxContainer
 	}
 
 	private void DisplayOffset(int offset) {
-		if(maxOffset == 0) return;
 		for (int i = 0; i < itemChoices.Count; i++) {
+			if (i >= itemList.Count)
+			{
+				itemChoices[i].Visible = false;
+				continue;
+			}
 			itemChoices[i].SetContent(itemList[i+offset]);
 		}
 	}
@@ -144,5 +196,53 @@ public partial class InventoryListManager : VBoxContainer
 		if (uiLayer == (UI_LAYER_NUMBER + 1)) {
 			onItemSelected?.Invoke(itemList[selectedIndex].item);
 		}
+	}
+
+	private void PerformActionOnItem(string action) {
+		Item currentItem = itemList[selectedIndex].item;
+		switch (action) {
+			case "Equip":
+				break;
+			case "Unequip":
+				break;
+			case "Use":
+				if (currentItem.itemType == ItemType.Consumable) {
+					((RecoveryItem)currentItem).UseItem();
+				} else {
+					((KeyItem)currentItem).UseItem();
+				}
+				break;
+			case "Drop":
+				break;
+		}
+	}
+
+	private void SyncInventory() {
+		if (currentFilter == ItemType.None) {
+			BuildItemList();
+		} else {
+			BuildItemList(item => item.Key.itemType == currentFilter);
+		}
+
+		maxOffset = itemList.Count > itemChoices.Count ? itemList.Count - itemChoices.Count : 0;
+		if (itemList.Count <= 0) {
+			MenuBook.onRequestUIFocus?.Invoke(UI_LAYER_NUMBER - 1);
+			itemChoices[selectedIndex].ToggleSelect();
+			itemChoices[selectedIndex].Visible = false;
+			return;
+		}
+		if (currentOffset > maxOffset) currentOffset = maxOffset;
+		if (selectedIndex >= itemList.Count) {
+			if (maxOffset == 0) {
+				itemChoices[selectedIndex].ToggleSelect();
+				selectedIndex = itemList.Count - 1;
+				itemChoices[selectedIndex].ToggleSelect();
+			} else {
+				selectedIndex = itemList.Count - 1;
+			}
+			
+		}
+
+		DisplayOffset(currentOffset);
 	}
 }
