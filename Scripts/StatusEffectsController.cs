@@ -10,13 +10,20 @@ public partial class StatusEffectsController : Node2D
 	[Export] BaseUnit unit;
 	[Export] public Godot.Collections.Array<StatusEffect> statusEffects = new Godot.Collections.Array<StatusEffect>();
 	[Export] private StatusBar statusBar;
-	// Called when the node enters the scene tree for the first time.
+
+	public override void _EnterTree() {
+		Events.OnBattleEnd += CleanseAllEffects;
+	}
+
+	public override void _ExitTree() {
+		Events.OnBattleEnd -= CleanseAllEffects;
+	}
+
 	public override void _Ready()
 	{
 		unit = GetParent<CharacterBody2D>() as BaseUnit;
 	}
 
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _PhysicsProcess(double delta)
 	{
 		if (statusEffects.Count > 0)
@@ -124,7 +131,6 @@ public partial class StatusEffectsController : Node2D
 				case StatusEffectType.ControlEffect:
 					((ControlEffect)timedOutEffects[i].effect).RemoveEffect(unit, timedOutEffects[i].Ceffect);
 					statusEffects.Remove(timedOutEffects[i]);
-					Debug.Print("Here");
 					break;
 				default:
 					timedOutEffects[i].effect.RemoveEffect(unit);
@@ -144,6 +150,10 @@ public partial class StatusEffectsController : Node2D
 		IEnumerable<StatusEffect> removedEffects = statusEffects.Where(predicate);
 		Debug.Print(removedEffects.Count().ToString());
 		RemoveStatusEffect(removedEffects.ToList());
+	}
 
+	public void CleanseAllEffects()
+	{
+		RemoveStatusEffect(statusEffects.ToList());
 	}
 }

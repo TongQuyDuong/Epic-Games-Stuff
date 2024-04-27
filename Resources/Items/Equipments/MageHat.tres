@@ -6,12 +6,13 @@
 
 [sub_resource type="Resource" id="Resource_n6iww"]
 script = ExtResource("3_nwijr")
-modtype = 0
+modtype = 100
 modValue = 5.0
 statType = 3
 
 [resource]
 script = ExtResource("1_qb83f")
+equipmentType = 2
 statMods = Array[Object]([SubResource("Resource_n6iww")])
 icon = ExtResource("1_lcxdf")
 itemName = "Mage's Hat"

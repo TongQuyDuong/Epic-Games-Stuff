@@ -6,7 +6,6 @@ using System.Diagnostics;
 using System.Linq;
 
 [GlobalClass]
-
 public partial class UnitStat : Resource
 {
     [Export] public StatType statType { get; set; }
@@ -27,13 +26,11 @@ public partial class UnitStat : Resource
         }
     }
     protected readonly List<StatModifier> statModifiers;
-    public readonly ReadOnlyCollection<StatModifier> StatModifiers;
     protected bool isDirty = true;
     protected int _value;
     public UnitStat()
     {
         statModifiers = new List<StatModifier>();
-        StatModifiers = statModifiers.AsReadOnly();
         statType = StatType.Attack;
         BaseValue = 0;
     }
@@ -70,13 +67,14 @@ public partial class UnitStat : Resource
     public bool RemoveModifier(StatModType type, float value) {
         StatModifier modToRemove = statModifiers.Where(mod => mod.Type == type && mod.Value == value).First();
         if (modToRemove != null) {
+            isDirty = true;
             statModifiers.Remove(modToRemove);
             numberOfMods -= 1;
-            Debug.Print(statModifiers.Count.ToString());
+            Debug.Print("Mods on " + type + " = " + statModifiers.Count.ToString());
             return true;
         }
 
-        Debug.Print(statModifiers.Count.ToString());
+        Debug.Print("Mods on " + type + " = " + statModifiers.Count.ToString());
         return false;
     }
 
@@ -101,7 +99,7 @@ public partial class UnitStat : Resource
                     finalValue *= statModifiers[i].Value;
                     break;
                 default:
-                Debug.Print("Defaulted");
+                Debug.Print("Dont know what this modType is");
                 break;
                     
             }

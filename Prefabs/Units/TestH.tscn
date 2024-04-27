@@ -1,7 +1,6 @@
-[gd_scene load_steps=22 format=3 uid="uid://dj3s5sndljpr1"]
+[gd_scene load_steps=21 format=3 uid="uid://dj3s5sndljpr1"]
 
 [ext_resource type="Script" path="res://Scripts/Units/Heroes/TestH.cs" id="1_1cg08"]
-[ext_resource type="Resource" uid="uid://cole6tiatpmnm" path="res://Resources/UnitStats/TestH.tres" id="2_o08ap"]
 [ext_resource type="Script" path="res://Scripts/Movement.cs" id="3_or2d2"]
 [ext_resource type="Shader" path="res://Resources/Shaders/FlashSprite.gdshader" id="4_6jwi1"]
 [ext_resource type="Script" path="res://Scripts/PlayerStateController.cs" id="4_d4ftl"]
@@ -217,7 +216,6 @@ script = ExtResource("1_1cg08")
 playerAnim = NodePath("PlayerAnimation")
 stateController = NodePath("PlayerStateController")
 abilityHolders = [NodePath("AbilityHolder1"), NodePath("AbilityHolder2"), NodePath("AbilityHolder3")]
-stats = ExtResource("2_o08ap")
 STeffectCon = NodePath("StatusEffectsController")
 animPlayer = NodePath("AnimationPlayer")
 PopupPoint = NodePath("PopupPoint")

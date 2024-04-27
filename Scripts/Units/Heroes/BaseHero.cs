@@ -9,7 +9,9 @@ public partial class BaseHero : BaseUnit
 	public override void _EnterTree()
 	{
 		base._EnterTree();
-		
+
+		stats = GameManager.Instance.playerData.playerStats;
+
 		BattleUI.Instance.SetStartingSP(20);
 		BattleUI.Instance.topLeftUI.UpdateSPInfo(50,1);
 		SelectSkillBook.onConfirmButtonPressed += LoadAbilities;
@@ -19,6 +21,10 @@ public partial class BaseHero : BaseUnit
 	{
 		base._ExitTree();
 		SelectSkillBook.onConfirmButtonPressed -= LoadAbilities;
+	}
+
+	public override void _Ready() {
+		base._Ready();
 	}
 
 	public override void _PhysicsProcess(double delta)

@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Diagnostics;
 
 public partial class GameManager : Node
 {
@@ -12,6 +13,7 @@ public partial class GameManager : Node
 	public override void _EnterTree()
 	{
 		if (Instance == null) { Instance = this; }
+
 		Events.OnBattleActive += BeginBattle;
 		Events.OnBattleEnd += EndBattle;
 		TopLeftUI.onSpOverFlow += EnableSelectSkill;
@@ -21,7 +23,13 @@ public partial class GameManager : Node
 		Events.OnBattleActive -= BeginBattle;
 		Events.OnBattleEnd -= EndBattle;
 		TopLeftUI.onSpOverFlow -= EnableSelectSkill;
+
 		Instance = null;
+	}
+
+	public override void _Ready() {
+		playerData.playerStats.TryGetStatValue(StatType.Magic, out float magic);
+		Debug.Print("Magic : " + magic);
 	}
 
     public override void _Process(double delta)

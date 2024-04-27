@@ -6,12 +6,13 @@
 
 [sub_resource type="Resource" id="Resource_n6hmm"]
 script = ExtResource("3_23k67")
-modtype = 0
+modtype = 100
 modValue = 5.0
 statType = 0
 
 [resource]
 script = ExtResource("1_dyoph")
+equipmentType = 1
 statMods = Array[Object]([SubResource("Resource_n6hmm")])
 icon = ExtResource("1_wko7f")
 itemName = "Crude Sword"

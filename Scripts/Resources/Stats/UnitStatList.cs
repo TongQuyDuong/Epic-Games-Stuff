@@ -13,6 +13,7 @@ public partial class UnitStatList : Resource
 
     public bool TryGetStatValue(StatType statType, out float value)
     {
+        
         for (int i = 0; i < StatList.Count; i++)
         {
             if (StatList[i].statType == statType)

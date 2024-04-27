@@ -18,6 +18,7 @@ statType = 3
 
 [resource]
 script = ExtResource("1_qyg2h")
+equipmentType = 3
 statMods = Array[Object]([SubResource("Resource_yheaw"), SubResource("Resource_a06ul")])
 icon = ExtResource("1_6uapr")
 itemName = "Mage's Cloak"

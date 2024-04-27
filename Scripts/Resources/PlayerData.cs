@@ -12,6 +12,7 @@ public partial class PlayerData : Resource
 	[Export] public int currentHP;
 	[Export] public UnitStatList playerStats;
 	[Export] public Godot.Collections.Dictionary<Item,int> inventory;
+	[Export] public Godot.Collections.Dictionary<EquipmentType, Equipment> equippedItems;
 
 	public void AddItem(Item item) {
 		if (inventory == null) inventory = new Godot.Collections.Dictionary<Item, int>();
@@ -44,5 +45,20 @@ public partial class PlayerData : Resource
 
 		ResourceSaver.Save(this);
 		onPlayerInventoryChanged?.Invoke();
+	}
+
+	public void EquipItem(Equipment item) {
+		if (equippedItems[item.equipmentType] != null) {
+			UnequipItem(item.equipmentType);
+		}
+		equippedItems[item.equipmentType] = item;
+		item.Equip(this);
+		ResourceSaver.Save(this);
+	}
+
+	public void UnequipItem(EquipmentType type) {
+		equippedItems[type].Unequip(this);
+		equippedItems[type] = null;
+		ResourceSaver.Save(this);	
 	}
 }

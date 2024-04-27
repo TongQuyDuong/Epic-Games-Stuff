@@ -6,6 +6,7 @@ public partial class ItemData : Resource
 {
 	public Item item;
 	public int quantity = 1;
+	public bool isEquipped = false;
 
 	public ItemData(Item item) {
 		this.item = item; 

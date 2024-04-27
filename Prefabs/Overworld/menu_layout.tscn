@@ -1,13 +1,18 @@
-[gd_scene load_steps=11 format=3 uid="uid://csxirw7jkgxha"]
+[gd_scene load_steps=16 format=3 uid="uid://csxirw7jkgxha"]
 
 [ext_resource type="Script" path="res://Scripts/Overworld/Menus/ProfileLayout.cs" id="1_qaw4d"]
+[ext_resource type="Script" path="res://Scripts/Overworld/MenuBook/EquipmentDisplayManager.cs" id="2_bg8k3"]
 [ext_resource type="Texture2D" uid="uid://baj7p78t084vw" path="res://Sprites/UI/Overworld/BookProfileBorder.png" id="3_1m75w"]
 [ext_resource type="PackedScene" uid="uid://d1pnehgy07weu" path="res://Prefabs/UI/menu_title_text.tscn" id="3_igx3d"]
+[ext_resource type="PackedScene" uid="uid://gi55ukjt6ouc" path="res://Prefabs/Overworld/equipment_loadout_display.tscn" id="4_hca6v"]
 [ext_resource type="Texture2D" uid="uid://ova4grfinsue" path="res://Sprites/TestH/TestPortrait.png" id="4_oncm8"]
 [ext_resource type="Texture2D" uid="uid://rh1dwln1unxf" path="res://Sprites/UI/Overworld/MenuBook/HPIcon.png" id="5_w0fib"]
 [ext_resource type="Texture2D" uid="uid://dcaq1ipupujck" path="res://Sprites/UI/Overworld/MenuBook/AtkIcon.png" id="6_iyoaj"]
+[ext_resource type="Texture2D" uid="uid://r38swqsshqpk" path="res://Sprites/UI/Overworld/MenuBook/HelmetIcon.png" id="6_sihh4"]
 [ext_resource type="Texture2D" uid="uid://dwc6aay53mji" path="res://Sprites/UI/Overworld/MenuBook/DefIcon.png" id="7_5nbr5"]
+[ext_resource type="Texture2D" uid="uid://d1hw1l5wrvxgn" path="res://Sprites/UI/Overworld/MenuBook/ChestplateIcon.png" id="7_6uebe"]
 [ext_resource type="Texture2D" uid="uid://de52f2po2ncmj" path="res://Sprites/UI/Overworld/MenuBook/MagicIcon.png" id="8_a65j8"]
+[ext_resource type="Texture2D" uid="uid://cam324cjqbx6h" path="res://Sprites/UI/Overworld/MenuBook/BootsIcon.png" id="8_yb24b"]
 [ext_resource type="Texture2D" uid="uid://d1rcma8rvti4u" path="res://Sprites/UI/Overworld/MenuBook/ResIcon.png" id="9_j1ov2"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_t15oi"]
@@ -17,7 +22,7 @@ texture_margin_top = 14.0
 texture_margin_right = 14.0
 texture_margin_bottom = 14.0
 
-[node name="ProfileLayout" type="Control" node_paths=PackedStringArray("currentHpDisplay", "maxHpDisplay", "atkDisplay", "defDisplay", "magicDisplay", "resDisplay", "portraitDisplay")]
+[node name="ProfileLayout" type="Control" node_paths=PackedStringArray("currentHpDisplay", "maxHpDisplay", "atkDisplay", "defDisplay", "magicDisplay", "resDisplay", "portraitDisplay", "equipmentDisplay")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -34,12 +39,16 @@ defDisplay = NodePath("2ndPage/Hbox3/MenuTitleText/NumberOfCharges")
 magicDisplay = NodePath("2ndPage/Hbox4/MenuTitleText/NumberOfCharges")
 resDisplay = NodePath("2ndPage/Hbox5/MenuTitleText/NumberOfCharges")
 portraitDisplay = NodePath("2ndPage/Panel/TextureRect")
+equipmentDisplay = NodePath("1stPage")
 
-[node name="1stPage" type="VBoxContainer" parent="."]
+[node name="1stPage" type="VBoxContainer" parent="." node_paths=PackedStringArray("displays")]
 custom_minimum_size = Vector2(407, 493)
 layout_mode = 2
 offset_right = 407.0
 offset_bottom = 493.0
+theme_override_constants/separation = 10
+script = ExtResource("2_bg8k3")
+displays = [NodePath("EquipmentLoadoutDisplay"), NodePath("EquipmentLoadoutDisplay2"), NodePath("EquipmentLoadoutDisplay3"), NodePath("EquipmentLoadoutDisplay4")]
 
 [node name="Center1stPage" type="Marker2D" parent="1stPage"]
 position = Vector2(203.721, 25.7955)
@@ -51,8 +60,24 @@ position = Vector2(407.4, 168.898)
 layout_mode = 2
 
 [node name="NumberOfCharges" parent="1stPage/Control" index="0"]
-text = "Menu
+text = "Equipment
 "
+
+[node name="EquipmentLoadoutDisplay" parent="1stPage" instance=ExtResource("4_hca6v")]
+layout_mode = 2
+defaultIcon = ExtResource("6_iyoaj")
+
+[node name="EquipmentLoadoutDisplay2" parent="1stPage" instance=ExtResource("4_hca6v")]
+layout_mode = 2
+defaultIcon = ExtResource("6_sihh4")
+
+[node name="EquipmentLoadoutDisplay3" parent="1stPage" instance=ExtResource("4_hca6v")]
+layout_mode = 2
+defaultIcon = ExtResource("7_6uebe")
+
+[node name="EquipmentLoadoutDisplay4" parent="1stPage" instance=ExtResource("4_hca6v")]
+layout_mode = 2
+defaultIcon = ExtResource("8_yb24b")
 
 [node name="2ndPage" type="VBoxContainer" parent="."]
 custom_minimum_size = Vector2(407, 493)

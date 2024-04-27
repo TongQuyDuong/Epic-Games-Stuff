@@ -6,12 +6,13 @@
 
 [sub_resource type="Resource" id="Resource_lpqlv"]
 script = ExtResource("3_vej8t")
-modtype = 0
+modtype = 100
 modValue = 5.0
 statType = 1
 
 [resource]
 script = ExtResource("1_qjli4")
+equipmentType = 3
 statMods = Array[Object]([SubResource("Resource_lpqlv")])
 icon = ExtResource("1_jhngx")
 itemName = "Ranger's Cloak"

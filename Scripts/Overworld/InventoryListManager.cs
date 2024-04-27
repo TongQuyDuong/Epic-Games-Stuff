@@ -58,6 +58,9 @@ public partial class InventoryListManager : VBoxContainer
 				for (int j = 0; j < item.Value; j++)
 				{
 					itemList[i] = new ItemData(item.Key);
+					if (j == 0) {
+						if (playerData.equippedItems.Values.Contains((Equipment)item.Key)) itemList[i].isEquipped = true;
+					}
 					i++;
 				}
 			}
@@ -82,6 +85,10 @@ public partial class InventoryListManager : VBoxContainer
 				for (int j = 0; j < item.Value; j++)
 				{
 					itemList[i] = new ItemData(item.Key);
+					if (j == 0)
+					{
+						if (playerData.equippedItems.Values.Contains((Equipment)item.Key)) itemList[i].isEquipped = true;
+					}
 					i++;
 				}
 			}
@@ -103,9 +110,6 @@ public partial class InventoryListManager : VBoxContainer
 		{
 			BuildItemList(item => item.Key.itemType == currentFilter);
 		}
-
-		Debug.Print("Items list :" + itemList.Count);
-		Debug.Print("Items choice:" + itemChoices.Count);
 
 		maxOffset = itemList.Count > itemChoices.Count ? itemList.Count - itemChoices.Count : 0;
 
@@ -138,7 +142,6 @@ public partial class InventoryListManager : VBoxContainer
 		if(itemList.Count <= 1) return;
 		if (UiLayer == UI_LAYER_NUMBER)
 		{
-			Debug.Print("Current Offset: " + currentOffset);
 			itemChoices[selectedIndex - currentOffset].ToggleSelect();
 			selectedIndex += isMovingUp ? -1 : 1;
 			if (selectedIndex < 0)
@@ -202,8 +205,16 @@ public partial class InventoryListManager : VBoxContainer
 		Item currentItem = itemList[selectedIndex].item;
 		switch (action) {
 			case "Equip":
+				if (itemList[selectedIndex].isEquipped == true) break;
+				playerData.EquipItem((Equipment)currentItem);
+				itemList[selectedIndex].isEquipped = true;
+				itemChoices[selectedIndex - currentOffset].SetContent(itemList[selectedIndex]);
 				break;
 			case "Unequip":
+				if (itemList[selectedIndex].isEquipped == false) break;
+				playerData.UnequipItem(((Equipment)currentItem).equipmentType);
+				itemList[selectedIndex].isEquipped = false;
+				itemChoices[selectedIndex - currentOffset].SetContent(itemList[selectedIndex]);
 				break;
 			case "Use":
 				if (currentItem.itemType == ItemType.Consumable) {
@@ -213,6 +224,8 @@ public partial class InventoryListManager : VBoxContainer
 				}
 				break;
 			case "Drop":
+				if (currentItem.itemType == ItemType.KeyItem) break;
+				playerData.RemoveItem(currentItem,1);
 				break;
 		}
 	}

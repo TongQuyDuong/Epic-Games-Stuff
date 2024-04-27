@@ -2,12 +2,12 @@
 
 [ext_resource type="Script" path="res://Scripts/Overworld/Menus/InventoryLayout.cs" id="1_o8vt3"]
 [ext_resource type="PackedScene" uid="uid://d1pnehgy07weu" path="res://Prefabs/UI/menu_title_text.tscn" id="2_eslp5"]
-[ext_resource type="Resource" uid="uid://uykmgy44tu00" path="res://Resources/SaveData/PlayerData1.tres" id="2_m614q"]
+[ext_resource type="Resource" uid="uid://dwutpt1lv8dt5" path="res://Resources/SaveData/PlayerData1.tres" id="2_m614q"]
 [ext_resource type="PackedScene" uid="uid://boueby18tbc0j" path="res://Prefabs/Overworld/menu_choice.tscn" id="3_vbs36"]
 [ext_resource type="PackedScene" uid="uid://bcq16aj436rmw" path="res://Prefabs/Overworld/menu_book_panel.tscn" id="4_d76er"]
 [ext_resource type="Script" path="res://Scripts/Overworld/InventoryListManager.cs" id="5_kmcna"]
-[ext_resource type="Theme" uid="uid://dvkdh8poahuwn" path="res://MainTheme.tres" id="6_pb8en"]
 [ext_resource type="Script" path="res://Scripts/Overworld/ItemDescription.cs" id="6_wtrc4"]
+[ext_resource type="PackedScene" uid="uid://dgdoplhcx5snl" path="res://Prefabs/Overworld/portrait_square_display.tscn" id="8_b25u0"]
 [ext_resource type="PackedScene" uid="uid://bnng8wqyxseb" path="res://Prefabs/UI/menu_panel_container.tscn" id="9_aogla"]
 [ext_resource type="Script" path="res://Scripts/Overworld/ItemAction.cs" id="10_k1d7r"]
 
@@ -333,26 +333,8 @@ itemDisplay = NodePath("MarginContainer/Panel/ItemPic")
 itemNameDisplay = NodePath("MarginContainer2/VBoxContainer/MenuTitleText/NumberOfCharges")
 itemDescriptionDisplay = NodePath("MarginContainer2/VBoxContainer/MarginContainer/MenuTitleText2/NumberOfCharges")
 
-[node name="MarginContainer" type="MarginContainer" parent="2ndPage/MarginContainer2/MenuBookPanel/HBoxContainer"]
+[node name="MarginContainer" parent="2ndPage/MarginContainer2/MenuBookPanel/HBoxContainer" instance=ExtResource("8_b25u0")]
 layout_mode = 2
-theme_override_constants/margin_left = 5
-theme_override_constants/margin_top = 5
-theme_override_constants/margin_right = 40
-theme_override_constants/margin_bottom = 5
-
-[node name="Panel" type="Panel" parent="2ndPage/MarginContainer2/MenuBookPanel/HBoxContainer/MarginContainer"]
-custom_minimum_size = Vector2(77, 0)
-layout_mode = 2
-theme = ExtResource("6_pb8en")
-theme_type_variation = &"MenuPanelPortrait"
-
-[node name="ItemPic" type="TextureRect" parent="2ndPage/MarginContainer2/MenuBookPanel/HBoxContainer/MarginContainer/Panel"]
-show_behind_parent = true
-layout_mode = 0
-offset_left = 5.0
-offset_top = 5.0
-offset_right = 71.0
-offset_bottom = 76.0
 
 [node name="MarginContainer2" type="MarginContainer" parent="2ndPage/MarginContainer2/MenuBookPanel/HBoxContainer"]
 layout_mode = 2
@@ -530,6 +512,7 @@ visible = false
 [editable path="2ndPage/Margin1/MenuBookPanel/Margin2/VBoxContainer/MenuChoice11"]
 [editable path="2ndPage/Margin1/MenuBookPanel/Margin2/VBoxContainer/MenuChoice11/MenuTitleText"]
 [editable path="2ndPage/Margin1/MenuBookPanel/Margin2/VBoxContainer/MenuChoice11/MarginContainer2/MenuTitleText2"]
+[editable path="2ndPage/MarginContainer2/MenuBookPanel/HBoxContainer/MarginContainer"]
 [editable path="2ndPage/MarginContainer2/MenuBookPanel/HBoxContainer/MarginContainer2/VBoxContainer/MenuTitleText"]
 [editable path="2ndPage/MarginContainer2/MenuBookPanel/HBoxContainer/MarginContainer2/VBoxContainer/MarginContainer/MenuTitleText2"]
 [editable path="MenuPanelContainer/MarginContainer/VBoxContainer/MenuChoice"]

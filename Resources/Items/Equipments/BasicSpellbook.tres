@@ -6,12 +6,13 @@
 
 [sub_resource type="Resource" id="Resource_lkl87"]
 script = ExtResource("3_3yk15")
-modtype = 0
+modtype = 100
 modValue = 5.0
 statType = 2
 
 [resource]
 script = ExtResource("1_spv2s")
+equipmentType = 1
 statMods = Array[Object]([SubResource("Resource_lkl87")])
 icon = ExtResource("1_oenms")
 itemName = "Basic Spellbook"

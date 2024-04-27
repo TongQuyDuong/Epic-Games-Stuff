@@ -1,0 +1,45 @@
+[gd_scene load_steps=4 format=3 uid="uid://gi55ukjt6ouc"]
+
+[ext_resource type="Script" path="res://Scripts/Overworld/MenuBook/EquipmentLoadoutDisplay.cs" id="1_yt5yn"]
+[ext_resource type="PackedScene" uid="uid://dgdoplhcx5snl" path="res://Prefabs/Overworld/portrait_square_display.tscn" id="2_80ve5"]
+[ext_resource type="PackedScene" uid="uid://d1pnehgy07weu" path="res://Prefabs/UI/menu_title_text.tscn" id="3_048b4"]
+
+[node name="EquipmentLoadoutDisplay" type="HBoxContainer" node_paths=PackedStringArray("itemPicDisplay", "itemNameDisplay")]
+custom_minimum_size = Vector2(0, 90)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -833.0
+offset_bottom = -551.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_yt5yn")
+itemPicDisplay = NodePath("MarginContainer/Panel/ItemPic")
+itemNameDisplay = NodePath("MenuTitleText/NumberOfCharges")
+
+[node name="MarginContainer" parent="." instance=ExtResource("2_80ve5")]
+layout_mode = 2
+theme_override_constants/margin_right = 70
+
+[node name="ItemPic" parent="MarginContainer/Panel" index="0"]
+offset_bottom = 71.0
+
+[node name="MenuTitleText" parent="." instance=ExtResource("3_048b4")]
+layout_mode = 2
+size_flags_horizontal = 2
+
+[node name="NumberOfCharges" parent="MenuTitleText" index="0"]
+offset_left = -201.0
+offset_top = 0.0
+offset_right = 870.0
+offset_bottom = 320.0
+scale = Vector2(0.3, 0.277)
+text = "Equipment Name
+"
+horizontal_alignment = 0
+vertical_alignment = 1
+autowrap_mode = 3
+text_overrun_behavior = 3
+
+[editable path="MarginContainer"]
+[editable path="MenuTitleText"]

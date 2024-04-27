@@ -1,9 +1,9 @@
 [gd_scene load_steps=16 format=3 uid="uid://tua6wgq2ab16"]
 
-[ext_resource type="Script" path="res://Scripts/Overworld/MenuBook.cs" id="1_j7ko2"]
+[ext_resource type="Script" path="res://Scripts/Overworld/MenuBook.cs" id="1_eyk74"]
 [ext_resource type="Texture2D" uid="uid://emdwqkx0dadp" path="res://Sprites/UI/Overworld/BookOpen1.png" id="1_jnin0"]
-[ext_resource type="Script" path="res://Scripts/Overworld/BookmarkManager.cs" id="2_edq4k"]
 [ext_resource type="PackedScene" uid="uid://s864oelsoifw" path="res://Prefabs/Overworld/bookmark.tscn" id="3_eht64"]
+[ext_resource type="Script" path="res://Scripts/Overworld/BookmarkManager.cs" id="3_h2ak3"]
 [ext_resource type="Texture2D" uid="uid://ic6lbyfg5adc" path="res://Sprites/UI/Overworld/BookmarkIcon.png" id="4_gdpjo"]
 [ext_resource type="Texture2D" uid="uid://c15g1p7c7w7nn" path="res://Sprites/UI/Overworld/InventoryIcon.png" id="5_evyo3"]
 [ext_resource type="Texture2D" uid="uid://0y4qveq5whva" path="res://Sprites/UI/Overworld/SettingsIcon.png" id="6_bagcg"]
@@ -187,7 +187,7 @@ _data = {
 }
 
 [node name="MenuBook" type="CanvasLayer" node_paths=PackedStringArray("animationPlayer", "bookmarkManager", "layoutManager")]
-script = ExtResource("1_j7ko2")
+script = ExtResource("1_eyk74")
 animationPlayer = NodePath("AnimationPlayer")
 bookmarkManager = NodePath("Bookmarks")
 layoutManager = NodePath("MenuLayoutManager")
@@ -212,7 +212,7 @@ offset_right = 1113.2
 offset_bottom = 183.936
 scale = Vector2(1.4, 1.4)
 theme_override_constants/separation = 0
-script = ExtResource("2_edq4k")
+script = ExtResource("3_h2ak3")
 bookmarks = [NodePath("Bookmark"), NodePath("Bookmark2"), NodePath("Bookmark3"), NodePath("Bookmark4")]
 
 [node name="Bookmark" parent="Bookmarks" instance=ExtResource("3_eht64")]

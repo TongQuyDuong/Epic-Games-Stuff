@@ -1,0 +1,23 @@
+[gd_scene load_steps=2 format=3 uid="uid://dgdoplhcx5snl"]
+
+[ext_resource type="Theme" uid="uid://dvkdh8poahuwn" path="res://MainTheme.tres" id="1_k6ly4"]
+
+[node name="MarginContainer" type="MarginContainer"]
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 7
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 7
+
+[node name="Panel" type="Panel" parent="."]
+custom_minimum_size = Vector2(77, 0)
+layout_mode = 2
+theme = ExtResource("1_k6ly4")
+theme_type_variation = &"MenuPanelPortrait"
+
+[node name="ItemPic" type="TextureRect" parent="Panel"]
+show_behind_parent = true
+layout_mode = 0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 71.0
+offset_bottom = 76.0

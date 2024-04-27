@@ -10,6 +10,7 @@ public partial class ProfileLayout : MenuLayout
 	[Export] private Label magicDisplay;
 	[Export] private Label resDisplay;
 	[Export] private TextureRect portraitDisplay;
+	[Export] private EquipmentDisplayManager equipmentDisplay;
 
 	public override void _Ready() {
 		portraitDisplay.Texture = player.portrait;
@@ -27,5 +28,6 @@ public partial class ProfileLayout : MenuLayout
 		magicDisplay.Text = magic.ToString();
 		resDisplay.Text = resistance.ToString();
 
+		equipmentDisplay.DisplayEquipments(player.playerData);
 	}
 }

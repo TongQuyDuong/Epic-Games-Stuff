@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://b0h20slp7kipf" path="res://Sprites/Units/Heroes/BetterTestChara.png" id="1_1w2nh"]
 [ext_resource type="Script" path="res://Scripts/Overworld/PlayerOverworld.cs" id="1_kycm4"]
-[ext_resource type="Resource" uid="uid://uykmgy44tu00" path="res://Resources/SaveData/PlayerData1.tres" id="2_dcqkx"]
+[ext_resource type="Resource" uid="uid://dwutpt1lv8dt5" path="res://Resources/SaveData/PlayerData1.tres" id="2_dcqkx"]
 [ext_resource type="Texture2D" uid="uid://ova4grfinsue" path="res://Sprites/TestH/TestPortrait.png" id="3_dotcq"]
 [ext_resource type="Script" path="res://Scripts/PlayerStateController.cs" id="4_iwv50"]
 [ext_resource type="PackedScene" uid="uid://bt6uqptmr2y7c" path="res://Prefabs/Effects/circle_transition.tscn" id="4_xj6nx"]

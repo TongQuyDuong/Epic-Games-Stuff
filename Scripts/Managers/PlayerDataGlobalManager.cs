@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 
 public partial class PlayerDataGlobalManager : Node2D
 {
@@ -16,6 +17,11 @@ public partial class PlayerDataGlobalManager : Node2D
 
 	public override void _Ready() {
 		playerData = GD.Load<PlayerData>("res://Resources/SaveData/PlayerData1.tres");
+
+		foreach(KeyValuePair<EquipmentType,Equipment> equippedItem in playerData.equippedItems) {
+			if (equippedItem.Value != null)
+				equippedItem.Value.Equip(playerData);
+		}
 	}
 
 	private void HealPlayer(Item item) {
@@ -26,8 +32,9 @@ public partial class PlayerDataGlobalManager : Node2D
 		playerData.RemoveItem(item,1);
 	}
 
-	private void DropItem(Item item)
+	public void DropItem(Item item)
 	{
+		if (item.itemType == ItemType.KeyItem) return;
 		playerData.RemoveItem(item, 1);
 	}
 

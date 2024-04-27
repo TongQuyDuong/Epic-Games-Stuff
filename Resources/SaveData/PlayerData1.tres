@@ -1,17 +1,25 @@
-[gd_resource type="Resource" load_steps=6 format=3]
+[gd_resource type="Resource" load_steps=7 format=3 uid="uid://dwutpt1lv8dt5"]
 
-[ext_resource type="Resource" path="res://Resources/Items/Equipments/MageHat.tres" id="1_1ddf3"]
+[ext_resource type="Resource" uid="uid://8xb7eovgsau8" path="res://Resources/Items/Equipments/MageHat.tres" id="1_1ddf3"]
 [ext_resource type="Script" path="res://Scripts/Resources/PlayerData.cs" id="1_4syv7"]
-[ext_resource type="Resource" path="res://Resources/UnitStats/TestH.tres" id="1_jwdxk"]
-[ext_resource type="Resource" path="res://Resources/Items/Equipments/CrudeSword.tres" id="2_fhvxs"]
-[ext_resource type="Resource" path="res://Resources/Items/Equipments/BasicSpellbook.tres" id="4_5jlj3"]
+[ext_resource type="Resource" uid="uid://cole6tiatpmnm" path="res://Resources/UnitStats/TestH.tres" id="1_jwdxk"]
+[ext_resource type="Resource" uid="uid://ca336qmnglkyk" path="res://Resources/Items/Equipments/CrudeSword.tres" id="2_fhvxs"]
+[ext_resource type="Resource" uid="uid://c3nc4m7ajb3wg" path="res://Resources/Items/Equipments/BasicSpellbook.tres" id="4_5jlj3"]
+[ext_resource type="Resource" uid="uid://chu5xpd42s0v7" path="res://Resources/Items/Equipments/MageCloak.tres" id="4_u1e8h"]
 
 [resource]
 script = ExtResource("1_4syv7")
-currentHP = 150
+currentHP = 146
 playerStats = ExtResource("1_jwdxk")
 inventory = {
 ExtResource("1_1ddf3"): 6,
 ExtResource("2_fhvxs"): 6,
-ExtResource("4_5jlj3"): 6
+ExtResource("4_5jlj3"): 6,
+ExtResource("4_u1e8h"): 1
+}
+equippedItems = {
+1: ExtResource("4_5jlj3"),
+2: null,
+3: null,
+4: null
 }
