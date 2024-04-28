@@ -23,13 +23,14 @@ config/icon="res://icon.svg"
 
 [autoload]
 
+DialogueSpawner="*res://Scripts/Managers/DialogueSpawner.cs"
 SceneGlobalManager="*res://Scripts/Managers/SceneGlobalManager.cs"
-DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
 PlayerDataGlobalManager="*res://Scripts/Managers/PlayerDataGlobalManager.cs"
+DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
 
 [dialogue_manager]
 
-general/states=["SceneGlobalManager"]
+general/states=["DialogueSpawner"]
 general/balloon_path="res://Dialogue/Balloon.tscn"
 
 [display]
@@ -126,7 +127,7 @@ Menu={
 
 [internationalization]
 
-locale/translations_pot_files=PackedStringArray("res://Dialogue/TestDialog.dialogue", "res://Dialogue/VillageDialouge.dialogue", "res://Dialogue/ExampleDialogue.dialogue")
+locale/translations_pot_files=PackedStringArray("res://Dialogue/TestDialog.dialogue", "res://Dialogue/VillageDialouge.dialogue", "res://Dialogue/ExampleDialogue.dialogue", "res://Dialogue/OverworldDialogue.dialogue")
 
 [layer_names]
 

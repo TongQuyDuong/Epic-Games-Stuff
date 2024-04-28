@@ -9,9 +9,5 @@ public partial class CodeExecutor : Node2D
 	[Export] Item itemToAdd;
 
 	public override void _Process(double delta) {
-		if (Input.IsActionJustPressed("Flip")) {
-			playerData.AddItem(itemToAdd);
-			Debug.Print("Done");
-		}
 	}
 }

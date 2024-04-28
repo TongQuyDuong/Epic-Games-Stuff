@@ -3,6 +3,7 @@ using System;
 using MonoCustomResourceRegistry;
 using MEC;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 [RegisteredType(nameof(SmiteAbility ), "", nameof(Resource))]
 public partial class SmiteAbility : RangedAbility
@@ -19,10 +20,9 @@ public partial class SmiteAbility : RangedAbility
 		for (int i = (int)caster.currentPos.X + direction; i >= 0 && i < 8; i += direction ) {
 			Panel panel = GridManager.Instance.GetPanelAtPosition(new Vector2I(i,caster.currentPos.Y));
 			if(panel.occupiedUnit != null) {
-				panel.animationPlayer.Play("Warning");
-
-				caster.stats.TryGetStatValue(scaleStat, out float Damage);
-				Timing.RunCoroutine(waitForSecondsAndStrike(0.5f,panel,Damage));
+				Debug.Print("Scales with" + scaleStat.ToString());
+				
+				TriggerAbilityAtPosition(caster,panel.Pos);
 				break;
 			}
 		}
@@ -32,7 +32,7 @@ public partial class SmiteAbility : RangedAbility
 		Panel panel = GridManager.Instance.GetPanelAtPosition(pos);
 		panel.animationPlayer.Play("Warning");
 
-		caster.stats.TryGetStatValue(StatType.Magic, out float Damage);
+		caster.stats.TryGetStatValue(scaleStat, out float Damage);
 		Timing.RunCoroutine(waitForSecondsAndStrike(0.5f, panel, Damage));
 	}
 

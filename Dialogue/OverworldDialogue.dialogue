@@ -1,0 +1,17 @@
+~ bush
+
+This is a bush.
+
+=> END
+
+~ tree
+
+This tree seems special
+
+=> END
+
+~ item_drop
+
+You received {{amount}} {{itemName}}
+
+=> END

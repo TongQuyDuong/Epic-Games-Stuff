@@ -8,6 +8,9 @@ public partial class FireMage : BaseEnemy
 	{
 		base._EnterTree();
 	}
+	public override void _ExitTree() {
+		base._ExitTree();
+	}
 	public override void _Ready()
 	{
 		base._Ready();

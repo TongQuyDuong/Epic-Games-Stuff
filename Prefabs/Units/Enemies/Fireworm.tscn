@@ -1,8 +1,9 @@
-[gd_scene load_steps=24 format=3 uid="uid://c25wg50qjajeh"]
+[gd_scene load_steps=25 format=3 uid="uid://c25wg50qjajeh"]
 
 [ext_resource type="Shader" path="res://Resources/Shaders/FlashSprite.gdshader" id="1_51sfo"]
 [ext_resource type="Script" path="res://Scripts/Units/Enemies/Fireworm.cs" id="1_ips0r"]
 [ext_resource type="Resource" uid="uid://cybtmgs6be4wf" path="res://Resources/Abilities/FirewormsBall.tres" id="2_d7wmy"]
+[ext_resource type="Resource" uid="uid://chvc034yto3oj" path="res://Resources/Items/Consumables/HealingPowder.tres" id="3_6dbff"]
 [ext_resource type="Texture2D" uid="uid://cp2np34uvawja" path="res://Sprites/Units/Enemies/Fireworm/Fireworm.png" id="3_gs0ia"]
 [ext_resource type="Script" path="res://Scripts/Resources/Stats/UnitStat.cs" id="3_nxvyh"]
 [ext_resource type="PackedScene" uid="uid://e5ccxwf8ehw1" path="res://Components/unit_health.tscn" id="4_3wxx6"]
@@ -268,6 +269,8 @@ stateCon = NodePath("EnemyStateConftroller")
 hpBar = NodePath("HpBar")
 waitTime = 1.0
 ability = ExtResource("2_d7wmy")
+lootDrop = ExtResource("3_6dbff")
+lootAmount = 1
 stats = SubResource("Resource_tepcg")
 STeffectCon = NodePath("StatusEffectsController")
 animPlayer = NodePath("AnimationPlayer")
@@ -288,8 +291,7 @@ libraries = {
 "": SubResource("AnimationLibrary_uowhd")
 }
 
-[node name="UnitHealth" parent="." node_paths=PackedStringArray("unit", "spriteAnim") instance=ExtResource("4_3wxx6")]
-unit = NodePath("..")
+[node name="UnitHealth" parent="." node_paths=PackedStringArray("spriteAnim") instance=ExtResource("4_3wxx6")]
 spriteAnim = NodePath("../AnimationPlayer")
 
 [node name="PopupPoint" type="Marker2D" parent="."]

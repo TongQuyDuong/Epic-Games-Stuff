@@ -7,6 +7,8 @@ public partial class BaseEnemy : BaseUnit
 	[Export] public EnemyHPBar hpBar;
 	[Export] public float waitTime;
 	[Export] public Ability ability;
+	[Export] Item lootDrop;
+	[Export] int lootAmount;
 	protected Tween runningAnimTween;
 
 	protected float countdown;
@@ -14,18 +16,20 @@ public partial class BaseEnemy : BaseUnit
 	public override void _EnterTree()
 	{
 		base._EnterTree();
-		stats.TryGetStatValue(StatType.HP, out float maxHP);
-		hpBar.SetMaxHP((int)maxHP);
-		if (isFacingRight == false) hpBar.Flip();
+		Events.OnEnemyDeath += DropLoot;
 	}
 	public override void _ExitTree()
 	{
 		base._ExitTree();
+		Events.OnEnemyDeath -= DropLoot;
 	}
 
 	public override void _Ready() {
 		base._Ready();
 		countdown = waitTime;
+		stats.TryGetStatValue(StatType.HP, out float maxHP);
+		hpBar.SetMaxHP((int)maxHP);
+		if (isFacingRight == false) hpBar.Flip();
 	}
 
 	public override void _PhysicsProcess(double delta)
@@ -80,5 +84,11 @@ public partial class BaseEnemy : BaseUnit
 
 	public void FreeCurrentPanel() {
 		occupiedPanel.ResetPanel();
+	}
+
+	private void DropLoot(BaseUnit deadUnit) {
+		if (deadUnit.Equals(this)) {
+			GameManager.Instance.AddLootDrop(lootDrop,lootAmount);
+		}
 	}
 }

@@ -14,12 +14,12 @@ public partial class PlayerData : Resource
 	[Export] public Godot.Collections.Dictionary<Item,int> inventory;
 	[Export] public Godot.Collections.Dictionary<EquipmentType, Equipment> equippedItems;
 
-	public void AddItem(Item item) {
+	public void AddItem(Item item, int quantity) {
 		if (inventory == null) inventory = new Godot.Collections.Dictionary<Item, int>();
 		if (inventory.ContainsKey(item)) {
-			inventory[item] += 1;
+			inventory[item] += quantity;
 		} else {
-			inventory[item] = 1;
+			inventory[item] = quantity;
 		}
 
 		Debug.Print(inventory.Count.ToString());

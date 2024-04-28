@@ -1,12 +1,15 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 
 public partial class GameManager : Node
 {
 	[Export] public PlayerData playerData;
 	public static GameManager Instance;
 	[Export] public GameState currentState;
+	private Dictionary<Item,int> lootDrops = new Dictionary<Item, int>();
 	private bool isSelectSkillReady = false;
 
 
@@ -28,8 +31,6 @@ public partial class GameManager : Node
 	}
 
 	public override void _Ready() {
-		playerData.playerStats.TryGetStatValue(StatType.Magic, out float magic);
-		Debug.Print("Magic : " + magic);
 	}
 
     public override void _Process(double delta)
@@ -74,18 +75,23 @@ public partial class GameManager : Node
 		}
 	}
 
-	public void BeginBattle() {
+	private void BeginBattle() {
 		UpdateGameState(GameState.BattleActive);
 	}
 
-	public void EndBattle() {
+	private void EndBattle() {
+		DialogueSpawner spawner = GetTree().Root.GetNode<DialogueSpawner>("DialogueSpawner");
+		if (lootDrops.Count == 1) {
+			spawner.SetItemDropDialogue(lootDrops.Keys.First().itemName,lootDrops.Values.First());
+			playerData.AddItem(lootDrops.Keys.First(), lootDrops.Values.First());
+		}
 		UpdateGameState(GameState.BattleEnd);
 	}
-	public void PauseBattle() {
+	private void PauseBattle() {
 		UnitManager.Instance.ProcessMode = ProcessModeEnum.Disabled;
 		BattleUI.Instance.topLeftUI.ProcessMode = ProcessModeEnum.Disabled;
 	}
-	public void ResumeBattle()
+	private void ResumeBattle()
 	{
 		UnitManager.Instance.ProcessMode = ProcessModeEnum.Inherit;
 		BattleUI.Instance.topLeftUI.ProcessMode = ProcessModeEnum.Inherit;
@@ -95,6 +101,14 @@ public partial class GameManager : Node
 	
 	private void EnableSelectSkill() {
 		isSelectSkillReady = true;
+	}
+
+	public void AddLootDrop(Item item,int amount) {
+		if (lootDrops.ContainsKey(item)) {
+			lootDrops[item] += amount;
+		} else {
+			lootDrops[item] = amount;
+		}
 	}
 }
 public enum GameState

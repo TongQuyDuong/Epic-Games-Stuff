@@ -70,11 +70,11 @@ public partial class UnitStat : Resource
             isDirty = true;
             statModifiers.Remove(modToRemove);
             numberOfMods -= 1;
-            Debug.Print("Mods on " + type + " = " + statModifiers.Count.ToString());
+            Debug.Print("Mods on " + statType + " = " + statModifiers.Count.ToString());
             return true;
         }
 
-        Debug.Print("Mods on " + type + " = " + statModifiers.Count.ToString());
+        Debug.Print("Mods on " + statType + " = " + statModifiers.Count.ToString());
         return false;
     }
 

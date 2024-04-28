@@ -16,7 +16,7 @@ public partial class Bookmark : Control
 	}
 
 	public void PopOut() {
-		animationPlayer.Play("PopOut");
+		animationPlayer.Play("PopOut",-1,1.5f);
 	}
 
 	public void Select() {

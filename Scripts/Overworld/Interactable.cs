@@ -12,7 +12,6 @@ public partial class Interactable : Area2D
 	public void Action()
 	{
 		onDialogueStart?.Invoke();
-		GetTree().Paused = true;
 		DialogueManager.ShowDialogueBalloon(dialougeResource, dialougeStartKey);
 		DialogueManager.DialogueEnded += delegate {
 			onDialogueEnd?.Invoke();

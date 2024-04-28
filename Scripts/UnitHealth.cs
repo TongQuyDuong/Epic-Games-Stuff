@@ -3,7 +3,7 @@ using System;
 
 public partial class UnitHealth : Node, IDamageable
 {
-	[Export] protected BaseUnit unit;
+	protected BaseUnit unit;
 	[Export] public int currentHP;
 	[Export] private int maxHP;
 	[Export] public AnimationPlayer spriteAnim;
@@ -60,7 +60,7 @@ public partial class UnitHealth : Node, IDamageable
 		unit.isControlled = true;
 		GridManager.Instance.GetPanelAtPosition(unit.currentPos).ResetPanel();
 		if(unit is BaseEnemy) {
-			Events.OnEnemyDeath?.Invoke();
+			Events.OnEnemyDeath?.Invoke(unit);
 		}
 		spriteAnim.Play("Die");
 	}

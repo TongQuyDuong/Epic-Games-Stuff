@@ -61,7 +61,7 @@ public partial class UnitManager : Node
 
 	}
 
-	private void RemoveEnemiesAlive()
+	private void RemoveEnemiesAlive(BaseUnit unit)
 	{
 		EnemiesAlive -= 1;
 		if (EnemiesAlive == 0)
