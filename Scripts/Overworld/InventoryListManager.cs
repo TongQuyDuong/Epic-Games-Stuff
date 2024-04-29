@@ -11,7 +11,7 @@ public partial class InventoryListManager : VBoxContainer
 	public Action<Item> onSelectedItemChanged;
 	public static Action<Item> onItemSelected;
 	[Export] Godot.Collections.Array<MenuChoice> itemChoices = new Godot.Collections.Array<MenuChoice>();
-	private Dictionary<int,ItemData> itemList = new Dictionary<int, ItemData>();
+	private List<ItemData> itemList = new List<ItemData>();
 	public PlayerData playerData;
 	public ItemType currentFilter;
 	[Export] private int selectedIndex = 0;
@@ -50,15 +50,16 @@ public partial class InventoryListManager : VBoxContainer
 		{
 			if (item.Key.isStackable)
 			{
-				itemList[i] = new ItemData(item.Key, item.Value);
+				itemList.Add(new ItemData(item.Key, item.Value));
 				i++;
 			}
 			else
 			{
 				for (int j = 0; j < item.Value; j++)
 				{
-					itemList[i] = new ItemData(item.Key);
-					if (j == 0) {
+					itemList.Add(new ItemData(item.Key, item.Value));
+					if (j == 0)
+					{
 						if (playerData.equippedItems.Values.Contains((Equipment)item.Key)) itemList[i].isEquipped = true;
 					}
 					i++;
@@ -77,14 +78,14 @@ public partial class InventoryListManager : VBoxContainer
 		{
 			if (item.Key.isStackable)
 			{
-				itemList[i] = new ItemData(item.Key, item.Value);
+				itemList.Add(new ItemData(item.Key, item.Value));
 				i++;
 			}
 			else
 			{
 				for (int j = 0; j < item.Value; j++)
 				{
-					itemList[i] = new ItemData(item.Key);
+					itemList.Add(new ItemData(item.Key, item.Value));
 					if (j == 0)
 					{
 						if (playerData.equippedItems.Values.Contains((Equipment)item.Key)) itemList[i].isEquipped = true;

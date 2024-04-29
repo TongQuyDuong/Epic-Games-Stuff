@@ -2,8 +2,7 @@ using Godot;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Runtime.Serialization;
-using System.Security.Principal;
+using System.Linq;
 
 public partial class SelectSkillBook : Control
 {
@@ -17,10 +16,12 @@ public partial class SelectSkillBook : Control
 	[Export] private Label SPcost;
 	[Export] private Label SoulPowerAmount;
 	private Dictionary<Vector2,SelectSkillButton> buttons = new Dictionary<Vector2, SelectSkillButton>();
-	[Export] public Godot.Collections.Array<Ability> abilities = new Godot.Collections.Array<Ability>();
+	public List<Ability> abilities;
 	[Export] public Godot.Collections.Array<SelectSkillButton> fixedButtons = new Godot.Collections.Array<SelectSkillButton>();
 	[Export] public Godot.Collections.Array<AbilityIcon> abilityIcons = new Godot.Collections.Array<AbilityIcon>();
 	[Export] PackedScene smallAbilityIcon;
+	private Random random = new Random();
+	private int randomAmount = 4;
 	Vector2 selectedPos;
 	private int currentSlotIndex = 0;
 	private bool isOnAddButton = false;
@@ -44,12 +45,19 @@ public partial class SelectSkillBook : Control
 		AddButton.onAmountChanged += AdjustSoulPower;
 	}
 
+	public override void _ExitTree()
+	{
+		SmallAbilityIcon.onAbilityPress -= SelectAbility;
+		AddButton.onAmountChanged -= AdjustSoulPower;
+	}
+
 	public override void _Ready()
 	{
 		Initialize();
 	}
 
 	public void Initialize() {
+		ImportAbilities();
 		UpdateAbilityIcons();
 		SmallAbilityIcon nextButton = (SmallAbilityIcon)buttons[selectedPos];
 		nextButton.ToggleSelectOn();
@@ -57,10 +65,13 @@ public partial class SelectSkillBook : Control
 		this.ProcessMode = ProcessModeEnum.Disabled;
 	}
 
-	public override void _ExitTree()
-	{
-		SmallAbilityIcon.onAbilityPress -= SelectAbility;
-		AddButton.onAmountChanged -= AdjustSoulPower;
+	private void ImportAbilities() {
+		abilities = new List<Ability>();
+		foreach(KeyValuePair<Ability,bool> skill in GameManager.Instance.playerData.skills) {
+			if (skill.Value) {
+				abilities.Add(skill.Key);
+			}
+		}
 	}
 
 	private void GenerateAbilityIcons() {
@@ -77,11 +88,15 @@ public partial class SelectSkillBook : Control
 	}
 
 	private void UpdateAbilityIcons() {
-		for(int i = 0; i < abilities.Count; i++) {
+		
+		List<Ability> randomizedSkills = abilities.OrderBy(x => random.Next()).Take<Ability>(randomAmount).ToList();
+
+		for (int i = 0; i < randomizedSkills.Count(); i++) {
 			if (i == 12) break;
-			((SmallAbilityIcon)buttons[new Vector2 (i%4,i/4)]).UpdateAbility(abilities[i]);
-			
+			((SmallAbilityIcon)buttons[new Vector2 (i%4,i/4)]).UpdateAbility(randomizedSkills[i]);
 		}
+
+		if (randomAmount > 4) randomAmount = 4;
 	}
 
 	public bool UpdateSoulPower(int amount) {
@@ -123,6 +138,7 @@ public partial class SelectSkillBook : Control
 			else if (selectedPos == new Vector2(1, 3))
 			{
 				//SkipButton
+				onSkipButtonPress();
 			}
 			else if (selectedPos == new Vector2(2, 3))
 			{
@@ -310,6 +326,17 @@ public partial class SelectSkillBook : Control
 		foreach (AbilityIcon icon in abilityIcons) {
 			icon.ResetIcon();
 		}
+	}
+
+	private void onSkipButtonPress()
+	{
+		randomAmount += 4;
+		if (randomAmount > 12) randomAmount = 12;
+		foreach (AbilityIcon icon in abilityIcons)
+		{
+			icon.ResetIcon();
+		}
+		onConfirmButtonPressed?.Invoke(abilityIcons);
 	}
 
 	public void ResetBook() {

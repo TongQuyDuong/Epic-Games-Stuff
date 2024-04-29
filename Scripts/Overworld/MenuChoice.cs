@@ -40,7 +40,25 @@ public partial class MenuChoice : HBoxContainer
 
 	}
 
+	public void SetContent(AbilityData data)
+	{
+		if (data != null)
+		{
+			textDisplay.Text = data.ability.Name + (data.isEquipped ? " (E)" : "");
+			HideNumber();
+		}
+		else
+		{
+			this.Visible = false;
+		}
+
+	}
+
 	public string GetText() {
 		return textDisplay.Text;
+	}
+
+	public void SetSize() {
+		this.textDisplay.Size = new Vector2(1180,100);
 	}
 }

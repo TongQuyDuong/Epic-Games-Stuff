@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://ib51qwl44qfd"]
+[gd_scene load_steps=17 format=3 uid="uid://ib51qwl44qfd"]
 
 [ext_resource type="Script" path="res://Scripts/BattleScene.cs" id="1_03c5o"]
 [ext_resource type="Script" path="res://Scripts/Managers/GameManager.cs" id="1_wgu4n"]
@@ -10,17 +10,11 @@
 [ext_resource type="Script" path="res://Scripts/Managers/SpriteManager.cs" id="7_rp32s"]
 [ext_resource type="PackedScene" uid="uid://o145r5colibr" path="res://Prefabs/UI/AbilityIcon.tscn" id="9_5rs6t"]
 [ext_resource type="PackedScene" uid="uid://d0ckwq8cucbrt" path="res://Prefabs/UI/battle_announcement.tscn" id="9_fywl8"]
-[ext_resource type="Resource" uid="uid://dwutpt1lv8dt5" path="res://Resources/SaveData/PlayerData1.tres" id="9_yqayn"]
+[ext_resource type="Resource" uid="uid://bkk0mgkccary6" path="res://Resources/SaveData/PlayerData1.tres" id="9_yqayn"]
 [ext_resource type="Texture2D" uid="uid://b0fgwlwi7527l" path="res://Sprites/Backgrounds/ForestBackground.png" id="10_ax1fd"]
 [ext_resource type="PackedScene" uid="uid://bjwsaflrdm5j1" path="res://Prefabs/UI/TopLeftUI.tscn" id="10_knel8"]
 [ext_resource type="PackedScene" uid="uid://dsbcrkpoufpcd" path="res://Prefabs/UI/SelectSkillBook.tscn" id="12_xhlm1"]
 [ext_resource type="Script" path="res://Scripts/UI/BattleUI.cs" id="13_1dkkn"]
-[ext_resource type="Resource" uid="uid://mntob2ltyay2" path="res://Resources/Abilities/Fireball.tres" id="13_qd73o"]
-[ext_resource type="Resource" uid="uid://bi04y3hs068ht" path="res://Resources/Abilities/SmallEruption.tres" id="15_d6t36"]
-[ext_resource type="Resource" uid="uid://bej6id1hervvf" path="res://Resources/Abilities/Melee/WindCirSlice.tres" id="16_do1c7"]
-[ext_resource type="Resource" uid="uid://dm1f0j6b5csfi" path="res://Resources/Fonts/LightningStrike.tres" id="16_ggacg"]
-[ext_resource type="Resource" uid="uid://b3ie26gxcwyna" path="res://Resources/Abilities/FireTower.tres" id="17_wqp4l"]
-[ext_resource type="Resource" uid="uid://bi721bwio75q1" path="res://Resources/Abilities/Melee/NormalSlash.tres" id="18_j0dj7"]
 [ext_resource type="PackedScene" uid="uid://bt6uqptmr2y7c" path="res://Prefabs/Effects/circle_transition.tscn" id="20_bfy8c"]
 
 [node name="TestBattle" type="Node2D" node_paths=PackedStringArray("transitionEffect")]
@@ -89,7 +83,6 @@ offset_right = 584.0
 layout_mode = 1
 offset_top = 641.0
 offset_bottom = 641.0
-abilities = [ExtResource("13_qd73o"), ExtResource("16_ggacg"), ExtResource("15_d6t36"), ExtResource("16_do1c7"), ExtResource("17_wqp4l"), ExtResource("18_j0dj7")]
 
 [node name="TextureRect" type="TextureRect" parent="."]
 offset_right = 672.0

@@ -13,6 +13,7 @@ public partial class PlayerData : Resource
 	[Export] public UnitStatList playerStats;
 	[Export] public Godot.Collections.Dictionary<Item,int> inventory;
 	[Export] public Godot.Collections.Dictionary<EquipmentType, Equipment> equippedItems;
+	[Export] public Godot.Collections.Dictionary<Ability,bool> skills;
 
 	public void AddItem(Item item, int quantity) {
 		if (inventory == null) inventory = new Godot.Collections.Dictionary<Item, int>();
@@ -60,5 +61,33 @@ public partial class PlayerData : Resource
 		equippedItems[type].Unequip(this);
 		equippedItems[type] = null;
 		ResourceSaver.Save(this);	
+	}
+
+	public void AddAbility(Ability ability)
+	{
+		if (skills == null) inventory = new Godot.Collections.Dictionary<Item, int>();
+		if (skills.ContainsKey(ability))
+		{
+
+		}
+		else
+		{
+			skills[ability] = false;
+		}
+
+		Debug.Print(skills.Count.ToString());
+
+		ResourceSaver.Save(this);
+	}
+
+	public void EquipAbility(Ability ability) {
+		skills[ability] = true;
+		ResourceSaver.Save(this);
+	}
+
+	public void UnequipAbility(Ability ability)
+	{
+		skills[ability] = false;
+		ResourceSaver.Save(this);
 	}
 }

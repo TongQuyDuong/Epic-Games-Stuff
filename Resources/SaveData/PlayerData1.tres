@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=8 format=3]
+[gd_resource type="Resource" load_steps=14 format=3]
 
 [ext_resource type="Resource" path="res://Resources/Items/Equipments/MageHat.tres" id="1_1ddf3"]
 [ext_resource type="Script" path="res://Scripts/Resources/PlayerData.cs" id="1_4syv7"]
@@ -7,6 +7,12 @@
 [ext_resource type="Resource" path="res://Resources/Items/Equipments/BasicSpellbook.tres" id="4_5jlj3"]
 [ext_resource type="Resource" path="res://Resources/Items/Equipments/MageCloak.tres" id="4_u1e8h"]
 [ext_resource type="Resource" path="res://Resources/Items/Consumables/HealingPowder.tres" id="5_ejr7d"]
+[ext_resource type="Resource" path="res://Resources/Abilities/Fireball.tres" id="8_rpq7p"]
+[ext_resource type="Resource" path="res://Resources/Abilities/FireTower.tres" id="9_77nlh"]
+[ext_resource type="Resource" path="res://Resources/Abilities/LightningStrike.tres" id="10_mr14b"]
+[ext_resource type="Resource" path="res://Resources/Abilities/SmallEruption.tres" id="11_xi8cf"]
+[ext_resource type="Resource" path="res://Resources/Abilities/Melee/NormalSlash.tres" id="12_vyios"]
+[ext_resource type="Resource" path="res://Resources/Abilities/Melee/WindCirSlice.tres" id="13_766k5"]
 
 [resource]
 script = ExtResource("1_4syv7")
@@ -17,11 +23,19 @@ ExtResource("1_1ddf3"): 6,
 ExtResource("2_fhvxs"): 6,
 ExtResource("4_5jlj3"): 6,
 ExtResource("4_u1e8h"): 1,
-ExtResource("5_ejr7d"): 2
+ExtResource("5_ejr7d"): 3
 }
 equippedItems = {
 1: ExtResource("4_5jlj3"),
 2: null,
 3: null,
 4: null
+}
+skills = {
+ExtResource("8_rpq7p"): true,
+ExtResource("9_77nlh"): true,
+ExtResource("10_mr14b"): true,
+ExtResource("11_xi8cf"): true,
+ExtResource("12_vyios"): true,
+ExtResource("13_766k5"): true
 }

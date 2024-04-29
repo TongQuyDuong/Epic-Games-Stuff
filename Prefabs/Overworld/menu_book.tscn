@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://tua6wgq2ab16"]
+[gd_scene load_steps=17 format=3 uid="uid://tua6wgq2ab16"]
 
 [ext_resource type="Script" path="res://Scripts/Overworld/MenuBook.cs" id="1_eyk74"]
 [ext_resource type="Texture2D" uid="uid://emdwqkx0dadp" path="res://Sprites/UI/Overworld/BookOpen1.png" id="1_jnin0"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://csxirw7jkgxha" path="res://Prefabs/Overworld/menu_layout.tscn" id="6_e2dem"]
 [ext_resource type="PackedScene" uid="uid://bcqmi8e0l0itl" path="res://Prefabs/Overworld/inventory_layout.tscn" id="8_2d61j"]
 [ext_resource type="Script" path="res://Scripts/Overworld/MenuLayoutManager.cs" id="9_2wmpd"]
+[ext_resource type="PackedScene" uid="uid://cvr443gbdkuw2" path="res://Prefabs/Overworld/skills_layout.tscn" id="9_e7n6u"]
 
 [sub_resource type="Animation" id="Animation_iyfhk"]
 resource_name = "CloseMenu"
@@ -227,7 +228,7 @@ menuLayout = ExtResource("8_2d61j")
 
 [node name="Bookmark3" parent="Bookmarks" instance=ExtResource("3_eht64")]
 layout_mode = 2
-menuLayout = ExtResource("6_e2dem")
+menuLayout = ExtResource("9_e7n6u")
 
 [node name="Bookmark4" parent="Bookmarks" instance=ExtResource("3_eht64")]
 layout_mode = 2
