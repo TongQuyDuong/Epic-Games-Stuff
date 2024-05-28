@@ -9,6 +9,7 @@ using System.Diagnostics;
 public partial class PlayerData : Resource
 {
 	public static Action onPlayerInventoryChanged;
+	[Export] public string currentStage = "res://Prefabs/Scenes/stage_1.tscn";
 	[Export] public int currentHP;
 	[Export] public UnitStatList playerStats;
 	[Export] public Godot.Collections.Dictionary<Item,int> inventory;
@@ -88,6 +89,11 @@ public partial class PlayerData : Resource
 	public void UnequipAbility(Ability ability)
 	{
 		skills[ability] = false;
+		ResourceSaver.Save(this);
+	}
+
+	public void ChangeCurrentStage(StringName nextStagePath) {
+		currentStage = nextStagePath;
 		ResourceSaver.Save(this);
 	}
 }

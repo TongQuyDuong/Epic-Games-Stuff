@@ -5,7 +5,6 @@ using DialogueManagerRuntime;
 public partial class PlayerOverworld : CharacterBody2D
 {
 	const int ACCELERATION = 10000;
-	const int FRICTION = 500;
 	const int MAXSPEED = 240;
 	const int MAXSPEEDRUNNING = 400;
 
@@ -58,7 +57,8 @@ public partial class PlayerOverworld : CharacterBody2D
     public override void _PhysicsProcess(double delta)
 	{
 		if (OverworldLevel.isActive == false) return;
-		
+
+		inputVector = Input.GetVector("MoveLeft", "MoveRight", "MoveUp", "MoveDown");
 		Move(delta);
 		Animate();
 	}
@@ -77,15 +77,6 @@ public partial class PlayerOverworld : CharacterBody2D
 			blendPos = inputVector;
 		}
 		MoveAndSlide();
-	}
-
-	private void ApplyFriction(float amount)
-	{
-		if(Velocity.Length() > amount) {
-			Velocity -= Velocity.Normalized() * amount;
-		} else {
-			Velocity = Vector2.Zero;
-		}
 	}
 
 	private void ApplyMovement(Vector2 amount)

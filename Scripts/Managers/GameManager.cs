@@ -120,7 +120,5 @@ public enum GameState
 	BattleStart,
 	BattleActive,
 	BattlePaused,
-	BattleEnd,
-	Victory,
-	Defeat
+	BattleEnd
 }

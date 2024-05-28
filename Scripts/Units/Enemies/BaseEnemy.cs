@@ -39,7 +39,7 @@ public partial class BaseEnemy : BaseUnit
 			case EnemyState.Idling:
 				if (countdown > 0)
 				{
-					countdown -= (float)GetProcessDeltaTime();
+					countdown -= (float)delta;
 				}
 				else
 				{

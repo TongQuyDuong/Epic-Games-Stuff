@@ -4,7 +4,7 @@ using System.Diagnostics;
 
 public partial class main : GameScene
 {
-	[Export] PackedScene battleScene;
+	[Export] PlayerData playerData;
 
 	private void _on_quit_pressed()
 	{
@@ -13,7 +13,7 @@ public partial class main : GameScene
 	private async void _on_play_pressed(){
 		transitionEffect.FadeOut();
 		await ToSignal(transitionEffect,"finished");
-		GetTree().ChangeSceneToPacked(battleScene);
+		GetTree().ChangeSceneToFile(playerData.currentStage);
 	}
 }
 

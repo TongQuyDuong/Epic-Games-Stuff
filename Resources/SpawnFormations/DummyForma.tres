@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=6 format=3 uid="uid://duw1rvkqxa0hh"]
+[gd_resource type="Resource" load_steps=5 format=3 uid="uid://duw1rvkqxa0hh"]
 
 [ext_resource type="Script" path="res://Scripts/Resources/SpawnFormation.cs" id="1_npk1i"]
 [ext_resource type="Script" path="res://Scripts/Resources/SpawnInfo.cs" id="2_dxjax"]
@@ -8,17 +8,10 @@
 resource_local_to_scene = true
 script = ExtResource("2_dxjax")
 unitToSpawn = ExtResource("3_pfr6n")
-spawnLocation = Vector2i(0, 0)
-isFacingRight = false
-
-[sub_resource type="Resource" id="Resource_wojsa"]
-resource_local_to_scene = true
-script = ExtResource("2_dxjax")
-unitToSpawn = ExtResource("3_pfr6n")
-spawnLocation = Vector2i(0, 0)
+spawnLocation = Vector2i(5, 1)
 isFacingRight = false
 
 [resource]
 script = ExtResource("1_npk1i")
-spawns = [SubResource("Resource_wfcw2"), SubResource("Resource_wojsa")]
+spawns = [SubResource("Resource_wfcw2")]
 playerSpawnPos = Vector2i(1, 1)

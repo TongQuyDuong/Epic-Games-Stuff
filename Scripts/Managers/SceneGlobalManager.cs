@@ -20,6 +20,8 @@ public partial class SceneGlobalManager : Node2D
 		GetTree().SetDeferred("current_scene", incomingScene);
 
 		incomingScene.EnterLevel();
+
+		incomingScene.player.playerData.ChangeCurrentStage(nextScenePath);
 	}
 
 	public async void InitBattle(SpawnFormation spawnFormation) {

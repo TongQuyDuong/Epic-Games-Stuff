@@ -29,5 +29,7 @@ public partial class ProfileLayout : MenuLayout
 		resDisplay.Text = resistance.ToString();
 
 		equipmentDisplay.DisplayEquipments(player.playerData);
+
+		MenuBook.onRequestUIFocus?.Invoke(0);
 	}
 }

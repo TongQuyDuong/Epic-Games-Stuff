@@ -71,6 +71,7 @@ _data = {
 radius = 14.0089
 
 [node name="NormalSlash" type="Node2D"]
+z_index = 1
 scale = Vector2(4, 4)
 script = ExtResource("1_236bu")
 

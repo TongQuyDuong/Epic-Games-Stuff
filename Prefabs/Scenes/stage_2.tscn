@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://b7okqq25j7tpo"]
+[gd_scene load_steps=10 format=3 uid="uid://b7okqq25j7tpo"]
 
 [ext_resource type="Script" path="res://Scripts/Overworld/OverworldLevel.cs" id="1_dmsed"]
 [ext_resource type="TileSet" uid="uid://cmhx25chy20jg" path="res://Resources/TileSet/TileSet1.tres" id="2_1ujnk"]
+[ext_resource type="PackedScene" uid="uid://dc78ophsxk1cu" path="res://Prefabs/Overworld/FireMageOverworld.tscn" id="5_ctra6"]
 [ext_resource type="PackedScene" uid="uid://cvyhsh2cfm20t" path="res://Prefabs/Units/PlayerOverworld.tscn" id="16_rs37p"]
 [ext_resource type="PackedScene" uid="uid://dj1aiehvvof46" path="res://Prefabs/Overworld/OverworldExit.tscn" id="17_j3r33"]
 
@@ -146,6 +147,11 @@ shadow_enabled = true
 shadow_item_cull_mask = 68
 texture = SubResource("GradientTexture2D_qhvjx")
 texture_scale = 4.27
+
+[node name="FiremageOverworld" parent="." instance=ExtResource("5_ctra6")]
+z_index = 1
+y_sort_enabled = true
+position = Vector2(426, 127)
 
 [editable path="Exit"]
 [editable path="Exit4"]

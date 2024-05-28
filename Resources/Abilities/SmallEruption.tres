@@ -1,11 +1,8 @@
-[gd_resource type="Resource" load_steps=8 format=3 uid="uid://bi04y3hs068ht"]
+[gd_resource type="Resource" load_steps=5 format=3 uid="uid://bi04y3hs068ht"]
 
 [ext_resource type="Texture2D" uid="uid://crt4ue6xt5doj" path="res://Sprites/Abilities/Ranged/Waves/SmallEruptionIcon.png" id="1_hh1pq"]
 [ext_resource type="Script" path="res://Scripts/Resources/Abilities/Ranged/WaveAbilities/WaveAbility.cs" id="1_li3ps"]
 [ext_resource type="PackedScene" uid="uid://dmmrfbsucoj88" path="res://Prefabs/Abilities/Ranged/Waves/SmallEruption.tscn" id="2_pwkui"]
-[ext_resource type="Resource" uid="uid://pstui3yo2rm3" path="res://Resources/StatusEffects/DamageOverTime/TestBurn.tres" id="2_y6hoq"]
-[ext_resource type="Resource" uid="uid://crtgv6w3644l8" path="res://Resources/StatusEffects/DamageOverTime/TestBleed.tres" id="3_jtuxg"]
-[ext_resource type="Resource" uid="uid://dbpsb2a7go4gn" path="res://Resources/StatusEffects/DamageOverTime/TestPoison.tres" id="4_f1lpl"]
 [ext_resource type="Texture2D" uid="uid://b2g1ex2sb4yrk" path="res://Sprites/Abilities/Ranged/Waves/SmallEruptionSmall.png" id="6_3vxrh"]
 
 [resource]
@@ -19,6 +16,6 @@ SPCost = 5
 castTime = 0.0
 cooldown = 3.0
 activeTime = 0.0
-effectsToApply = Array[Resource]([ExtResource("2_y6hoq"), ExtResource("3_jtuxg"), ExtResource("4_f1lpl")])
+effectsToApply = Array[Resource]([])
 Icon = ExtResource("1_hh1pq")
 smallIcon = ExtResource("6_3vxrh")

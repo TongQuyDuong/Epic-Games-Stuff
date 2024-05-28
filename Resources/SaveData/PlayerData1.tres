@@ -9,25 +9,26 @@
 [ext_resource type="Resource" path="res://Resources/Items/Consumables/HealingPowder.tres" id="5_ejr7d"]
 [ext_resource type="Resource" path="res://Resources/Abilities/Fireball.tres" id="8_rpq7p"]
 [ext_resource type="Resource" path="res://Resources/Abilities/FireTower.tres" id="9_77nlh"]
-[ext_resource type="Resource" path="res://Resources/Abilities/LightningStrike.tres" id="10_mr14b"]
+[ext_resource type="Resource" path="res://Resources/Fonts/LightningStrike.tres" id="10_mr14b"]
 [ext_resource type="Resource" path="res://Resources/Abilities/SmallEruption.tres" id="11_xi8cf"]
 [ext_resource type="Resource" path="res://Resources/Abilities/Melee/NormalSlash.tres" id="12_vyios"]
 [ext_resource type="Resource" path="res://Resources/Abilities/Melee/WindCirSlice.tres" id="13_766k5"]
 
 [resource]
 script = ExtResource("1_4syv7")
-currentHP = 143
+currentStage = "res://Prefabs/Scenes/stage_1.tscn"
+currentHP = 148
 playerStats = ExtResource("1_jwdxk")
 inventory = {
-ExtResource("1_1ddf3"): 6,
-ExtResource("2_fhvxs"): 6,
-ExtResource("4_5jlj3"): 6,
+ExtResource("1_1ddf3"): 1,
+ExtResource("2_fhvxs"): 1,
+ExtResource("4_5jlj3"): 1,
 ExtResource("4_u1e8h"): 1,
 ExtResource("5_ejr7d"): 3
 }
 equippedItems = {
 1: ExtResource("4_5jlj3"),
-2: null,
+2: ExtResource("1_1ddf3"),
 3: null,
 4: null
 }

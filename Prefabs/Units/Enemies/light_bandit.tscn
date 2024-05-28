@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://10u2o5ps04t3"]
+[gd_scene load_steps=24 format=3 uid="uid://10u2o5ps04t3"]
 
 [ext_resource type="Script" path="res://Scripts/Units/Enemies/LightBandit.cs" id="1_0qqio"]
 [ext_resource type="Script" path="res://Scripts/Resources/Stats/UnitStat.cs" id="2_itwgq"]
@@ -6,6 +6,7 @@
 [ext_resource type="Shader" path="res://Resources/Shaders/FlashSprite.gdshader" id="2_tqu1r"]
 [ext_resource type="Script" path="res://Scripts/Resources/Stats/UnitStatList.cs" id="3_kni4l"]
 [ext_resource type="Texture2D" uid="uid://b2tfh8favl2va" path="res://Sprites/Units/Enemies/LightBandit/LightBandit.png" id="3_trcot"]
+[ext_resource type="Resource" uid="uid://ca336qmnglkyk" path="res://Resources/Items/Equipments/CrudeSword.tres" id="3_ylsh2"]
 [ext_resource type="PackedScene" uid="uid://e5ccxwf8ehw1" path="res://Components/unit_health.tscn" id="4_k7agj"]
 [ext_resource type="Script" path="res://Scripts/EnemyStateConftroller.cs" id="5_ww7tl"]
 [ext_resource type="PackedScene" uid="uid://cdkd8tavio2nn" path="res://Components/status_effects_controller.tscn" id="6_h5mdw"]
@@ -261,6 +262,8 @@ stateCon = NodePath("EnemyStateConftroller")
 hpBar = NodePath("HpBar")
 waitTime = 1.0
 ability = ExtResource("2_tkhix")
+lootDrop = ExtResource("3_ylsh2")
+lootAmount = 1
 stats = SubResource("Resource_5ybjq")
 STeffectCon = NodePath("StatusEffectsController")
 animPlayer = NodePath("AnimationPlayer")
@@ -282,8 +285,7 @@ libraries = {
 "": SubResource("AnimationLibrary_uowhd")
 }
 
-[node name="UnitHealth" parent="." node_paths=PackedStringArray("unit", "spriteAnim") instance=ExtResource("4_k7agj")]
-unit = NodePath("..")
+[node name="UnitHealth" parent="." node_paths=PackedStringArray("spriteAnim") instance=ExtResource("4_k7agj")]
 spriteAnim = NodePath("../AnimationPlayer")
 
 [node name="PopupPoint" type="Marker2D" parent="."]

@@ -5,12 +5,12 @@
 [ext_resource type="Script" path="res://Scripts/Managers/GridManager.cs" id="2_ylql0"]
 [ext_resource type="Script" path="res://Scripts/Managers/UnitManager.cs" id="3_xm58r"]
 [ext_resource type="PackedScene" uid="uid://dj3s5sndljpr1" path="res://Prefabs/Units/TestH.tscn" id="4_h2i1f"]
-[ext_resource type="Resource" uid="uid://cx4aoi357yfc7" path="res://Resources/SpawnFormations/FireWormForma.tres" id="4_q325h"]
+[ext_resource type="Resource" uid="uid://duw1rvkqxa0hh" path="res://Resources/SpawnFormations/DummyForma.tres" id="5_rlbc2"]
 [ext_resource type="Script" path="res://Scripts/Managers/SpriteLayerManager.cs" id="6_8aygl"]
 [ext_resource type="Script" path="res://Scripts/Managers/SpriteManager.cs" id="7_rp32s"]
 [ext_resource type="PackedScene" uid="uid://o145r5colibr" path="res://Prefabs/UI/AbilityIcon.tscn" id="9_5rs6t"]
 [ext_resource type="PackedScene" uid="uid://d0ckwq8cucbrt" path="res://Prefabs/UI/battle_announcement.tscn" id="9_fywl8"]
-[ext_resource type="Resource" uid="uid://bkk0mgkccary6" path="res://Resources/SaveData/PlayerData1.tres" id="9_yqayn"]
+[ext_resource type="Resource" uid="uid://4d4klirsfy3o" path="res://Resources/SaveData/PlayerData1.tres" id="9_yqayn"]
 [ext_resource type="Texture2D" uid="uid://b0fgwlwi7527l" path="res://Sprites/Backgrounds/ForestBackground.png" id="10_ax1fd"]
 [ext_resource type="PackedScene" uid="uid://bjwsaflrdm5j1" path="res://Prefabs/UI/TopLeftUI.tscn" id="10_knel8"]
 [ext_resource type="PackedScene" uid="uid://dsbcrkpoufpcd" path="res://Prefabs/UI/SelectSkillBook.tscn" id="12_xhlm1"]
@@ -31,7 +31,7 @@ offsetY = 60.0
 [node name="UnitManager" type="Node" parent="Managers"]
 script = ExtResource("3_xm58r")
 hero = ExtResource("4_h2i1f")
-formation = ExtResource("4_q325h")
+formation = ExtResource("5_rlbc2")
 
 [node name="SpriteLayerManager" type="Node" parent="Managers"]
 script = ExtResource("6_8aygl")

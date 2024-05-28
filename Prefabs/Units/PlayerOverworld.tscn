@@ -2,14 +2,11 @@
 
 [ext_resource type="Texture2D" uid="uid://b0h20slp7kipf" path="res://Sprites/Units/Heroes/BetterTestChara.png" id="1_1w2nh"]
 [ext_resource type="Script" path="res://Scripts/Overworld/PlayerOverworld.cs" id="1_kycm4"]
-[ext_resource type="Resource" uid="uid://bkk0mgkccary6" path="res://Resources/SaveData/PlayerData1.tres" id="2_dcqkx"]
+[ext_resource type="Resource" uid="uid://4d4klirsfy3o" path="res://Resources/SaveData/PlayerData1.tres" id="2_dcqkx"]
 [ext_resource type="Texture2D" uid="uid://ova4grfinsue" path="res://Sprites/TestH/TestPortrait.png" id="3_dotcq"]
 [ext_resource type="Script" path="res://Scripts/PlayerStateController.cs" id="4_iwv50"]
 [ext_resource type="PackedScene" uid="uid://bt6uqptmr2y7c" path="res://Prefabs/Effects/circle_transition.tscn" id="4_xj6nx"]
 [ext_resource type="PackedScene" uid="uid://wskpw4yfok6" path="res://Prefabs/Overworld/interact_finder.tscn" id="5_tf7dd"]
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_qpdfu"]
-radius = 7.0
 
 [sub_resource type="Animation" id="Animation_uau6n"]
 resource_name = "IdleDown"
@@ -379,7 +376,7 @@ blend_point_3/pos = Vector2(0, -1)
 blend_mode = 1
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_nou8i"]
-graph_offset = Vector2(-591.258, 0)
+graph_offset = Vector2(-226.983, 57.3771)
 nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_05lm8")
 nodes/TimeScale/position = Vector2(60, 140)
 nodes/move_bs2d/node = SubResource("AnimationNodeBlendSpace2D_51akt")
@@ -400,32 +397,35 @@ states/move/node = SubResource("AnimationNodeBlendTree_nou8i")
 states/move/position = Vector2(384, 154)
 transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_njds7"), "idle", "move", SubResource("AnimationNodeStateMachineTransition_yuf4b"), "move", "idle", SubResource("AnimationNodeStateMachineTransition_lewf6")]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_qpdfu"]
+radius = 7.0
+
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_ey2fs"]
 polygon = PackedVector2Array(2, 4, 0, 4, -5, 3, -7, 1, -6, -2, -1, -2, 2, -2, 6, -2, 7, -1, 7, 1, 6, 3)
 
-[node name="TestHOverworld" type="CharacterBody2D" node_paths=PackedStringArray("StateController", "animTree", "transition", "interactFinder")]
+[node name="PlayerOverworld" type="CharacterBody2D" node_paths=PackedStringArray("StateController", "animTree", "transition", "interactFinder")]
 z_index = 1
 y_sort_enabled = true
 script = ExtResource("1_kycm4")
 playerData = ExtResource("2_dcqkx")
-StateController = NodePath("PlayerState")
+StateController = NodePath("PlayerStateFinder")
 animTree = NodePath("AnimationTree")
 transition = NodePath("CircleTransition")
 interactFinder = NodePath("InteractFinder/InteractZone")
 portrait = ExtResource("3_dotcq")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -2)
-shape = SubResource("CircleShape2D_qpdfu")
+[node name="Sprite2D" type="Sprite2D" parent="."]
+light_mask = 32
+texture = ExtResource("1_1w2nh")
+offset = Vector2(0, -14)
+hframes = 7
+vframes = 8
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 process_mode = 3
 libraries = {
 "": SubResource("AnimationLibrary_o6ys6")
 }
-
-[node name="PlayerState" type="Node2D" parent="."]
-script = ExtResource("4_iwv50")
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 process_mode = 3
@@ -435,7 +435,14 @@ active = true
 parameters/idle/TimeScale/scale = 1.0
 parameters/idle/idle_bs2d/blend_position = Vector2(0, 0)
 parameters/move/TimeScale/scale = 1.0
-parameters/move/move_bs2d/blend_position = Vector2(0, 0)
+parameters/move/move_bs2d/blend_position = Vector2(-0.998049, 0.00436687)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -2)
+shape = SubResource("CircleShape2D_qpdfu")
+
+[node name="PlayerStateFinder" type="Node2D" parent="."]
+script = ExtResource("4_iwv50")
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]
 occluder = SubResource("OccluderPolygon2D_ey2fs")
@@ -443,15 +450,8 @@ occluder_light_mask = 64
 
 [node name="InteractFinder" parent="." instance=ExtResource("5_tf7dd")]
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-light_mask = 32
-texture = ExtResource("1_1w2nh")
-offset = Vector2(0, -14)
-hframes = 7
-vframes = 8
-
 [node name="CircleTransition" parent="." instance=ExtResource("4_xj6nx")]
 z_index = 50
-position = Vector2(-2, -22)
+position = Vector2(1, -22)
 
 [editable path="InteractFinder"]

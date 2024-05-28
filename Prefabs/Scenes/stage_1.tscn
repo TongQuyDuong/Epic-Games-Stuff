@@ -8,6 +8,10 @@
 [ext_resource type="PackedScene" uid="uid://cvyhsh2cfm20t" path="res://Prefabs/Units/PlayerOverworld.tscn" id="15_cek5h"]
 [ext_resource type="PackedScene" uid="uid://dj1aiehvvof46" path="res://Prefabs/Overworld/OverworldExit.tscn" id="17_vv1w3"]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_hadca"]
+resource_local_to_scene = true
+radius = 15.0
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h3ej2"]
 resource_local_to_scene = true
 size = Vector2(32.5, 37)
@@ -23,10 +27,6 @@ size = Vector2(32.5, 37)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3v5v5"]
 resource_local_to_scene = true
 size = Vector2(32.5, 37)
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_hadca"]
-resource_local_to_scene = true
-radius = 15.0
 
 [node name="Stage1" type="Node2D" node_paths=PackedStringArray("player", "exits", "enemies", "camera")]
 y_sort_enabled = true
@@ -72,6 +72,14 @@ layer_4/y_sort_enabled = true
 layer_4/y_sort_origin = 0
 layer_4/z_index = 1
 layer_4/tile_data = PackedInt32Array(65554, 9, 5, 65539, 262150, 7, 65543, 262150, 7, 65547, 262150, 7, 65549, 262150, 7, 65552, 262150, 7, 65560, 262150, 7, 65566, 262150, 7, 65574, 262150, 7, 131073, 262150, 0, 131079, 262150, 0, 131084, 262150, 0, 131087, 262150, 0, 131093, 262150, 0, 131100, 262150, 0, 131109, 262150, 0, 131077, 1310726, 0, 65544, 1310726, 0, 131083, 1310726, 0, 65550, 1310726, 0, 65556, 1310726, 0, 131095, 1310726, 0, 65563, 1310726, 0, 131102, 1310726, 0, 65569, 1310726, 0, 65572, 1310726, 0, 262144, 6, 0, 983041, 6, 0, 131097, 6, 0, 131081, 6, 0, 131106, 6, 7, 131075, 524294, 7, 458752, 262150, 0, 1114112, 262150, 0, 1245185, 524294, 7, 393217, 1310726, 0, 262146, 262150, 0, 393219, 262150, 0, 917507, 262150, 0, 1048579, 262150, 0, 1245187, 262150, 0, 1376266, 262150, 0, 1310733, 262150, 0, 1310739, 262150, 0, 1376278, 262150, 0, 1376284, 262150, 0, 1310751, 262150, 0, 1376290, 262150, 0, 1376272, 6, 0, 1310757, 6, 0, 1310745, 6, 7, 851989, 131082, 4, 720922, 131082, 4, 917538, 131082, 4, 983068, 196618, 4, 655395, 196618, 4, 851976, 1769483, 6, 655370, 1769483, 9, 983054, 1769483, 9, 655377, 1769483, 6, 1114122, 1769483, 6, 524312, 1769483, 9, 1114128, 1572875, 12, 524319, 1572875, 12, 852005, 1572875, 12, 1114146, 1572875, 12)
+
+[node name="Bush" parent="." instance=ExtResource("6_x68lx")]
+position = Vector2(168, 167.5)
+dialougeResource = ExtResource("7_jimp1")
+dialougeStartKey = "bush"
+
+[node name="CollisionShape2D" parent="Bush" index="0"]
+shape = SubResource("CircleShape2D_hadca")
 
 [node name="TestHOverworld" parent="." instance=ExtResource("15_cek5h")]
 position = Vector2(110.5, 180)
@@ -142,16 +150,8 @@ shape = SubResource("RectangleShape2D_3v5v5")
 [node name="FirewormOverworld" parent="." instance=ExtResource("5_joicw")]
 position = Vector2(361.5, 119.5)
 
-[node name="Bush" parent="." instance=ExtResource("6_x68lx")]
-position = Vector2(168, 167.5)
-dialougeResource = ExtResource("7_jimp1")
-dialougeStartKey = "bush"
-
-[node name="CollisionShape2D" parent="Bush" index="0"]
-shape = SubResource("CircleShape2D_hadca")
-
+[editable path="Bush"]
 [editable path="Exit"]
 [editable path="Exit2"]
 [editable path="Exit3"]
 [editable path="Exit4"]
-[editable path="Bush"]

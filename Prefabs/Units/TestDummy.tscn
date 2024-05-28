@@ -25,7 +25,7 @@ numberOfMods = 0
 [sub_resource type="Resource" id="Resource_7hmd1"]
 script = ExtResource("2_igvpn")
 statType = 4
-BaseValue = 5.0
+BaseValue = 100.0
 numberOfMods = 0
 
 [sub_resource type="Resource" id="Resource_ndm0n"]
@@ -97,6 +97,7 @@ _data = {
 }
 
 [node name="TestDummy" type="CharacterBody2D" node_paths=PackedStringArray("stateCon", "hpBar", "STeffectCon", "animPlayer", "PopupPoint")]
+scale = Vector2(-1, 1)
 script = ExtResource("1_u3x8x")
 stateCon = NodePath("StateCon")
 hpBar = NodePath("HpBar")
@@ -124,16 +125,18 @@ libraries = {
 [node name="PopupPoint" type="Marker2D" parent="."]
 position = Vector2(26, -193)
 
-[node name="UnitHealth" parent="." node_paths=PackedStringArray("unit", "spriteAnim") instance=ExtResource("7_vfsc1")]
-unit = NodePath("..")
+[node name="UnitHealth" parent="." node_paths=PackedStringArray("spriteAnim") instance=ExtResource("7_vfsc1")]
 spriteAnim = NodePath("../AnimationPlayer")
 
-[node name="StatusEffectsController" parent="." node_paths=PackedStringArray("unit") instance=ExtResource("7_4otk2")]
+[node name="StatusEffectsController" parent="." node_paths=PackedStringArray("unit", "statusBar") instance=ExtResource("7_4otk2")]
 unit = NodePath("..")
+statusBar = NodePath("../HpBar/StatusBar")
 
 [node name="HpBar" parent="." instance=ExtResource("8_1jkj8")]
 position = Vector2(26, -199)
-scale = Vector2(2, 2)
+scale = Vector2(-2, 2)
 
 [node name="StateCon" type="Node2D" parent="."]
 script = ExtResource("9_qxkmu")
+
+[editable path="HpBar"]
